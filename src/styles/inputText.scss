@@ -1,0 +1,86 @@
+/* input-text ================================= */
+.input-text {
+  margin-bottom: 5px;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  height: 30px;
+
+  border-bottom: 1px solid var(--theme-color);
+}
+
+.input-text_color-invert {
+  border-bottom: 1px solid var(--sub-theme-color);
+}
+
+.input-text__button {
+  box-sizing: border-box;
+  height: 100%;
+  width: 24px;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  color: var(--content-color);
+  background: none;
+}
+
+.input-text__button:hover {
+  color: var(--content-color);
+}
+
+.input-text__button_color-invert:hover {
+  color: var(--sub-theme-color);
+}
+
+.input-text__input {
+  flex-basis: calc(100% - 24px);
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  background: none;
+}
+
+.input-text__input_color-invert::placeholder {
+  color: var(--sub-theme-color);
+}
+
+.input-text__input:focus {
+  outline: none;
+}
+
+/* focus-line */
+.input-text__focus-line {
+  flex-basis: 100%;
+}
+
+.input-text__focus-line:before, .input-text__focus-line:after {
+  position: absolute;
+  content: '';
+  height: 2px;
+  width: 0;
+  background: var(--theme-color);
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.input-text__focus-line_color-invert:before, .input-text__focus-line_color-invert:after {
+  background: var(--sub-theme-color);
+}
+
+.input-text__focus-line:before {
+  left: 50%;
+}
+
+.input-text__focus-line:after {
+  right: 50%;
+}
+
+/* active state */
+input:focus ~ .input-text__focus-line:before, input:focus ~ .input-text__focus-line:after {
+  width: 50%;
+}

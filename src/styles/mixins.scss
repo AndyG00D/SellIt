@@ -1,0 +1,56 @@
+/* modificators ================================= */
+.text_italic {
+  font-style: italic;
+}
+
+.text_bold {
+  font-weight: bold;
+}
+
+._main-color {
+  color: var(--theme-color);
+}
+
+.text_green-color {
+  color: var(--green-color);
+}
+
+.text_red-color {
+  color: #d72f2c;
+}
+
+.text_white-color {
+  color: var(--sub-content-color);
+}
+
+.text_white-color::-webkit-input-placeholder {
+  color: var(--sub-content-color);
+}
+
+.text_white-background-color {
+  background: var(--sub-content-color);
+}
+
+.text_big_size {
+  font-size: 2.14rem;
+}
+
+._margin-top-1rem {
+  margin-top: 1rem;
+}
+
+._margin-top-2_5rem {
+  margin-top: 2.5rem;
+}
+
+._margin-top-7_5rem {
+  margin-top: 7.5rem;
+}
+
+._margin-top-4_6rem {
+  margin-top: 4.6rem;
+}
+
+._margin-top-5_2rem {
+  margin-top: 5.2rem;
+}

@@ -1,0 +1,13 @@
+/* content ================================= */
+.content {
+  margin: 0 auto;
+  max-width: 950px;
+  padding-top: 150px;
+
+}
+
+@media only all and (max-width: 960px) {
+  .content {
+    padding-top: 50px;
+  }
+}
