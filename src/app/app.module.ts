@@ -7,6 +7,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 
 import { HomePageComponent } from './home-page/home-page.component';
+import { ProductListPageComponent } from './product-list-page/product-list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 
@@ -16,6 +17,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     HeaderComponent,
     FooterComponent,
     HomePageComponent,
+    ProductListPageComponent,
     DetailPageComponent,
     LoginPageComponent,
 
