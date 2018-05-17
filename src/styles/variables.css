@@ -1,0 +1,11 @@
+/* variables ================================= */
+:root {
+    --theme-color: #00b3be;
+    --sub-theme-color: white;
+    --content-color: #4a4a4a;
+    --sub-content-color:#fffdfd;
+    --green-color:#91d763;
+    --font-family: Arial, sans-serif;
+    --title-font-family: "Myriad Pro", Calibri, sans-serif;
+    --font-size: 14px;
+}
