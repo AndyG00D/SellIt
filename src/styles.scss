@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: "Myriad Pro";
+  src:  url('./assets/fonts/MyriadPro-Regular/myriadpro-regular.eot') format('eot'),
+        url('./assets/fonts/MyriadPro-Regular/myriadpro-regular.ttf') format('ttf');
+}
+
+//@import "styles/fonts";
+@import "styles/normalize";
+@import "styles/variables";
+@import "styles/style";

@@ -129,7 +129,22 @@ input:focus ~ .input-text__focus-line:before, input:focus ~ .input-text__focus-l
   width: 50%;
 }
 
+/* dropdown ================================= */
+.dropdown {
+  height: 100%;
+  position: relative;
+  background-color: var(--sub-theme-color);
+}
 
+.dropdown__submenu {
+  width: 100%;
+  display: none;
+  position: absolute;
+}
+
+.dropdown:hover .dropdown__submenu {
+  display: flex;
+}
 
 
 /* text modificators ================================= */
