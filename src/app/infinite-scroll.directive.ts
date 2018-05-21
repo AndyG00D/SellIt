@@ -1,8 +1,6 @@
 import {Directive, ElementRef, Renderer2} from '@angular/core';
 import {DataProductsService} from "./data-products.service";
-// import {window} from "rxjs/operators";
-// import {ProductListPageComponent} from "./product-list-page/product-list-page.component";
-// import {Product} from "./product";
+
 
 @Directive({
   selector: '[appInfiniteScroll]',
@@ -17,9 +15,7 @@ export class InfiniteScrollDirective {
   }
 
   whenScrolled() {
-    console.log("1: " + this.element.nativeElement.scrollTop + "2: " + this.element.nativeElement.offsetHeight + '3 ' + this.element.nativeElement.scrollHeight);
-    let elem = this.element.nativeElement;
-    if (elem.scrollTop + elem.offsetHeight >= elem.scrollHeight) {
+    if (window.scrollY + window.innerHeight + 100 > this.element.nativeElement.scrollHeight) {
       setTimeout(this.dataProducts.addDataProducts(), 5000);
     }
   }
