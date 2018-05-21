@@ -12,6 +12,9 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProductItemComponent } from './shared/components/product-item/product-item.component';
 import { DataProductsService} from "./data-products.service";
+import { InfiniteScrollDirective } from './infinite-scroll.directive';
+import { ScrollTopDirective } from './scroll-top.directive';
+import { ButtonOnTopComponent } from './shared/components/button-on-top/button-on-top.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { DataProductsService} from "./data-products.service";
     DetailPageComponent,
     LoginPageComponent,
     ProductItemComponent,
+    InfiniteScrollDirective,
+    ScrollTopDirective,
+    ButtonOnTopComponent,
 
 
   ],
