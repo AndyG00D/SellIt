@@ -15,19 +15,21 @@ export class ProductListPageComponent implements OnInit    {
   constructor(private dataProducts: DataProductsService){
   }
 
-  loadProducts(){
+  loadProducts(isNextPage){
     // this.products.push(...this.products);
-    this.dataProducts.addDataProducts();
+    if(isNextPage) {
+      this.dataProducts.addDataProducts();
+    }
   }
 
 
-  whenScrolled(emit:Product) {
-    this.loadProducts();
-  }
+  // whenScrolled(emit:Product) {
+  //   this.loadProducts();
+  // }
 
-  onCatch(emit:string) {
-    console.log(emit);
-  }
+  // onCatch(emit:string) {
+  //   console.log(emit);
+  // }
 
   ngOnInit() {
     this.products = this.dataProducts.getDataProducts();

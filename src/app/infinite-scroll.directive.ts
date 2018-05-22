@@ -1,6 +1,4 @@
-import {Directive, ElementRef, Renderer2} from '@angular/core';
-import {DataProductsService} from "./data-products.service";
-
+import {Directive, ElementRef, Renderer2, EventEmitter, Output} from '@angular/core';
 
 @Directive({
   selector: '[appInfiniteScroll]',
@@ -11,12 +9,14 @@ import {DataProductsService} from "./data-products.service";
 
 export class InfiniteScrollDirective {
 
-  constructor(private element: ElementRef, private renderer: Renderer2, private dataProducts: DataProductsService) {
+  constructor(private element: ElementRef, private renderer: Renderer2) {
   }
+
+  @Output() getNextPage = new EventEmitter <boolean>();
 
   whenScrolled() {
     if (window.scrollY + window.innerHeight + 100 > this.element.nativeElement.scrollHeight) {
-      setTimeout(this.dataProducts.addDataProducts(), 5000);
+      this.getNextPage.emit(true);
     }
   }
 }
