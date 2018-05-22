@@ -1,7 +1,7 @@
 <!--item-->
 <div class="product-item" *ngIf = "product.show">
   <a class="product-item__url" href="{{product.id}}">
-    <img [src]="pathImg + product.imgSrc" [alt]="product.imgAlt" class="product-item__img">
+    <img [src]="product.imgSrc" [alt]="product.imgAlt" class="product-item__img">
     <div class="product-item__title">
       <span class="">{{ product.title }}</span>
       <span class="text_white-color">

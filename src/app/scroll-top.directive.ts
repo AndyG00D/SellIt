@@ -7,6 +7,7 @@ import {Directive, ElementRef, Renderer2, OnInit} from '@angular/core';
     '(click)': 'onClick()'
   }
 })
+
 export class ScrollTopDirective implements OnInit {
 
   constructor(private element: ElementRef, private renderer: Renderer2) {

@@ -1,0 +1,104 @@
+[
+  {
+    "pk": 6,
+    "owner": {
+      "id": 23,
+      "username": "zicrael",
+      "email": "13ccdd@gmail.com",
+      "first_name": "Can`t",
+      "last_name": "Stop",
+      "avatar": "http://light-it-04.tk/media/avatars/f9ed685d-818.jpg",
+      "location": null,
+      "color_scheme": "#7164ce",
+      "language": "en"
+    },
+    "theme": "P.R.O.D.U.C.T",
+    "text": "Anothert test product",
+    "price": 200,
+    "currency": 1,
+    "images": [
+      {
+        "pk": 17,
+        "advert": 6,
+        "file": "http://light-it-04.tk/media/photos/advert_6/da71a89e-063.png"
+      }
+    ],
+    "contract_price": true,
+    "location": null,
+    "category": null,
+    "activated_at": "2018-05-03T07:30:44.252217Z",
+    "is_active": true
+  },
+  {
+    "pk": 4,
+    "owner": {
+      "id": 23,
+      "username": "zicrael",
+      "email": "13ccdd@gmail.com",
+      "first_name": "Can`t",
+      "last_name": "Stop",
+      "avatar": "http://light-it-04.tk/media/avatars/f9ed685d-818.jpg",
+      "location": null,
+      "color_scheme": "#7164ce",
+      "language": "en"
+    },
+    "theme": "Тестовое",
+    "text": "обычное такое. да..",
+    "price": 320,
+    "currency": 1,
+    "images": [],
+    "contract_price": true,
+    "location": null,
+    "category": null,
+    "activated_at": "2018-05-03T07:43:54.649795Z",
+    "is_active": true
+  },
+  {
+    "pk": 5,
+    "owner": {
+      "id": 23,
+      "username": "zicrael",
+      "email": "13ccdd@gmail.com",
+      "first_name": "Can`t",
+      "last_name": "Stop",
+      "avatar": "http://light-it-04.tk/media/avatars/f9ed685d-818.jpg",
+      "location": null,
+      "color_scheme": "#7164ce",
+      "language": "en"
+    },
+    "theme": "Simple advert",
+    "text": "asdasdsadadasd",
+    "price": 322,
+    "currency": 1,
+    "images": [],
+    "contract_price": true,
+    "location": null,
+    "category": null,
+    "activated_at": "2018-05-02T05:44:59.874424Z",
+    "is_active": true
+  },
+  {
+    "pk": 3,
+    "owner": {
+      "id": 23,
+      "username": "zicrael",
+      "email": "13ccdd@gmail.com",
+      "first_name": "Can`t",
+      "last_name": "Stop",
+      "avatar": "http://light-it-04.tk/media/avatars/f9ed685d-818.jpg",
+      "location": null,
+      "color_scheme": "#7164ce",
+      "language": "en"
+    },
+    "theme": "Продам шиншилу",
+    "text": "Норм такую",
+    "price": 10,
+    "currency": 1,
+    "images": [],
+    "contract_price": true,
+    "location": null,
+    "category": null,
+    "activated_at": "2018-04-24T11:10:59.944943Z",
+    "is_active": true
+  }
+]

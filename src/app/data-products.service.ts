@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit} from '@angular/core';
 import { Product} from "./product";
+import { map } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataProductsService {
+export class DataProductsService implements OnInit{
 
   _dataProducts: Product[] = [
     {
@@ -180,12 +182,28 @@ export class DataProductsService {
     }
   ];
 
-  constructor() {
+  constructor(private http: HttpClient) {
 
   }
 
+  public ngOnInit(){
+     // subscribeOn
+    // this.getDataProducts();
+  }
+
   getDataProducts(){
-    return this._dataProducts
+    // return this._dataProducts
+    return this.http.get('http://light-it-04.tk/api/adverts/')
+    // return this.http.get('../assets/products.json')
+      .pipe(
+        map(((response: any[]) => {
+          let results: Product[] = [];
+          for (const item of response) {
+            results.push(new Product(item));
+          }
+          return results;
+        }))
+      )
   }
 
   addDataProducts(){

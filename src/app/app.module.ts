@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
+import { HttpClientModule} from "@angular/common/http";
+
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 
@@ -28,12 +30,12 @@ import { ButtonOnTopComponent } from './shared/components/button-on-top/button-o
     ProductItemComponent,
     InfiniteScrollDirective,
     ScrollTopDirective,
-    ButtonOnTopComponent,
-
+    ButtonOnTopComponent
 
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [DataProductsService],
   bootstrap: [AppComponent]

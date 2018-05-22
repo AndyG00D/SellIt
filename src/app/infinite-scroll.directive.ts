@@ -12,7 +12,7 @@ export class InfiniteScrollDirective {
   constructor(private element: ElementRef, private renderer: Renderer2) {
   }
 
-  @Output() getNextPage = new EventEmitter <boolean>();
+  @Output() getNextPage = new EventEmitter<boolean>();
 
   whenScrolled() {
     if (window.scrollY + window.innerHeight + 100 > this.element.nativeElement.scrollHeight) {
