@@ -16,20 +16,10 @@ export class ProductListPageComponent implements OnInit    {
   }
 
   loadProducts(isNextPage){
-    // this.products.push(...this.products);
     if(isNextPage) {
       this.dataProducts.addDataProducts();
     }
   }
-
-
-  // whenScrolled(emit:Product) {
-  //   this.loadProducts();
-  // }
-
-  // onCatch(emit:string) {
-  //   console.log(emit);
-  // }
 
   ngOnInit() {
     this.products = this.dataProducts.getDataProducts();
