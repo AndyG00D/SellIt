@@ -9,8 +9,6 @@ import { Product} from "../../../product";
 export class ProductItemComponent implements OnInit {
 
   @Input() product: Product;
-  pathURL:string = 'sellit/detail/';
-  pathImg:string =  '/../../../../assets/img/';
 
     constructor() {
 

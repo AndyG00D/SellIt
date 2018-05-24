@@ -12,8 +12,10 @@ import {InfiniteScrollDirective} from "../infinite-scroll.directive";
 export class ProductListPageComponent implements OnInit, OnDestroy {
   public products: Product[];
   private _offset: number;
-  private _limit: number = 10;
+  private _limit: number = 12;
   private _isLoadData: boolean;
+  public errorMsg: string;
+  public infoMsg: string;
 
 
   constructor(private dataProducts: DataProductsService) {
@@ -22,7 +24,7 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.products = [];
     this._offset = 0;
-    this._addProducts();
+     this._addProducts();
   }
 
   public ngOnDestroy(): void {
@@ -42,10 +44,11 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
       .subscribe((res: Product[]) => {
         // console.log('loading data:' + JSON.stringify(res));
         this.products.push(...res);
+        this.infoMsg = this.dataProducts.infoMsg;
         this._isLoadData = true;
-      });
-
-  }
+      },
+        error => this.errorMsg = error || 'server error',
+      )}
 
 
 }

@@ -13,6 +13,7 @@ export class DataProductsService implements OnInit {
 
   private _productsURL: string = 'http://light-it-04.tk/api/adverts/';
   private _isAlive: boolean = true;
+  public infoMsg: string = '';
 
   constructor(private http: HttpClient) {
   }
@@ -33,18 +34,20 @@ export class DataProductsService implements OnInit {
 
           response["results"].forEach(item => res.push(new Product(item)));
 
-          if (response["next"] == null) {
+          if (response["next"] === null) {
             this.stop();
-            console.log('All of the products downloaded...')
+            this.infoMsg = 'All of the products downloaded...';
+            console.log('All of the products downloaded...');
           }
 
           return res;
         }),
-        catchError(err => {
-          console.log(err);
-          return throwError(err);
+        catchError(error => {
+          console.log(error.message || 'Server error');
+          return throwError(error.message);
         }));
   }
+
 
   public stop() {
     this._isAlive = false;
