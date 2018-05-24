@@ -11,8 +11,8 @@ import {takeWhile} from "rxjs/operators";
 })
 export class DataProductsService implements OnInit {
 
-  _productsURL: string = 'http://light-it-04.tk/api/adverts/';
-  isAlive: boolean = true;
+  private _productsURL: string = 'http://light-it-04.tk/api/adverts/';
+  private _isAlive: boolean = true;
 
   constructor(private http: HttpClient) {
   }
@@ -27,15 +27,17 @@ export class DataProductsService implements OnInit {
 
     return this.http.get(this._productsURL, {params})
       .pipe(
-        takeWhile(() => this.isAlive),
+        takeWhile(() => this._isAlive),
         map((response: Response) => {
           let res: Product[] = [];
+
           response["results"].forEach(item => res.push(new Product(item)));
 
           if (response["next"] == null) {
             this.stop();
             console.log('All of the products downloaded...')
           }
+
           return res;
         }),
         catchError(err => {
@@ -45,7 +47,7 @@ export class DataProductsService implements OnInit {
   }
 
   public stop() {
-    this.isAlive = false;
+    this._isAlive = false;
   }
 
 
