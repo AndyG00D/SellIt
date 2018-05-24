@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {DataProductsService} from "../data-products.service";
 import {Product} from "../product";
 import {InfiniteScrollDirective} from "../infinite-scroll.directive";
+
 
 @Component({
   selector: 'app-product-list-page',
@@ -9,29 +10,43 @@ import {InfiniteScrollDirective} from "../infinite-scroll.directive";
   styleUrls: ['./product-list-page.component.scss'],
   providers: [DataProductsService, InfiniteScrollDirective]
 })
-export class ProductListPageComponent implements OnInit {
+export class ProductListPageComponent implements OnInit, OnDestroy {
   products: Product[];
-  // error:any;
+  offset: number;
+  limit: number = 10;
+
 
   constructor(private dataProducts: DataProductsService) {
   }
 
-  // loadProducts(isNextPage) {
-    // if (isNextPage) {
-    //   // this.dataProducts.addDataProducts();
-    //   this.dataProducts.getDataProducts(11,10).subscribe((res: Product[]) => {
-    //     this.products = res;
-    //     console.log(this.products);
-    //   });
-    // }
-  // }
-
   ngOnInit() {
-    // this.products = this.dataProducts.getDataProducts();
-    this.dataProducts.getDataProducts(1,2).subscribe((res: Product[]) => {
-      this.products = res;
-      console.log(this.products);
-    });
+    this.products = [];
+    this.offset = 0;
+    this.addProducts();
   }
+
+  ngOnDestroy(): void {
+    this.dataProducts.stop();
+  }
+
+  loadProducts(isNextPage) {
+    if (isNextPage) {
+      this.offset += this.limit;
+      this.addProducts();
+    }
+  }
+
+  addProducts(){
+    this.dataProducts.getDataProducts(this.offset,this.limit)
+      .subscribe((res: Product[]) => {
+      console.log('loading data:' + res);
+      this.products.push(...res);
+    });
+
+  }
+
+
+
+
 
 }
