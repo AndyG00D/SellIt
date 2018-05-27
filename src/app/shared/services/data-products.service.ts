@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Product} from "./product";
+import {Product} from "../models/product";
 import {map, catchError} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, throwError} from 'rxjs';

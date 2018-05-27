@@ -1,13 +1,14 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {DataProductsService} from "../data-products.service";
-import {Product} from "../product";
-import {InfiniteScrollDirective} from "../infinite-scroll.directive";
+import {DataProductsService} from "../shared/services/data-products.service";
+import {Product} from "../shared/models/product";
+// import {InfiniteScrollDirective} from "../shared/directives/infinite-scroll.directive";
 
 @Component({
   selector: 'app-product-list-page',
   templateUrl: './product-list-page.component.html',
   styleUrls: ['./product-list-page.component.scss'],
-  providers: [DataProductsService, InfiniteScrollDirective]
+  providers: [DataProductsService],
+  // declarations: [InfiniteScrollDirective]
 })
 export class ProductListPageComponent implements OnInit, OnDestroy {
   public products: Product[];
