@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {Image} from "../../models/product";
 
 @Component({
   selector: 'app-slideshow',
   templateUrl: './slideshow.component.html',
   styleUrls: ['./slideshow.component.scss']
 })
+
 export class SlideshowComponent implements OnInit {
   slideIndex:number;
   slides: HTMLCollectionOf<Element>;
+  @Input()  images: Image[];
+
   constructor() {
-    this.slideIndex = 1;
-    this.slides = document.getElementsByClassName("slideshow__slide");
-  }
+   }
 
   ngOnInit() {
-
-    document.getElementsByClassName("slideshow__btn")[0].addEventListener('click', this.plusSlidesPrev.bind(this));
-    document.getElementsByClassName("slideshow__btn_next")[0].addEventListener('click', this.plusSlidesNext.bind(this));
+    this.slideIndex = 1;
+    this.slides = document.getElementsByClassName("slideshow__slide");
     this.showSlides(this.slideIndex);
   }
 

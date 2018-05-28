@@ -10,7 +10,7 @@
       <span class="about__price">{{product?.price}}$</span>
     </p>
     <!--about__slideshow-->
-    <app-slideshow class="about_slideshow"></app-slideshow>
+    <app-slideshow class="about_slideshow" [images] = "product?.images"></app-slideshow>
     <!--about__description-->
     <div class="about__description">
       <span>{{product?.text}}</span>
