@@ -1,9 +1,9 @@
 <!--item-->
-<div class="product-item" *ngIf = "product.show">
-  <a class="product-item__url" href="" [routerLink]="[product.id]">
-    <img [src]="product.imgSrc" [alt]="product.imgAlt" class="product-item__img">
+<div class="product-item" *ngIf = "product?.is_active">
+  <a class="product-item__url" href="" [routerLink]="[product.pk]">
+    <img [src]="product?.images[0]?.file" [alt]="product?.theme" class="product-item__img">
     <div class="product-item__title">
-      <span class="">{{ product.title }}</span>
+      <span class="">{{ product?.theme }}</span>
       <span class="text_white-color">
         <i class="fa fa-eye" aria-hidden="true"></i>
       </span>

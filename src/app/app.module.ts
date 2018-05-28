@@ -18,6 +18,9 @@ import { InfiniteScrollDirective } from './shared/directives/infinite-scroll.dir
 import { ScrollTopDirective } from './shared/directives/scroll-top.directive';
 import { ButtonOnTopComponent } from './shared/components/button-on-top/button-on-top.component';
 import { NotFoundComponent } from "./not-found/not-found.component";
+import { SlideshowComponent } from './shared/components/slideshow/slideshow.component';
+import { AboutComponent } from './detail-page/about/about.component';
+import { ChatComponent } from './detail-page/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { NotFoundComponent } from "./not-found/not-found.component";
     ScrollTopDirective,
     InfiniteScrollDirective,
     ButtonOnTopComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SlideshowComponent,
+    AboutComponent,
+    ChatComponent
 
   ],
   imports: [

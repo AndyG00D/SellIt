@@ -30,9 +30,9 @@ export class DataProductsService implements OnInit {
       .pipe(
         takeWhile(() => this._isAlive),
         map((response: Response) => {
-          let res: Product[] = [];
-
-          response["results"].forEach(item => res.push(new Product(item)));
+          // let res: Product[] = [];
+          //
+          // response["results"].forEach(item => res.push(new Product(item)));
 
           if (response["next"] === null) {
             this.stop();
@@ -40,12 +40,20 @@ export class DataProductsService implements OnInit {
             console.log('All of the products downloaded...');
           }
 
-          return res;
+          return response["results"];
         }),
         catchError(error => {
           console.log(error.message || 'Server error');
           return throwError(error.message);
         }));
+  }
+
+
+  public getDataProduct(id: number): Observable<Product> {
+    const params = new HttpParams()
+      .set('id', id.toString());
+
+    return this.http.get<Product>(this._productsURL, {params});
   }
 
 
