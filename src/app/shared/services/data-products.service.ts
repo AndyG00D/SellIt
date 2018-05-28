@@ -50,7 +50,7 @@ export class DataProductsService implements OnInit {
 
 
   public getDataProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(this._productsURL + id +"/" );
+    return this.http.get<Product>(this._productsURL + id.toString() + '/' );
   }
 
 

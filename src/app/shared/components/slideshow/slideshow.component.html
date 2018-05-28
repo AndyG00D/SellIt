@@ -1,8 +1,13 @@
 <!--slideshow-->
 <div class="slideshow">
 
-  <div *ngFor="let image of images" class="slideshow__slide slideshow__slide_fade">
-    <img [src]="image.file">
+  <div *ngFor="let slide of slides"
+       class="slideshow__slide slideshow__slide_fade _"
+    <!--ngClass="_hide: slide."-->
+  >
+
+
+    <img [src]="slide.file">
   </div>
 
   <a class="slideshow__btn" (click)="plusSlidesPrev()">

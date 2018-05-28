@@ -19,8 +19,8 @@ import { ScrollTopDirective } from './shared/directives/scroll-top.directive';
 import { ButtonOnTopComponent } from './shared/components/button-on-top/button-on-top.component';
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { SlideshowComponent } from './shared/components/slideshow/slideshow.component';
-import { AboutComponent } from './detail-page/about/about.component';
 import { ChatComponent } from './shared/components/chat/chat.component';
+import { SlideshowSlideDirective } from './shared/directives/slideshow-slide.directive';
 
 @NgModule({
   declarations: [
@@ -37,8 +37,8 @@ import { ChatComponent } from './shared/components/chat/chat.component';
     ButtonOnTopComponent,
     NotFoundComponent,
     SlideshowComponent,
-    AboutComponent,
-    ChatComponent
+    ChatComponent,
+    SlideshowSlideDirective
 
   ],
   imports: [

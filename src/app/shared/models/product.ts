@@ -33,7 +33,7 @@ export interface Owner {
 
 export interface Image {
   pk: number;
-  advert: number;
+  advert: string;
   file: string;
 }
 
