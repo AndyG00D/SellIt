@@ -1,11 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {Subject} from 'rxjs/internal/Subject';
+import {switchMap, takeUntil, tap} from 'rxjs/operators';
+import {Product, Owner} from "../shared/models/product";
+import {DataProductsService} from "../shared/services/data-products.service";
 
 @Component({
   selector: 'app-detail-page',
   templateUrl: './detail-page.component.html',
   styleUrls: ['./detail-page.component.scss']
 })
-export class DetailPageComponent implements OnInit  {
-  constructor(){}
-  ngOnInit(){}
+
+export class DetailPageComponent implements OnInit, OnDestroy {
+  public loading$ = new BehaviorSubject(true);
+  private destroy = new Subject();
+  public product: Product;
+
+  //temp data of user
+  public user: Owner = {
+    id: 23,
+    username: "zicrael",
+    email: "13ccdd@gmail.com",
+    first_name: "Can`t",
+    last_name: "Stop",
+    avatar: "http://light-it-04.tk/media/avatars/f9ed685d-818.jpg",
+    location: null,
+    color_scheme: "#7164ce",
+    language: "en"
+  };
+
+  constructor(
+    private dataProductsService: DataProductsService,
+    private route: ActivatedRoute
+  ) {
+  }
+
+  ngOnInit() {
+    this.route.params
+      .pipe(
+        tap(() => {
+          this.loading$.next(true);
+        }),
+        takeUntil(this.destroy),
+        switchMap(params => this.dataProductsService.getDataProduct(+params['id']))
+      )
+      .subscribe(
+        product => {
+          this.product = product;
+          console.log(JSON.stringify(product));
+          this.loading$.next(false);
+        },
+        err => {
+          this.loading$.next(false);
+        }
+      );
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy.next();
+    this.destroy.complete();
+    this.loading$.complete();
+  }
 }

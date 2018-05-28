@@ -4,84 +4,21 @@
   <!--about-->
   <div class="about">
     <!--about__title-->
-    <p class="about__title">Some title text must be here maybe second line</p>
+    <p class="about__title">{{product?.theme}}</p>
     <p class="about__sub-title text_bold">from
-      <span class="_main-color">Alis Kim</span>
-      <span class="about__price">18000$</span>
+      <span class="_main-color">{{product?.owner?.first_name}} {{product?.owner?.last_name}}</span>
+      <span class="about__price">{{product?.price}}$</span>
     </p>
-    <app-slideshow></app-slideshow>
+    <!--about__slideshow-->
+    <app-slideshow class="about_slideshow"></app-slideshow>
     <!--about__description-->
     <div class="about__description">
-      <span>Some description text from WYSIWYG editer</span><br><br>
-      <span>Can be Can be </span><span class="text_bold">BOLD</span>
-      <span class="text_italic">Italic</span><br><br>
-      <span class="text_bold ">Can have list:</span>
-      <ul class="about__list text_bold">
-        <li>first</li>
-        <li>second</li>
-      </ul>
-      <br>
-      <span class="text_bold ">And anything from WYSIWYG editor</span><br><br>
-      <span class="text_bold ">Some line</span><br>
-      <span>Some line</span><br>
-      <span class="text_italic">Some line</span> <br><br>
-      <span class="text_bold">Finished on this line.</span>
+      <span>{{product?.text}}</span>
     </div>
   </div>
 
-  <!--chat-->
-  <div class="chat">
-    <!--chat_title-->
-    <div class="chat__title text_bold">
-      <span class="text_big_size">Chat</span>
-      with
-      <span class="_main-color">Alis Kim</span>
-      <span class="text_green-color">
-                <i class="fa fa-square" aria-hidden="true"></i>
-            </span>
-    </div>
-    <!--contact-list-->
-    <div class="contact-list chat__contact-list dropdown">
+  <app-chat [user] = "user" [owner]= "product?.owner"></app-chat>
 
-      <p class="contact-list__title-status">Connected <a
-        class="contact-list__dropdown__btn dropdown__btn _main-color"><i
-        class="fa fa-long-arrow-down"></i></a></p>
-
-      <ul class="contact-list__list dropdown__submenu">
-        <li class="contact-list-item">
-          <img class="contact-list__avatar" src="../../assets/img/user1_40_40.png"/>
-          Alis Kim
-        </li>
-
-        <li class="contact-list-item">
-          <img class="contact-list__avatar" src="../../assets/img/user2_40_40.png" height="40" width="40"/>
-          Kim Evans
-        </li>
-      </ul>
-    </div>
-    <!--chat__messages-->
-    <div class="chat__messages">
-      <div class="chat__message-line">
-        <img class="chat__message-avatar" src="../../assets/img/user2_25_25.png">
-        <div class="chat__message-text">One line chat message</div>
-      </div>
-      <div class="chat__message-line chat__message_own chat__message_multi-line">
-        <img class="chat__message-avatar" src="../../assets/img/user1_25_25.png">
-        <div class="chat__message-text">
-          Multi line chat message. Some text for multi line message. What
-          is your name. Oh sorry. My bad, your name I think Alis. Right?
-          Please send me your contacts. May be your facebook page or
-          some think alse. How much cost this t shirt?
-        </div>
-      </div>
-    </div>
-    <!--chat__input-text-->
-    <div class="input-text chat__input-text">
-      <input type="text" class="input-text__input" required placeholder="Try find somethlink">
-      <button class="input-text__button"><i class="fa fa-send"></i></button>
-      <div class="input-text__focus-line"></div>
-    </div>
-  </div>
 </section>
 
 <app-footer></app-footer>

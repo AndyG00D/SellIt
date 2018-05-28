@@ -20,7 +20,7 @@ import { ButtonOnTopComponent } from './shared/components/button-on-top/button-o
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { SlideshowComponent } from './shared/components/slideshow/slideshow.component';
 import { AboutComponent } from './detail-page/about/about.component';
-import { ChatComponent } from './detail-page/chat/chat.component';
+import { ChatComponent } from './shared/components/chat/chat.component';
 
 @NgModule({
   declarations: [
