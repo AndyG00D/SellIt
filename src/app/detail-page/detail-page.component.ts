@@ -37,22 +37,12 @@ export class DetailPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.params
-      .pipe(
-        tap(() => {
-          this.loading$.next(true);
-        }),
-        takeUntil(this.destroy),
-        switchMap(params => this.dataProductsService.getDataProduct(+params['id']))
-      )
-      .subscribe(
+    this.route.data.subscribe(
         product => {
-          this.product = product;
-          console.log(JSON.stringify(product));
-          this.loading$.next(false);
+          this.product = product.data;
         },
         err => {
-          this.loading$.next(false);
+          console.log(err.message);
         }
       );
   }
