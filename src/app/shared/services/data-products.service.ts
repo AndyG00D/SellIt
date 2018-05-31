@@ -12,6 +12,8 @@ import {takeWhile} from "rxjs/operators";
 export class DataProductsService implements OnInit {
 
   private _productsURL: string = 'http://light-it-04.tk/api/adverts/';
+  private _noImageURL: string = 'https://vignette.wikia.nocookie.net/hunterxhunter/images/6/6d/No_image.png/revision/latest?cb=20120417110152';
+  private _noAvatarURL: string = 'http://bibka.org/templates/bibkanew/dleimages/noavatar.png';
   private _isAlive: boolean = true;
   public infoMsg: string = '';
 
@@ -30,9 +32,10 @@ export class DataProductsService implements OnInit {
       .pipe(
         takeWhile(() => this._isAlive),
         map((response: Response) => {
-          // let res: Product[] = [];
-          //
-          // response["results"].forEach(item => res.push(new Product(item)));
+
+          response['results'].forEach(item => {
+            this._setNoImage(item);
+          });
 
           if (response["next"] === null) {
             this.stop();
@@ -49,14 +52,36 @@ export class DataProductsService implements OnInit {
   }
 
 
-  public getDataProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(this._productsURL + id.toString() + '/' );
-  }
-
-
   public stop() {
     this._isAlive = false;
   }
 
+  public getDataProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(this._productsURL + id.toString() + '/').pipe(
+      map((product) => {
+          this._setNoImage(product);
+          this._setNoAvatar(product);
+          return product;
+        },
+        catchError(error => {
+          console.log(error.message || 'Server error');
+          return throwError(error.message);
+        })));
+  }
 
+  private _setNoImage(product: Product): void {
+    if (product.images[0] === undefined) {
+      product.images.push({
+        pk: null,
+        advert: null,
+        file: this._noImageURL
+      });
+    }
+  }
+
+  private _setNoAvatar(product: Product): void {
+    if (product.owner.avatar == undefined) {
+      product.owner.avatar = this._noAvatarURL;
+    }
+  }
 }

@@ -14,7 +14,7 @@ export class DataProductResolver implements Resolve<Product> {
     // private router: Router
   ) {}
 
-  public   resolve( route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+  public resolve( route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
     :Observable<Product> | Promise <Product> | Product {
     return this.service.getDataProduct(route.params.id);
   }

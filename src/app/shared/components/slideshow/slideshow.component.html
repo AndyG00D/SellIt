@@ -1,17 +1,17 @@
 <!--slideshow-->
 <div class="slideshow">
-
+  <!--slides-->
   <div *ngFor="let slide of slides"
        class="slideshow__slide slideshow__slide_fade _"
-    <!--ngClass="_hide: slide."-->
-  >
-
-
+       [ngClass]="{_hide: !slide.isActive} ">
     <img [src]="slide.file">
   </div>
+  <!--Buttons-->
+  <ng-template [ngIf]="slides.length > 1">
+    <a class="slideshow__btn" (click)="onclickSlidesPrev()">
+      <i class="fa fa-long-arrow-left"></i></a>
+    <a class="slideshow__btn slideshow__btn_next" (click)="onclickSlidesNext()">
+      <i class="fa fa-long-arrow-right"></i></a>
+  </ng-template>
 
-  <a class="slideshow__btn" (click)="plusSlidesPrev()">
-    <i class="fa fa-long-arrow-left"></i></a>
-  <a class="slideshow__btn slideshow__btn_next" (click)="plusSlidesNext()">
-    <i class="fa fa-long-arrow-right"></i></a>
 </div>

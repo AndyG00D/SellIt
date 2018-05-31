@@ -40,6 +40,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
     this.route.data.subscribe(
         product => {
           this.product = product.data;
+          console.log("product: " + JSON.stringify(product.data));
         },
         err => {
           console.log(err.message);
