@@ -1,0 +1,35 @@
+<form class="login-form form-group _margin-top-4_6rem" [formGroup]="signInForm" (ngSubmit)="onSignIn()">
+  <!--email-->
+  <div class="input-text input-text_color-invert">
+    <input formControlName="email"
+           type="email"
+           class="input-text__input input-text__input_color-invert"
+           [class.alert-danger-text]="signInForm.get('email').errors && signInForm.get('email').dirty"
+           placeholder="Email">
+    <div class="input-text__focus-line input-text__focus-line_color-invert"></div>
+  </div>
+  <app-form-control-errors
+    *ngIf="signInForm.get('email').errors && signInForm.get('email').dirty"
+    [errors]="signInForm.get('email').errors"
+    [title]="'Email'">
+  </app-form-control-errors>
+
+  <!--password-->
+  <div class="input-text input-text_color-invert _margin-top-1rem">
+    <input formControlName="password"
+           type="password"
+           class="input-text__input input-text__input_color-invert"
+           [class.alert-danger-text]="signInForm.get('password').errors && signInForm.get('password').dirty"
+           placeholder="Password">
+    <div class="input-text__focus-line input-text__focus-line_color-invert"></div>
+  </div>
+  <app-form-control-errors
+    *ngIf="signInForm.get('password').errors && signInForm.get('password').dirty"
+    [errors]="signInForm.get('password').errors"
+    [title]="'Password'">
+  </app-form-control-errors>
+
+  <!--submit-->
+  <button class="login_btn _margin-top-2_5rem">Sign in</button>
+
+</form>

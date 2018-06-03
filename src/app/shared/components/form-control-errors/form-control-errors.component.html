@@ -1,0 +1,10 @@
+<!--<pre>{{ errors| json }}</pre>-->
+<div class="alert alert-danger">
+  <p *ngIf="errors.required">{{title}} is required</p>
+  <p *ngIf="errors.minlength">{{title}} should contain more {{errors?.minlength?.requiredLength}} characters</p>
+  <p *ngIf="errors.maxlength">{{title}} should contain less {{errors?.minlength?.requiredLength}} characters</p>
+  <p *ngIf="errors.min">{{title}} should more {{errors?.min?.requiredLength}}</p>
+  <p *ngIf="errors.max">{{title}} should less {{errors?.max?.requiredLength}}</p>
+  <p *ngIf="errors.email">Wrong email format</p>
+  <p *ngIf="errors.pattern">{{title}} has wrong format</p>
+</div>

@@ -5,9 +5,11 @@ import { ProductListPageComponent } from "./product-list-page/product-list-page.
 import { DetailPageComponent } from "./detail-page/detail-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import {DataProductResolver} from "./shared/data-products.resolve";
+import {AddProductPageComponent} from "./add-product-page/add-product-page.component";
 
 const routes: Routes = [
   { path: 'products', component: ProductListPageComponent },
+  { path: 'products/add', component: AddProductPageComponent},
   { path: 'products/:id', component: DetailPageComponent, resolve: { data: DataProductResolver} },
   { path: 'login', component: LoginPageComponent },
   { path: '', redirectTo: 'products', pathMatch: 'full' },

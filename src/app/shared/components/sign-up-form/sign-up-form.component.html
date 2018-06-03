@@ -1,0 +1,97 @@
+<form class="login-form form-group _margin-top-4_6rem" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+  <!--<pre> {{signUpForm.value | json}}</pre>-->
+  <!--username-->
+  <div class="input-text input-text_color-invert">
+    <input formControlName="username"
+           type="text"
+           class="input-text__input input-text__input_color-invert"
+           [class.alert]="signUpForm.get('username').errors && signUpForm.get('username').dirty"
+           placeholder="Username">
+    <div class="input-text__focus-line input-text__focus-line_color-invert"></div>
+  </div>
+  <app-form-control-errors
+    *ngIf="signUpForm.get('username').errors && signUpForm.get('username').dirty"
+    [errors]="signUpForm.get('username').errors"
+    [title]="'Username'">
+  </app-form-control-errors>
+
+  <!--first_name-->
+  <div class="input-text input-text_color-invert">
+    <input formControlName="first_name"
+           type="text"
+           class="input-text__input input-text__input_color-invert"
+           [class.alert]="signUpForm.get('first_name').errors && signUpForm.get('first_name').dirty"
+           placeholder="Last Name">
+    <div class="input-text__focus-line input-text__focus-line_color-invert"></div>
+  </div>
+  <app-form-control-errors
+    *ngIf="signUpForm.get('first_name').errors && signUpForm.get('first_name').dirty"
+    [errors]="signUpForm.get('first_name').errors"
+    [title]="'First Name'">
+  </app-form-control-errors>
+
+  <!--last_name-->
+  <div class="input-text input-text_color-invert">
+    <input formControlName="last_name"
+           type="text"
+           class="input-text__input input-text__input_color-invert"
+           [class.alert]="signUpForm.get('last_name').errors && signUpForm.get('last_name').dirty"
+           placeholder="Last Name">
+    <div class="input-text__focus-line input-text__focus-line_color-invert"></div>
+  </div>
+  <app-form-control-errors
+    *ngIf="signUpForm.get('last_name').errors && signUpForm.get('last_name').dirty"
+    [errors]="signUpForm.get('last_name').errors"
+    [title]="'Last Name'">
+  </app-form-control-errors>
+
+  <!--email-->
+  <div class="input-text input-text_color-invert">
+    <input formControlName="email"
+           type="email"
+           class="input-text__input input-text__input_color-invert"
+           [class.alert]="signUpForm.get('email').errors && signUpForm.get('email').dirty"
+           placeholder="Email">
+    <div class="input-text__focus-line input-text__focus-line_color-invert"></div>
+  </div>
+  <app-form-control-errors
+    *ngIf="signUpForm.get('email').errors && signUpForm.get('email').dirty"
+    [errors]="signUpForm.get('email').errors"
+    [title]="'Email'">
+  </app-form-control-errors>
+
+  <!--password-->
+  <ng-container formGroupName="password">
+    <div class="input-text input-text_color-invert _margin-top-1rem">
+      <input formControlName="pwd"
+             type="password"
+             class="input-text__input input-text__input_color-invert"
+             [class.alert]="signUpForm.get('password.pwd').errors && signUpForm.get('password.pwd').dirty"
+             placeholder="Password">
+      <div class="input-text__focus-line input-text__focus-line_color-invert"></div>
+    </div>
+    <!--confirm-->
+    <div class="input-text input-text_color-invert _margin-top-1rem">
+      <input formControlName="confirmPwd"
+             type="password"
+             class="input-text__input input-text__input_color-invert"
+             [class.alert]="signUpForm.get('password.confirmPwd').errors && signUpForm.get('password.confirmPwd').dirty"
+             placeholder="Confirm">
+      <div class="input-text__focus-line input-text__focus-line_color-invert"></div>
+    </div>
+    <app-form-control-errors
+      *ngIf="signUpForm.get('password.pwd').errors && signUpForm.get('password.pwd').dirty"
+      [errors]="signUpForm.get('password.pwd').errors"
+      [title]="'Email'">
+    </app-form-control-errors>
+    <app-form-control-errors
+      *ngIf="signUpForm.get('password.confirmPwd').errors && signUpForm.get('password.confirmPwd').dirty"
+      [errors]="signUpForm.get('password.confirmPwd').errors"
+      [title]="'Confirm'">
+    </app-form-control-errors>
+  </ng-container>
+
+  <!--confirm button-->
+  <button class="login_btn _margin-top-2_5rem">Sign up</button>
+
+</form>

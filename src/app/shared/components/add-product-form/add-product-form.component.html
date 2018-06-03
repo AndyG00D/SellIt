@@ -1,0 +1,169 @@
+<form class="login-form form-group _margin-top-4_6rem" [formGroup]="newProductForm" (ngSubmit)="onSignIn()">
+  <!--theme-->
+  <label class="input-text__label">Theme</label>
+  <div class="input-text">
+    <input formControlName="theme"
+           type="text"
+           class="input-text__input "
+           [class.alert-danger-text]="newProductForm.get('theme').errors && newProductForm.get('theme').dirty"
+           placeholder="Theme">
+    <div class="input-text__focus-line"></div>
+  </div>
+  <app-form-control-errors
+    *ngIf="newProductForm.get('theme').errors && newProductForm.get('theme').dirty"
+    [errors]="newProductForm.get('theme').errors"
+    [title]="'Theme'">
+  </app-form-control-errors>
+
+  <!--text-->
+  <label class="input-text__label">Text</label>
+  <textarea class="input-text input-text__textarea" formControlName="text"
+            rows="3"
+            [class.alert-danger-text]="newProductForm.get('text').errors && newProductForm.get('text').dirty"
+            placeholder="text">
+    </textarea>
+  <app-form-control-errors
+    *ngIf="newProductForm.get('text').errors && newProductForm.get('text').dirty"
+    [errors]="newProductForm.get('text').errors"
+    [title]="'Text'">
+  </app-form-control-errors>
+
+  <!--price-->
+  <label class="input-text__label">Price</label>
+  <div class="input-text">
+    <input formControlName="price"
+           type="number"
+           class="input-text__input "
+           [class.alert-danger-text]="newProductForm.get('price').errors && newProductForm.get('price').dirty"
+           placeholder="Price">
+    <div class="input-text__focus-line"></div>
+  </div>
+  <app-form-control-errors
+    *ngIf="newProductForm.get('price').errors && newProductForm.get('price').dirty"
+    [errors]="newProductForm.get('price').errors"
+    [title]="'Price'">
+  </app-form-control-errors>
+
+  <!--currency-->
+  <label class="input-text__label">Currency</label>
+  <div class="input-text">
+    <input formControlName="currency"
+           type="number"
+           class="input-text__input "
+           [class.alert-danger-text]="newProductForm.get('currency').errors && newProductForm.get('currency').dirty"
+           placeholder="Currency">
+    <div class="input-text__focus-line"></div>
+  </div>
+  <app-form-control-errors
+    *ngIf="newProductForm.get('currency').errors && newProductForm.get('currency').dirty"
+    [errors]="newProductForm.get('currency').errors"
+    [title]="'Currency'">
+  </app-form-control-errors>
+
+  <!--contract_price-->
+  <label class="input-text__label">Contract Price</label>
+  <input class="input-text" formControlName="contract_price"
+         type="checkbox">
+  <app-form-control-errors
+    *ngIf="newProductForm.get('contract_price').errors && newProductForm.get('contract_price').dirty"
+    [errors]="newProductForm.get('contract_price').errors"
+    [title]="'Contract Price'">
+  </app-form-control-errors>
+
+  <div formGroupName="location">
+    <!--Country-->
+    <label class="input-text__label">Country</label>
+    <div class="input-text">
+      <input formControlName="country"
+             type="text"
+             class="input-text__input"
+             [class.alert-danger-text]="newProductForm.get('location.country').errors && newProductForm.get('location.country').dirty"
+             placeholder="contract price">
+      <div class="input-text__focus-line"></div>
+    </div>
+    <app-form-control-errors
+      *ngIf="newProductForm.get('location.country').errors && newProductForm.get('location.country').dirty"
+      [errors]="newProductForm.get('location.country').errors"
+      [title]="'Country'">
+    </app-form-control-errors>
+
+    <!--zone-->
+    <label class="input-text__label">Zone</label>
+    <div class="input-text">
+      <input formControlName="zone"
+             type="text"
+             class="input-text__input "
+             [class.alert-danger-text]="newProductForm.get('location.zone').errors && newProductForm.get('location.zone').dirty"
+             placeholder="contract price">
+      <div class="input-text__focus-line"></div>
+    </div>
+    <app-form-control-errors
+      *ngIf="newProductForm.get('location.zone').errors && newProductForm.get('location.zone').dirty"
+      [errors]="newProductForm.get('location.zone').errors"
+      [title]="'Zone'">
+    </app-form-control-errors>
+
+    <!--city-->
+    <label class="input-text__label">City</label>
+    <div class="input-text">
+      <input formControlName="city"
+             type="text"
+             class="input-text__input "
+             [class.alert-danger-text]="newProductForm.get('location.city').errors && newProductForm.get('location.city').dirty"
+             placeholder="city">
+      <div class="input-text__focus-line"></div>
+    </div>
+    <app-form-control-errors
+      *ngIf="newProductForm.get('location.city').errors && newProductForm.get('location.city').dirty"
+      [errors]="newProductForm.get('location.city').errors"
+      [title]="'City'">
+    </app-form-control-errors>
+
+    <!--address-->
+    <label class="input-text__label">Contract Price</label>
+    <div class="input-text">
+      <input formControlName="address"
+             type="text"
+             class="input-text__input "
+             [class.alert-danger-text]="newProductForm.get('location.address').errors && newProductForm.get('location.address').dirty"
+             placeholder="contract price">
+      <div class="input-text__focus-line"></div>
+    </div>
+    <app-form-control-errors
+      *ngIf="newProductForm.get('location.address').errors && newProductForm.get('location.address').dirty"
+      [errors]="newProductForm.get('location.address').errors"
+      [title]="'Address'">
+    </app-form-control-errors>
+
+    <!--zipcode-->
+    <label class="input-text__label">Zipcode</label>
+    <div class="input-text">
+      <input formControlName="zipcode"
+             type="text"
+             class="input-text__input "
+             [class.alert-danger-text]="newProductForm.get('location.zipcode').errors && newProductForm.get('location.zipcode').dirty"
+             placeholder="contract price">
+      <div class="input-text__focus-line"></div>
+    </div>
+    <app-form-control-errors
+      *ngIf="newProductForm.get('location.zipcode').errors && newProductForm.get('location.zipcode').dirty"
+      [errors]="newProductForm.get('location.zipcode').errors"
+      [title]="'Zipcode'">
+    </app-form-control-errors>
+  </div>
+
+  <!--is_active-->
+  <label class="input-text__label">Active</label>
+  <input class="input-text" formControlName="is_active"
+         type="checkbox"
+         placeholder="contract price">
+  <app-form-control-errors
+    *ngIf="newProductForm.get('is_active').errors && newProductForm.get('is_active').dirty"
+    [errors]="newProductForm.get('is_active').errors"
+    [title]="'Active'">
+  </app-form-control-errors>
+
+  <!--submit-->
+  <button class="login_btn _margin-top-2_5rem">Sign in</button>
+
+</form>

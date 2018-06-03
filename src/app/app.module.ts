@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
-import { HomePageComponent } from './home-page/home-page.component';
+import { AddProductPageComponent } from './add-product-page/add-product-page.component';
 import { ProductListPageComponent } from './product-list-page/product-list-page.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -20,16 +20,22 @@ import { ButtonOnTopComponent } from './shared/components/button-on-top/button-o
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { SlideshowComponent } from './shared/components/slideshow/slideshow.component';
 import { ChatComponent } from './shared/components/chat/chat.component';
+import {SignUpFormComponent} from "./shared/components/sign-up-form/sign-up-form.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {SignInFormComponent} from "./shared/components/sign-in-form/sign-in-form.component";
+import {FormControlErrorsComponent} from "./shared/components/form-control-errors/form-control-errors.component";
+import {AddProductFormComponent} from "./shared/components/add-product-form/add-product-form.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomePageComponent,
+    AddProductPageComponent,
     ProductListPageComponent,
     DetailPageComponent,
     LoginPageComponent,
+    AddProductPageComponent,
     ProductItemComponent,
     ScrollTopDirective,
     InfiniteScrollDirective,
@@ -37,11 +43,16 @@ import { ChatComponent } from './shared/components/chat/chat.component';
     NotFoundComponent,
     SlideshowComponent,
     ChatComponent,
+    SignUpFormComponent,
+    SignInFormComponent,
+    FormControlErrorsComponent,
+    AddProductFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [DataProductsService],
   bootstrap: [AppComponent]

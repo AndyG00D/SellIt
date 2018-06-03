@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
 })
 export class LoginPageComponent {
 
+  public isSignIn: boolean = true;
+
   constructor() { }
 }
