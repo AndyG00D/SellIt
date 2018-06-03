@@ -1,30 +1,30 @@
-<form class="login-form form-group _margin-top-4_6rem" [formGroup]="newProductForm" (ngSubmit)="onSignIn()">
+<form [formGroup]="productForm" (ngSubmit)="onAdd()">
   <!--theme-->
   <label class="input-text__label">Theme</label>
   <div class="input-text">
     <input formControlName="theme"
            type="text"
            class="input-text__input "
-           [class.alert-danger-text]="newProductForm.get('theme').errors && newProductForm.get('theme').dirty"
+           [class.alert-danger-text]="productForm.get('theme').errors && productForm.get('theme').dirty"
            placeholder="Theme">
     <div class="input-text__focus-line"></div>
   </div>
   <app-form-control-errors
-    *ngIf="newProductForm.get('theme').errors && newProductForm.get('theme').dirty"
-    [errors]="newProductForm.get('theme').errors"
+    *ngIf="productForm.get('theme').errors && productForm.get('theme').dirty"
+    [errors]="productForm.get('theme').errors"
     [title]="'Theme'">
   </app-form-control-errors>
 
   <!--text-->
   <label class="input-text__label">Text</label>
   <textarea class="input-text input-text__textarea" formControlName="text"
-            rows="3"
-            [class.alert-danger-text]="newProductForm.get('text').errors && newProductForm.get('text').dirty"
-            placeholder="text">
+            cols="100"
+            [class.alert-danger-text]="productForm.get('text').errors && productForm.get('text').dirty"
+            placeholder="Text">
     </textarea>
   <app-form-control-errors
-    *ngIf="newProductForm.get('text').errors && newProductForm.get('text').dirty"
-    [errors]="newProductForm.get('text').errors"
+    *ngIf="productForm.get('text').errors && productForm.get('text').dirty"
+    [errors]="productForm.get('text').errors"
     [title]="'Text'">
   </app-form-control-errors>
 
@@ -34,13 +34,13 @@
     <input formControlName="price"
            type="number"
            class="input-text__input "
-           [class.alert-danger-text]="newProductForm.get('price').errors && newProductForm.get('price').dirty"
+           [class.alert-danger-text]="productForm.get('price').errors && productForm.get('price').dirty"
            placeholder="Price">
     <div class="input-text__focus-line"></div>
   </div>
   <app-form-control-errors
-    *ngIf="newProductForm.get('price').errors && newProductForm.get('price').dirty"
-    [errors]="newProductForm.get('price').errors"
+    *ngIf="productForm.get('price').errors && productForm.get('price').dirty"
+    [errors]="productForm.get('price').errors"
     [title]="'Price'">
   </app-form-control-errors>
 
@@ -50,13 +50,13 @@
     <input formControlName="currency"
            type="number"
            class="input-text__input "
-           [class.alert-danger-text]="newProductForm.get('currency').errors && newProductForm.get('currency').dirty"
+           [class.alert-danger-text]="productForm.get('currency').errors && productForm.get('currency').dirty"
            placeholder="Currency">
     <div class="input-text__focus-line"></div>
   </div>
   <app-form-control-errors
-    *ngIf="newProductForm.get('currency').errors && newProductForm.get('currency').dirty"
-    [errors]="newProductForm.get('currency').errors"
+    *ngIf="productForm.get('currency').errors && productForm.get('currency').dirty"
+    [errors]="productForm.get('currency').errors"
     [title]="'Currency'">
   </app-form-control-errors>
 
@@ -65,8 +65,8 @@
   <input class="input-text" formControlName="contract_price"
          type="checkbox">
   <app-form-control-errors
-    *ngIf="newProductForm.get('contract_price').errors && newProductForm.get('contract_price').dirty"
-    [errors]="newProductForm.get('contract_price').errors"
+    *ngIf="productForm.get('contract_price').errors && productForm.get('contract_price').dirty"
+    [errors]="productForm.get('contract_price').errors"
     [title]="'Contract Price'">
   </app-form-control-errors>
 
@@ -77,13 +77,13 @@
       <input formControlName="country"
              type="text"
              class="input-text__input"
-             [class.alert-danger-text]="newProductForm.get('location.country').errors && newProductForm.get('location.country').dirty"
-             placeholder="contract price">
+             [class.alert-danger-text]="productForm.get('location.country').errors && productForm.get('location.country').dirty"
+             placeholder="Country">
       <div class="input-text__focus-line"></div>
     </div>
     <app-form-control-errors
-      *ngIf="newProductForm.get('location.country').errors && newProductForm.get('location.country').dirty"
-      [errors]="newProductForm.get('location.country').errors"
+      *ngIf="productForm.get('location.country').errors && productForm.get('location.country').dirty"
+      [errors]="productForm.get('location.country').errors"
       [title]="'Country'">
     </app-form-control-errors>
 
@@ -93,13 +93,13 @@
       <input formControlName="zone"
              type="text"
              class="input-text__input "
-             [class.alert-danger-text]="newProductForm.get('location.zone').errors && newProductForm.get('location.zone').dirty"
-             placeholder="contract price">
+             [class.alert-danger-text]="productForm.get('location.zone').errors && productForm.get('location.zone').dirty"
+             placeholder="Zone">
       <div class="input-text__focus-line"></div>
     </div>
     <app-form-control-errors
-      *ngIf="newProductForm.get('location.zone').errors && newProductForm.get('location.zone').dirty"
-      [errors]="newProductForm.get('location.zone').errors"
+      *ngIf="productForm.get('location.zone').errors && productForm.get('location.zone').dirty"
+      [errors]="productForm.get('location.zone').errors"
       [title]="'Zone'">
     </app-form-control-errors>
 
@@ -109,29 +109,29 @@
       <input formControlName="city"
              type="text"
              class="input-text__input "
-             [class.alert-danger-text]="newProductForm.get('location.city').errors && newProductForm.get('location.city').dirty"
-             placeholder="city">
+             [class.alert-danger-text]="productForm.get('location.city').errors && productForm.get('location.city').dirty"
+             placeholder="City">
       <div class="input-text__focus-line"></div>
     </div>
     <app-form-control-errors
-      *ngIf="newProductForm.get('location.city').errors && newProductForm.get('location.city').dirty"
-      [errors]="newProductForm.get('location.city').errors"
+      *ngIf="productForm.get('location.city').errors && productForm.get('location.city').dirty"
+      [errors]="productForm.get('location.city').errors"
       [title]="'City'">
     </app-form-control-errors>
 
     <!--address-->
-    <label class="input-text__label">Contract Price</label>
+    <label class="input-text__label">Address</label>
     <div class="input-text">
       <input formControlName="address"
              type="text"
              class="input-text__input "
-             [class.alert-danger-text]="newProductForm.get('location.address').errors && newProductForm.get('location.address').dirty"
-             placeholder="contract price">
+             [class.alert-danger-text]="productForm.get('location.address').errors && productForm.get('location.address').dirty"
+             placeholder="Address">
       <div class="input-text__focus-line"></div>
     </div>
     <app-form-control-errors
-      *ngIf="newProductForm.get('location.address').errors && newProductForm.get('location.address').dirty"
-      [errors]="newProductForm.get('location.address').errors"
+      *ngIf="productForm.get('location.address').errors && productForm.get('location.address').dirty"
+      [errors]="productForm.get('location.address').errors"
       [title]="'Address'">
     </app-form-control-errors>
 
@@ -141,13 +141,13 @@
       <input formControlName="zipcode"
              type="text"
              class="input-text__input "
-             [class.alert-danger-text]="newProductForm.get('location.zipcode').errors && newProductForm.get('location.zipcode').dirty"
-             placeholder="contract price">
+             [class.alert-danger-text]="productForm.get('location.zipcode').errors && productForm.get('location.zipcode').dirty"
+             placeholder="Zipcode ">
       <div class="input-text__focus-line"></div>
     </div>
     <app-form-control-errors
-      *ngIf="newProductForm.get('location.zipcode').errors && newProductForm.get('location.zipcode').dirty"
-      [errors]="newProductForm.get('location.zipcode').errors"
+      *ngIf="productForm.get('location.zipcode').errors && productForm.get('location.zipcode').dirty"
+      [errors]="productForm.get('location.zipcode').errors"
       [title]="'Zipcode'">
     </app-form-control-errors>
   </div>
@@ -158,12 +158,12 @@
          type="checkbox"
          placeholder="contract price">
   <app-form-control-errors
-    *ngIf="newProductForm.get('is_active').errors && newProductForm.get('is_active').dirty"
-    [errors]="newProductForm.get('is_active').errors"
+    *ngIf="productForm.get('is_active').errors && productForm.get('is_active').dirty"
+    [errors]="productForm.get('is_active').errors"
     [title]="'Active'">
   </app-form-control-errors>
 
   <!--submit-->
-  <button class="login_btn _margin-top-2_5rem">Sign in</button>
+  <button class="btn _full-width _margin-top-5_2rem">Add</button>
 
 </form>

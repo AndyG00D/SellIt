@@ -3,23 +3,23 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
-  selector: 'app-add-product-form',
-  templateUrl: './add-product-form.component.html',
-  styleUrls: ['./add-product-form.component.scss'],
+  selector: 'app-product-form',
+  templateUrl: './product-form.component.html',
+  styleUrls: ['./product-form.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class AddProductFormComponent implements OnInit, OnDestroy {
-  public newProductForm;
+export class ProductFormComponent implements OnInit, OnDestroy {
+  public productForm;
 
   constructor() {
-    this.newProductForm = new FormGroup(
+    this.productForm = new FormGroup(
       {
         theme: new FormControl('',
           [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
         text: new FormControl('',
           [Validators.maxLength(400)]),
         price: new FormControl('',
-          [Validators.required]),
+          [Validators.required, Validators.min(0)]),
         currency: new FormControl(''),
         contract_price: new FormControl(''),
         location: new FormGroup(
@@ -40,17 +40,17 @@ export class AddProductFormComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit() {
-    this.newProductForm.get('currency').patchValue(1);
-    this.newProductForm.get('currency').disable();
+    this.productForm.get('currency').patchValue(1);
+    this.productForm.get('currency').disable();
   }
 
 
   public ngOnDestroy(): void {
   }
 
-  public onSignIn() {
-    if(this.newProductForm.valid) {
-      console.log(this.newProductForm.value);
+  public onAdd() {
+    if(this.productForm.valid) {
+      console.log(this.productForm.value);
     }
   }
 }

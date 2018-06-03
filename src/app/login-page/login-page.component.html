@@ -8,8 +8,8 @@
         <img src="../../assets/img/sell-it_invert.png" height="69" width="198"/>
       </div>
       <div class="btn-group _margin-top-7_5rem">
-        <button class="login_btn" (click)="isSignIn = true;" [disabled] = "isSignIn">Sign in</button>
-        <button class="login_btn" (click)="isSignIn = false;" [disabled] = "!isSignIn">Sign up</button>
+        <button class="btn" (click)="isSignIn = true;" [disabled] = "isSignIn">Sign in</button>
+        <button class="btn" (click)="isSignIn = false;" [disabled] = "!isSignIn">Sign up</button>
       </div>
       <app-sign-in-form *ngIf="isSignIn; else signUp" ></app-sign-in-form>
       <ng-template  #signUp>

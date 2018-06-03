@@ -24,7 +24,7 @@ import {SignUpFormComponent} from "./shared/components/sign-up-form/sign-up-form
 import {ReactiveFormsModule} from "@angular/forms";
 import {SignInFormComponent} from "./shared/components/sign-in-form/sign-in-form.component";
 import {FormControlErrorsComponent} from "./shared/components/form-control-errors/form-control-errors.component";
-import {AddProductFormComponent} from "./shared/components/add-product-form/add-product-form.component";
+import {ProductFormComponent} from "./shared/components/product-form/product-form.component";
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import {AddProductFormComponent} from "./shared/components/add-product-form/add-
     SignUpFormComponent,
     SignInFormComponent,
     FormControlErrorsComponent,
-    AddProductFormComponent
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
