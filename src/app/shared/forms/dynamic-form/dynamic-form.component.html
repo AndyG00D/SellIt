@@ -1,0 +1,127 @@
+<form class="login-form form-group _margin-top-4_6rem" novalidate (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+  <div *ngFor="let prop of dataObject">
+
+    <!--label-->
+    <ng-container *ngIf="!prop.hideLabel && prop.type !== 'submit' && prop.type !== 'reset'">
+      <label class="input-text__label"
+             [attr.for]="prop">
+        {{prop.label}}
+      </label>
+    </ng-container>
+
+    <!--input:  search, text, tel, email, password-->
+    <ng-container *ngIf="
+      prop.type === 'search' ||
+      prop.type === 'text' ||
+      prop.type ===  'tel' ||
+      prop.type ==='email' ||
+      prop.type === 'password'">
+      <div class="input-text">
+        <input class="input-text__input"
+               [formControlName]="prop.key"
+               [id]=" prop.key"
+               [type]="prop.type"
+               [class.alert-danger-text]="form.get(prop.key).errors && form.get(prop.key).dirty"
+               [placeholder]="prop.label">
+        <div class="input-text__focus-line"></div>
+      </div>
+    </ng-container>
+
+    <!--input:  number, range, checkbox, radio-->
+    <ng-container *ngIf="
+    prop.type === 'number' ||
+    prop.type === 'range'||
+    prop.type === 'checkbox' ||
+    prop.type === 'radio'">
+      <input class="input-text"
+             [formControlName]="prop.key"
+             [id]=" prop.key"
+             [type]="prop.type"
+             [class.alert-danger-text]="form.get(prop.key).errors && form.get(prop.key).dirty"
+             [placeholder]="prop.label">
+    </ng-container>
+
+    <!--textarea-->
+    <ng-container *ngIf="prop.type === 'textarea'">
+      <textarea class="input-text input-text__textarea"
+                cols="100"
+                [formControlName]="prop.key"
+                [class.alert-danger-text]="form.get(prop.key).errors && form.get(prop.key).dirty"
+                [placeholder]="prop.label">
+    </textarea>
+    </ng-container>
+
+    <!--select-->
+    <ng-container *ngIf="prop.type === 'select'">
+      <select [formControlName]="prop.key"
+              (change)="prop.cascade($event.target.value)">
+        <option *ngFor="let option of prop.options" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </ng-container>
+
+    <!--submit-->
+    <ng-container *ngIf="prop.type === 'submit'">
+      <button class="btn _full-width" type="submit" (click)="onSubmit()">{{prop.label}}</button>
+    </ng-container>
+
+    <!--reset-->
+    <ng-container *ngIf="prop.type === 'reset'">
+      <button class="btn _full-width" type="reset" (click)="onSubmit()">{{prop.label}}</button>
+    </ng-container>
+
+    <!--errors-->
+    <ng-container *ngIf="
+      prop.type !== 'submit' &&
+      prop.type !== 'reset' &&
+      form.get(prop.key).errors &&
+      form.get(prop.key).dirty">
+      <app-form-control-errors
+        [errors]="form.get(prop.key).errors"
+        [title]="prop.label">
+      </app-form-control-errors>
+    </ng-container>
+
+  </div>
+  <!--<input *ngIf="prop.type === ('number' || 'search' || 'text') "-->
+  <!--[formControlName]="prop.key"-->
+  <!--[id]="prop.key" [type]="prop.type">-->
+
+  <!--<div [ngSwitch]="prop.type">-->
+  <!--<input *ngSwitchCase="'text'"-->
+  <!--[formControlName]="prop.key"-->
+  <!--[id]="prop.key" [type]="prop.type">-->
+
+  <!--<div *ngSwitchCase="'radio'">-->
+  <!--<label *ngFor="let option of prop.options">-->
+  <!--<input-->
+  <!--type="radio"-->
+  <!--[name]="prop.key"-->
+  <!--[formControlName]="prop.key"-->
+  <!--[value]="option.value"> {{option.label}}-->
+  <!--</label>-->
+  <!--</div>-->
+
+  <!--<div *ngSwitchCase="'select'">-->
+  <!--<select [formControlName]="prop.key" (change)="prop.cascade($event.target.value)">-->
+  <!--<option *ngFor="let option of prop.options; let index = i; trackBy: ti" [value]="option.value">-->
+  <!--{{ option.label }}-->
+  <!--</option>-->
+  <!--</select>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="error" *ngIf="form.get(prop.key).invalid && (form.get(prop.key).dirty || form.get(prop.key).touched)">-->
+  <!--<div *ngIf="form.get(prop.key).errors.required">-->
+  <!--{{ prop.label }} is required.-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+
+</form>
+<hr/>
+<strong>Form Value</strong>
+<pre>{{ form.value | json }}</pre>
+<strong>Form is valid:</strong> {{form.valid}}
+

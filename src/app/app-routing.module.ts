@@ -6,8 +6,10 @@ import { DetailPageComponent } from "./detail-page/detail-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import {DataProductResolver} from "./shared/data-products.resolve";
 import {AddProductPageComponent} from "./add-product-page/add-product-page.component";
+import {TestFormPageComponent} from "./test-form-page/test-form-page.component";
 
 const routes: Routes = [
+  { path: '', component: TestFormPageComponent },
   { path: 'products', component: ProductListPageComponent },
   { path: 'products/add', component: AddProductPageComponent},
   { path: 'products/:id', component: DetailPageComponent, resolve: { data: DataProductResolver} },

@@ -8,6 +8,7 @@
   justify-content: stretch;
   box-sizing: border-box;
   height: 30px;
+  color: var(--content-color);
 
   border-bottom: 1px solid var(--theme-color);
 
@@ -58,6 +59,7 @@
     font-family: var(--font-family);
     font-size: 0.85rem;
     background: none;
+    color: var(--content-color);
   }
 
   &__input_color-invert::placeholder {

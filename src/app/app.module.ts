@@ -25,6 +25,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {SignInFormComponent} from "./shared/components/sign-in-form/sign-in-form.component";
 import {FormControlErrorsComponent} from "./shared/components/form-control-errors/form-control-errors.component";
 import {ProductFormComponent} from "./shared/components/product-form/product-form.component";
+import { DynamicFormComponent } from './shared/forms/dynamic-form/dynamic-form.component';
+import { TestFormPageComponent } from './test-form-page/test-form-page.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import {ProductFormComponent} from "./shared/components/product-form/product-for
     SignUpFormComponent,
     SignInFormComponent,
     FormControlErrorsComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    DynamicFormComponent,
+    TestFormPageComponent
   ],
   imports: [
     BrowserModule,
