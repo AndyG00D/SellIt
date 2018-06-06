@@ -2,7 +2,36 @@ import {FormControlConf} from '../models/forms'
 import {Validators} from "@angular/forms";
 
 
-export let testFormConf: Array<FormControlConf> = [{
+export let testNestedFormConf: Array<FormControlConf> = [
+  {
+    key: 'email',
+    type: 'email',
+    label: 'Email',
+    validators: [Validators.maxLength(400)]
+  },
+  {
+    key: 'password',
+    type: 'password',
+    label: 'Password',
+    validators: [Validators.required, Validators.min(0)]
+  },
+];
+
+export let tesFormArrayConf: Array<FormControlConf> = [
+  {
+    key: 'item',
+    type: 'text',
+    label: 'Item1'
+  },
+  {
+    key: 'item2',
+    type: 'text',
+    label: 'Item2'
+  }
+];
+
+export let testFormConf: Array<FormControlConf> = [
+  {
     key: 'number',
     type: 'number',
     label: 'Number',
@@ -72,6 +101,19 @@ export let testFormConf: Array<FormControlConf> = [{
     ]
   },
   {
+    key: 'nested',
+    type: 'nested',
+    label: 'Nested Group',
+    conf: testNestedFormConf
+  },
+  {
+    key: 'array',
+    type: 'array',
+    label: 'Form Array',
+    conf: tesFormArrayConf,
+    arrayLength: 4
+  },
+  {
     key: 'submit',
     type: 'submit',
     label: 'Submit',
@@ -81,80 +123,4 @@ export let testFormConf: Array<FormControlConf> = [{
     type: 'reset',
     label: 'Reset',
   },
-  ];
-
-//   {
-//     key: 'contract_price',
-//     value: '1',
-//     type: 'number',
-//     label: 'Contract Price',
-//     validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
-//   },
-//   {
-//     key: 'key',
-// type: 'text',
-// label: 'Text',
-// value: 'T',
-//     validators: [Validators.required],
-// options: [
-//     {label: "(choose one)", value: ''},
-//     {label: "Bolzano", value: '39100'},
-//     {label: "Meltina", value: '39010'},
-//     {label: "Appiano", value: '39057'}
-//   ],
-// hideLabel: true
-// },
-
-// ];
-
-// {
-//   key: 'text',
-//   label: 'Age',
-//   type: 'textarea'
-// },
-// {
-//   key: 'gender',
-//   label: 'Gender',
-//   value: 'M',
-//   type: 'radio',
-//   options: [
-//     {label: "Male", value: 'M'},
-//     {label: "Female", value: 'F'}
-//   ]
-// },
-// {
-//   key: 'country',
-//   label: 'Country',
-//   value: '123',
-//   type: 'select',
-//   options: [
-//     {label: "(choose one)", value: ''},
-//     {label: "Italy", value: '123'},
-//     {label: "France", value: '236'}
-//   ],
-//   cascade: (selectedValue) => {
-//
-//     if (selectedValue === '123') {
-//
-//       productFormConf.city.options = [
-//         {label: "(choose one)", value: ''},
-//         {label: "Bolzano", value: '39100'},
-//         {label: "Meltina", value: '39010'},
-//         {label: "Appiano", value: '39057'}
-//       ];
-//
-//     } else if (selectedValue === '236') {
-//
-//       productFormConf.city.options = [
-//         {label: "(choose one)", value: ''},
-//         {label: "Paris", value: '40100'},
-//         {label: "Nice", value: '40010'},
-//         {label: "Lyon", value: '40057'}
-//       ];
-//     }
-//
-//   },
-//   validation: {
-//     required: true
-//   }
-// },
+];

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {Component, OnInit, Input} from '@angular/core';
+import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -8,27 +8,46 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class DynamicFormComponent implements OnInit {
   @Input() dataObject;
-  @Input() nameForm = 'fg';
   form: FormGroup;
-  // objectProps;
 
   constructor() {
   }
 
   ngOnInit() {
-
-    // setup the form
-    const formGroup = {};
-    for(let prop of this.dataObject) {
-      formGroup[prop.key] = new FormControl(prop.value || '', prop.validators);
-    // console.log(prop);
-    }
-    // console.log(formGroup);
-
-
-    this.form = new FormGroup(formGroup);
-    console.log(this.form);
+    this.form = this.createForm(this.dataObject);
   }
+
+  // setup the form
+  createForm(conf): FormGroup {
+    const formGroup = {};
+    for (let prop of conf) {
+      if (prop.type === 'nested') { // generate Nested Form
+        formGroup[prop.key] = this.createForm(prop.conf);
+      } else if (prop.type === 'array') { // generate Form Array
+        let items = [];
+        const item = this.createForm(prop.conf);
+        for (let i = 0; i < prop.arrayLength; i++) {
+          items.push(item);
+        }
+        formGroup[prop.key] = new FormArray(items);
+      }
+      else { // generate Form Control
+        formGroup[prop.key] = new FormControl(prop.value || '', prop.validators);
+      }
+    }
+    return new FormGroup(formGroup);
+  }
+
+
+  // addItem(): void {
+  //   // this.items = this.fg.get('items') as FormArray;
+  //   // this.items.push(this.createItem());
+  //   this.fg.get('items').push(this.createItem());
+  // }
+
+  // removeItem(i: number) {
+  //   this.fg.get('items').removeAt(i);
+  // }
 
   // private mapValidators(validators) {
   //   const formValidators = [];
@@ -47,6 +66,8 @@ export class DynamicFormComponent implements OnInit {
   // }
 
   onSubmit(form) {
-    console.log(form);
+    if (form.valid) {
+      console.log(form);
+    }
   }
 }
