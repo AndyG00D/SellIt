@@ -1,5 +1,15 @@
 <form class="login-form form-group _margin-top-4_6rem" novalidate (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+  <div #elem></div>
+
   <div *ngFor="let prop of dataObject">
+
+    <!--<div [ngSwitch]="prop.type"></div>-->
+    <!--<ng-container [ngSwitch]="prop.type">-->
+      <!--<ng-container *ngSwitchCase="'nested'">-->
+        <!--<app-dynamic-form [dataObject]="prop.conf"></app-dynamic-form>-->
+      <!--</ng-container>-->
+      <!--<ng-container *ngSwitchDefault>-->
+
 
     <!--label-->
     <ng-container *ngIf="!prop.hideLabel && prop.type !== 'submit' && prop.type !== 'reset'">
@@ -83,7 +93,11 @@
       </app-form-control-errors>
     </ng-container>
 
+
+      <!--</ng-container>-->
+    <!--</ng-container>-->
   </div>
+
   <!--<input *ngIf="prop.type === ('number' || 'search' || 'text') "-->
   <!--[formControlName]="prop.key"-->
   <!--[id]="prop.key" [type]="prop.type">-->
