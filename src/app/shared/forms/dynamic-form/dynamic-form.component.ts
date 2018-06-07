@@ -1,6 +1,8 @@
 ///<reference path="../../../../../node_modules/@angular/core/src/linker/element_ref.d.ts"/>
 import {Component, OnInit, Input, ElementRef, Renderer2, ViewChild, AfterViewInit} from '@angular/core';
 import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
+import {AuthService} from "../../services/auth.service";
+
 
 
 @Component({
@@ -14,7 +16,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
 
-  constructor(private _renderer: Renderer2 ) {}
+  constructor(private _renderer: Renderer2, private authService: AuthService ) {}
 
   ngOnInit() {
     this.form = this.createForm(this.dataObject);
@@ -124,9 +126,9 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
   //   return formValidators;
   // }
 
-  onSubmit(form) {
-    if (form.valid) {
-      console.log(form);
-    }
+  onSubmit() {
+    // if (form.valid) {
+      this.authService.getAuth(this.form.value).subscribe();
+    // }
   }
 }

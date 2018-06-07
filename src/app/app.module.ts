@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
@@ -14,6 +14,7 @@ import {DetailPageComponent} from './detail-page/detail-page.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {ProductItemComponent} from './shared/components/product-item/product-item.component';
 import {DataProductsService} from "./shared/services/data-products.service";
+import {AuthService} from "./shared/services/auth.service";
 import {InfiniteScrollDirective} from './shared/directives/infinite-scroll.directive';
 import {ScrollTopDirective} from './shared/directives/scroll-top.directive';
 import {ButtonOnTopComponent} from './shared/components/button-on-top/button-on-top.component';
@@ -27,6 +28,8 @@ import {FormControlErrorsComponent} from "./shared/components/form-control-error
 import {ProductFormComponent} from "./shared/components/product-form/product-form.component";
 import {DynamicFormComponent} from './shared/forms/dynamic-form/dynamic-form.component';
 import {TestFormPageComponent} from './test-form-page/test-form-page.component';
+import {AuthInterceptor} from "./shared/services/auth.interceptor";
+// import {AuthInterceptor} from "./shared/services/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -58,7 +61,15 @@ import {TestFormPageComponent} from './test-form-page/test-form-page.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [DataProductsService],
+  providers: [
+    DataProductsService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
