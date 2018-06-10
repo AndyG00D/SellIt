@@ -24,12 +24,12 @@ export class DynamicFormService implements OnInit {
         return productFormConf;
       case 'demo':
         return demoFormConf;
-      case 'singIn':
+      case 'signIn':
         return signInFormConf;
-      case 'singUp':
+      case 'signUp':
         return signUpFormConf;
       default:
-        console.log('exist config!');
+        console.log('exist form config!');
         return null;
     }
   }
