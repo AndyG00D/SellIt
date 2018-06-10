@@ -1,0 +1,10 @@
+<form novalidate (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+  <div class="login-form form-group" dynamic-form [props]="props" [form]="form"></div>
+      <!--<button class="btn _full-width" type="submit">submit</button>-->
+      <!--<button class="btn _full-width" type="reset">reset</button>-->
+</form>
+<hr/>
+<strong>Form Value</strong>
+<pre>{{ form.value | json }}</pre>
+<strong>Form is valid:</strong> {{form.valid}}
+<pre>{{ form.errors | json }}</pre>

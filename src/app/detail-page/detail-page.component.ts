@@ -3,8 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {Subject} from 'rxjs/internal/Subject';
 import {switchMap, takeUntil, tap} from 'rxjs/operators';
-import {Product, Owner} from "../shared/models/product";
-import {DataProductsService} from "../shared/services/data-products.service";
+import {Product, Owner} from "../core/models/product";
+import {DataProductsService} from "../core/services/data-products.service";
 
 @Component({
   selector: 'app-detail-page',

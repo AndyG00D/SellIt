@@ -1,0 +1,9 @@
+<div [formGroup]="form">
+  <div class="login-form form-group" [formGroupName]="prop.key">
+    <ng-container
+      dynamic-form [props]="prop.conf"
+      [form]="form">
+    </ng-container>
+  </div>
+</div>
+

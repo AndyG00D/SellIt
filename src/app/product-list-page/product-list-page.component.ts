@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {DataProductsService} from "../shared/services/data-products.service";
-import {Product} from "../shared/models/product";
+import {DataProductsService} from "../core/services/data-products.service";
+import {Product} from "../core/models/product";
 // import {InfiniteScrollDirective} from "../shared/directives/infinite-scroll.directive";
 
 @Component({

@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Image} from "../../models/product";
+import {Image} from "../../../core/models/product";
 
 @Component({
   selector: 'app-slideshow',
