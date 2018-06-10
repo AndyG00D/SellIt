@@ -7,6 +7,7 @@ import { LoginPageComponent } from "./login-page/login-page.component";
 import {DataProductResolver} from "./shared/data-products.resolve";
 import {AddProductPageComponent} from "./add-product-page/add-product-page.component";
 import {TestFormPageComponent} from "./test-form-page/test-form-page.component";
+import {DynamicComponent} from "./dynamic-form/dynamic/dynamic.component";
 
 const routes: Routes = [
   { path: '', component: TestFormPageComponent },

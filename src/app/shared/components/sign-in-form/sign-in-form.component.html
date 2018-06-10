@@ -33,3 +33,8 @@
   <button class="btn _margin-top-2_5rem">Sign in</button>
 
 </form>
+
+<strong>Form Value</strong>
+<pre>{{ signInForm.value | json }}</pre>
+<strong>Form is valid:</strong> {{signInForm.valid}}
+<pre>{{ signInForm.errors | json }}</pre>

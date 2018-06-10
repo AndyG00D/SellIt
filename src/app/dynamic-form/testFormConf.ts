@@ -1,4 +1,4 @@
-import {FormControlConf} from '../models/forms'
+import {FormControlConf} from './dynamic-form.model.ts'
 import {Validators} from "@angular/forms";
 
 
@@ -31,23 +31,23 @@ export let tesFormArrayConf: Array<FormControlConf> = [
 ];
 
 export let testFormConf: Array<FormControlConf> = [
-  {
-    key: 'number',
-    type: 'number',
-    label: 'Number',
-    validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
-  },
-  {
-    key: 'range',
-    type: 'range',
-    label: 'Range',
-    validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
-  },
+  // {
+  //   key: 'number',
+  //   type: 'number',
+  //   label: 'Number',
+  //   validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
+  // },
+  // {
+  //   key: 'range',
+  //   type: 'range',
+  //   label: 'Range',
+  //   validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
+  // },
   {
     key: 'text',
     type: 'text',
     label: 'Text',
-    validators: [Validators.maxLength(2)]
+    validators: [Validators.maxLength(2), Validators.required]
   },
   {
     key: 'search',
@@ -100,27 +100,27 @@ export let testFormConf: Array<FormControlConf> = [
       {label: "Appiano", value: '39057'}
     ]
   },
-  {
-    key: 'nested',
-    type: 'nested',
-    label: 'Nested Group',
-    conf: testNestedFormConf
-  },
-  {
-    key: 'array',
-    type: 'array',
-    label: 'Form Array',
-    conf: tesFormArrayConf,
-    arrayLength: 4
-  },
-  {
-    key: 'submit',
-    type: 'submit',
-    label: 'Submit',
-  },
-  {
-    key: 'reset',
-    type: 'reset',
-    label: 'Reset',
-  },
+  // {
+  //   key: 'nested',
+  //   type: 'nested',
+  //   label: 'Nested Group',
+  //   conf: testNestedFormConf
+  // },
+  // {
+  //   key: 'array',
+  //   type: 'array',
+  //   label: 'Form Array',
+  //   conf: tesFormArrayConf,
+  //   arrayLength: 4
+  // },
+  // {
+  //   key: 'submit',
+  //   type: 'submit',
+  //   label: 'Submit',
+  // },
+  // {
+  //   key: 'reset',
+  //   type: 'reset',
+  //   label: 'Reset',
+  // },
 ];

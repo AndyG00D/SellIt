@@ -1,4 +1,4 @@
-import {FormControlConf} from '../models/forms'
+import {FormControlConf} from './dynamic-form.model.ts'
 import {Validators} from "@angular/forms";
 
 

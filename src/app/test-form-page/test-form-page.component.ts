@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { productFormConf } from '../shared/forms/productFormConf';
-import { testFormConf} from "../shared/forms/testFormConf";
+import { productFormConf } from '../dynamic-form/productFormConf';
+import { testFormConf} from "../dynamic-form/testFormConf";
 
 @Component({
   selector: 'app-test-form',
@@ -9,12 +9,9 @@ import { testFormConf} from "../shared/forms/testFormConf";
 })
 export class TestFormPageComponent {
 
-  person;
-  dataForm;
+  props = testFormConf;
 
   constructor() {
-    this.person = productFormConf;
-    this.dataForm = testFormConf;
   }
 
 

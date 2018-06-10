@@ -23,10 +23,10 @@ import {ChatComponent} from './shared/components/chat/chat.component';
 import {SignUpFormComponent} from "./shared/components/sign-up-form/sign-up-form.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SignInFormComponent} from "./shared/components/sign-in-form/sign-in-form.component";
-import {FormControlErrorsComponent} from "./shared/components/form-control-errors/form-control-errors.component";
 import {ProductFormComponent} from "./shared/components/product-form/product-form.component";
-import {DynamicFormComponent} from './shared/forms/dynamic-form/dynamic-form.component';
 import {TestFormPageComponent} from './test-form-page/test-form-page.component';
+import {ComponentLoaderService} from "./shared/services/component-loader.service";
+import {DynamicFormModule} from "./dynamic-form/dynamic-form.module";
 
 @NgModule({
   declarations: [
@@ -47,18 +47,17 @@ import {TestFormPageComponent} from './test-form-page/test-form-page.component';
     ChatComponent,
     SignUpFormComponent,
     SignInFormComponent,
-    FormControlErrorsComponent,
     ProductFormComponent,
-    DynamicFormComponent,
-    TestFormPageComponent
+    TestFormPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DynamicFormModule
   ],
-  providers: [DataProductsService],
+  providers: [DataProductsService, ComponentLoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
