@@ -31,6 +31,8 @@ import {DynamicFormModule} from "./dynamic-form/dynamic-form.module";
 import {MessagesComponent} from "./shared/components/messages/messages.component";
 import {HttpErrorHandler} from "./core/services/http-error-handler.service";
 import {MessageService} from "./core/services/message.service";
+import {SessionService} from "./core/services/session.service";
+import {ProfileService} from "./core/services/profile.service";
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import {MessageService} from "./core/services/message.service";
     MessageService,
     // { provide: RequestCache, useClass: RequestCacheWithMap },
     HttpErrorHandler,
-    CookieService
+    CookieService,
+    SessionService,
+    ProfileService
   ],
   bootstrap: [AppComponent]
 })
