@@ -7,7 +7,7 @@ export let signUpFormConf: Array<FormControlConf> = [
     key: 'username',
     type: 'text',
     label: 'User Name',
-    validators: [Validators.minLength(6), Validators.email],
+    validators: [Validators.minLength(6)],
     hideLabel: true,
     invertTheme: true
   },
@@ -22,7 +22,7 @@ export let signUpFormConf: Array<FormControlConf> = [
   {
     key: 'password1',
     type: 'password',
-    label: 'Password1',
+    label: 'Password',
     validators: [Validators.required, Validators.minLength(6)],
     hideLabel: true,
     invertTheme: true
@@ -31,7 +31,7 @@ export let signUpFormConf: Array<FormControlConf> = [
   {
     key: 'password2',
     type: 'password',
-    label: 'password2',
+    label: 'Confirm',
     validators: [Validators.required, Validators.minLength(6)],
     hideLabel: true,
     invertTheme: true

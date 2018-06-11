@@ -4,6 +4,8 @@ import {map, catchError} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, throwError} from 'rxjs';
 import {takeWhile} from "rxjs/operators";
+import {apiUrls} from "../api-urls";
+import {HandleError, HttpErrorHandler} from "./http-error-handler.service";
 
 
 @Injectable({
@@ -11,13 +13,14 @@ import {takeWhile} from "rxjs/operators";
 })
 export class DataProductsService implements OnInit {
 
-  private _productsURL: string = 'http://light-it-04.tk/api/adverts/';
-  private _noImageURL: string = 'https://vignette.wikia.nocookie.net/hunterxhunter/images/6/6d/No_image.png/revision/latest?cb=20120417110152';
-  private _noAvatarURL: string = 'http://bibka.org/templates/bibkanew/dleimages/noavatar.png';
   private _isAlive: boolean = true;
   public infoMsg: string = '';
 
-  constructor(private http: HttpClient) {
+  public handleError: HandleError;
+
+  constructor(private http: HttpClient,
+              httpErrorHandler: HttpErrorHandler) {
+    this.handleError = httpErrorHandler.createHandleError('Errors: ');
   }
 
   public ngOnInit() {
@@ -28,7 +31,7 @@ export class DataProductsService implements OnInit {
       .set('offset', offset.toString())
       .set('limit', limit.toString());
 
-    return this.http.get(this._productsURL, {params})
+    return this.http.get(apiUrls.products, {params})
       .pipe(
         takeWhile(() => this._isAlive),
         map((response: Response) => {
@@ -45,10 +48,12 @@ export class DataProductsService implements OnInit {
 
           return response["results"];
         }),
-        catchError(error => {
-          console.log(error.message || 'Server error');
-          return throwError(error.message);
-        }));
+        catchError(this.handleError('getDataProducts:', []))
+        // catchError(error => {
+        //   console.log(error.message || 'Server error');
+        //   return throwError(error.message);
+        // })
+      );
   }
 
 
@@ -57,16 +62,16 @@ export class DataProductsService implements OnInit {
   }
 
   public getDataProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(this._productsURL + id.toString() + '/').pipe(
-      map((product) => {
-          this._setNoImage(product);
-          this._setNoAvatar(product);
-          return product;
-        },
-        catchError(error => {
-          console.log(error.message || 'Server error');
-          return throwError(error.message);
-        })));
+    return this.http.get<Product>(apiUrls.products + id.toString() + '/')
+      .pipe(
+        map((product) => {
+            this._setNoImage(product);
+            this._setNoAvatar(product);
+            return product;
+          },
+          catchError(this.handleError('getDataProduct:', []))
+        )
+      );
   }
 
   private _setNoImage(product: Product): void {
@@ -74,14 +79,14 @@ export class DataProductsService implements OnInit {
       product.images.push({
         pk: null,
         advert: null,
-        file: this._noImageURL
+        file: apiUrls.noImage
       });
     }
   }
 
   private _setNoAvatar(product: Product): void {
     if (product.owner.avatar == undefined) {
-      product.owner.avatar = this._noAvatarURL;
+      product.owner.avatar = apiUrls.noAvatar;
     }
   }
 }

@@ -11,12 +11,20 @@
         <button class="btn" (click)="isSignIn = true;" [disabled] = "isSignIn">Sign in</button>
         <button class="btn" (click)="isSignIn = false;" [disabled] = "!isSignIn">Sign up</button>
       </div>
-      <app-dynamic-form *ngIf="isSignIn; else signUp" [props]="signInProps"></app-dynamic-form>
+      <app-dynamic-form *ngIf="isSignIn; else signUp"
+                        class="_margin-top-2_5rem"
+                        [props]="signInProps"
+                        (submitted)="onSignIn($event)" >
+      </app-dynamic-form>
       <!--<app-sign-in-form *ngIf="isSignIn; else signUp" ></app-sign-in-form>-->
       <ng-template  #signUp>
-        <app-dynamic-form [props]="signUpProps"></app-dynamic-form>
+        <app-dynamic-form class="_margin-top-2_5rem"
+                          [props]="signUpProps"
+                          (submitted)="onSignUp($event)">
+        </app-dynamic-form>
       <!--<app-sign-up-form></app-sign-up-form>-->
       </ng-template>
+      <app-messages></app-messages>
     </div>
     <div class="login-right-section_bottom-text">2017 - front-end labs Light IT</div>
   </div>

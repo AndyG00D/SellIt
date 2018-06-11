@@ -15,7 +15,7 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   private _offset: number;
   private _limit: number = 12;
   private _isLoadData: boolean;
-  public errorMsg: string;
+  // public errorMsg: string;
   public infoMsg: string;
 
 
@@ -48,7 +48,7 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
         this.infoMsg = this.dataProducts.infoMsg;
         this._isLoadData = true;
       },
-        error => this.errorMsg = error || 'server error',
+        // error => this.errorMsg = error || 'server error',
       )}
 
 

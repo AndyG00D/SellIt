@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {AuthService} from "../../../core/services/auth.service";
+import {Owner} from "../../../core/models/product";
 
 @Component({
   selector: 'app-header',
@@ -6,8 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  user: Owner;
+  constructor(private authService: AuthService) {
+    this.user = authService.authUser;
+  }
 
-  constructor() { }
-
+  onLogOut(){
+    this.authService.logout();
+  }
 
 }
