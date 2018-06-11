@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from "../../services/auth.service";
 
 
 @Component({
@@ -11,7 +12,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class SignInFormComponent implements OnInit, OnDestroy {
   public signInForm;
 
-  constructor() {
+  constructor(private authService:AuthService) {
     this.signInForm = new FormGroup(
       {
         email: new FormControl('',
@@ -29,8 +30,8 @@ export class SignInFormComponent implements OnInit, OnDestroy {
   }
 
   public onSignIn() {
-    if(this.signInForm.valid) {
-      console.log(this.signInForm.value);
-    }
+    // if(this.signInForm.valid) {
+      this.authService.getLogIn(this.signInForm.value).subscribe();
+    // }
   }
 }
