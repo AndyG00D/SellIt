@@ -22,9 +22,7 @@ export class DynamicFormComponent implements OnInit {
   createForm(props): FormGroup {
     const formGroup = {};
     for (let prop of props) {
-      if (prop.type != 'submit' && prop.type !== 'reset') { // generate Form Control
-        formGroup[prop.key] = new FormControl(prop.value, prop.validators);
-      } else if (prop.type === 'nested') { // generate Nested Form
+      if (prop.type === 'nested') { // generate Nested Form
         formGroup[prop.key] = this.createForm(prop.conf);
       } else if (prop.type === 'array') { // generate Form Array
         let items = [];
@@ -33,6 +31,8 @@ export class DynamicFormComponent implements OnInit {
           items.push(item);
         }
         formGroup[prop.key] = new FormArray(items);
+      } else if (prop.type != 'submit' && prop.type !== 'reset') { // generate Form Control
+        formGroup[prop.key] = new FormControl(prop.value, prop.validators);
       }
     }
     return new FormGroup(formGroup);

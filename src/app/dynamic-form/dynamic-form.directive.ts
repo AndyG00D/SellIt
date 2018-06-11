@@ -16,6 +16,7 @@ import {ButtonComponent} from "./components/button/button.component";
 export class DynamicFormDirective implements OnInit, OnChanges {
   @Input() props;
   @Input() form: FormGroup;
+  @Input() parentsFormGroup: string = '';
 
   constructor(private container: ViewContainerRef,
               private factoryResolver: ComponentFactoryResolver) {
@@ -30,7 +31,7 @@ export class DynamicFormDirective implements OnInit, OnChanges {
     }
   }
 
-  addComponent(component: Type<any>, prop: FormControlConf = null, form: FormGroup = null) {
+  addComponent(component: Type<any>, prop: FormControlConf = null) {
     // const newFactory = this.factoryResolver.resolveComponentFactory(component);
     // const newComponent = newFactory.create(this.container.parentInjector);
     // // const componentRef = this.container.insert(newComponent.hostView);
@@ -42,8 +43,13 @@ export class DynamicFormDirective implements OnInit, OnChanges {
     if (prop !== null) {
       componentRef.instance['prop'] = prop;
     }
-    if (form !== null) {
-      componentRef.instance.form = form;
+    //add context of current form
+    if (this.form !== null) {
+      componentRef.instance.form = this.form;
+    }
+    //add parents Form Group
+    if (this.parentsFormGroup) {
+      componentRef.instance.parentsFormGroup = this.parentsFormGroup + '.';
     }
   }
 
@@ -59,28 +65,28 @@ export class DynamicFormDirective implements OnInit, OnChanges {
         case 'password':
         case 'search':
         case 'tel':
-          this.addComponent(InputTextComponent, prop, this.form);
+          this.addComponent(InputTextComponent, prop);
           break;
         case 'number':
         case 'range':
-          this.addComponent(InputNumberComponent, prop, this.form);
+          this.addComponent(InputNumberComponent, prop);
           break;
         case 'checkbox':
         case 'radio':
-          this.addComponent(InputBooleanComponent, prop, this.form);
+          this.addComponent(InputBooleanComponent, prop);
           break;
         case 'textarea':
-          this.addComponent(TextareaComponent, prop, this.form);
+          this.addComponent(TextareaComponent, prop);
           break;
         case 'select':
-          this.addComponent(SelectComponent, prop, this.form);
+          this.addComponent(SelectComponent, prop);
           break;
         case 'submit':
         case 'reset':
           this.addComponent(ButtonComponent, prop);
           break;
         case 'nested':
-          this.addComponent(NestedFieldComponent, prop, this.form);
+          this.addComponent(NestedFieldComponent, prop);
           break;
         case 'array':
           break;

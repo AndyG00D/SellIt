@@ -1,9 +1,11 @@
 <div [formGroup]="form">
-  <div class="login-form form-group" [formGroupName]="prop.key">
-    <ng-container
-      dynamic-form [props]="prop.conf"
-      [form]="form">
+  <fieldset [formGroupName]="prop.key">
+    <ng-container dynamic-form
+                  [props]="prop.conf"
+                  [form]="form"
+                  [parentsFormGroup] = "parentsFormGroup + prop.key">
     </ng-container>
-  </div>
+    <!--<input formGroupName="field1" type="text" formGroup="nested">-->
+  </fieldset>
 </div>
 

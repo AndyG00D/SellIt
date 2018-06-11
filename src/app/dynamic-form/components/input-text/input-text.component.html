@@ -1,18 +1,17 @@
 <div class="input-text" [formGroup]="form" [class.input-text_color-invert]="prop.invertTheme">
   <input class="input-text__input"
          [formControlName]="prop.key"
-         [id]="prop.key"
          [type]="prop.type"
-         [class.alert-danger-text]="form.get(prop.key).errors && form.get(prop.key).dirty"
+         [class.alert-danger-text]="form.get(parentsFormGroup+prop.key).errors && form.get(parentsFormGroup+prop.key).dirty"
          [class.input-text__input_color-invert]="prop.invertTheme"
          [placeholder]="prop.label">
   <div class="input-text__focus-line" [class.input-text__focus-line_color-invert]="prop.invertTheme"></div>
 </div>
 
 <!--errors-->
-<ng-container *ngIf="!prop.hideErrors && form.get(prop.key).errors && form.get(prop.key).dirty">
+<ng-container *ngIf="!prop.hideErrors && form.get(parentsFormGroup+prop.key).errors && form.get(parentsFormGroup+prop.key).dirty">
   <app-form-control-errors
-    [errors]="form.get(prop.key).errors"
+    [errors]="form.get(parentsFormGroup+prop.key).errors"
     [title]="prop.label">
   </app-form-control-errors>
 </ng-container>

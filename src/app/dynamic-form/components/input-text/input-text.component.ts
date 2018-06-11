@@ -9,6 +9,7 @@ import {FormGroup} from "@angular/forms";
 export class InputTextComponent implements OnInit {
   @Input() prop: any;
   @Input() form: FormGroup;
+  @Input() parentsFormGroup: string = '';
 
   constructor() { }
 

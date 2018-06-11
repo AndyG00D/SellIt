@@ -7,8 +7,9 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./nested-field.component.scss']
 })
 export class NestedFieldComponent {
-  @Input() prop;
-  form: FormGroup;
+  @Input() prop: any;
+  @Input() form: FormGroup;
+  @Input() parentsFormGroup: string = '';
 
   constructor() {
   }
