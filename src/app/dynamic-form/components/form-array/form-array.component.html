@@ -1,0 +1,13 @@
+<ng-container [formGroup]="form">
+  <fieldset [formArrayName]="prop.key">
+    <div class="form-group"
+         *ngFor="let control of form.get(prop.key).controls; let i = index">
+      <fieldset [formGroupName]="i">
+        <ng-container dynamic-form
+                      [props]="prop.conf"
+                      [form]="control">
+        </ng-container>
+      </fieldset>
+    </div>
+  </fieldset>
+</ng-container>

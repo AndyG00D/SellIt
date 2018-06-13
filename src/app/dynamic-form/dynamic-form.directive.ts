@@ -6,9 +6,10 @@ import {InputNumberComponent} from "./components/input-number/input-number.compo
 import {TextareaComponent} from "./components/textarea/textarea.component";
 import {SelectComponent} from "./components/select/select.component";
 import {FormControlConf} from "./dynamic-form.model";
-import {NestedFieldComponent} from "./components/nested-field/nested-field.component";
+import {FormGroupComponent} from "./components/form-group/form-group.component";
 import {InputBooleanComponent} from "./components/input-boolean/input-boolean.component";
 import {ButtonComponent} from "./components/button/button.component";
+import {FormArrayComponent} from "./components/form-array/form-array.component";
 
 @Directive({
   selector: '[dynamic-form]',
@@ -16,7 +17,7 @@ import {ButtonComponent} from "./components/button/button.component";
 export class DynamicFormDirective implements OnInit, OnChanges {
   @Input() props;
   @Input() form: FormGroup;
-  @Input() parentsFormGroup: string = '';
+  // @Input() parentsFormGroup: string = '';
 
   constructor(private container: ViewContainerRef,
               private factoryResolver: ComponentFactoryResolver) {
@@ -31,7 +32,7 @@ export class DynamicFormDirective implements OnInit, OnChanges {
     }
   }
 
-  addComponent(component: Type<any>, prop: FormControlConf = null) {
+  addComponent(component: Type<any>, prop: FormControlConf = null, formGroupKey: any = null) {
     // const newFactory = this.factoryResolver.resolveComponentFactory(component);
     // const newComponent = newFactory.create(this.container.parentInjector);
     // // const componentRef = this.container.insert(newComponent.hostView);
@@ -48,8 +49,8 @@ export class DynamicFormDirective implements OnInit, OnChanges {
       componentRef.instance.form = this.form;
     }
     //add parents Form Group
-    if (this.parentsFormGroup) {
-      componentRef.instance.parentsFormGroup = this.parentsFormGroup + '.';
+    if (formGroupKey) {
+      componentRef.instance.formGroupKey = formGroupKey;
     }
   }
 
@@ -86,9 +87,10 @@ export class DynamicFormDirective implements OnInit, OnChanges {
           this.addComponent(ButtonComponent, prop);
           break;
         case 'nested':
-          this.addComponent(NestedFieldComponent, prop);
+          this.addComponent(FormGroupComponent, prop, prop.key);
           break;
         case 'array':
+          this.addComponent(FormArrayComponent, prop);
           break;
         default:
           console.log('wrong type of control! ' + prop);

@@ -1,11 +1,11 @@
-<div [formGroup]="form">
+<ng-container [formGroup]="form">
   <input class="input-text"
          [formControlName]="prop.key"
          [id]=" prop.key"
          [type]="prop.type"
          [class.alert-danger-text]="form.get(prop.key).errors && form.get(prop.key).dirty"
          [placeholder]="prop.label">
-</div>
+</ng-container>
 
 <!--errors-->
 <ng-container *ngIf="!prop.hideErrors && form.get(prop.key).errors && form.get(prop.key).dirty">

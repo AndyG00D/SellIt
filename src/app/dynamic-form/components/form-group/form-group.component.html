@@ -1,0 +1,31 @@
+<!--<div formArrayName="items" class="well well-lg">-->
+  <!--*ngFor="let item of fg.get('items').controls; let i = index;"-->
+  <!--<div  type="text"  [formGroupName]="i" >-->
+    <!--<input formControlName="name" placeholder="Item name">-->
+    <!--<pre> {{ item.get('name').errors | json }} <pre>-->
+        <!--<input formControlName="description" placeholder="Item description">-->
+        <!--<input formControlName="price" placeholder="Item price">-->
+        <!--<button (click)="removeItem(i)">-</button>-->
+  <!--</div>-->
+  <!---->
+<!--<div  type="text"  [formGroupName]="i" >-->
+  <!--<input formControlName="name" placeholder="Item name">-->
+        <!--<input formControlName="description" placeholder="Item description">-->
+        <!--<input formControlName="price" placeholder="Item price">-->
+        <!--<button (click)="removeItem(i)">-</button>-->
+<!--</div>-->
+
+
+<ng-container [formGroup]="form">
+  <fieldset [formGroupName]="formGroupKey">
+    <ng-container dynamic-form
+                  [props]="prop.conf"
+                  [form]="form.get(prop.key)">
+    </ng-container>
+  </fieldset>
+</ng-container>
+{{prop.key}}
+{{formGroupKey}}
+
+<!--{{form.get(prop.key).value|json}}-->
+<!--{{parentsFormGroup|json}}-->

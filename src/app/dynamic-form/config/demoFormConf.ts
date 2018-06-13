@@ -1,6 +1,18 @@
 import {FormControlConf} from '../dynamic-form.model'
 import {Validators} from "@angular/forms";
 
+export let tesFormArrayConf: Array<FormControlConf> = [
+  {
+    key: 'item',
+    type: 'text',
+    label: 'Item1'
+  },
+  {
+    key: 'item2',
+    type: 'text',
+    label: 'Item2'
+  }
+];
 
 export let testNestedFormConf: Array<FormControlConf> = [
   {
@@ -15,20 +27,15 @@ export let testNestedFormConf: Array<FormControlConf> = [
     label: 'Field 2',
     validators: [Validators.required, Validators.min(4)]
   },
+  // {
+  //   key: 'field3',
+  //   type: 'nested',
+  //   label: 'Field 3',
+  //   conf: tesFormArrayConf
+  // }
 ];
 
-export let tesFormArrayConf: Array<FormControlConf> = [
-  {
-    key: 'item',
-    type: 'text',
-    label: 'Item1'
-  },
-  {
-    key: 'item2',
-    type: 'text',
-    label: 'Item2'
-  }
-];
+
 
 export let demoFormConf: Array<FormControlConf> = [
   {
@@ -106,13 +113,13 @@ export let demoFormConf: Array<FormControlConf> = [
     label: 'Nested Group',
     conf: testNestedFormConf
   },
-  // {
-  //   key: 'array',
-  //   type: 'array',
-  //   label: 'Form Array',
-  //   conf: tesFormArrayConf,
-  //   arrayLength: 4
-  // },
+  {
+    key: 'array',
+    type: 'array',
+    label: 'Form Array',
+    conf: tesFormArrayConf,
+    arrayLength: 5
+  },
   {
     key: 'submit',
     type: 'submit',

@@ -10,9 +10,10 @@ import {InputBooleanComponent} from "./components/input-boolean/input-boolean.co
 import {InputNumberComponent} from "./components/input-number/input-number.component";
 import {TextareaComponent} from "./components/textarea/textarea.component";
 import {SelectComponent} from "./components/select/select.component";
-import {NestedFieldComponent} from "./components/nested-field/nested-field.component";
+import {FormGroupComponent} from "./components/form-group/form-group.component";
 import {ButtonComponent} from "./components/button/button.component";
 import {DynamicFormService} from "./dynamic-form.service";
+import {FormArrayComponent} from "./components/form-array/form-array.component";
 
 @NgModule({
   imports: [
@@ -29,8 +30,9 @@ import {DynamicFormService} from "./dynamic-form.service";
     TextareaComponent,
     SelectComponent,
     FormControlErrorsComponent,
-    NestedFieldComponent,
-    ButtonComponent
+    FormGroupComponent,
+    ButtonComponent,
+    FormArrayComponent
   ],
   entryComponents: [
     LabelComponent,
@@ -40,8 +42,9 @@ import {DynamicFormService} from "./dynamic-form.service";
     TextareaComponent,
     SelectComponent,
     FormControlErrorsComponent,
-    NestedFieldComponent,
-    ButtonComponent
+    FormGroupComponent,
+    ButtonComponent,
+    FormArrayComponent
   ],
   providers: [
     DynamicFormService
