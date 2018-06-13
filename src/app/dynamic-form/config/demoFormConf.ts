@@ -1,18 +1,7 @@
 import {FormControlConf} from '../dynamic-form.model'
 import {Validators} from "@angular/forms";
 
-export let tesFormArrayConf: Array<FormControlConf> = [
-  {
-    key: 'item',
-    type: 'text',
-    label: 'Item1'
-  },
-  {
-    key: 'item2',
-    type: 'text',
-    label: 'Item2'
-  }
-];
+
 
 export let testNestedFormConf: Array<FormControlConf> = [
   {
@@ -36,6 +25,24 @@ export let testNestedFormConf: Array<FormControlConf> = [
 ];
 
 
+export let tesFormArrayConf: Array<FormControlConf> = [
+  {
+    key: 'item',
+    type: 'text',
+    label: 'Item1'
+  },
+  {
+    key: 'item2',
+    type: 'text',
+    label: 'Item2'
+  },
+  {
+    key: 'nested',
+    type: 'nested',
+    label: 'Nested Group',
+    conf: testNestedFormConf
+  }
+];
 
 export let demoFormConf: Array<FormControlConf> = [
   {

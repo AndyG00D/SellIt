@@ -13,7 +13,11 @@ export class FormArrayComponent {
   constructor() {
   }
 
-  items = [{}];
+  public get formArray() {
+    return this.form.get(this.prop.key) as FormArray;
+  }
+
+  // items = [{}];
 
   // createItem(): FormGroup {
   //   return new FormGroup({
@@ -29,8 +33,8 @@ export class FormArrayComponent {
   //   this.fg.get('items').push(this.createItem());
   // }
 
-  // removeItem(i: number) {
-  //   this.form.get(this.prop.key).removeAt(i);
-  // }
+  removeItem(i: number) {
+    this.formArray.removeAt(i);
+  }
 
 }
