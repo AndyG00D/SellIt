@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import {FormGroup, FormControl, FormArray} from '@angular/forms';
 
 @Component({
@@ -6,8 +6,9 @@ import {FormGroup, FormControl, FormArray} from '@angular/forms';
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.scss']
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit, AfterViewInit {
   @Input() props;
+  @Input() data: any;
   @Output() submitted = new EventEmitter<any>();
   form: FormGroup = new FormGroup({});
 
@@ -16,6 +17,14 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.createForm(this.props);
+    if (this.data) {
+      this.form.patchValue(this.data);
+      console.log("load form data: " + JSON.stringify(this.data))
+    }
+  }
+
+  ngAfterViewInit() {
+
   }
 
   // setup the form

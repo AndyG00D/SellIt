@@ -1,0 +1,8 @@
+<app-header></app-header>
+<section class="content">
+  <p><a href="" routerLink="/products">&lt; Back to product list</a></p>
+  <app-messages></app-messages>
+  <h1>Profile</h1>
+  <app-dynamic-form [props]="props" [data] = "user" (submitted)="onSubmit($event)"></app-dynamic-form>
+</section>
+<app-footer></app-footer>

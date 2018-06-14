@@ -57,7 +57,7 @@ export class AuthService implements OnInit {
           console.log('login: ' + JSON.stringify(data));
           this.sessionService.token = data.token;
           this.sessionService.user = data.user;
-          this.profileService.user = data.user;
+          this.profileService.setUser(data.user);
           this.router.navigate(['/products']);
         }),
         catchError(this.handleError('Sign In:', log))
@@ -65,16 +65,20 @@ export class AuthService implements OnInit {
   }
 
 
-  public getLogInUser() {
-    return this.http.get(apiUrls.profile)
-      .pipe(
-        tap((data: any) => {
-          console.log('login: ' + JSON.stringify(data));
-          this.sessionService.user = data;
-          this.profileService.user = data;
-        }),
-        catchError(this.handleError('getLogInUser:'))
-      )
+  // public getProfile() {
+  //   return this.http.get(apiUrls.profile)
+  //     .pipe(
+  //       tap((data: any) => {
+  //         console.log('login: ' + JSON.stringify(data));
+  //         this.sessionService.user = data;
+  //         this.profileService.user = data;
+  //       }),
+  //       catchError(this.handleError('getProfile:'))
+  //     )
+  // }
+
+  public isAuth(){
+    return !!this.sessionService.token;
   }
 
   public verifyEmail(key: any) {
@@ -87,22 +91,22 @@ export class AuthService implements OnInit {
       );
   }
 
-  getUser(){
-    if(this.profileService.user) {
-      console.log("1");
-      return this.profileService.user;
-    }
-    else if(this.sessionService.user){
-      console.log("2");
-     return this.profileService.user = this.sessionService.user;
-    }
-    else if (this.sessionService.token) {
-      this.getLogInUser().subscribe();
-      console.log("3");
-    }
-    console.log("4");
-    return this.profileService.user
-  }
+  // getUser(){
+  //   if(this.profileService.user) {
+  //     console.log("1");
+  //     return this.profileService.user;
+  //   }
+  //   else if(this.sessionService.user){
+  //     console.log("2");
+  //    return this.profileService.user = this.sessionService.user;
+  //   }
+  //   else if (this.sessionService.token) {
+  //     this.getProfile().subscribe();
+  //     console.log("3");
+  //   }
+  //   console.log("4");
+  //   return this.profileService.user
+  // }
 
 
   public logout() {
@@ -110,7 +114,7 @@ export class AuthService implements OnInit {
       () => {
         this.sessionService.token = null;
         this.sessionService.user = null;
-        this.profileService.user = null;
+        this.profileService.setUser(null);
       }
     );
   }

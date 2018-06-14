@@ -34,7 +34,7 @@ import {MessageService} from "./core/services/message.service";
 import {SessionService} from "./core/services/session.service";
 import {ProfileService} from "./core/services/profile.service";
 import {AuthInterceptor} from "./core/services/auth.interceptor";
-import {LoggingInterceptor} from "./core/services/logging-interceptor";
+import {ProfilePageComponent} from "./profile-page/profile-page.component";
 
 @NgModule({
   declarations: [
@@ -57,7 +57,8 @@ import {LoggingInterceptor} from "./core/services/logging-interceptor";
     SignInFormComponent,
     ProductFormComponent,
     DynamicFormDemoPageComponent,
-    MessagesComponent
+    MessagesComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +85,7 @@ import {LoggingInterceptor} from "./core/services/logging-interceptor";
       useClass: AuthInterceptor,
       multi: true,
     },
-    LoggingInterceptor
+
   ],
   bootstrap: [AppComponent]
 })

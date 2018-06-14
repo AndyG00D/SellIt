@@ -1,7 +1,6 @@
 <header class="header">
   <!--user-block-->
   <div class="dropdown user-block">
-      <pre>{{user}}</pre>
       <div class=" user-block__menu" *ngIf="!user; else userBlock">
         <span>Welcome,
           <a class="link" routerLink="/login">login</a> or
@@ -14,13 +13,12 @@
                 <span class="user-block__user">
                 <img class="user-block__avatar" [src]="user.avatar" alt="{{userName}}"/>
                 {{userName}}
-                  <!--{{(user|async).username}}-->
                 </span>
         <a class="link text_white-color" (click)="onLogOut()"><i class="fa fa-sign-out"></i></a>
       </div>
       <div class="dropdown__submenu user-block__submenu">
         <button class="btn" routerLink="/products/add">Add new post</button>
-        <button class="btn">Profile</button>
+        <button class="btn" routerLink="/profile">Profile</button>
       </div>
     </ng-template>
   </div>
