@@ -49,9 +49,9 @@ export class ProfileService implements OnInit {
   //   return res;
   // }
 
-  // set user(user: User) {
-  //   this._userSubject.next(user);
-  // }
+  set user(user: User) {
+    this._userSubject.next(user);
+  }
 
 
   // setIsAuth(IsAuth: boolean) {
@@ -70,7 +70,7 @@ export class ProfileService implements OnInit {
       )
   }
 
-  public updateProfile(user: User) {
+  public updateProfile(user: any) {
     return this.http.patch(apiUrls.profile, {user})
       .pipe(
         tap((data: any) => {

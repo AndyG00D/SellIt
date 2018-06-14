@@ -65,17 +65,17 @@ export class AuthService implements OnInit {
   }
 
 
-  // public getProfile() {
-  //   return this.http.get(apiUrls.profile)
-  //     .pipe(
-  //       tap((data: any) => {
-  //         console.log('login: ' + JSON.stringify(data));
-  //         this.sessionService.user = data;
-  //         this.profileService.user = data;
-  //       }),
-  //       catchError(this.handleError('getProfile:'))
-  //     )
-  // }
+  public getLogGoogle(obj) {
+    return this.http.post(apiUrls.google, {'access_token': obj.token})
+      .pipe(
+        tap((data: any) => {
+          console.log('login: ' + JSON.stringify(data));
+          // this.sessionService.user = data;
+          // this.profileService.user = data;
+        }),
+        catchError(this.handleError('getProfile:'))
+      )
+  }
 
   public isAuth(){
     return !!this.sessionService.token;
@@ -107,6 +107,8 @@ export class AuthService implements OnInit {
   //   console.log("4");
   //   return this.profileService.user
   // }
+
+
 
 
   public logout() {

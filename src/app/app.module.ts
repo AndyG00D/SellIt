@@ -35,6 +35,11 @@ import {SessionService} from "./core/services/session.service";
 import {ProfileService} from "./core/services/profile.service";
 import {AuthInterceptor} from "./core/services/auth.interceptor";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+} from "angular5-social-login";
 
 @NgModule({
   declarations: [
@@ -66,6 +71,7 @@ import {ProfilePageComponent} from "./profile-page/profile-page.component";
     HttpClientModule,
     ReactiveFormsModule,
     DynamicFormModule,
+    SocialLoginModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'My-Xsrf-Cookie',
       headerName: 'My-Xsrf-Header',
@@ -85,9 +91,27 @@ import {ProfilePageComponent} from "./profile-page/profile-page.component";
       useClass: AuthInterceptor,
       multi: true,
     },
-
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+}
+
+
+// Configs
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+    [
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider("837694048230-keo53o03s8od9ee39boib7o6prp18fs5.apps.googleusercontent.com"),
+      },
+    ]
+);
+  return config;
 }
