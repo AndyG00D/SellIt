@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
 
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
@@ -33,6 +33,8 @@ import {HttpErrorHandler} from "./core/services/http-error-handler.service";
 import {MessageService} from "./core/services/message.service";
 import {SessionService} from "./core/services/session.service";
 import {ProfileService} from "./core/services/profile.service";
+import {AuthInterceptor} from "./core/services/auth.interceptor";
+import {LoggingInterceptor} from "./core/services/logging-interceptor";
 
 @NgModule({
   declarations: [
@@ -76,7 +78,13 @@ import {ProfileService} from "./core/services/profile.service";
     HttpErrorHandler,
     CookieService,
     SessionService,
-    ProfileService
+    ProfileService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    LoggingInterceptor
   ],
   bootstrap: [AppComponent]
 })

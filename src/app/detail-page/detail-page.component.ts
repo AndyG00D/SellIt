@@ -3,7 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {Subject} from 'rxjs/internal/Subject';
 import {switchMap, takeUntil, tap} from 'rxjs/operators';
-import {Product, Owner} from "../core/models/product";
+import {Product} from "../core/models/product";
+import {User} from "../core/models/user";
 import {DataProductsService} from "../core/services/data-products.service";
 
 @Component({
@@ -18,7 +19,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
   public product: Product;
 
   //temp props of user
-  public user: Owner = {
+  public user: User = {
     id: 23,
     username: "zicrael",
     email: "13ccdd@gmail.com",

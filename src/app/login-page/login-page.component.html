@@ -8,15 +8,15 @@
         <img src="../../assets/img/sell-it_invert.png" height="69" width="198"/>
       </div>
       <div class="btn-group _margin-top-7_5rem">
-        <button class="btn" (click)="isSignIn = true;" [disabled] = "isSignIn">Sign in</button>
-        <button class="btn" (click)="isSignIn = false;" [disabled] = "!isSignIn">Sign up</button>
+        <button class="btn" (click)="isSignUp = false;" [disabled] = "!isSignUp">Sign in</button>
+        <button class="btn" (click)="isSignUp = true;" [disabled] = "isSignUp">Sign up</button>
       </div>
-      <app-dynamic-form *ngIf="isSignIn; else signUp"
+      <app-dynamic-form *ngIf="!isSignUp; else signUp"
                         class="_margin-top-2_5rem"
                         [props]="signInProps"
                         (submitted)="onSignIn($event)" >
       </app-dynamic-form>
-      <!--<app-sign-in-form *ngIf="isSignIn; else signUp" ></app-sign-in-form>-->
+      <!--<app-sign-in-form *ngIf="isSignUp; else signUp" ></app-sign-in-form>-->
       <ng-template  #signUp>
         <app-dynamic-form class="_margin-top-2_5rem"
                           [props]="signUpProps"

@@ -1,22 +1,32 @@
 <header class="header">
   <!--user-block-->
-  <ng-container *ngIf="user">
   <div class="dropdown user-block">
-    <div class="dropdown__btn user-block__menu">
+      <pre>{{user}}</pre>
+      <div class=" user-block__menu" *ngIf="!user; else userBlock">
+        <span>Welcome,
+          <a class="link" routerLink="/login">login</a> or
+          <a class="link" routerLink="/login" [queryParams]="{isSignUp: true}" >register</a>
+          for start!</span>
+      </div>
+
+    <ng-template #userBlock>
+      <div class="dropdown__btn user-block__menu">
                 <span class="user-block__user">
-                <img class="user-block__avatar" [src]="user.avatar" alt="Kim Evans"/>
-                {{user.first_name}} {{user.last_name}}
+                <img class="user-block__avatar" [src]="user.avatar" alt="{{userName}}"/>
+                {{userName}}
+                  <!--{{(user|async).username}}-->
                 </span>
-      <a (click)="onLogOut()"><i class="fa fa-sign-out"></i></a>
-    </div>
-    <div class="dropdown__submenu user-block__submenu">
-      <button class="btn" routerLink="/products/add">Add new post</button>
-      <button class="btn">Profile</button>
-    </div>
+        <a class="link text_white-color" (click)="onLogOut()"><i class="fa fa-sign-out"></i></a>
+      </div>
+      <div class="dropdown__submenu user-block__submenu">
+        <button class="btn" routerLink="/products/add">Add new post</button>
+        <button class="btn">Profile</button>
+      </div>
+    </ng-template>
   </div>
-  </ng-container>
+
   <!--logo-->
-  <img src="../../assets/img/sell-it.png" height="41" width="116" class="logo"/>
+  <img src="/assets/img/sell-it.png" height="41" width="116" class="logo"/>
   <!--input-text-->
   <div class="input-text input-text-search">
     <button class="input-text__button"><i class="fa fa-search"></i></button>

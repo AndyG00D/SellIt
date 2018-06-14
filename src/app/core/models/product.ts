@@ -19,17 +19,7 @@
 //   }
 // }
 
-export interface Owner {
-  id: number;
-  username: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  avatar: string;
-  location: string;
-  color_scheme: string;
-  language: string;
-}
+import {User} from "./user";
 
 export interface Image {
   pk: number;
@@ -39,7 +29,7 @@ export interface Image {
 
 export interface Product{
   pk: number;
-  owner: Owner;
+  owner: User;
   theme: string;
   text: string;
   price: number;

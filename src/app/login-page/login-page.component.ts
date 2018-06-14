@@ -11,7 +11,7 @@ import {ActivatedRoute, ActivatedRouteSnapshot, Router} from "@angular/router";
 })
 export class LoginPageComponent implements OnInit{
 
-  public isSignIn: boolean = true;
+  public isSignUp: boolean = false;
   public signInProps: FormControlConf[];
   public signUpProps: FormControlConf[];
 
@@ -22,8 +22,14 @@ export class LoginPageComponent implements OnInit{
   }
 
   ngOnInit(){
-    console.log(this.router.snapshot.queryParams['key']);
-    this.authService.verifyEmail(this.router.snapshot.queryParams['key']).subscribe();
+    //verify email
+    if(this.router.snapshot.queryParams['key']) {
+      this.authService.verifyEmail(this.router.snapshot.queryParams['key']).subscribe();
+    }
+    //register
+    if(this.router.snapshot.queryParams['isSignUp']) {
+      this.isSignUp = true;
+    }
   }
 
   public onSignIn(event) {

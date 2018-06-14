@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Owner, Product} from "../models/product";
+import {User} from "../models/user";
 import {map, catchError} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, throwError} from 'rxjs';
@@ -17,9 +17,7 @@ import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
 })
 export class SessionService implements OnInit {
 
-  public authUser: Owner;
   public  handleError: HandleError;
-  public  cookieValue = 'UNKNOWN';
 
   constructor(private http: HttpClient,
               public httpErrorHandler: HttpErrorHandler,
@@ -48,12 +46,12 @@ export class SessionService implements OnInit {
   }
 
 
-  get user(): Owner {
+  get user(): User {
 
     return JSON.parse(localStorage.getItem("user"));
   }
 
-  set user(value: Owner) {
+  set user(value: User) {
     if (value === null) {
       localStorage.removeItem('user');
     } else {
