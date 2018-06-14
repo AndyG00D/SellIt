@@ -14,6 +14,7 @@ import {FormGroupComponent} from "./components/form-group/form-group.component";
 import {ButtonComponent} from "./components/button/button.component";
 import {DynamicFormService} from "./dynamic-form.service";
 import {FormArrayComponent} from "./components/form-array/form-array.component";
+import {InputFileComponent} from "./components/input-file/input-file.component";
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import {FormArrayComponent} from "./components/form-array/form-array.component";
     FormControlErrorsComponent,
     FormGroupComponent,
     ButtonComponent,
-    FormArrayComponent
+    FormArrayComponent,
+    InputFileComponent
   ],
   entryComponents: [
     LabelComponent,
@@ -44,7 +46,8 @@ import {FormArrayComponent} from "./components/form-array/form-array.component";
     FormControlErrorsComponent,
     FormGroupComponent,
     ButtonComponent,
-    FormArrayComponent
+    FormArrayComponent,
+    InputFileComponent
   ],
   providers: [
     DynamicFormService

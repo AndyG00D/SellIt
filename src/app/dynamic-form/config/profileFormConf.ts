@@ -22,6 +22,12 @@ export let profileFormConf: Array<FormControlConf> = [
     validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
   },
   {
+    key: 'images',
+    type: 'file',
+    label: 'Images',
+    validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
+  },
+  {
     key: 'location',
     type: 'text',
     label: 'Location',
