@@ -11,7 +11,9 @@
     <ng-template #userBlock>
       <div class="dropdown__btn user-block__menu">
                 <span class="user-block__user">
-                <img class="user-block__avatar" [src]="user.avatar" alt="{{userName}}"/>
+                <!--<img class="user-block__avatar" [src]="user.avatar" alt="{{userName}}"/>-->
+                  <app-avatar class="user-block__avatar" [user]="user"></app-avatar>
+                  <!--<app-user-name [user]="user"></app-user-name>-->
                 {{userName}}
                 </span>
         <a class="link text_white-color" (click)="onLogOut()"><i class="fa fa-sign-out"></i></a>

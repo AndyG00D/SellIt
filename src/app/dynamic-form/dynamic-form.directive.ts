@@ -11,6 +11,7 @@ import {InputBooleanComponent} from "./components/input-boolean/input-boolean.co
 import {ButtonComponent} from "./components/button/button.component";
 import {FormArrayComponent} from "./components/form-array/form-array.component";
 import {InputFileComponent} from "./components/input-file/input-file.component";
+import {SelectColorComponent} from "./components/select-color/select-color.component";
 
 @Directive({
   selector: '[dynamic-form]',
@@ -71,6 +72,7 @@ export class DynamicFormDirective implements OnInit, OnChanges {
           break;
         case 'number':
         case 'range':
+        case 'color':
           this.addComponent(InputNumberComponent, prop);
           break;
         case 'file':
@@ -85,6 +87,9 @@ export class DynamicFormDirective implements OnInit, OnChanges {
           break;
         case 'select':
           this.addComponent(SelectComponent, prop);
+          break;
+        case 'select-color':
+          this.addComponent(SelectColorComponent, prop);
           break;
         case 'submit':
         case 'reset':

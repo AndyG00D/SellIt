@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {SignInUser, SignUpUser} from "../models/auth";
 import {SessionService} from "./session.service";
 import {ProfileService} from "./profile.service";
+import {Product} from "../models/product";
 
 
 @Injectable({
@@ -56,6 +57,7 @@ export class AuthService implements OnInit {
         tap((data: any) => {
           console.log('login: ' + JSON.stringify(data));
           this.sessionService.token = data.token;
+          // this.setNoAvatar(data.user);
           this.sessionService.user = data.user;
           this.profileService.setUser(data.user);
           this.router.navigate(['/products']);
@@ -70,8 +72,11 @@ export class AuthService implements OnInit {
       .pipe(
         tap((data: any) => {
           console.log('login: ' + JSON.stringify(data));
-          // this.sessionService.user = data;
-          // this.profileService.user = data;
+          this.sessionService.token = data.token;
+          // this.setNoAvatar(data.user);
+          this.sessionService.user = data.user;
+          this.profileService.setUser(data.user);
+          this.router.navigate(['/products']);
         }),
         catchError(this.handleError('getProfile:'))
       )
@@ -117,8 +122,15 @@ export class AuthService implements OnInit {
         this.sessionService.token = null;
         this.sessionService.user = null;
         this.profileService.setUser(null);
+        this.router.navigate(['/products']);
       }
     );
   }
+
+  // public setNoAvatar(user: User): void {
+  //   if (user.avatar == undefined) {
+  //     user.avatar = apiUrls.noAvatar;
+  //   }
+  // }
 
 }

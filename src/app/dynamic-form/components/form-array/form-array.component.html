@@ -1,13 +1,12 @@
 <ng-container [formGroup]="form">
   <fieldset [formArrayName]="prop.key">
-    <div class="form-group"
-         *ngFor="let control of formArray.controls; let i = index">
-
-      <fieldset [formGroupName]="i">
+    <div class="form-group">
+      <fieldset  *ngFor="let control of formArray.controls; let i = index" [formGroupName]="i">
+        {{i}}
         <ng-container [formGroup]="control">
           <ng-container dynamic-form
                         [props]="prop.conf"
-                        [form]="formArray.controls[i]">
+                        [form]="control">
           </ng-container>
         </ng-container>
         <button (click)="removeItem(i)">remove {{i}}</button>

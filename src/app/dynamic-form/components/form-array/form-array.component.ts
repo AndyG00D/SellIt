@@ -17,6 +17,10 @@ export class FormArrayComponent {
     return this.form.get(this.prop.key) as FormArray;
   }
 
+  // public get formGroup() {
+  //   return this.form.controls as FormGroup;
+  // }
+
   // items = [{}];
 
   // createItem(): FormGroup {

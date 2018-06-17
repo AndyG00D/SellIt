@@ -40,6 +40,10 @@ import {
   AuthServiceConfig,
   GoogleLoginProvider,
 } from "angular5-social-login";
+import {GuestGuard} from "./core/guards/guest.guard";
+import {UserGuard} from "./core/guards/user.guard";
+import {AvatarComponent} from "./shared/components/avatar/avatar.component";
+import {UserNameComponent} from "./shared/components/user-name/user-name.component";
 
 @NgModule({
   declarations: [
@@ -63,7 +67,9 @@ import {
     ProductFormComponent,
     DynamicFormDemoPageComponent,
     MessagesComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    AvatarComponent,
+    UserNameComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +89,8 @@ import {
     MessageService,
     // { provide: RequestCache, useClass: RequestCacheWithMap },
     HttpErrorHandler,
+    GuestGuard,
+    UserGuard,
     CookieService,
     SessionService,
     ProfileService,

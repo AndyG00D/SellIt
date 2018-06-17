@@ -18,12 +18,14 @@
 
     <ul class="contact-list__list dropdown__submenu">
       <li class="contact-list-item">
-        <img class="contact-list__avatar" [src]="user?.avatar"/>
+        <!--<img class="contact-list__avatar" [src]="user?.avatar"/>-->
+        <app-avatar class="contact-list__avatar" [user]="user"></app-avatar>
         {{user?.first_name}} {{user?.last_name}}
       </li>
 
       <li class="contact-list-item">
-        <img class="contact-list__avatar" [src]="owner?.avatar"/>
+        <!--<img class="contact-list__avatar" [src]="owner?.avatar"/>-->
+        <app-avatar class="contact-list__avatar" [user]="owner"></app-avatar>
         {{owner?.first_name}} {{owner?.last_name}}
       </li>
     </ul>
@@ -31,11 +33,13 @@
   <!--chat__messages-->
   <div class="chat__messages">
     <div class="chat__message-line">
-      <img class="chat__message-avatar" [src]="owner?.avatar">
+      <!--<img class="chat__message-avatar" [src]="owner?.avatar">-->
+      <app-avatar class="chat__message-avatar" [user]="owner"></app-avatar>
       <div class="chat__message-text">One line chat message</div>
     </div>
     <div class="chat__message-line chat__message_own chat__message_multi-line">
-      <img class="chat__message-avatar" [src]="user?.avatar">
+      <!--<img class="chat__message-avatar" [src]="user?.avatar">-->
+      <app-avatar class="chat__message-avatar" [user]="user"></app-avatar>
       <div class="chat__message-text">
         Multi line chat message. Some text for multi line message. What
         is your name. Oh sorry. My bad, your name I think Alis. Right?

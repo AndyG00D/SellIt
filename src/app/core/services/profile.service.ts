@@ -70,15 +70,15 @@ export class ProfileService implements OnInit {
       )
   }
 
-  public updateProfile(user: any) {
-    return this.http.patch(apiUrls.profile, {user})
+  public updateProfile(userData: any) {
+    return this.http.patch(apiUrls.profile, userData)
       .pipe(
         tap((data: any) => {
           console.log('updateProfile: ' + JSON.stringify(data));
           this.sessionService.user = data;
           this._userSubject.next(data);
         }),
-        catchError(this.handleError('onSubmit:'))
+        catchError(this.handleError('updateProfile:'))
       )
   }
 

@@ -66,7 +66,7 @@ export class DataProductsService implements OnInit {
       .pipe(
         map((product) => {
             this._setNoImage(product);
-            this._setNoAvatar(product);
+            // this._setNoAvatar(product);
             return product;
           },
           catchError(this.handleError('getDataProduct:', []))
@@ -84,9 +84,9 @@ export class DataProductsService implements OnInit {
     }
   }
 
-  private _setNoAvatar(product: Product): void {
-    if (product.owner.avatar == undefined) {
-      product.owner.avatar = apiUrls.noAvatar;
-    }
-  }
+  // private _setNoAvatar(product: Product): void {
+  //   if (product.owner.avatar == undefined) {
+  //     product.owner.avatar = apiUrls.noAvatar;
+  //   }
+  // }
 }

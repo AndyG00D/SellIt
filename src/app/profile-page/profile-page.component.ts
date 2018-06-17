@@ -21,6 +21,8 @@ export class ProfilePageComponent {
   }
 
   onSubmit(event: User){
-    this.profileService.updateProfile(event).subscribe();
+    this.profileService.updateProfile(event).subscribe(data =>
+      console.log('Update data: ' + JSON.stringify(data))
+    );
   }
 }

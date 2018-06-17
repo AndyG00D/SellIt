@@ -17,11 +17,16 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.form = this.createForm(this.props);
+    // if (this.data) {
+    //   this.form.patchValue(this.data);
+    //   console.log("load form data: " + JSON.stringify(this.data))
+    // }
     if (this.data) {
-      this.form.patchValue(this.data);
-      console.log("load form data: " + JSON.stringify(this.data))
+      this.setFormData();
     }
+
   }
+
 
   ngAfterViewInit() {
 
@@ -41,11 +46,21 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
         }
         formGroup[prop.key] = new FormArray(items);
       } else if (prop.type != 'submit' && prop.type !== 'reset') { // generate Form Control
-        formGroup[prop.key] = new FormControl(prop.value, prop.validators);
+        formGroup[prop.key] = new FormControl(prop.value || '', prop.validators);
       }
+
     }
     return new FormGroup(formGroup);
   }
+
+  setFormData(){
+    for(let item in this.data)
+      if(this.data[item] &&  this.form.get(item)) {
+        this.form.get(item).patchValue(this.data[item]);
+        // console.log(item + ": " + this.data[item]);
+      }
+  }
+
 
   // createItem(props): FormGroup {
   //   for (let prop of props) {
@@ -81,4 +96,10 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
       this.submitted.emit(this.form.value);
     }
   }
+
+  reset(){
+    this.form.markAsPristine();
+    this.form.markAsUntouched();
+  }
+
 }

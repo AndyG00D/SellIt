@@ -15,6 +15,7 @@ import {ButtonComponent} from "./components/button/button.component";
 import {DynamicFormService} from "./dynamic-form.service";
 import {FormArrayComponent} from "./components/form-array/form-array.component";
 import {InputFileComponent} from "./components/input-file/input-file.component";
+import {SelectColorComponent} from "./components/select-color/select-color.component";
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import {InputFileComponent} from "./components/input-file/input-file.component";
     FormGroupComponent,
     ButtonComponent,
     FormArrayComponent,
-    InputFileComponent
+    InputFileComponent,
+    SelectColorComponent
   ],
   entryComponents: [
     LabelComponent,
@@ -47,7 +49,8 @@ import {InputFileComponent} from "./components/input-file/input-file.component";
     FormGroupComponent,
     ButtonComponent,
     FormArrayComponent,
-    InputFileComponent
+    InputFileComponent,
+    SelectColorComponent
   ],
   providers: [
     DynamicFormService

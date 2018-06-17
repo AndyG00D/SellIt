@@ -1,11 +1,11 @@
 <div class="login-left-section-image">
   <div>
-    <img src="../../assets/img/login-left-section-image.jpg" class="login-left-section-image__img"/>
+    <img src="/assets/img/login-left-section-image.jpg" class="login-left-section-image__img"/>
   </div>
   <div class="login-right-section">
     <div>
       <div class="login-logo _margin-top-5_2rem">
-        <img src="../../assets/img/sell-it_invert.png" height="69" width="198"/>
+        <img src="/assets/img/sell-it_invert.png" height="69" width="198"/>
       </div>
       <div class="btn-group _margin-top-7_5rem">
         <button class="btn" (click)="isSignUp = false;" [disabled] = "!isSignUp">Sign in</button>
@@ -16,15 +16,14 @@
                         [props]="signInProps"
                         (submitted)="onSignIn($event)" >
       </app-dynamic-form>
-      <!--<app-sign-in-form *ngIf="isSignUp; else signUp" ></app-sign-in-form>-->
       <ng-template  #signUp>
         <app-dynamic-form class="_margin-top-2_5rem"
                           [props]="signUpProps"
                           (submitted)="onSignUp($event)">
         </app-dynamic-form>
-      <!--<app-sign-up-form></app-sign-up-form>-->
       </ng-template>
-      <button (click)="authGoogle()">Auth Google</button>
+      <!--<button class="input-text__button"><i class="fa fa-search"></i></button>-->
+      <button class="btn _full-width" (click)="authGoogle()"><i class="fa fa-google"></i></button>
       <app-messages></app-messages>
     </div>
     <div class="login-right-section_bottom-text">2017 - front-end labs Light IT</div>

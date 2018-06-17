@@ -2,52 +2,74 @@ import {FormControlConf} from '../dynamic-form.model'
 import {Validators} from "@angular/forms";
 
 
+
+export let locationFormConf: Array<FormControlConf> = [
+  {
+    key: 'name',
+    type: 'text',
+    label: 'Name'
+    // validators: [Validators.maxLength(6)]
+  }
+  // {
+  //   key: 'field2',
+  //   type: 'text',
+  //   label: 'Field 2',
+  //   // validators: [Validators.required, Validators.min(4)]
+  // }
+];
+
 export let profileFormConf: Array<FormControlConf> = [
   {
     key: 'username',
     type: 'text',
     label: 'User name',
-    validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
+    // validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
   },
   {
     key: 'first_Name',
     type: 'text',
     label: 'First Name',
-    validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
+    // validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
   },
   {
     key: 'last_name',
     type: 'text',
     label: 'Last name',
-    validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
+    // validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
   },
-  {
-    key: 'images',
-    type: 'file',
-    label: 'Images',
-    validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
-  },
+  // {
+  //   key: 'avatar',
+  //   type: 'text',
+  //   label: 'Avatar',
+  //   validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
+  // },
   {
     key: 'location',
-    type: 'text',
+    type: 'nested',
     label: 'Location',
-    validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
+    conf: [{
+      key: 'name',
+      type: 'text',
+      label: 'Address',
+      hideLabel: true
+      // validators: [Validators.maxLength(6)]
+    }]
   },
   {
     key: 'color_scheme',
-    label: 'Select',
-    value: '39010',
-    type: 'select',
+    label: 'Color Scheme',
+    value: '',
+    type: 'select-color',
     options: [
       {label: "(choose one)", value: ''},
+      {label: "blue", value: '#00b3be'},
       {label: "red", value: '#d21212'},
       {label: "green", value: '#91d763'},
-      {label: "blue", value: '#00b3be'}
     ]
   },
   {
     key: 'language',
-    label: 'Select',
+    label: 'Language',
     value: '',
     type: 'select',
     options: [
@@ -60,7 +82,7 @@ export let profileFormConf: Array<FormControlConf> = [
   {
     key: 'submit',
     type: 'submit',
-    label: 'Submit',
+    label: 'Update User',
   },
   {
     key: 'reset',
