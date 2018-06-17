@@ -32,12 +32,26 @@ export class ProfileService implements OnInit {
   setUser(user: User) {
     this._userSubject.next(user);
   }
+  //
+  // getUser() {
+  //   if (this._userSubject.value) {
+  //   }
+  //   else if (this.sessionService.user) this._userSubject.next(this.sessionService.user);
+  //   else if (this.sessionService.token) this.getProfile().subscribe();
+  //   return this._userSubject.asObservable().pipe(distinctUntilChanged(), share());
+  // }
 
   getUser() {
-    if (this._userSubject.value) {
+    if (this.sessionService.token) {
+      if (!this._userSubject.value && this.sessionService.user) {
+        this._userSubject.next(this.sessionService.user);
+      }
+      else {
+        this.getProfile().subscribe();
+      }
+    } else {
+      this._userSubject.next(null);
     }
-    else if (this.sessionService.user) this._userSubject.next(this.sessionService.user);
-    else if (this.sessionService.token) this.getProfile().subscribe();
     return this._userSubject.asObservable().pipe(distinctUntilChanged(), share());
   }
 

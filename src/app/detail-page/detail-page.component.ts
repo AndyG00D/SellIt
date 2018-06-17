@@ -19,7 +19,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
   private destroy = new Subject();
   public product: Product;
 
-  //temp props of user
+  //temp userProps of user
   public user: User;
 
   constructor(

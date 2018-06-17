@@ -5,11 +5,13 @@
   <!--about-->
   <div class="about">
     <!--about__title-->
-    <p class="about__title">{{product?.theme}}</p>
-    <p class="about__sub-title text_bold">from
+    <div class="about__title">
+      <h2 class="about__main-title">{{product?.theme}}</h2>
+    <p class="text_bold">from
       <span class="_main-color">{{product?.owner?.first_name}} {{product?.owner?.last_name}}</span>
       <span class="about__price">{{product?.price}}$</span>
     </p>
+    </div>
     <!--about__slideshow-->
     <app-slideshow class="about_slideshow" [images] = "product?.images"></app-slideshow>
     <!--about__description-->

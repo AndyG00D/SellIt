@@ -3,19 +3,26 @@ import {Validators} from "@angular/forms";
 
 
 
-export let locationFormConf: Array<FormControlConf> = [
+export let avatarFormConf: Array<FormControlConf> = [
   {
-    key: 'name',
-    type: 'text',
-    label: 'Name'
-    // validators: [Validators.maxLength(6)]
+    key: 'avatar',
+    type: 'file',
+    label: 'Avatar'
+  },
+  {
+    key: 'submit',
+    type: 'submit',
+    label: 'Change Photo'
   }
-  // {
-  //   key: 'field2',
-  //   type: 'text',
-  //   label: 'Field 2',
-  //   // validators: [Validators.required, Validators.min(4)]
-  // }
+];
+
+export let locationFormConf: Array<FormControlConf> = [
+
+  {
+    key: 'submit',
+    type: 'submit',
+    label: 'Update User',
+  },
 ];
 
 export let profileFormConf: Array<FormControlConf> = [
@@ -37,12 +44,6 @@ export let profileFormConf: Array<FormControlConf> = [
     label: 'Last name',
     // validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
   },
-  // {
-  //   key: 'avatar',
-  //   type: 'text',
-  //   label: 'Avatar',
-  //   validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
-  // },
   {
     key: 'location',
     type: 'nested',
@@ -82,11 +83,11 @@ export let profileFormConf: Array<FormControlConf> = [
   {
     key: 'submit',
     type: 'submit',
-    label: 'Update User',
+    label: 'Update User'
   },
-  {
-    key: 'reset',
-    type: 'reset',
-    label: 'Reset',
-  },
+  // {
+  //   key: 'reset',
+  //   type: 'reset',
+  //   label: 'Reset',
+  // },
 ];

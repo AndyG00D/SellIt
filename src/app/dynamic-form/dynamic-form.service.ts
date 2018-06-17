@@ -4,7 +4,7 @@ import {productFormConf} from "./config/productFormConf";
 import {demoFormConf} from "./config/demoFormConf";
 import {signInFormConf} from "./config/signInFormConf";
 import {signUpFormConf} from "./config/signUpFormConf";
-import {profileFormConf} from "./config/profileFormConf";
+import {avatarFormConf, profileFormConf} from "./config/profileFormConf";
 
 
 
@@ -31,6 +31,8 @@ export class DynamicFormService implements OnInit {
         return signUpFormConf;
       case 'profile':
         return profileFormConf;
+      case 'avatar':
+        return avatarFormConf;
       default:
         console.log('exist form config!');
         return null;

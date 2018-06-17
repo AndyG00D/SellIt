@@ -62,8 +62,8 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
   }
 
 
-  // createItem(props): FormGroup {
-  //   for (let prop of props) {
+  // createItem(userProps): FormGroup {
+  //   for (let prop of userProps) {
   //     if (prop.type === 'nested') { // generate Nested Form
   //       formGroup[prop.key] = this.createForm(prop.conf);
   //     } else if (prop.type === 'array') { // generate Form Array

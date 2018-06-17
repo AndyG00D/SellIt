@@ -44,6 +44,8 @@ import {GuestGuard} from "./core/guards/guest.guard";
 import {UserGuard} from "./core/guards/user.guard";
 import {AvatarComponent} from "./shared/components/avatar/avatar.component";
 import {UserNameComponent} from "./shared/components/user-name/user-name.component";
+import {ProfilePageTestComponent} from "./profile-page-test/profile-page-test.component";
+import {Base64UploadComponent} from "./shared/components/base64-upload/base64-upload.component";
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import {UserNameComponent} from "./shared/components/user-name/user-name.compone
     MessagesComponent,
     ProfilePageComponent,
     AvatarComponent,
-    UserNameComponent
+    UserNameComponent,
+    ProfilePageTestComponent,
+    Base64UploadComponent
   ],
   imports: [
     BrowserModule,

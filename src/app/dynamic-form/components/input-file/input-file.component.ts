@@ -24,11 +24,30 @@ export class InputFileComponent implements OnInit {
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
-        // console.log('result :' + reader.result);
-        this.form.get(this.prop.key).setValue(reader.result);
+        console.log('result :' + reader.result);
+        this.form.get(this.prop.key).patchValue(reader.result.data);
         // this.form.get(this.prop.key).patchValue(reader.readAsText(file));
       };
       // reader.readAsText(file);
 
     }
+
+
+  onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        console.log('result :' + reader.result);
+        this.form.get(this.prop.key).setValue(reader.result.data);
+        // this.form.get(this.prop.key).setValue(reader.result);
+        this.form.get(this.prop.key).setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.split(',')[1]
+        })
+      };
+    }
+  }
 }

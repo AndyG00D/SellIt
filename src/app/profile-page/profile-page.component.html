@@ -3,7 +3,14 @@
   <p><a href="" routerLink="/products">&lt; Back to product list</a></p>
   <h1>Profile</h1>
   <app-messages></app-messages>
-  <pre>{{user | json}}</pre>
-  <app-dynamic-form [props]="props" [data] = "user" (submitted)="onSubmit($event)"></app-dynamic-form>
+
+
+  <!--<pre>{{user | json}}</pre>-->
+  <div class="profile__avatar">
+    <app-avatar [user]="user"></app-avatar>
+  </div>
+  <app-dynamic-form [props]="avatarProps" [data]="user" (submitted)="onSubmit($event)"></app-dynamic-form>
+  <br>
+  <app-dynamic-form [props]="userProps" [data]="user" (submitted)="onSubmit($event)"></app-dynamic-form>
 </section>
 <app-footer></app-footer>

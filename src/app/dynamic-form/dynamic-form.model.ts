@@ -7,16 +7,16 @@ export interface optionsConf {
 }
 
 export class FormControlConf {
-  //main props
+  //main userProps
   key: string;
   type: string;
   label: string;
-  //additional props
+  //additional userProps
   value?: any;
   validators?: ValidatorFn[];
-  //props for select, checkbox
+  //userProps for select, checkbox
   options?: optionsConf[];
-  //props for nested, arrays
+  //userProps for nested, arrays
   conf?: FormControlConf[];
   arrayLength?: number;
   //customisation

@@ -43,7 +43,7 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   private _addProducts() {
     this.dataProducts.getDataProducts(this._offset, this._limit)
       .subscribe((res: Product[]) => {
-        // console.log('loading props:' + JSON.stringify(res));
+        // console.log('loading userProps:' + JSON.stringify(res));
         this.products.push(...res);
         this.infoMsg = this.dataProducts.infoMsg;
         this._isLoadData = true;
