@@ -46,6 +46,7 @@ import {AvatarComponent} from "./shared/components/avatar/avatar.component";
 import {UserNameComponent} from "./shared/components/user-name/user-name.component";
 import {ProfilePageTestComponent} from "./profile-page-test/profile-page-test.component";
 import {Base64UploadComponent} from "./shared/components/base64-upload/base64-upload.component";
+import {AuthService} from "./core/services/auth.service";
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import {Base64UploadComponent} from "./shared/components/base64-upload/base64-up
     })
   ],
   providers: [
+    AuthService,
     DataProductsService,
     ComponentLoaderService,
     MessageService,

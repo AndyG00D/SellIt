@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-
 import { Observable, of } from 'rxjs';
-
 import { MessageService } from './message.service';
 
 /** Type of the handleError function returned by HttpErrorHandler.createHandleError */
@@ -45,10 +43,3 @@ export class HttpErrorHandler {
 
   }
 }
-
-
-/*
-Copyright 2017-2018 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

@@ -2,59 +2,81 @@ import {Component, OnInit} from '@angular/core';
 import {DynamicFormService} from "../dynamic-form/dynamic-form.service";
 import {FormControlConf} from "../dynamic-form/dynamic-form.model";
 import {AuthService} from "../core/services/auth.service";
-import {ActivatedRoute, ActivatedRouteSnapshot, Router} from "@angular/router";
-import {GoogleLoginProvider} from "angular5-social-login";
-import {AuthService as SocialAuthService } from "angular5-social-login";
+import {ActivatedRoute} from "@angular/router";
+import {AuthService as SocialAuthService} from "angular5-social-login";
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit{
+export class LoginPageComponent implements OnInit {
 
-  public isSignUp: boolean = false;
-  public signInProps: FormControlConf[];
-  public signUpProps: FormControlConf[];
+  public currentForm: string = 'signIn';
+  public props: FormControlConf[];
+  public info: string;
 
-  constructor(private dynamicFormService: DynamicFormService, private authService:AuthService,
+  constructor(private dynamicFormService: DynamicFormService, private authService: AuthService,
               private socialAuthService: SocialAuthService,
               private router: ActivatedRoute) {
-    this.signInProps = this.dynamicFormService.getFormConfig('signIn');
-    this.signUpProps = this.dynamicFormService.getFormConfig('signUp');
+    this.props = this.dynamicFormService.getFormConfig(this.currentForm);
   }
 
-  ngOnInit(){
-    //verify email
-    if(this.router.snapshot.queryParams['key']) {
-      this.authService.verifyEmail(this.router.snapshot.queryParams['key']).subscribe();
+  ngOnInit() {
+    for (let param in this.router.snapshot.queryParams) {
+      //verify email
+      switch (param) {
+        case 'key':
+          this.authService.getVerifyEmail(this.router.snapshot.queryParams['key']).subscribe();
+          break;
+        //verify Confirm reset password
+        case 'uid':
+          this.changeForm('resetConfirm');
+          break;
+        //load current form
+        case 'form':
+          this.changeForm(this.router.snapshot.queryParams['form']);
+          break;
+      }
     }
-    //register
-    if(this.router.snapshot.queryParams['isSignUp']) {
-      this.isSignUp = true;
-    }
+  }
+
+  changeForm(currentForm: string) {
+    this.currentForm = currentForm;
+    this.props = this.dynamicFormService.getFormConfig(this.currentForm);
   }
 
   public onSignIn(event) {
-    console.log(event);
     this.authService.getLogIn(event).subscribe();
   }
 
   public onSignUp(event) {
-    console.log(event);
-    this.authService.getReg(event).subscribe();
+    this.authService.getRegistration(event).subscribe();
   }
 
-  public authGoogle(){
-    let socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-
-    this.socialAuthService.signIn(socialPlatformProvider).then(
-      (userData) => {
-        console.log("Google sign in data : " , userData);
-        this.authService.getLogGoogle(userData).subscribe();
+  public onResetPassword(event) {
+    this.authService.getResetPassword(event).subscribe((data) => {
+      if (data.detail !== undefined) {
+        this.info = data.detail;
+        this.changeForm('info');
       }
-    );
+    });
   }
 
+  public onResetConfirm(event) {
+    let params = event;
+    params.uid = this.router.snapshot.queryParams['uid'];
+    params.token = this.router.snapshot.queryParams['token'];
+    this.authService.getResetConfirm(params).subscribe((data) => {
+      if (data.detail !== undefined) {
+        this.info = data.detail;
+        this.changeForm('info');
+      }
+    });
+  }
+
+  public onAuthGoogle() {
+    this.authService.AuthGoogle();
+  }
 
 }

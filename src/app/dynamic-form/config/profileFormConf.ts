@@ -33,7 +33,7 @@ export let profileFormConf: Array<FormControlConf> = [
     // validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
   },
   {
-    key: 'first_Name',
+    key: 'first_name',
     type: 'text',
     label: 'First Name',
     // validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]

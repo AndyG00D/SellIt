@@ -8,9 +8,7 @@ import {apiUrls} from "../api-urls";
 import {HandleError, HttpErrorHandler} from "./http-error-handler.service";
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DataProductsService implements OnInit {
 
   private _isAlive: boolean = true;
@@ -49,10 +47,6 @@ export class DataProductsService implements OnInit {
           return response["results"];
         }),
         catchError(this.handleError('getDataProducts:', []))
-        // catchError(error => {
-        //   console.log(error.message || 'Server error');
-        //   return throwError(error.message);
-        // })
       );
   }
 
@@ -66,7 +60,6 @@ export class DataProductsService implements OnInit {
       .pipe(
         map((product) => {
             this._setNoImage(product);
-            // this._setNoAvatar(product);
             return product;
           },
           catchError(this.handleError('getDataProduct:', []))
@@ -84,9 +77,4 @@ export class DataProductsService implements OnInit {
     }
   }
 
-  // private _setNoAvatar(product: Product): void {
-  //   if (product.owner.avatar == undefined) {
-  //     product.owner.avatar = apiUrls.noAvatar;
-  //   }
-  // }
 }

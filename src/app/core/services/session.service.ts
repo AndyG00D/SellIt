@@ -1,29 +1,18 @@
 import {Injectable, OnInit} from '@angular/core';
 import {User} from "../models/user";
-import {map, catchError} from "rxjs/operators";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable, throwError} from 'rxjs';
-import {takeWhile, tap} from "rxjs/operators";
-import {apiUrls} from "../api-urls";
+import {HttpClient} from "@angular/common/http";
 import {HttpErrorHandler, HandleError} from "./http-error-handler.service";
-import { CookieService } from 'ngx-cookie-service';
-import {Router} from "@angular/router";
-import {SignInUser, SignUpUser} from "../models/auth";
-import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
+import {CookieService} from 'ngx-cookie-service';
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SessionService implements OnInit {
 
-  public  handleError: HandleError;
+  public handleError: HandleError;
 
   constructor(private http: HttpClient,
               public httpErrorHandler: HttpErrorHandler,
-              private cookieService: CookieService,
-              private router: Router
-  ) {
+              private cookieService: CookieService) {
+
     this.handleError = httpErrorHandler.createHandleError('Errors: ');
   }
 
@@ -31,13 +20,11 @@ export class SessionService implements OnInit {
   public ngOnInit() {
   }
 
-
-
-  get token() {
+  public get token(): string {
     return this.cookieService.get('token');
   }
 
-  set token(value: any) {
+  public set token(value: string) {
     if (value === null) {
       this.cookieService.delete('token');
     } else {
@@ -45,13 +32,11 @@ export class SessionService implements OnInit {
     }
   }
 
-
-  get user(): User {
-
+  public get user(): User {
     return JSON.parse(localStorage.getItem("user"));
   }
 
-  set user(value: User) {
+  public set user(value: User) {
     if (value === null) {
       localStorage.removeItem('user');
     } else {
