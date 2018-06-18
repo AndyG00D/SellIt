@@ -7,7 +7,7 @@ export let resetConfirmFormConf: Array<FormControlConf> = [
     key: 'new_password1',
     type: 'password',
     label: 'Password',
-    validators: [Validators.required, Validators.minLength(6)],
+    validators: [Validators.required],
     hideLabel: true,
     invertTheme: true
   },
@@ -15,7 +15,7 @@ export let resetConfirmFormConf: Array<FormControlConf> = [
     key: 'new_password2',
     type: 'password',
     label: 'Password',
-    validators: [Validators.required, Validators.minLength(6)],
+    validators: [Validators.required],
     hideLabel: true,
     invertTheme: true
   },

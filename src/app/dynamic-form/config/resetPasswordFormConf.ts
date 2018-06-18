@@ -7,7 +7,7 @@ export let resetPasswordFormConf: Array<FormControlConf> = [
     key: 'email',
     type: 'email',
     label: 'Email',
-    validators: [Validators.required, Validators.minLength(6), Validators.email],
+    validators: [Validators.required],
     hideLabel: true,
     invertTheme: true
   },

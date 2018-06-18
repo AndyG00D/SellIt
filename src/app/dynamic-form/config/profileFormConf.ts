@@ -16,33 +16,22 @@ export let avatarFormConf: Array<FormControlConf> = [
   }
 ];
 
-export let locationFormConf: Array<FormControlConf> = [
-
-  {
-    key: 'submit',
-    type: 'submit',
-    label: 'Update User',
-  },
-];
 
 export let profileFormConf: Array<FormControlConf> = [
   {
     key: 'username',
     type: 'text',
     label: 'User name',
-    // validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
   },
   {
     key: 'first_name',
     type: 'text',
     label: 'First Name',
-    // validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
   },
   {
     key: 'last_name',
     type: 'text',
     label: 'Last name',
-    // validators: [Validators.required, Validators.minLength(4), Validators.maxLength(20)]
   },
   {
     key: 'location',
@@ -53,7 +42,6 @@ export let profileFormConf: Array<FormControlConf> = [
       type: 'text',
       label: 'Address',
       hideLabel: true
-      // validators: [Validators.maxLength(6)]
     }]
   },
   {

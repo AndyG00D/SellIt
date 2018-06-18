@@ -7,7 +7,7 @@ export let signInFormConf: Array<FormControlConf> = [
     key: 'email',
     type: 'email',
     label: 'Email',
-    validators: [Validators.required, Validators.minLength(6), Validators.email],
+    validators: [Validators.required],
     hideLabel: true,
     invertTheme: true
   },
@@ -15,7 +15,7 @@ export let signInFormConf: Array<FormControlConf> = [
     key: 'password',
     type: 'password',
     label: 'Password',
-    validators: [Validators.required, Validators.minLength(6)],
+    validators: [Validators.required],
     hideLabel: true,
     invertTheme: true
   },
