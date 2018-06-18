@@ -20,7 +20,6 @@ import {InputFileBase64Component} from "./components/input-file-base64/input-fil
 export class DynamicFormDirective implements OnInit, OnChanges {
   @Input() props;
   @Input() form: FormGroup;
-  // @Input() parentsFormGroup: string = '';
 
   constructor(private container: ViewContainerRef,
               private factoryResolver: ComponentFactoryResolver) {
@@ -36,12 +35,6 @@ export class DynamicFormDirective implements OnInit, OnChanges {
   }
 
   addComponent(component: Type<any>, prop: FormControlConf = null, formGroupKey: any = null) {
-    // const newFactory = this.factoryResolver.resolveComponentFactory(component);
-    // const newComponent = newFactory.create(this.container.parentInjector);
-    // // const componentRef = this.container.insert(newComponent.hostView);
-    // this.appRef.attachView(newComponent.hostView);
-    // newComponent.instance['prop'] = prop;
-
     let componentFactory = this.factoryResolver.resolveComponentFactory(component);
     let componentRef = this.container.createComponent(componentFactory);
     if (prop !== null) {

@@ -1,5 +1,6 @@
 import {FormControlConf} from '../dynamic-form.model'
 import {Validators} from "@angular/forms";
+import {CustomValidatorsService} from "../custom-validators.service";
 
 
 export let signUpFormConf: Array<FormControlConf> = [
@@ -31,7 +32,7 @@ export let signUpFormConf: Array<FormControlConf> = [
     key: 'password2',
     type: 'password',
     label: 'Confirm',
-    validators: [Validators.required],
+    validators: [Validators.required, /*CustomValidatorsService.prototype.confirm('password1', 'password2')*/],
     hideLabel: true,
     invertTheme: true
   },

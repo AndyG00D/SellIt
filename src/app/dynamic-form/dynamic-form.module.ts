@@ -17,11 +17,12 @@ import {FormArrayComponent} from "./components/form-array/form-array.component";
 import {InputFileComponent} from "./components/input-file/input-file.component";
 import {SelectColorComponent} from "./components/select-color/select-color.component";
 import {InputFileBase64Component} from "./components/input-file-base64/input-file-base64.component";
+import {CustomValidatorsService} from "./custom-validators.service";
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     DynamicFormComponent,
@@ -56,7 +57,8 @@ import {InputFileBase64Component} from "./components/input-file-base64/input-fil
     InputFileBase64Component
   ],
   providers: [
-    DynamicFormService
+    DynamicFormService,
+    CustomValidatorsService
   ],
   exports: [
     DynamicFormComponent,

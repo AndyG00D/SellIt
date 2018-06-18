@@ -5,6 +5,9 @@
   <p *ngIf="errors.maxlength">{{title}} should contain less {{errors?.minlength?.requiredLength}} characters</p>
   <p *ngIf="errors.min">{{title}} should more {{errors?.min?.requiredLength}}</p>
   <p *ngIf="errors.max">{{title}} should less {{errors?.max?.requiredLength}}</p>
+  <p *ngIf="errors.confirm">Fields of password not equal</p>
   <p *ngIf="errors.email">Wrong email format</p>
+  <p *ngIf="errors.number">Wrong number format</p>
+  <p *ngIf="errors.password">Wrong password format</p>
   <p *ngIf="errors.pattern">{{title}} has wrong format</p>
 </div>
