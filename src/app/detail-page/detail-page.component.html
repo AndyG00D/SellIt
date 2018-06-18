@@ -23,8 +23,8 @@
 
 
         <span class="text_big_size" *ngIf="!user; else chat">Welcome,
-          <a class="link" routerLink="/login">login</a> or
-          <a class="link" routerLink="/login" [queryParams]="{isSignUp: true}" >register</a>
+          <a class="link" routerLink="/login" [queryParams]="{form: 'signIn'}">login</a> or
+          <a class="link" routerLink="/login" [queryParams]="{form: 'signUp'}">register</a>
           for start!</span>
   <ng-template #chat>
   <app-chat #chat [user] = "user" [owner]= "product?.owner"></app-chat>

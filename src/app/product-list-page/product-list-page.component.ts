@@ -1,21 +1,18 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {DataProductsService} from "../core/services/data-products.service";
 import {Product} from "../core/models/product";
-// import {InfiniteScrollDirective} from "../shared/directives/infinite-scroll.directive";
 
 @Component({
   selector: 'app-product-list-page',
   templateUrl: './product-list-page.component.html',
   styleUrls: ['./product-list-page.component.scss'],
   providers: [DataProductsService],
-  // declarations: [InfiniteScrollDirective]
 })
 export class ProductListPageComponent implements OnInit, OnDestroy {
   public products: Product[];
   private _offset: number;
   private _limit: number = 12;
   private _isLoadData: boolean;
-  // public errorMsg: string;
   public infoMsg: string;
 
 
@@ -47,9 +44,9 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
         this.products.push(...res);
         this.infoMsg = this.dataProducts.infoMsg;
         this._isLoadData = true;
-      },
-        // error => this.errorMsg = error || 'server error',
-      )}
+      }
+      )
+  }
 
 
 }

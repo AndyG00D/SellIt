@@ -3,8 +3,8 @@
   <div class="dropdown user-block">
       <div class=" user-block__menu" *ngIf="!user; else userBlock">
         <span>Welcome,
-          <a class="link" routerLink="/login">login</a> or
-          <a class="link" routerLink="/login" [queryParams]="{isSignUp: true}" >register</a>
+          <a class="link" routerLink="/login" [queryParams]="{form: 'signIn'}">login</a> or
+          <a class="link" routerLink="/login" [queryParams]="{form: 'signUp'}">register</a>
           for start!</span>
       </div>
 
