@@ -2,7 +2,6 @@ import {FormControlConf} from '../dynamic-form.model'
 import {Validators} from "@angular/forms";
 
 
-
 export let testNestedFormConf: Array<FormControlConf> = [
   {
     key: 'field1',
@@ -82,12 +81,24 @@ export let demoFormConf: Array<FormControlConf> = [
   {
     key: 'checkbox',
     type: 'checkbox',
-    label: 'Checkbox'
+    label: 'Checkbox',
+    options: [
+      {label: "(choose one)", value: ''},
+      {label: "Bolzano", value: '39100'},
+      {label: "Meltina", value: '39010'},
+      {label: "Appiano", value: '39057'}
+    ]
   },
   {
     key: 'radio',
     type: 'radio',
-    label: 'Radio'
+    label: 'Radio',
+    options: [
+      {label: "(choose one)", value: ''},
+      {label: "Bolzano", value: '39100'},
+      {label: "Meltina", value: '39010'},
+      {label: "Appiano", value: '39057'}
+    ]
   },
   {
     key: 'textarea',

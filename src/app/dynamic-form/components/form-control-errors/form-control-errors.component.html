@@ -1,4 +1,4 @@
-<!--<pre>{{ errors| json }}</pre>-->
+<pre>{{ errors| json }}</pre>
 <div class="alert alert-danger">
   <p *ngIf="errors.required">{{title}} is required</p>
   <p *ngIf="errors.minlength">{{title}} should contain more {{errors?.minlength?.requiredLength}} characters</p>
@@ -10,4 +10,5 @@
   <p *ngIf="errors.number">Wrong number format</p>
   <p *ngIf="errors.password">Wrong password format</p>
   <p *ngIf="errors.pattern">{{title}} has wrong format</p>
+  <p *ngIf="errors.existValue">Wrong value for {{title}}</p>
 </div>

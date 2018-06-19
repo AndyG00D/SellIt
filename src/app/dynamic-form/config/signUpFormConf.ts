@@ -32,7 +32,7 @@ export let signUpFormConf: Array<FormControlConf> = [
     key: 'password2',
     type: 'password',
     label: 'Confirm',
-    validators: [Validators.required, /*CustomValidatorsService.prototype.confirm('password1', 'password2')*/],
+    validators: [Validators.required, CustomValidatorsService.prototype.confirm('password1')],
     hideLabel: true,
     invertTheme: true
   },

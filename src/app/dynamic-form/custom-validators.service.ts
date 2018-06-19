@@ -9,6 +9,8 @@ import {
 } from "@angular/forms";
 import {Injectable} from "@angular/core";
 import {patterns} from "./patterns";
+import {Subscription} from "rxjs/Subscription";
+import {optionsConf} from "./dynamic-form.model";
 
 
 @Injectable()
@@ -40,19 +42,21 @@ export class CustomValidatorsService {
     };
   }
 
-  // public confirm(control1, control2): ValidatorFn {
-  //   return (c: FormControl): ValidationErrors => {
-  //     // const fgValue = c.parent.value;
-  //     const group = c.parent;
-  //     console.log(FormGroup.apply(group, get(control1));
-  //     const value = c.value;
-  //     console.log(value);
-  //     // if (fgValue[control1] != fgValue[control2]) {
-  //     //   return {same: `${control1} != ${control2}`};
-  //     // }
-  //     return null;
-  //   };
-  // }
+  public confirm(control: string): ValidatorFn {
+    return (c: AbstractControl): ValidationErrors => {
+      // let control2 = c.parent.get(control);
+      // let cont: Subscription = control2.valueChanges.subscribe( () => {
+      //   c.updateValueAndValidity();
+      //   cont.unsubscribe();
+      // });
+      const fgValue1 = c.root.value[control];
+      const fgValue2 = c.value;
+      if (fgValue1 != fgValue2) {
+        return {confirm: true};
+      }
+      return null;
+    };
+  }
 
   // public confirm(c: FormGroup, control1, control2): ValidationErrors {
   //     const fgValue = c.value;
@@ -63,14 +67,14 @@ export class CustomValidatorsService {
   // }
 
   public number(control: FormControl): ValidationErrors {
-    if (!(patterns.number.test(control.value)) ) {
+    if (!(patterns.number.test(control.value))) {
       return {number: true};
     }
     return null;
   }
 
   public password(control: FormControl): ValidationErrors {
-    if (!(patterns.number.test(control.value) && patterns.char.test(control.value)) ) {
+    if (!(patterns.number.test(control.value) && patterns.char.test(control.value))) {
       return {password: true};
     }
     return null;
@@ -87,16 +91,13 @@ export class CustomValidatorsService {
   }
 
 
-  private matchValidator(group: FormGroup): ValidationErrors {
-
-    let password1 = group.controls['password1'].value;
-    let password2 = group.controls['password2'].value;
-
-    if (password1 === password2) {
-      return null;
-    }
-    return {
-      mismatch: true
+  public existValue(options: optionsConf[]): ValidatorFn {
+    return (c: AbstractControl): ValidationErrors => {
+      if (options.length) return null;
+      for (let option of options) {
+        if (c.value === option.value) return null;
+      }
+      return {existValue: true};
     };
   }
 }
