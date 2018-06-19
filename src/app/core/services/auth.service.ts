@@ -107,14 +107,21 @@ export class AuthService implements OnInit {
       );
   }
 
-  public logout(): void {
-    this.http.get(apiUrls.logout).subscribe(
-      () => {
+  public resetAuth(){
+    this.sessionService.token = null;
+    this.sessionService.user = null;
+    this.profileService.setUser(null);
+    this.router.navigate(['/login']);
+  }
+
+  public getLogout(): Observable<any> {
+    return this.http.get(apiUrls.logout).pipe(
+      tap(() => {
         this.sessionService.token = null;
         this.sessionService.user = null;
         this.profileService.setUser(null);
         this.router.navigate(['/products']);
-      }
+      })
     );
   }
 

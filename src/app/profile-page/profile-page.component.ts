@@ -15,16 +15,24 @@ export class ProfilePageComponent {
   avatarProps: FormControlConf[];
 
   constructor(private service: DynamicFormService,
-              private profileService:ProfileService) {
+              private profileService: ProfileService) {
     this.userProps = this.service.getFormConfig('profile');
     this.avatarProps = this.service.getFormConfig('avatar');
     // this.profileService.getProfile().subscribe(data => this.user = data);
-    this.profileService.getUser().subscribe((user) => {this.user = user});
+    this.profileService.getUser().subscribe((user) => {
+      this.user = user
+    });
   }
 
-  onSubmit(event: User){
+  onSubmit(event: User) {
     this.profileService.updateProfile(event).subscribe(
-      // data => console.log('Update data: ' + JSON.stringify(data))
+      // data => console.log('Update data: ' + JSON.stringify(data)),
+      // error => {
+      //   if (error.status === 401 && error.statusText == 'unauthorized') {
+      //     console.log('token is changed ');
+      //     // this.authService)
+      //   }
+      // }
     );
   }
 
