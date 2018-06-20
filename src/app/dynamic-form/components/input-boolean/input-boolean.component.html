@@ -1,10 +1,9 @@
 <ng-container [formGroup]="form">
   <input class="input-text"
+         [id]="prop.key"
          [formControlName]="prop.key"
-         [id]=" prop.key"
-         [type]="prop.type"
-         [class.alert-danger-text]="form.get(prop.key).errors && form.get(prop.key).dirty"
-         [placeholder]="prop.label">
+         [value] = "prop.value"
+         [type]="prop.type">
 </ng-container>
 
 <!--errors-->

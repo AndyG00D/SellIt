@@ -3,6 +3,9 @@
   <app-messages></app-messages>
   <p><a href="" routerLink="..">&lt; Back to product list</a></p>
   <h1>Add products</h1>
-  <app-product-form></app-product-form>
+  <!--<app-product-form></app-product-form>-->
+  <app-dynamic-form [props]="props"
+                    (submitted)="onAddProduct($event)">
+  </app-dynamic-form>
 </section>
 <app-footer></app-footer>

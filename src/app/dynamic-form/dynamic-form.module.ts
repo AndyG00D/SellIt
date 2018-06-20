@@ -18,6 +18,7 @@ import {InputFileComponent} from "./components/input-file/input-file.component";
 import {SelectColorComponent} from "./components/select-color/select-color.component";
 import {InputFileBase64Component} from "./components/input-file-base64/input-file-base64.component";
 import {CustomValidatorsService} from "./custom-validators.service";
+import {InputFileBase64MultiComponent} from "./components/input-file-multi-base64/input-file-multi-base64.component";
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import {CustomValidatorsService} from "./custom-validators.service";
     FormArrayComponent,
     InputFileComponent,
     SelectColorComponent,
-    InputFileBase64Component
+    InputFileBase64Component,
+    InputFileBase64MultiComponent
   ],
   entryComponents: [
     LabelComponent,
@@ -54,7 +56,8 @@ import {CustomValidatorsService} from "./custom-validators.service";
     FormArrayComponent,
     InputFileComponent,
     SelectColorComponent,
-    InputFileBase64Component
+    InputFileBase64Component,
+    InputFileBase64MultiComponent
   ],
   providers: [
     DynamicFormService,

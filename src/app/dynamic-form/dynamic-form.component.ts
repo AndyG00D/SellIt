@@ -85,7 +85,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
         res = [Validators.nullValidator];
         break;
       case 'checkbox':
-        res = [this.customValidators.existValue(prop.options)];
+        res = [];
         break;
       case 'radio':
         res = [this.customValidators.existValue(prop.options)];

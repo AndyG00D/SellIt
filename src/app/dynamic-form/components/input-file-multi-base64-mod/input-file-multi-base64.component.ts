@@ -1,14 +1,19 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {User} from "../../../core/models/user";
+import {map} from "rxjs/operators";
 
 
 @Component({
   selector: 'app-input-file-base64',
-  templateUrl: './input-file-base64.component.html'
+  templateUrl: './input-file-multi-base64.component.html'
 })
-export class InputFileBase64Component {
+export class InputFileBase64MultiComponent {
   @Input() prop: any;
   @Input() form: FormGroup;
+  // images = new BehaviorSubject<Array<string>>([]);
+  images = [];
   // loading: boolean = false;
 
   // @ViewChild('fileInput') fileInput: ElementRef;
@@ -27,23 +32,36 @@ export class InputFileBase64Component {
 
   onFileChange(event) {
 
-    let reader = new FileReader();
     if(event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.form.get(this.prop.key).setValue(
-        //   {
-        //   filename: file.name,
-        //   filetype: file.type,
-        //   value: reader.result.split(',')[1]
-        // }
-        reader.result
-        )
-      };
+      let res = [];
+      for(let file of event.target.files) {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          // this.images.push(reader.result);
+        this.images.push(reader.result);
+          // this.images.pipe(
+          //   map(img => {
+          //     img.push(reader.result);
+          //   return img;
+          //   }));
+        };
+      }
+      // this.images.next(res);
+      this.form.get(this.prop.key).setValue(this.images)
     }
   }
 
+  deleteImg(i){
+    console.log("click: "+ i);
+    // this.images.pipe(
+    //   map(img => {
+    //
+    //     delete img[i];
+    //     return img;
+    //   })).subscribe();
+    this.images.splice(i,1);
+  }
   // onSubmit() {
   //   const formModel = this.form.value;
   //   this.profileService.updateProfile(formModel).subscribe(data =>

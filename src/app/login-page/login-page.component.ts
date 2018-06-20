@@ -64,7 +64,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   public onResetConfirm(event) {
-    let params = event;
+    let params = { ...event };
     params.uid = this.router.snapshot.queryParams['uid'];
     params.token = this.router.snapshot.queryParams['token'];
     this.authService.getResetConfirm(params).subscribe((data) => {

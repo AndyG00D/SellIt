@@ -13,6 +13,7 @@ import {FormArrayComponent} from "./components/form-array/form-array.component";
 import {InputFileComponent} from "./components/input-file/input-file.component";
 import {SelectColorComponent} from "./components/select-color/select-color.component";
 import {InputFileBase64Component} from "./components/input-file-base64/input-file-base64.component";
+import {InputFileBase64MultiComponent} from "./components/input-file-multi-base64/input-file-multi-base64.component";
 
 @Directive({
   selector: '[dynamic-form]',
@@ -72,9 +73,13 @@ export class DynamicFormDirective implements OnInit, OnChanges {
         case 'file':
           this.addComponent(InputFileBase64Component, prop);
           break;
+        case 'files':
+          this.addComponent(InputFileBase64MultiComponent, prop);
+          break;
         case 'checkbox':
         case 'radio':
-          this.addComponent(InputBooleanComponent, prop);
+          this.addComponent(InputNumberComponent, prop);
+          // this.addComponent(InputBooleanComponent, prop);
           break;
         case 'textarea':
           this.addComponent(TextareaComponent, prop);

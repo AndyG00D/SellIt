@@ -3,7 +3,7 @@ import {ValidatorFn} from "@angular/forms";
 
 export interface optionsConf {
   label: string;
-  value: string;
+  value: any;
 }
 
 export class FormControlConf {
@@ -41,7 +41,7 @@ export class FormControlConf {
     this.key = options.key || '';
     this.type = options.type || '';
     this.label = options.label || '';
-    this.value = options.value || '';
+    this.value = options.value;
     this.validators = options.validators || [];
     this.options = options.options || [];
     this.conf = options.conf || [];

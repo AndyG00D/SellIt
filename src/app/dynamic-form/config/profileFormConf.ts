@@ -42,7 +42,14 @@ export let profileFormConf: Array<FormControlConf> = [
       type: 'text',
       label: 'Address',
       hideLabel: true
-    }]
+    },
+      // {
+      //   key: 'name',
+      //   type: 'text',
+      //   label: 'City',
+      //   // hideLabel: true
+      // },
+    ]
   },
   {
     key: 'color_scheme',

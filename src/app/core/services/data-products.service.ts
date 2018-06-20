@@ -43,13 +43,12 @@ export class DataProductsService implements OnInit {
             this.infoMsg = 'All of the products downloaded...';
             console.log('All of the products downloaded...');
           }
-
+          console.log(response);
           return response["results"];
         }),
         catchError(this.handleError('getDataProducts:', []))
       );
   }
-
 
   public stop() {
     this._isAlive = false;
@@ -60,12 +59,86 @@ export class DataProductsService implements OnInit {
       .pipe(
         map((product) => {
             this._setNoImage(product);
+            console.log(product);
             return product;
           },
           catchError(this.handleError('getDataProduct:', []))
         )
       );
   }
+
+  public addProduct(newProduct: Product): Observable<Product>  {
+    return this.http.post<Product>(apiUrls.products, newProduct)
+      .pipe(
+        map((response: any) => {
+          console.log('addProduct: ' + response);
+          return response;
+        }),
+        catchError(this.handleError('addProduct:', []))
+      );
+  }
+
+  public updateProduct(newProduct: Product) {
+    return this.http.patch(apiUrls.products + newProduct.pk + '/', newProduct)
+      .pipe(
+        map((response: Response) => {
+          console.log('updateProduct: ' + response);
+        }),
+        catchError(this.handleError('updateProduct:', []))
+      );
+  }
+
+  public deleteProduct(newProduct: Product) {
+    return this.http.delete(apiUrls.products + newProduct.pk + '/')
+      .pipe(
+        map((response: Response) => {
+          console.log('deleteProduct: ' + response);
+        }),
+        catchError(this.handleError('deleteProduct:', []))
+      );
+  }
+
+  public getImages(advert_pk: number) {
+    return this.http.get(apiUrls.products + advert_pk + '/image/')
+      .pipe(
+        map((response: Response) => {
+          console.log('deleteProduct: ' + response);
+        }),
+        catchError(this.handleError('deleteProduct:', []))
+      );
+  }
+
+  public addImage(advert_pk: number, file: string) {
+    return this.http.post(apiUrls.products + advert_pk + '/image/', {'advert': advert_pk, 'file': file})
+      .pipe(
+        map((response: Response) => {
+          console.log('addImage: ' + response);
+        }),
+        catchError(this.handleError('addImage:', []))
+      );
+  }
+
+  public updateImage(id: number, advert_pk: number, file: string) {
+    return this.http.patch(apiUrls.products + advert_pk + '/image/'+ id, {'advert': advert_pk, 'file': file})
+      .pipe(
+        map((response: Response) => {
+          console.log('updateImage: ' + response);
+        }),
+        catchError(this.handleError('updateImage:', []))
+      );
+  }
+
+  public deleteImage(id: number, advert_pk: number) {
+    return this.http.delete(apiUrls.products + advert_pk + '/image/'+ id)
+      .pipe(
+        map((response: Response) => {
+          console.log('deleteImage: ' + response);
+        }),
+        catchError(this.handleError('deleteImage:', []))
+      );
+  }
+
+
 
   private _setNoImage(product: Product): void {
     if (product.images[0] === undefined) {
