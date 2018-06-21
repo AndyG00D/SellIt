@@ -1,8 +1,19 @@
 <div *ngIf="messageService.messages.length" class="alert alert-danger _full-width">
-  <h3>Messages</h3>
+  <!--<h3>Messages</h3>-->
+  <span class="alert-clearbtn" (click)="messageService.clear()">&times;</span>
   <!--<button class="clear" (click)="messageService.clear()">clear</button>-->
   <!--<br>-->
   <ol>
     <li *ngFor='let message of messageService.messages'> {{message}} </li>
+  </ol>
+</div>
+
+<div *ngIf="messageService.messagesInfo.length" class="alert alert-success _full-width">
+  <!--<h3>Messages</h3>-->
+  <span class="alert-clearbtn" (click)="messageService.clearInfo()">&times;</span>
+  <!--<button class="clear" (click)="messageService.clear()">clear</button>-->
+  <!--<br>-->
+  <ol>
+    <li *ngFor='let message of messageService.messagesInfo'> {{message}} </li>
   </ol>
 </div>

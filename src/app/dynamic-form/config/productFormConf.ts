@@ -28,19 +28,14 @@ export let productFormConf: Array<FormControlConf> = [{
     ]
   },
   {
-    key: 'images',
-    type: 'files',
-    label: 'Images'
+    key: 'contract_price',
+    type: 'checkbox',
+    value: 'true',
+    label: 'Contract Price',
+    // options: [
+    //   {label: "", value: "true"},
+    // ]
   },
-  // {
-  //   key: 'contract_price',
-  //   type: 'checkbox',
-  //   // value: 'true',
-  //   label: 'Contract Price',
-  //   // options: [
-  //   //   {label: "", value: "true"},
-  //   // ]
-  // },
   // {
   //   key: 'location',
   //   type: 'nested',
@@ -50,14 +45,15 @@ export let productFormConf: Array<FormControlConf> = [{
   //     type: 'text',
   //     label: 'Address',
   //     hideLabel: true
-  //   },
-      // {
-      //   key: 'name',
-      //   type: 'text',
-      //   label: 'City',
-      //   // hideLabel: true
-      // },
-    // ]
+  //   }]
+  // },
+  // {
+  //   key: 'name',
+  //   type: 'text',
+  //   label: 'City',
+  //   // hideLabel: true
+  // },
+  // ]
   // },
   // {
   //   key: 'is_active',
@@ -66,38 +62,43 @@ export let productFormConf: Array<FormControlConf> = [{
   //   // value: 'true'
   // },
   {
+    key: 'images',
+    type: 'files',
+    label: 'Images'
+  },
+  {
     key: 'submit',
     type: 'submit',
     label: 'Update User'
   }
-  ];
+];
 
-  // {
-  //   key: 'key',
-  //   type: 'text',
-  //   label: 'Text',
-  //   value: 'T',
-  //   validators: [Validators.required],
-  //   options: [
-  //     {label: "(choose one)", value: ''},
-  //     {label: "Bolzano", value: '39100'},
-  //     {label: "Meltina", value: '39010'},
-  //     {label: "Appiano", value: '39057'}
-  //   ],
-  //   hideLabel: true
-  // },
-  // {
-  //   key: 'city',
-  //   label: 'City',
-  //   value: '39010',
-  //   type: 'select',
-  //   options: [
-  //     {label: "(choose one)", value: ''},
-  //     {label: "Bolzano", value: '39100'},
-  //     {label: "Meltina", value: '39010'},
-  //     {label: "Appiano", value: '39057'}
-  //   ]
-  // }];
+// {
+//   key: 'key',
+//   type: 'text',
+//   label: 'Text',
+//   value: 'T',
+//   validators: [Validators.required],
+//   options: [
+//     {label: "(choose one)", value: ''},
+//     {label: "Bolzano", value: '39100'},
+//     {label: "Meltina", value: '39010'},
+//     {label: "Appiano", value: '39057'}
+//   ],
+//   hideLabel: true
+// },
+// {
+//   key: 'city',
+//   label: 'City',
+//   value: '39010',
+//   type: 'select',
+//   options: [
+//     {label: "(choose one)", value: ''},
+//     {label: "Bolzano", value: '39100'},
+//     {label: "Meltina", value: '39010'},
+//     {label: "Appiano", value: '39057'}
+//   ]
+// }];
 // ];
 
 // {

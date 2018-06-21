@@ -26,13 +26,6 @@ export class ProfilePageComponent {
 
   onSubmit(event: User) {
     this.profileService.updateProfile(event).subscribe(
-      // data => console.log('Update data: ' + JSON.stringify(data)),
-      // error => {
-      //   if (error.status === 401 && error.statusText == 'unauthorized') {
-      //     console.log('token is changed ');
-      //     // this.authService)
-      //   }
-      // }
     );
   }
 

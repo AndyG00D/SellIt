@@ -1,11 +1,13 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Product} from "../models/product";
-import {map, catchError} from "rxjs/operators";
+import {Image, Product} from "../models/product";
+import {map, catchError, concatMap, tap} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, throwError} from 'rxjs';
 import {takeWhile} from "rxjs/operators";
 import {apiUrls} from "../api-urls";
 import {HandleError, HttpErrorHandler} from "./http-error-handler.service";
+import {from} from "rxjs/internal/observable/from";
+import {MessageService} from "./message.service";
 
 
 @Injectable()
@@ -17,7 +19,8 @@ export class DataProductsService implements OnInit {
   public handleError: HandleError;
 
   constructor(private http: HttpClient,
-              httpErrorHandler: HttpErrorHandler) {
+              private httpErrorHandler: HttpErrorHandler,
+              private messageService:MessageService) {
     this.handleError = httpErrorHandler.createHandleError('Errors: ');
   }
 
@@ -70,9 +73,9 @@ export class DataProductsService implements OnInit {
   public addProduct(newProduct: Product): Observable<Product>  {
     return this.http.post<Product>(apiUrls.products, newProduct)
       .pipe(
-        map((response: any) => {
+        tap((response: any) => {
+          this.messageService.addInfo('Create new product id:' + response.pk);
           console.log('addProduct: ' + response);
-          return response;
         }),
         catchError(this.handleError('addProduct:', []))
       );
@@ -101,7 +104,7 @@ export class DataProductsService implements OnInit {
   public getImages(advert_pk: number) {
     return this.http.get(apiUrls.products + advert_pk + '/image/')
       .pipe(
-        map((response: Response) => {
+        tap((response: Response) => {
           console.log('deleteProduct: ' + response);
         }),
         catchError(this.handleError('deleteProduct:', []))
@@ -111,12 +114,22 @@ export class DataProductsService implements OnInit {
   public addImage(advert_pk: number, file: string) {
     return this.http.post(apiUrls.products + advert_pk + '/image/', {'advert': advert_pk, 'file': file})
       .pipe(
-        map((response: Response) => {
-          console.log('addImage: ' + response);
+        tap((image: Image) => {
+          this.messageService.addInfo('uploaded image id:' + image.pk);
+          console.log('addImage: ' + image);
+
         }),
         catchError(this.handleError('addImage:', []))
       );
   }
+
+  public addImages(advert_pk: number, images: string[]): Observable<any>{
+    return from(images).pipe(
+      concatMap( (image: string) => this.addImage(advert_pk, image)),
+      catchError(this.handleError('addImages:', []))
+    )
+  }
+
 
   public updateImage(id: number, advert_pk: number, file: string) {
     return this.http.patch(apiUrls.products + advert_pk + '/image/'+ id, {'advert': advert_pk, 'file': file})
@@ -127,6 +140,7 @@ export class DataProductsService implements OnInit {
         catchError(this.handleError('updateImage:', []))
       );
   }
+
 
   public deleteImage(id: number, advert_pk: number) {
     return this.http.delete(apiUrls.products + advert_pk + '/image/'+ id)

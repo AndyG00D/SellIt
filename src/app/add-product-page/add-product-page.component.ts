@@ -6,6 +6,10 @@ import {AuthService as SocialAuthService} from "angular5-social-login";
 import {ActivatedRoute} from "@angular/router";
 import {DataProductsService} from "../core/services/data-products.service";
 import {Product} from "../core/models/product";
+import {Observable} from "rxjs/Observable";
+import {from} from "rxjs/internal/observable/from";
+import {concat, concatMap, switchMap, tap} from "rxjs/operators";
+
 
 @Component({
   selector: 'app-add-product-page',
@@ -15,6 +19,7 @@ import {Product} from "../core/models/product";
 export class AddProductPageComponent   {
 
   public props: FormControlConf[];
+  private currentPK;
 
   constructor(private dynamicFormService: DynamicFormService,
               private dataProductsService:DataProductsService,
@@ -30,17 +35,28 @@ export class AddProductPageComponent   {
     //
     //   }
     // }
-    let images = new Array<string>(...event.images);
-    console.log(images);
+
+    // let images = new Array<string>(...event.images);
+    // console.log(images);
+    // delete event['images'];
+    //
+    // this.dataProductsService.addProduct(event).subscribe(
+    //   (data: Product) =>  {
+    //     this.dataProductsService.addImage(data.pk, images[0]).subscribe(
+    //       img => console.log(img)
+    //     );
+
+    // http create -> swithMap ->  Observable From([img1, img2]) -- ignore img-> concatMap( 2nd send for img)-> resultSelector ->
+
+    const images = event.images;
     delete event['images'];
 
-    this.dataProductsService.addProduct(event).subscribe(
-      (data: Product) =>  {
-        this.dataProductsService.addImage(data.pk, images[0]).subscribe(
-          img => console.log(img)
-        );
-      }
-    );
+    this.dataProductsService.addProduct(event).pipe(
+      switchMap((val) => this.dataProductsService.addImages(val.pk, images))
+    ).subscribe(data => console.log("dataProductsService done! " + data));
   }
-
 }
+
+
+
+

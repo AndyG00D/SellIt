@@ -24,16 +24,34 @@
     border-color: lighten(#d43f3a, 10%);
     color: darken(#d43f3a, 15%);
   }
+
+  &-clearbtn {
+    margin-left: 15px;
+    //color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  &-clearbtn:hover {
+    color: white;
+  }
+
   p {
     line-height: 2rem;
     padding: 0;
     margin: 0;
   }
+
   i {
     padding-right: 5px;
     vertical-align: middle;
     font-size: 24px;
   }
+
 }
 
 
