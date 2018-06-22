@@ -1,9 +1,13 @@
 <ng-container [formGroup]="form">
   <input class="input-text"
-         [id]="prop.key"
          [formControlName]="prop.key"
-         [(value)] = "prop.value"
-         [type]="prop.type">
+         [type]="prop.type"
+         (click)="onChange()"
+         [checked] = "isCheck">
+         <!--[checked] = "isCheck">-->
+         <!--(change)="onChange($event.target.check)">-->
+  <!--[checked]="(prop.value === true)? true: false"-->
+  <!--[(value)] = "prop.value"-->
 </ng-container>
 
 <!--errors-->

@@ -78,8 +78,8 @@ export class DynamicFormDirective implements OnInit, OnChanges {
           break;
         case 'checkbox':
         case 'radio':
-          this.addComponent(InputNumberComponent, prop);
-          // this.addComponent(InputBooleanComponent, prop);
+          // this.addComponent(InputNumberComponent, prop);
+          this.addComponent(InputBooleanComponent, prop);
           break;
         case 'textarea':
           this.addComponent(TextareaComponent, prop);

@@ -30,11 +30,12 @@ export let productFormConf: Array<FormControlConf> = [{
   {
     key: 'contract_price',
     type: 'checkbox',
-    value: 'true',
+    // value: true,
     label: 'Contract Price',
     // options: [
-    //   {label: "", value: "true"},
+    //   {label: "1", value: 'check'},
     // ]
+
   },
   // {
   //   key: 'location',
@@ -55,12 +56,12 @@ export let productFormConf: Array<FormControlConf> = [{
   // },
   // ]
   // },
-  // {
-  //   key: 'is_active',
-  //   type: 'checkbox',
-  //   label: 'Active',
-  //   // value: 'true'
-  // },
+  {
+    key: 'is_active',
+    type: 'checkbox',
+    label: 'Active',
+    value: true
+  },
   {
     key: 'images',
     type: 'files',
