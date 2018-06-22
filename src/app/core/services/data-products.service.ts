@@ -8,6 +8,7 @@ import {apiUrls} from "../api-urls";
 import {HandleError, HttpErrorHandler} from "./http-error-handler.service";
 import {from} from "rxjs/internal/observable/from";
 import {MessageService} from "./message.service";
+import {optionsConf} from "../../dynamic-form/dynamic-form.model";
 
 
 @Injectable()
@@ -147,6 +148,22 @@ export class DataProductsService implements OnInit {
           console.log('deleteImage: ' + response);
         }),
         catchError(this.handleError('deleteImage:', []))
+      );
+  }
+
+  public getLocations(): Observable<Array<optionsConf>> {
+    return this.http.get(apiUrls.locations)
+      .pipe(
+        map((response: any) => {
+          // console.log(JSON.stringify(response));
+          let res: optionsConf[] = [];
+          for (let item of response){
+            res.push({label: item.name, value: item.id })
+          }
+          // console.log(JSON.stringify(res));
+          return res;
+        }),
+        catchError(this.handleError('getLocations:', []))
       );
   }
 

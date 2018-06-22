@@ -10,6 +10,7 @@ export class apiUrls {
   static google = `${environment.apiBase}/rest-auth/google/`;
   static resetPassword = `${environment.apiBase}/password/reset/`;
   static resetConfirm = `${environment.apiBase}/password/reset/confirm/`;
+  static locations = `${environment.apiBase}/locations/`;
 
 
   static noImage: string = `/assets/img/No_image.png`;

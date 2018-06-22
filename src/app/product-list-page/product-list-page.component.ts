@@ -22,7 +22,7 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.products = [];
     this._offset = 0;
-     this._addProducts();
+     this.getProducts();
   }
 
   public ngOnDestroy(): void {
@@ -33,11 +33,11 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
     if (isNextPage && this._isLoadData) {
       this._isLoadData = false;
       this._offset += this._limit;
-      this._addProducts();
+      this.getProducts();
     }
   }
 
-  private _addProducts() {
+  private getProducts() {
     this.dataProducts.getDataProducts(this._offset, this._limit)
       .subscribe((res: Product[]) => {
         // console.log('loading userProps:' + JSON.stringify(res));

@@ -1,5 +1,6 @@
 import {FormControlConf} from '../dynamic-form.model'
 import {Validators} from "@angular/forms";
+import {DataProductsService} from "../../core/services/data-products.service";
 
 
 export let productFormConf: Array<FormControlConf> = [{
@@ -35,19 +36,28 @@ export let productFormConf: Array<FormControlConf> = [{
     // options: [
     //   {label: "1", value: 'check'},
     // ]
-
   },
-  // {
-  //   key: 'location',
-  //   type: 'nested',
-  //   label: 'Location',
-  //   conf: [{
-  //     key: 'name',
-  //     type: 'text',
-  //     label: 'Address',
-  //     hideLabel: true
-  //   }]
-  // },
+  {
+    key: 'location',
+    type: 'select',
+    label: 'Location',
+    value: 1,
+    options: []
+    // conf: [
+    //   {
+    //     key: 'id',
+    //     type: 'number',
+    //     label: 'Address',
+    //     hideLabel: true
+    //   },
+      // {
+      //   key: 'name',
+      //   type: 'text',
+      //   label: 'Address',
+      //   hideLabel: true
+      // }
+    // ]
+  },
   // {
   //   key: 'name',
   //   type: 'text',
