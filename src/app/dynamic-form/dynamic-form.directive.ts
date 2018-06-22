@@ -41,11 +41,11 @@ export class DynamicFormDirective implements OnInit, OnChanges {
     if (prop !== null) {
       componentRef.instance['prop'] = prop;
     }
-    //add context of current form
+    //addError context of current form
     if (this.form !== null) {
       componentRef.instance.form = this.form;
     }
-    //add parents Form Group
+    //addError parents Form Group
     if (formGroupKey) {
       componentRef.instance.formGroupKey = formGroupKey;
     }

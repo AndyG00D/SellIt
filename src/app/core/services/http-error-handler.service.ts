@@ -32,10 +32,9 @@ export class HttpErrorHandler {
       const message = (error.error instanceof ErrorEvent) ?
         error.error.message :
         `server returned code ${error.status} with body: ${JSON.stringify(error.error)}`;
-      // error.error.forEach((messege, key) => error.error.message :)
 
       // TODO: better job of transforming error for user consumption
-      this.messageService.add(`${serviceName}: ${operation} failed: ${message}`);
+      this.messageService.addError(`${serviceName}: ${operation} failed: ${message}`);
 
       // Let the app keep running by returning a safe result.
       return of( result );

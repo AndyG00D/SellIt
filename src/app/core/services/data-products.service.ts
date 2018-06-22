@@ -20,7 +20,7 @@ export class DataProductsService implements OnInit {
 
   constructor(private http: HttpClient,
               private httpErrorHandler: HttpErrorHandler,
-              private messageService:MessageService) {
+              private messageService: MessageService) {
     this.handleError = httpErrorHandler.createHandleError('Errors: ');
   }
 
@@ -35,19 +35,18 @@ export class DataProductsService implements OnInit {
     return this.http.get(apiUrls.products, {params})
       .pipe(
         takeWhile(() => this._isAlive),
-        map((response: Response) => {
+        map((response: any) => {
 
-          response['results'].forEach(item => {
+          response.results.forEach(item => {
             this._setNoImage(item);
           });
 
-          if (response["next"] === null) {
+          if (response.next === null) {
             this.stop();
-            this.infoMsg = 'All of the products downloaded...';
-            console.log('All of the products downloaded...');
+            this.messageService.addSuccess('All of the products downloaded...');
           }
-          console.log(response);
-          return response["results"];
+
+          return response.results;
         }),
         catchError(this.handleError('getDataProducts:', []))
       );
@@ -62,7 +61,6 @@ export class DataProductsService implements OnInit {
       .pipe(
         map((product) => {
             this._setNoImage(product);
-            console.log(product);
             return product;
           },
           catchError(this.handleError('getDataProduct:', []))
@@ -70,11 +68,11 @@ export class DataProductsService implements OnInit {
       );
   }
 
-  public addProduct(newProduct: Product): Observable<Product>  {
+  public addProduct(newProduct: Product): Observable<Product> {
     return this.http.post<Product>(apiUrls.products, newProduct)
       .pipe(
         tap((response: any) => {
-          this.messageService.addInfo('Create new product id:' + response.pk);
+          this.messageService.addSuccess('Created new product id:' + response.pk);
           console.log('addProduct: ' + response);
         }),
         catchError(this.handleError('addProduct:', []))
@@ -115,7 +113,7 @@ export class DataProductsService implements OnInit {
     return this.http.post(apiUrls.products + advert_pk + '/image/', {'advert': advert_pk, 'file': file})
       .pipe(
         tap((image: Image) => {
-          this.messageService.addInfo('uploaded image id:' + image.pk);
+          this.messageService.addSuccess('uploaded image id:' + image.pk);
           console.log('addImage: ' + image);
 
         }),
@@ -123,16 +121,16 @@ export class DataProductsService implements OnInit {
       );
   }
 
-  public addImages(advert_pk: number, images: string[]): Observable<any>{
+  public addImages(advert_pk: number, images: string[]): Observable<any> {
     return from(images).pipe(
-      concatMap( (image: string) => this.addImage(advert_pk, image)),
+      concatMap((image: string) => this.addImage(advert_pk, image)),
       catchError(this.handleError('addImages:', []))
     )
   }
 
 
   public updateImage(id: number, advert_pk: number, file: string) {
-    return this.http.patch(apiUrls.products + advert_pk + '/image/'+ id, {'advert': advert_pk, 'file': file})
+    return this.http.patch(apiUrls.products + advert_pk + '/image/' + id, {'advert': advert_pk, 'file': file})
       .pipe(
         map((response: Response) => {
           console.log('updateImage: ' + response);
@@ -143,7 +141,7 @@ export class DataProductsService implements OnInit {
 
 
   public deleteImage(id: number, advert_pk: number) {
-    return this.http.delete(apiUrls.products + advert_pk + '/image/'+ id)
+    return this.http.delete(apiUrls.products + advert_pk + '/image/' + id)
       .pipe(
         map((response: Response) => {
           console.log('deleteImage: ' + response);
@@ -151,7 +149,6 @@ export class DataProductsService implements OnInit {
         catchError(this.handleError('deleteImage:', []))
       );
   }
-
 
 
   private _setNoImage(product: Product): void {

@@ -1,25 +1,37 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class MessageService {
-  messages: string[] = [];
-  messagesInfo: string[] = [];
+  messagesError: string[] = [];
+  messagesWarning: string[] = [];
+  messagesSuccess: string[] = [];
 
-  add(message: string) {
-    this.messages.push(message);
+  // add messages
+  addError(message: string) {
+    this.messagesError.push(message);
     console.log(message);
   }
 
-  addInfo(message: string) {
-    this.messagesInfo.push(message);
+  addWarning(message: string) {
+    this.messagesWarning.push(message);
     console.log(message);
   }
 
-  clear() {
-    this.messages = [];
+  addSuccess(message: string) {
+    this.messagesSuccess.push(message);
+    console.log(message);
   }
 
-  clearInfo() {
-    this.messagesInfo = [];
+  // clear messages
+  clearError() {
+    this.messagesError = [];
+  }
+
+  clearWarning() {
+    this.messagesWarning = [];
+  }
+
+  clearSuccess() {
+    this.messagesSuccess = [];
   }
 }

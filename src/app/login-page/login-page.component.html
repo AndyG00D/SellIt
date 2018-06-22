@@ -43,9 +43,10 @@
                           [props]="props"
                           (submitted)="onResetConfirm($event)">
         </app-dynamic-form>
-
-        <div *ngSwitchCase="'info'" class="alert alert-success _full-width"> {{info}} </div>
       </div>
+
+      <!--messages-->
+      <app-messages></app-messages>
 
       <div class="btn-group _margin-top-2_5rem">
         <!--Google Auth button-->
@@ -54,7 +55,6 @@
         <button class="btn" (click)="changeForm('resetPassword')">Forgot Password?</button>
       </div>
 
-      <app-messages></app-messages>
     </div>
     <div class="login-right-section_bottom-text">2017 - front-end labs Light IT</div>
   </div>

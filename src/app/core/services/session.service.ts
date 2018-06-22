@@ -5,7 +5,7 @@ import {HttpErrorHandler, HandleError} from "./http-error-handler.service";
 import {CookieService} from 'ngx-cookie-service';
 
 @Injectable()
-export class SessionService implements OnInit {
+export class SessionService {
 
   public handleError: HandleError;
 
@@ -14,10 +14,6 @@ export class SessionService implements OnInit {
               private cookieService: CookieService) {
 
     this.handleError = httpErrorHandler.createHandleError('Errors: ');
-  }
-
-
-  public ngOnInit() {
   }
 
   public get token(): string {

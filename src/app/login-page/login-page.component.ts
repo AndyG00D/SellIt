@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {DynamicFormService} from "../dynamic-form/dynamic-form.service";
 import {FormControlConf} from "../dynamic-form/dynamic-form.model";
 import {AuthService} from "../core/services/auth.service";
@@ -14,9 +14,9 @@ export class LoginPageComponent implements OnInit {
 
   public currentForm: string = 'signIn';
   public props: FormControlConf[];
-  public info: string;
 
-  constructor(private dynamicFormService: DynamicFormService, private authService: AuthService,
+  constructor(private dynamicFormService: DynamicFormService,
+              private authService: AuthService,
               private socialAuthService: SocialAuthService,
               private router: ActivatedRoute) {
     this.props = this.dynamicFormService.getFormConfig(this.currentForm);
@@ -51,28 +51,24 @@ export class LoginPageComponent implements OnInit {
   }
 
   public onSignUp(event) {
-    this.authService.getRegistration(event).subscribe();
+    this.authService.getRegistration(event).subscribe(
+      () => this.changeForm('signIn')
+    );
   }
 
   public onResetPassword(event) {
-    this.authService.getResetPassword(event).subscribe((data) => {
-      if (data.detail !== undefined) {
-        this.info = data.detail;
-        this.changeForm('info');
-      }
-    });
+    this.authService.getResetPassword(event).subscribe(
+      () => this.changeForm('signIn')
+    );
   }
 
   public onResetConfirm(event) {
-    let params = { ...event };
+    let params = {...event};
     params.uid = this.router.snapshot.queryParams['uid'];
     params.token = this.router.snapshot.queryParams['token'];
-    this.authService.getResetConfirm(params).subscribe((data) => {
-      if (data.detail !== undefined) {
-        this.info = data.detail;
-        this.changeForm('info');
-      }
-    });
+    this.authService.getResetConfirm(params).subscribe(
+      () => this.changeForm('signIn')
+    );
   }
 
   public onAuthGoogle() {

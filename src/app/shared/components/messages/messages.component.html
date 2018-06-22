@@ -1,19 +1,29 @@
-<div *ngIf="messageService.messages.length" class="alert alert-danger _full-width">
-  <!--<h3>Messages</h3>-->
-  <span class="alert-clearbtn" (click)="messageService.clear()">&times;</span>
-  <!--<button class="clear" (click)="messageService.clear()">clear</button>-->
-  <!--<br>-->
+<!--messages Error-->
+<div *ngIf="messageService.messagesError.length" class="alert alert-danger _full-width">
+  <!--button clear-->
+  <span class="alert-clearbtn" (click)="messageService.clearError()">&times;</span>
+  <!--list of messages-->
   <ol>
-    <li *ngFor='let message of messageService.messages'> {{message}} </li>
+    <li *ngFor="let message of messageService.messagesError"> {{message}}</li>
   </ol>
 </div>
 
-<div *ngIf="messageService.messagesInfo.length" class="alert alert-success _full-width">
-  <!--<h3>Messages</h3>-->
-  <span class="alert-clearbtn" (click)="messageService.clearInfo()">&times;</span>
-  <!--<button class="clear" (click)="messageService.clear()">clear</button>-->
-  <!--<br>-->
+<!--messages Warning-->
+<div *ngIf="messageService.messagesWarning.length" class="alert alert-warning _full-width">
+  <!--button clear-->
+  <span class="alert-clearbtn" (click)="messageService.clearWarning()">&times;</span>
+  <!--list of messages-->
   <ol>
-    <li *ngFor='let message of messageService.messagesInfo'> {{message}} </li>
+    <li *ngFor="let message of messageService.messagesWarning"> {{message}}</li>
+  </ol>
+</div>
+
+<!--messages Success-->
+<div *ngIf="messageService.messagesSuccess.length" class="alert alert-success _full-width">
+  <!--button clear-->
+  <span class="alert-clearbtn" (click)="messageService.clearSuccess()">&times;</span>
+  <!--list of messages-->
+  <ol>
+    <li *ngFor="let message of messageService.messagesSuccess"> {{message}}</li>
   </ol>
 </div>
