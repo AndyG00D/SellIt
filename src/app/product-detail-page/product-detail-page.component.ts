@@ -5,16 +5,16 @@ import {Subject} from 'rxjs/internal/Subject';
 import {switchMap, takeUntil, tap} from 'rxjs/operators';
 import {Product} from "../core/models/product";
 import {User} from "../core/models/user";
-import {DataProductsService} from "../core/services/data-products.service";
+import {ProductService} from "../core/services/product.service";
 import {ProfileService} from "../core/services/profile.service";
 
 @Component({
   selector: 'app-detail-page',
-  templateUrl: './detail-page.component.html',
-  styleUrls: ['./detail-page.component.scss']
+  templateUrl: './product-detail-page.component.html',
+  styleUrls: ['./product-detail-page.component.scss']
 })
 
-export class DetailPageComponent implements OnInit, OnDestroy {
+export class ProductDetailPageComponent implements OnInit, OnDestroy {
   public loading$ = new BehaviorSubject(true);
   private destroy = new Subject();
   public product: Product;
@@ -23,7 +23,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
   public user: User;
 
   constructor(
-    private dataProductsService: DataProductsService,
+    private dataProductsService: ProductService,
     private route: ActivatedRoute,
     private profileService: ProfileService) {
 
@@ -34,7 +34,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
     this.route.data.subscribe(
         product => {
           this.product = product.data;
-          // console.log("product: " + JSON.stringify(product.data));
+          console.log("product: " + JSON.stringify(product.data));
         },
         err => {
           console.log(err.message);

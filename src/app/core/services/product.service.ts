@@ -12,7 +12,7 @@ import {optionsConf} from "../../dynamic-form/dynamic-form.model";
 
 
 @Injectable()
-export class DataProductsService implements OnInit {
+export class ProductService implements OnInit {
 
   private _isAlive: boolean = true;
   public infoMsg: string = '';
@@ -28,7 +28,7 @@ export class DataProductsService implements OnInit {
   public ngOnInit() {
   }
 
-  public getDataProducts(offset: number, limit: number): Observable<Product[]> {
+  public getProducts(offset: number, limit: number): Observable<Product[]> {
     const params = new HttpParams()
       .set('offset', offset.toString())
       .set('limit', limit.toString());
@@ -49,7 +49,7 @@ export class DataProductsService implements OnInit {
 
           return response.results;
         }),
-        catchError(this.handleError('getDataProducts:', []))
+        catchError(this.handleError('getProducts:', []))
       );
   }
 
@@ -57,14 +57,14 @@ export class DataProductsService implements OnInit {
     this._isAlive = false;
   }
 
-  public getDataProduct(id: number): Observable<Product> {
+  public getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(apiUrls.products + id.toString() + '/')
       .pipe(
         map((product) => {
             this._setNoImage(product);
             return product;
           },
-          catchError(this.handleError('getDataProduct:', []))
+          catchError(this.handleError('getProduct:', []))
         )
       );
   }
@@ -80,8 +80,8 @@ export class DataProductsService implements OnInit {
       );
   }
 
-  public updateProduct(newProduct: Product) {
-    return this.http.patch(apiUrls.products + newProduct.pk + '/', newProduct)
+  public updateProduct(pk: number, newProduct: Product) {
+    return this.http.patch(apiUrls.products + pk + '/', newProduct)
       .pipe(
         map((response: Response) => {
           console.log('updateProduct: ' + response);

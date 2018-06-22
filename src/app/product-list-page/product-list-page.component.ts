@@ -1,12 +1,12 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {DataProductsService} from "../core/services/data-products.service";
+import {ProductService} from "../core/services/product.service";
 import {Product} from "../core/models/product";
 
 @Component({
   selector: 'app-product-list-page',
   templateUrl: './product-list-page.component.html',
   styleUrls: ['./product-list-page.component.scss'],
-  providers: [DataProductsService],
+  providers: [ProductService],
 })
 export class ProductListPageComponent implements OnInit, OnDestroy {
   public products: Product[];
@@ -16,7 +16,7 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   public infoMsg: string;
 
 
-  constructor(private dataProducts: DataProductsService) {
+  constructor(private dataProducts: ProductService) {
   }
 
   public ngOnInit() {
@@ -38,7 +38,7 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   }
 
   private getProducts() {
-    this.dataProducts.getDataProducts(this._offset, this._limit)
+    this.dataProducts.getProducts(this._offset, this._limit)
       .subscribe((res: Product[]) => {
         // console.log('loading userProps:' + JSON.stringify(res));
         this.products.push(...res);

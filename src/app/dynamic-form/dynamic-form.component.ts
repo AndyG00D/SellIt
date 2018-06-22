@@ -73,10 +73,10 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
         res = [Validators.minLength(6), Validators.maxLength(13)];
         break;
       case 'number':
-        res = [Validators.min(0), Validators.max(100000)];
+        res = [Validators.min(1), Validators.max(100000)];
         break;
       case 'range':
-        res = [Validators.min(0), Validators.max(100000)];
+        res = [Validators.min(1), Validators.max(100000)];
         break;
       case 'color':
         res = [];

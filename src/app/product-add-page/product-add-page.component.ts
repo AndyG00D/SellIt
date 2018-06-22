@@ -4,7 +4,7 @@ import {DynamicFormService} from "../dynamic-form/dynamic-form.service";
 import {FormControlConf, optionsConf} from "../dynamic-form/dynamic-form.model";
 import {AuthService as SocialAuthService} from "angular5-social-login";
 import {ActivatedRoute} from "@angular/router";
-import {DataProductsService} from "../core/services/data-products.service";
+import {ProductService} from "../core/services/product.service";
 import {Product} from "../core/models/product";
 import {Observable} from "rxjs/Observable";
 import {from} from "rxjs/internal/observable/from";
@@ -12,26 +12,24 @@ import {concat, concatMap, switchMap, takeUntil, takeWhile, tap} from "rxjs/oper
 
 
 @Component({
-  selector: 'app-add-product-page',
-  templateUrl: './add-product-page.component.html',
-  styleUrls: ['./add-product-page.component.scss']
+  selector: 'app-product-add-page',
+  templateUrl: './product-add-page.component.html',
+  styleUrls: ['./product-add-page.component.scss']
 })
-export class AddProductPageComponent implements OnInit{
+export class ProductAddPageComponent implements OnInit {
 
   public props: FormControlConf[];
-  public locations: optionsConf[] = [];
 
   constructor(private dynamicFormService: DynamicFormService,
-              private dataProductsService: DataProductsService,
-              private router: ActivatedRoute) {
+              private dataProductsService: ProductService) {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.props = this.dynamicFormService.getFormConfig('product');
-    this.dataProductsService.getLocations().subscribe(data =>{
-      for(let prop of this.props){
-        if(prop.key === 'location'){
+    this.dataProductsService.getLocations().subscribe(data => {
+      for (let prop of this.props) {
+        if (prop.key === 'location') {
           prop.options.push(...data);
         }
       }
@@ -39,26 +37,6 @@ export class AddProductPageComponent implements OnInit{
   }
 
   onAddProduct(event) {
-    // let newProduct: Product;
-    // let newImages: String[] = ;
-    // for(let prop in event){
-    //   if(prop === 'images'){
-    //
-    //   }
-    // }
-
-    // let images = new Array<string>(...event.images);
-    // console.log(images);
-    // delete event['images'];
-    //
-    // this.dataProductsService.addProduct(event).subscribe(
-    //   (data: Product) =>  {
-    //     this.dataProductsService.addImage(data.pk, images[0]).subscribe(
-    //       img => console.log(img)
-    //     );
-
-    // http create -> swithMap ->  Observable From([img1, img2]) -- ignore img-> concatMap( 2nd send for img)-> resultSelector ->
-
     const images = event.images;
     delete event['images'];
 

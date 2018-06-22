@@ -9,12 +9,12 @@ import { CookieService } from 'ngx-cookie-service';
 
 import {HeaderComponent} from './shared/components/header/header.component';
 import {FooterComponent} from './shared/components/footer/footer.component';
-import {AddProductPageComponent} from './add-product-page/add-product-page.component';
+import {ProductAddPageComponent} from './product-add-page/product-add-page.component';
 import {ProductListPageComponent} from './product-list-page/product-list-page.component';
-import {DetailPageComponent} from './detail-page/detail-page.component';
+import {ProductDetailPageComponent} from './product-detail-page/product-detail-page.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {ProductItemComponent} from './shared/components/product-item/product-item.component';
-import {DataProductsService} from "./core/services/data-products.service";
+import {ProductService} from "./core/services/product.service";
 import {InfiniteScrollDirective} from './shared/directives/infinite-scroll.directive';
 import {ScrollTopDirective} from './shared/directives/scroll-top.directive';
 import {ButtonOnTopComponent} from './shared/components/button-on-top/button-on-top.component';
@@ -47,17 +47,21 @@ import {UserNameComponent} from "./shared/components/user-name/user-name.compone
 import {ProfilePageTestComponent} from "./profile-page-test/profile-page-test.component";
 import {Base64UploadComponent} from "./shared/components/base64-upload/base64-upload.component";
 import {AuthService} from "./core/services/auth.service";
+import {environment} from "../environments/environment";
+import {ProductEditPageComponent} from "./product-edit-page/product-edit-page.component";
+import {DataProductResolver} from "./core/product.resolve";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    AddProductPageComponent,
+    ProductAddPageComponent,
     ProductListPageComponent,
-    DetailPageComponent,
+    ProductDetailPageComponent,
     LoginPageComponent,
-    AddProductPageComponent,
+    ProductAddPageComponent,
+    ProductEditPageComponent,
     ProductItemComponent,
     ScrollTopDirective,
     InfiniteScrollDirective,
@@ -90,7 +94,8 @@ import {AuthService} from "./core/services/auth.service";
   ],
   providers: [
     AuthService,
-    DataProductsService,
+    ProductService,
+    DataProductResolver,
     ComponentLoaderService,
     MessageService,
     // { provide: RequestCache, useClass: RequestCacheWithMap },
@@ -123,7 +128,7 @@ export function getAuthServiceConfigs() {
     [
       {
         id: GoogleLoginProvider.PROVIDER_ID,
-        provider: new GoogleLoginProvider("837694048230-keo53o03s8od9ee39boib7o6prp18fs5.apps.googleusercontent.com"),
+        provider: new GoogleLoginProvider(environment.googleToken),
       },
     ]
 );
