@@ -42,7 +42,7 @@ export class ProductAddPageComponent implements OnInit {
 
     this.dataProductsService.addProduct(event).pipe(
       takeWhile(() => !!images),
-      switchMap((val) => this.dataProductsService.addImages(val.pk, images))
+      switchMap((val) => this.dataProductsService.uploadImages(val.pk, images))
     )
       .subscribe(data => console.log("dataProductsService done! " + data));
   }

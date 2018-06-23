@@ -50,6 +50,7 @@ import {AuthService} from "./core/services/auth.service";
 import {environment} from "../environments/environment";
 import {ProductEditPageComponent} from "./product-edit-page/product-edit-page.component";
 import {DataProductResolver} from "./core/product.resolve";
+import {ImagesUploaderComponent} from "./shared/components/images-uploader/images-uploader.component";
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import {DataProductResolver} from "./core/product.resolve";
     AvatarComponent,
     UserNameComponent,
     ProfilePageTestComponent,
-    Base64UploadComponent
+    Base64UploadComponent,
+    ImagesUploaderComponent
   ],
   imports: [
     BrowserModule,

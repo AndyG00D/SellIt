@@ -1,8 +1,9 @@
 <app-header></app-header>
 <section class="content">
   <p><a href="" [routerLink]="'/products/' + product.pk">&lt; Back to detail</a></p>
-  <h1>Edit products</h1>
+  <h1>Edit Product</h1>
   <app-messages></app-messages>
+  <app-images-uploader [uploadedImages]="product.images"></app-images-uploader>
   <!--<app-product-form></app-product-form>-->
   <app-dynamic-form [props]="props"
                     [data]="product"

@@ -28,6 +28,7 @@ export class ProductEditPageComponent implements OnInit, OnDestroy{
   public user: User;
   public props: FormControlConf[];
 
+
   constructor(private dynamicFormService: DynamicFormService,
               private dataProductsService: ProductService,
               private route: ActivatedRoute,
@@ -86,7 +87,7 @@ export class ProductEditPageComponent implements OnInit, OnDestroy{
     //
     // this.dataProductsService.addProduct(event).subscribe(
     //   (data: Product) =>  {
-    //     this.dataProductsService.addImage(data.pk, images[0]).subscribe(
+    //     this.dataProductsService.uploadImage(data.pk, images[0]).subscribe(
     //       img => console.log(img)
     //     );
 
@@ -97,7 +98,7 @@ export class ProductEditPageComponent implements OnInit, OnDestroy{
 
     this.dataProductsService.updateProduct(this.product.pk, event).pipe(
       // takeWhile(() => !!images),
-      // switchMap((val) => this.dataProductsService.addImages(val.pk, images))
+      // switchMap((val) => this.dataProductsService.uploadImages(val.pk, images))
     )
       .subscribe(data => console.log("dataProductsService done! " + data));
   }

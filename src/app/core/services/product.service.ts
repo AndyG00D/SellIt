@@ -113,22 +113,22 @@ export class ProductService implements OnInit {
       );
   }
 
-  public addImage(advert_pk: number, file: string) {
+  public uploadImage(advert_pk: number, file: string) {
     return this.http.post(apiUrls.products + advert_pk + '/image/', {'advert': advert_pk, 'file': file})
       .pipe(
         tap((image: Image) => {
-          this.messageService.addSuccess('uploaded image id:' + image.pk);
-          console.log('addImage: ' + image);
+          this.messageService.addSuccess('uploaded to server image id:' + image.pk);
+          console.log('uploadImage: ' + image);
 
         }),
-        catchError(this.handleError('addImage:', []))
+        catchError(this.handleError('uploadImage:', []))
       );
   }
 
-  public addImages(advert_pk: number, images: string[]): Observable<any> {
+  public uploadImages(advert_pk: number, images: string[]): Observable<any> {
     return from(images).pipe(
-      concatMap((image: string) => this.addImage(advert_pk, image)),
-      catchError(this.handleError('addImages:', []))
+      concatMap((image: string) => this.uploadImage(advert_pk, image)),
+      catchError(this.handleError('uploadImages:', []))
     )
   }
 
@@ -144,11 +144,13 @@ export class ProductService implements OnInit {
   }
 
 
-  public deleteImage(id: number, advert_pk: number) {
+  public deleteImage(id: number, advert_pk: string) {
     return this.http.delete(apiUrls.products + advert_pk + '/image/' + id)
       .pipe(
-        map((response: Response) => {
-          console.log('deleteImage: ' + response);
+        tap(() => {
+          this.messageService.addSuccess('deleted from server image id:' + id);
+          console.log('deleteImage: ' + id);
+
         }),
         catchError(this.handleError('deleteImage:', []))
       );

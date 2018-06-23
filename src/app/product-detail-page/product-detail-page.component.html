@@ -1,13 +1,16 @@
 <app-header></app-header>
 
 <section class="content">
+  <!--button Edit-->
   <button *ngIf="isOwner()"
           class="edit-btn"
           [routerLink]="'/products/edit/' + product.pk">
     Edit product
     <i class="fa fa-edit"></i>
   </button>
+  <!--link back page-->
   <p><a href="" routerLink="..">&lt; Back to product list</a></p>
+  <!--app messeges-->
   <app-messages></app-messages>
   <!--about-->
   <div class="about">
@@ -22,16 +25,16 @@
     <!--about__slideshow-->
     <app-slideshow class="about_slideshow" [images]="product?.images"></app-slideshow>
     <!--about__description-->
-
     <div class="about__description">
       <span>{{product?.text}}</span>
     </div>
   </div>
-
+  <!--links to register -->
   <span class="text_big_size" *ngIf="!user; else chat">Welcome,
           <a class="link" routerLink="/login" [queryParams]="{form: 'signIn'}">login</a> or
           <a class="link" routerLink="/login" [queryParams]="{form: 'signUp'}">register</a>
           for start!</span>
+  <!--Chat-->
   <ng-template #chat *ngIf="!isOwner()">
     <app-chat #chat [user]="user" [owner]="product?.owner"></app-chat>
   </ng-template>
