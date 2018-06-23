@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Renderer2, EventEmitter, Output} from '@angular/core';
+import {Directive, ElementRef, EventEmitter, Output} from '@angular/core';
 
 @Directive({
   selector: '[appInfiniteScroll]',
@@ -9,7 +9,7 @@ import {Directive, ElementRef, Renderer2, EventEmitter, Output} from '@angular/c
 
 export class InfiniteScrollDirective {
 
-  constructor(private element: ElementRef, private renderer: Renderer2) {
+  constructor(private element: ElementRef) {
   }
 
   @Output() getNextPage = new EventEmitter<boolean>();

@@ -9,6 +9,7 @@ import { Product} from "../../../core/models/product";
 export class ProductItemComponent implements OnInit {
 
   @Input() product: Product;
+  @Input() isOwner: boolean = false;
 
     constructor() {
 

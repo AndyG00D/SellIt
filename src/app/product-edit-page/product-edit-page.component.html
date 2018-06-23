@@ -1,6 +1,6 @@
 <app-header></app-header>
 <section class="content">
-  <p><a href="" routerLink="..">&lt; Back to product list</a></p>
+  <p><a href="" [routerLink]="'/products/' + product.pk">&lt; Back to detail</a></p>
   <h1>Edit products</h1>
   <app-messages></app-messages>
   <!--<app-product-form></app-product-form>-->

@@ -57,6 +57,8 @@ export class ProductService implements OnInit {
     this._isAlive = false;
   }
 
+
+
   public getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(apiUrls.products + id.toString() + '/')
       .pipe(
@@ -68,6 +70,7 @@ export class ProductService implements OnInit {
         )
       );
   }
+
 
   public addProduct(newProduct: Product): Observable<Product> {
     return this.http.post<Product>(apiUrls.products, newProduct)

@@ -18,15 +18,12 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
   public loading$ = new BehaviorSubject(true);
   private destroy = new Subject();
   public product: Product;
-
-  //temp userProps of user
   public user: User;
 
   constructor(
     private dataProductsService: ProductService,
     private route: ActivatedRoute,
     private profileService: ProfileService) {
-
     this.profileService.getUser().subscribe((user) => {this.user = user});
   }
 
@@ -41,6 +38,11 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
         }
       );
   }
+
+  public isOwner(){
+    return (this.user && this.user.id) === this.product.owner.id;
+  }
+
 
   public ngOnDestroy(): void {
     this.destroy.next();

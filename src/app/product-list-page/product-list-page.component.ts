@@ -1,6 +1,8 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ProductService} from "../core/services/product.service";
 import {Product} from "../core/models/product";
+import {User} from "../core/models/user";
+import {ProfileService} from "../core/services/profile.service";
 
 @Component({
   selector: 'app-product-list-page',
@@ -14,9 +16,13 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   private _limit: number = 12;
   private _isLoadData: boolean;
   public infoMsg: string;
+  public user: User;
 
 
-  constructor(private dataProducts: ProductService) {
+  constructor(private dataProducts: ProductService,
+              private profileService: ProfileService)
+  {
+    this.profileService.getUser().subscribe((user) => {this.user = user});
   }
 
   public ngOnInit() {
