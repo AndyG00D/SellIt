@@ -57,8 +57,6 @@ export class ProductService implements OnInit {
     this._isAlive = false;
   }
 
-
-
   public getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(apiUrls.products + id.toString() + '/')
       .pipe(
@@ -70,7 +68,6 @@ export class ProductService implements OnInit {
         )
       );
   }
-
 
   public addProduct(newProduct: Product): Observable<Product> {
     return this.http.post<Product>(apiUrls.products, newProduct)
@@ -103,58 +100,6 @@ export class ProductService implements OnInit {
       );
   }
 
-  public getImages(advert_pk: number) {
-    return this.http.get(apiUrls.products + advert_pk + '/image/')
-      .pipe(
-        tap((response: Response) => {
-          console.log('deleteProduct: ' + response);
-        }),
-        catchError(this.handleError('deleteProduct:', []))
-      );
-  }
-
-  public uploadImage(advert_pk: number, file: string) {
-    return this.http.post(apiUrls.products + advert_pk + '/image/', {'advert': advert_pk, 'file': file})
-      .pipe(
-        tap((image: Image) => {
-          this.messageService.addSuccess('uploaded to server image id:' + image.pk);
-          console.log('uploadImage: ' + image);
-
-        }),
-        catchError(this.handleError('uploadImage:', []))
-      );
-  }
-
-  public uploadImages(advert_pk: number, images: string[]): Observable<any> {
-    return from(images).pipe(
-      concatMap((image: string) => this.uploadImage(advert_pk, image)),
-      catchError(this.handleError('uploadImages:', []))
-    )
-  }
-
-
-  public updateImage(id: number, advert_pk: number, file: string) {
-    return this.http.patch(apiUrls.products + advert_pk + '/image/' + id, {'advert': advert_pk, 'file': file})
-      .pipe(
-        map((response: Response) => {
-          console.log('updateImage: ' + response);
-        }),
-        catchError(this.handleError('updateImage:', []))
-      );
-  }
-
-
-  public deleteImage(id: number, advert_pk: string) {
-    return this.http.delete(apiUrls.products + advert_pk + '/image/' + id)
-      .pipe(
-        tap(() => {
-          this.messageService.addSuccess('deleted from server image id:' + id);
-          console.log('deleteImage: ' + id);
-
-        }),
-        catchError(this.handleError('deleteImage:', []))
-      );
-  }
 
   public getLocations(): Observable<Array<optionsConf>> {
     return this.http.get(apiUrls.locations)
@@ -162,8 +107,8 @@ export class ProductService implements OnInit {
         map((response: any) => {
           // console.log(JSON.stringify(response));
           let res: optionsConf[] = [];
-          for (let item of response){
-            res.push({label: item.name, value: item.id })
+          for (let item of response) {
+            res.push({label: item.name, value: item.id})
           }
           // console.log(JSON.stringify(res));
           return res;
@@ -171,7 +116,6 @@ export class ProductService implements OnInit {
         catchError(this.handleError('getLocations:', []))
       );
   }
-
 
   private _setNoImage(product: Product): void {
     if (product.images[0] === undefined) {

@@ -8,6 +8,7 @@ import {ProductService} from "../../../core/services/product.service";
 import {environment} from "../../../../environments/environment";
 import {from} from "rxjs/internal/observable/from";
 import {Observable} from "rxjs/index";
+import {ProductImagesService} from "../../../core/services/product-images.service";
 
 
 @Component({
@@ -22,7 +23,8 @@ export class ImagesUploaderComponent {
   public newImages = [];
 
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+              private productImagesService: ProductImagesService) {
   }
 
   onFileChange(event) {
@@ -60,13 +62,13 @@ export class ImagesUploaderComponent {
   }
 
   deleteRestImg(i: number, image: Image) {
-    this.productService.deleteImage(image.pk, image.advert).subscribe(
+    this.productImagesService.deleteImage(image.pk, image.advert).subscribe(
     );
     this.deleteUploadImage(i);
   }
 
   uploadImage(i, image) {
-    this.productService.uploadImage(196, image).subscribe(
+    this.productImagesService.uploadImage(196, image).subscribe(
       image => this.uploadedImages.push(image)
     );
     this.deleteNewImage(i);

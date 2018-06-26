@@ -51,6 +51,7 @@ import {environment} from "../environments/environment";
 import {ProductEditPageComponent} from "./product-edit-page/product-edit-page.component";
 import {DataProductResolver} from "./core/product.resolve";
 import {ImagesUploaderComponent} from "./shared/components/images-uploader/images-uploader.component";
+import {ProductImagesService} from "./core/services/product-images.service";
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import {ImagesUploaderComponent} from "./shared/components/images-uploader/image
     CookieService,
     SessionService,
     ProfileService,
+    ProductImagesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

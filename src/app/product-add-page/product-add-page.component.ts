@@ -9,6 +9,7 @@ import {Product} from "../core/models/product";
 import {Observable} from "rxjs/Observable";
 import {from} from "rxjs/internal/observable/from";
 import {concat, concatMap, switchMap, takeUntil, takeWhile, tap} from "rxjs/operators";
+import {ProductImagesService} from "../core/services/product-images.service";
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ProductAddPageComponent implements OnInit {
   public props: FormControlConf[];
 
   constructor(private dynamicFormService: DynamicFormService,
-              private dataProductsService: ProductService) {
+              private dataProductsService: ProductService,
+              private productImagesService: ProductImagesService) {
 
   }
 
@@ -42,7 +44,7 @@ export class ProductAddPageComponent implements OnInit {
 
     this.dataProductsService.addProduct(event).pipe(
       takeWhile(() => !!images),
-      switchMap((val) => this.dataProductsService.uploadImages(val.pk, images))
+      switchMap((val) => this.productImagesService.uploadImages(val.pk, images))
     )
       .subscribe(data => console.log("dataProductsService done! " + data));
   }
