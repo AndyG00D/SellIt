@@ -16,14 +16,12 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
   @Output() submitted = new EventEmitter<any>();
   form: FormGroup = new FormGroup({});
 
-  constructor(private customValidators: CustomValidatorsService
-  ) {
+  constructor(private customValidators: CustomValidatorsService) {
   }
 
   ngOnInit() {
     // create Form model
     this.form = this.createForm(this.props);
-
     // set default form values
     if (this.data) {
       this.setFormData();
@@ -54,11 +52,12 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
     return new FormGroup(formGroup);
   }
 
+
   private getValidators(prop: FormControlConf): ValidatorFn[] {
     let res: ValidatorFn[];
     switch (prop.type) {
       case 'text':
-        res = [Validators.minLength(6), Validators.maxLength(20)];
+        res = [Validators.minLength(4), Validators.maxLength(20)];
         break;
       case 'email':
         res = [Validators.minLength(6), Validators.maxLength(20), this.customValidators.email];
@@ -110,7 +109,6 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
     for (let item in this.data)
       if (this.data[item] && this.form.get(item)) {
         this.form.get(item).patchValue(this.data[item]);
-        // console.log(item + ": " + this.data[item]);
       }
   }
 

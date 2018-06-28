@@ -35,8 +35,8 @@
           <a class="link" routerLink="/login" [queryParams]="{form: 'signUp'}">register</a>
           for start!</span>
   <!--Chat-->
-  <ng-template #chat *ngIf="!isOwner()">
-    <app-chat #chat [user]="user" [owner]="product?.owner"></app-chat>
+  <ng-template #chat>
+    <app-chat *ngIf="!isOwner()" [user]="user" [owner]="product?.owner"></app-chat>
   </ng-template>
 </section>
 

@@ -1,12 +1,9 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
-
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-
-import { CookieService } from 'ngx-cookie-service';
-
+import {CookieService} from 'ngx-cookie-service';
 import {HeaderComponent} from './shared/components/header/header.component';
 import {FooterComponent} from './shared/components/footer/footer.component';
 import {ProductAddPageComponent} from './product-add-page/product-add-page.component';
@@ -102,7 +99,6 @@ import {Base64ValidatorsService} from "./core/services/base64-validators.service
     DataProductResolver,
     ComponentLoaderService,
     MessageService,
-    // { provide: RequestCache, useClass: RequestCacheWithMap },
     HttpErrorHandler,
     GuestGuard,
     UserGuard,
@@ -124,9 +120,7 @@ import {Base64ValidatorsService} from "./core/services/base64-validators.service
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
 }
-
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -137,6 +131,6 @@ export function getAuthServiceConfigs() {
         provider: new GoogleLoginProvider(environment.googleToken),
       },
     ]
-);
+  );
   return config;
 }

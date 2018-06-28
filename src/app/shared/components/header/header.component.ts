@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     this.profileService.getUser().subscribe((user) => {this.user = user});
 
     if(this.user){
-      if(this.user.first_name) this.userName = this.user.first_name + this.user.last_name;
+      if(this.user.first_name) this.userName = this.user.first_name + ' ' + this.user.last_name;
       else if(this.user.username) this.userName = this.user.username;
       else
         this.userName = 'User';

@@ -1,2 +1,6 @@
-{{name}}
-
+<ng-container *ngIf="user?.first_name; else username">
+  {{user?.first_name}} {{user?.last_name}}
+</ng-container>
+<ng-template #username>
+  {{user?.username}}
+</ng-template>

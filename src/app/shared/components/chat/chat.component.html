@@ -4,7 +4,7 @@
   <div class="chat__title text_bold">
     <span class="text_big_size">Chat</span>
     with
-    <span class="_main-color">{{owner?.first_name}} {{owner?.last_name}} </span>
+    <app-user-name class="_main-color" [user]="owner"></app-user-name>
     <span class="text_green-color">
                 <i class="fa fa-square" aria-hidden="true"></i>
             </span>
@@ -18,27 +18,23 @@
 
     <ul class="contact-list__list dropdown__submenu">
       <li class="contact-list-item">
-        <!--<img class="contact-list__avatar" [src]="user?.avatar"/>-->
         <app-avatar class="contact-list__avatar" [user]="user"></app-avatar>
-        {{user?.first_name}} {{user?.last_name}}
+        <app-user-name [user]="user"></app-user-name>
       </li>
 
       <li class="contact-list-item">
-        <!--<img class="contact-list__avatar" [src]="owner?.avatar"/>-->
         <app-avatar class="contact-list__avatar" [user]="owner"></app-avatar>
-        {{owner?.first_name}} {{owner?.last_name}}
+        <app-user-name [user]="owner"></app-user-name>
       </li>
     </ul>
   </div>
   <!--chat__messages-->
   <div class="chat__messages">
     <div class="chat__message-line">
-      <!--<img class="chat__message-avatar" [src]="owner?.avatar">-->
       <app-avatar class="chat__message-avatar" [user]="owner"></app-avatar>
       <div class="chat__message-text">One line chat message</div>
     </div>
     <div class="chat__message-line chat__message_own chat__message_multi-line">
-      <!--<img class="chat__message-avatar" [src]="user?.avatar">-->
       <app-avatar class="chat__message-avatar" [user]="user"></app-avatar>
       <div class="chat__message-text">
         Multi line chat message. Some text for multi line message. What

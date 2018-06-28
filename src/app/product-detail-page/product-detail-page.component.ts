@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {Subject} from 'rxjs/internal/Subject';
-import {switchMap, takeUntil, tap} from 'rxjs/operators';
 import {Product} from "../core/models/product";
 import {User} from "../core/models/user";
 import {ProductService} from "../core/services/product.service";
@@ -24,25 +23,18 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
     private dataProductsService: ProductService,
     private route: ActivatedRoute,
     private profileService: ProfileService) {
-    this.profileService.getUser().subscribe((user) => {this.user = user});
+    this.profileService.getUser().subscribe((user) => this.user = user);
   }
 
   ngOnInit() {
     this.route.data.subscribe(
-        product => {
-          this.product = product.data;
-          console.log("product: " + JSON.stringify(product.data));
-        },
-        err => {
-          console.log(err.message);
-        }
+        product => this.product = product.data
       );
   }
 
   public isOwner(){
     return (this.user && this.user.id) === this.product.owner.id;
   }
-
 
   public ngOnDestroy(): void {
     this.destroy.next();

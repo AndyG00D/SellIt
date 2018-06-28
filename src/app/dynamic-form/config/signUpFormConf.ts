@@ -8,6 +8,7 @@ export let signUpFormConf: Array<FormControlConf> = [
     key: 'username',
     type: 'text',
     label: 'User Name',
+    validators: [Validators.required],
     hideLabel: true,
     invertTheme: true
   },

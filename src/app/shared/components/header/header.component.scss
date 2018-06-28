@@ -84,6 +84,7 @@
   min-height: 2rem;
 
   &:hover {
+    outline: none;
     -webkit-box-shadow: inset 3px 0 0 0 var(--content-color);
     -moz-box-shadow: inset 3px 0 0 0 var(--content-color);
     box-shadow: inset 3px 0 0 0 var(--content-color);
