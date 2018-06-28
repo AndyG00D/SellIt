@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from "../core/services/auth.service";
 import {DynamicFormService} from "../dynamic-form/dynamic-form.service";
 import {FormControlConf, optionsConf} from "../dynamic-form/dynamic-form.model";
@@ -19,6 +19,7 @@ import {ProductImagesService} from "../core/services/product-images.service";
 })
 export class ProductAddPageComponent implements OnInit {
 
+  @ViewChild('imagesUploader') imagesLoader;
   public props: FormControlConf[];
 
   constructor(private dynamicFormService: DynamicFormService,
@@ -39,14 +40,18 @@ export class ProductAddPageComponent implements OnInit {
   }
 
   onAddProduct(event) {
-    const images = event.images;
-    delete event['images'];
+    // const images = event.images;
+    // delete event['images'];
 
-    this.dataProductsService.addProduct(event).pipe(
-      takeWhile(() => !!images),
-      switchMap((val) => this.productImagesService.uploadImages(val.pk, images))
-    )
-      .subscribe(data => console.log("dataProductsService done! " + data));
+    this.dataProductsService.addProduct(event)
+    //   .pipe(
+    //   takeWhile(() => !!images),
+    //   switchMap((val) => this.productImagesService.uploadNewImages(val.pk, images))
+    // )
+      .subscribe(data => {
+        console.log("dataProductsService done! " + data);
+        this.imagesLoader.uploadNewImages(data.pk);
+      });
   }
 }
 

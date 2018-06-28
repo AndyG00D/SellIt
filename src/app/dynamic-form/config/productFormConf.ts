@@ -48,11 +48,11 @@ export let productFormConf: Array<FormControlConf> = [{
     label: 'Active',
     value: true
   },
-  {
-    key: 'images',
-    type: 'files',
-    label: 'Images'
-  },
+  // {
+  //   key: 'images',
+  //   type: 'files',
+  //   label: 'Images'
+  // },
   {
     key: 'submit',
     type: 'submit',

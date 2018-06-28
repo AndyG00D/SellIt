@@ -11,7 +11,7 @@
     <button class="images-loader__btn text_red-color" (click)="deleteNewImage(i)">
       <i class="fa fa-remove"></i>
     </button>
-    <button class="images-loader__btn text_green-color" (click)="uploadImage(i, image)">
+    <button *ngIf="productId" class="images-loader__btn text_green-color" (click)="uploadNewImage(i, image)">
       <i class="fa fa-upload"></i>
     </button>
   </div>
@@ -27,7 +27,7 @@
     </label>
   </div>
 
-  <button class="btn _full-width" (click)="uploadImages()">Upload all</button>
+  <button *ngIf="productId" class="btn _full-width" (click)="uploadNewImages()">Upload all</button>
 </div>
 
 <!--<button type="button" class="btn" (click)="clearFile()">clearError file</button>-->

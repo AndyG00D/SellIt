@@ -39,18 +39,18 @@ export class ProductImagesService implements OnInit {
     return this.http.post(apiUrls.products + advert_pk + '/image/', {'advert': advert_pk, 'file': file})
       .pipe(
         tap((image: Image) => {
-          this.messageService.addSuccess('uploaded to server image id:' + image.pk);
-          console.log('uploadImage: ' + image);
+          this.messageService.addSuccess('uploaded to server image productId:' + image.pk);
+          console.log('uploadNewImage: ' + image);
 
         }),
-        catchError(this.handleError('uploadImage:', []))
+        catchError(this.handleError('uploadNewImage:', []))
       );
   }
 
   public uploadImages(advert_pk: number, images: string[]): Observable<any> {
     return from(images).pipe(
       concatMap((image: string) => this.uploadImage(advert_pk, image)),
-      catchError(this.handleError('uploadImages:', []))
+      catchError(this.handleError('uploadNewImages:', []))
     )
   }
 
@@ -70,7 +70,7 @@ export class ProductImagesService implements OnInit {
     return this.http.delete(apiUrls.products + advert_pk + '/image/' + id)
       .pipe(
         tap(() => {
-          this.messageService.addSuccess('deleted from server image id:' + id);
+          this.messageService.addSuccess('deleted from server image productId:' + id);
           console.log('deleteImage: ' + id);
 
         }),

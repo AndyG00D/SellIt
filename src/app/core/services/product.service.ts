@@ -73,7 +73,7 @@ export class ProductService implements OnInit {
     return this.http.post<Product>(apiUrls.products, newProduct)
       .pipe(
         tap((response: any) => {
-          this.messageService.addSuccess('Created new product id:' + response.pk);
+          this.messageService.addSuccess('Created new product productId:' + response.pk);
           console.log('addProduct: ' + response);
         }),
         catchError(this.handleError('addProduct:', []))

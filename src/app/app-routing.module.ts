@@ -16,8 +16,8 @@ import {ProductEditPageComponent} from "./product-edit-page/product-edit-page.co
 const routes: Routes = [
   { path: 'products', component: ProductListPageComponent },
   { path: 'products/add', component: ProductAddPageComponent, canActivate: [UserGuard]},
-  { path: 'products/:id', component: ProductDetailPageComponent, resolve: { data: DataProductResolver} },
-  { path: 'products/edit/:id', component: ProductEditPageComponent, canActivate: [UserGuard], resolve: { data: DataProductResolver} },
+  { path: 'products/:productId', component: ProductDetailPageComponent, resolve: { data: DataProductResolver} },
+  { path: 'products/edit/:productId', component: ProductEditPageComponent, canActivate: [UserGuard], resolve: { data: DataProductResolver} },
   { path: 'profile', component:ProfilePageComponent, canActivate: [UserGuard]},
   { path: 'profile2', component:ProfilePageTestComponent, canActivate: [UserGuard]},
   { path: 'login', component: LoginPageComponent, canActivate: [GuestGuard]  },

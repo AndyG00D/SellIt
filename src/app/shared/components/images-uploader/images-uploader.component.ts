@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Image} from "../../../core/models/product";
 import {ProductService} from "../../../core/services/product.service";
 import {ProductImagesService} from "../../../core/services/product-images.service";
@@ -11,12 +11,10 @@ import {Base64ValidatorsService} from "../../../core/services/base64-validators.
 
 })
 export class ImagesUploaderComponent implements OnInit {
-  @Input() id: number = null;
-  @Output() newImages: string[] = [];
-  // @Input() uploadedImages = [];
-  public uploadedImages = [];
+  @Input() productId: number = null;
 
-  // public newImages: string[] = [];
+  public uploadedImages = [];
+  public newImages: string[] = [];
 
 
   constructor(private productService: ProductService,
@@ -25,15 +23,14 @@ export class ImagesUploaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.id) {
-      this.productImagesService.getImages(this.id).subscribe(
+    if (this.productId) {
+      this.productImagesService.getImages(this.productId).subscribe(
         (images: Image[]) => this.uploadedImages.push(...images)
-        // images => console.log(images)
       );
     }
   }
 
-  onFileChange(event) {
+  public onFileChange(event) {
     //files exist?
     if (!(event.target.files && event.target.files.length > 0)) return;
     //File count less max limit upload files RestApi
@@ -54,34 +51,35 @@ export class ImagesUploaderComponent implements OnInit {
     }
   }
 
-
-  deleteNewImage(i) {
-    this.newImages.splice(i, 1);
+  private deleteNewImage(index: number):void {
+    this.newImages.splice(index, 1);
   }
 
-  deleteUploadImage(i) {
-    this.uploadedImages.splice(i, 1);
+  private deleteUploadImage(index: number):void {
+    this.uploadedImages.splice(index, 1);
   }
 
-  deleteRestImg(i: number, image: Image) {
-    this.productImagesService.deleteImage(image.pk, image.advert).subscribe(
-    );
+  public deleteRestImg(i: number, uploadedImage: Image):void {
+    this.productImagesService.deleteImage(uploadedImage.pk, uploadedImage.advert).subscribe();
     this.deleteUploadImage(i);
   }
 
-  uploadImage(i, image) {
-    this.productImagesService.uploadImage(this.id, image).subscribe(
+  public uploadNewImage(index: number, newImage: string):void {
+    this.productImagesService.uploadImage(this.productId, newImage).subscribe(
       image => this.uploadedImages.push(image)
     );
-    this.deleteNewImage(i);
+    this.deleteNewImage(index);
   }
 
-public uploadImages() {
-  this.productImagesService.uploadImages(this.id, this.newImages).subscribe(
-    // image => this.uploadedImages.push(image)
-    image => this.uploadedImages.push(image)
-  );
-  this.newImages = [];
-}
+  public uploadNewImages(id: number = this.productId):void {
+    this.productImagesService.uploadImages(id, this.newImages).subscribe(
+      image => {
+        if (this.productId) {
+          this.uploadedImages.push(image);
+        }
+        this.newImages = [];
+      }
+    );
+  }
 
 }

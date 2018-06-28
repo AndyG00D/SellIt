@@ -4,7 +4,7 @@
   <h1>Edit Product</h1>
   <app-messages></app-messages>
   <label class="input-text__label">Images</label>
-  <app-images-uploader [id]="product.pk"></app-images-uploader>
+  <app-images-uploader [productId]="product.pk"></app-images-uploader>
   <!--<app-images-uploader [uploadedImages]="product.images"></app-images-uploader>-->
   <!--<app-product-form></app-product-form>-->
   <app-dynamic-form [props]="props"
