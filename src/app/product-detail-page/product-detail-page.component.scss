@@ -25,6 +25,11 @@
     margin: 0;
     font-family: var(--title-font-family);
     font-size: 2.28rem;
+    width: 70%;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
   }
 
   &_slideshow {
@@ -52,6 +57,13 @@
   &__list li:before {
     content: '- ';
   }
+}
+
+.no-login{
+  font-family: var(--font-family);
+  color: var(--content-color);
+  font-size: 2.28rem;
+  font-weight: bold;
 }
 
 .edit-btn{

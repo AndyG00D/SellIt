@@ -115,9 +115,9 @@ export class AuthService {
   }
 
   public resetAuth(): void {
-    this.profileService.setUser(null);
-    this.sessionService.user = null;
     this.sessionService.token = null;
+    this.sessionService.user = null;
+    this.profileService.setUser(null);
     this.router.navigate(['/products']);
   }
 

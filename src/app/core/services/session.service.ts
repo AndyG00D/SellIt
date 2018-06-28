@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from "../models/user";
 import {HttpClient} from "@angular/common/http";
 import {HttpErrorHandler, HandleError} from "./http-error-handler.service";

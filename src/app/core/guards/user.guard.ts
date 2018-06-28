@@ -16,8 +16,8 @@ export class UserGuard implements CanActivate {
     if (this.sessionService.token) {
       return true;
     } else {
-      this.messageService.addWarning('This page only for log in Users!');
-      this.router.navigate(['login']);
+      this.messageService.addWarning('This page only for login Users!');
+      this.router.navigate(['/login']);
       return false;
     }
   }

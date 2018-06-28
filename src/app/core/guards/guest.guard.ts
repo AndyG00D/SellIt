@@ -17,7 +17,7 @@ export class GuestGuard implements CanActivate {
       return true;
     } else {
       this.messageService.addWarning('This is page only for guests!');
-      this.router.navigate(['products']);
+      this.router.navigate(['/products']);
       return false;
     }
 

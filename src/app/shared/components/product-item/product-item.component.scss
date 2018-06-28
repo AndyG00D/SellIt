@@ -46,9 +46,12 @@
     font-size: 1.28rem;
     font-weight: bold;
     height: 3.6rem;
+    word-wrap: break-word;
+    word-break: break-all;
   }
 
   &__ico {
+    flex: 2rem;
     font-size: 2rem;
   }
 }

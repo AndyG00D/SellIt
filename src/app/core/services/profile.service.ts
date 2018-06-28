@@ -74,5 +74,17 @@ export class ProfileService {
       )
   }
 
+  public getChangePasswod(params: any): Observable<any> {
+    return this.http.post(apiUrls.changePassword, params)
+      .pipe(
+        tap((response: any) => {
+          this.messageService.addSuccess(response.detail);
+        }),
+        catchError(this.handleError('getChangePasswod:'))
+      )
+  }
+
+
+
 
 }

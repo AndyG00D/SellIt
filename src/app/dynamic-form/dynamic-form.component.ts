@@ -56,7 +56,7 @@ export class DynamicFormComponent implements OnInit {
         res = [Validators.minLength(4), Validators.maxLength(20)];
         break;
       case 'email':
-        res = [Validators.minLength(6), Validators.maxLength(20), this.customValidators.email];
+        res = [Validators.minLength(6), Validators.maxLength(30), this.customValidators.email];
         break;
       case 'password':
         res = [Validators.minLength(8), Validators.maxLength(20), this.customValidators.password];

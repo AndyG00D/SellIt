@@ -9,5 +9,7 @@
   <app-dynamic-form [props]="avatarProps" [data]="user" (submitted)="onSubmit($event)"></app-dynamic-form>
   <br>
   <app-dynamic-form [props]="userProps" [data]="user" (submitted)="onSubmit($event)"></app-dynamic-form>
+  <br>
+  <app-dynamic-form [props]="passProps" (submitted)="onChangePass($event)"></app-dynamic-form>
 </section>
 <app-footer></app-footer>

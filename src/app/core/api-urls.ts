@@ -8,6 +8,7 @@ export class apiUrls {
   static verify = `${environment.apiBase}/verify-email/`;
   static profile = `${environment.apiBase}/profile/`;
   static google = `${environment.apiBase}/rest-auth/google/`;
+  static changePassword = `${environment.apiBase}/password/change/`;
   static resetPassword = `${environment.apiBase}/password/reset/`;
   static resetConfirm = `${environment.apiBase}/password/reset/confirm/`;
   static locations = `${environment.apiBase}/locations/`;

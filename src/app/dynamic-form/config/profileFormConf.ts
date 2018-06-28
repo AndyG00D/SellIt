@@ -1,4 +1,6 @@
 import {FormControlConf} from '../dynamic-form.model'
+import {CustomValidatorsService} from "../custom-validators.service";
+import {Validators} from "@angular/forms";
 
 export let avatarFormConf: Array<FormControlConf> = [
   {
@@ -75,4 +77,24 @@ export let profileFormConf: Array<FormControlConf> = [
   //   type: 'reset',
   //   label: 'Reset',
   // },
+];
+
+export let changePasswordFormConf: Array<FormControlConf> = [
+  {
+    key: 'new_password1',
+    type: 'password',
+    label: 'Password',
+    validators: [Validators.required]
+  },
+  {
+    key: 'new_password2',
+    type: 'password',
+    label: 'Confirm',
+    validators: [Validators.required, CustomValidatorsService.prototype.confirm('new_password1')],
+  },
+  {
+    key: 'submit',
+    type: 'submit',
+    label: 'Change Password',
+  }
 ];

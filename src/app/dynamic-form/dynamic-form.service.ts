@@ -4,7 +4,7 @@ import {productFormConf} from "./config/productFormConf";
 import {demoFormConf} from "./config/demoFormConf";
 import {signInFormConf} from "./config/signInFormConf";
 import {signUpFormConf} from "./config/signUpFormConf";
-import {avatarFormConf, profileFormConf} from "./config/profileFormConf";
+import {avatarFormConf, changePasswordFormConf, profileFormConf} from "./config/profileFormConf";
 import {resetPasswordFormConf} from "./config/resetPasswordFormConf";
 import {resetConfirmFormConf} from "./config/resetConfirmFormConf";
 
@@ -33,6 +33,8 @@ export class DynamicFormService implements OnInit {
         return profileFormConf;
       case 'avatar':
         return avatarFormConf;
+      case 'changePassword':
+        return changePasswordFormConf;
       case 'resetPassword':
         return resetPasswordFormConf;
       case 'resetConfirm':
