@@ -9,6 +9,7 @@ import {environment} from "../../../../environments/environment";
 import {from} from "rxjs/internal/observable/from";
 import {Observable} from "rxjs/index";
 import {ProductImagesService} from "../../../core/services/product-images.service";
+import {Base64ValidatorsService} from "../../../core/services/base64-validators.service";
 
 
 @Component({
@@ -20,38 +21,35 @@ import {ProductImagesService} from "../../../core/services/product-images.servic
 export class ImagesUploaderComponent {
   @Input() prop: any;
   @Input() uploadedImages = [];
-  public newImages = [];
+  public newImages: string[] = [];
 
 
   constructor(private productService: ProductService,
-              private productImagesService: ProductImagesService) {
+              private productImagesService: ProductImagesService,
+              private base64ValidatorsService: Base64ValidatorsService) {
   }
 
   onFileChange(event) {
-    if (event.target.files && event.target.files.length > 0) {
-      let res = [];
-      let count = this.uploadedImages.length + this.newImages.length + event.target.files.length;
-      if (count > 8) {
-        alert("Too match files");
-        return
-      }
-      for (let file of event.target.files) {
-        if (!environment.imgType.includes(file.type)) {
-          alert("Wrong Format of image");
-          continue
-        }
-        if (file.size > environment.maxFileSize) {
-          alert("File is too big!");
-          continue
-        }
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          this.newImages.push(reader.result);
-        };
-      }
+    //files exist?
+    if (!(event.target.files && event.target.files.length > 0)) return;
+    //File count less max limit upload files RestApi
+    let ExistFilesCount = this.uploadedImages.length + this.newImages.length + event.target.files.length;
+    if (!this.base64ValidatorsService.isValidCount(ExistFilesCount)) return;
+
+    for (let file of event.target.files) {
+      // is valid type?
+      if (!this.base64ValidatorsService.isValidType(file)) continue;
+      // is valid size?
+      if (!this.base64ValidatorsService.isValidSize(file)) continue;
+
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.newImages.push(reader.result);
+      };
     }
   }
+
 
   deleteNewImage(i) {
     this.newImages.splice(i, 1);
@@ -61,7 +59,12 @@ export class ImagesUploaderComponent {
     this.uploadedImages.splice(i, 1);
   }
 
-  deleteRestImg(i: number, image: Image) {
+  deleteRestImg(i
+                  :
+                  number, image
+                  :
+                  Image
+  ) {
     this.productImagesService.deleteImage(image.pk, image.advert).subscribe(
     );
     this.deleteUploadImage(i);
@@ -74,10 +77,10 @@ export class ImagesUploaderComponent {
     this.deleteNewImage(i);
   }
 
-  // public uploadImages(advert_pk: number, images: string[]) {
-  //   return from(images).pipe(
-  //     concatMap((image: string) => this.uploadImage(advert_pk, image)),
-  //   )
-  // }
+// public uploadImages(advert_pk: number, images: string[]) {
+//   return from(images).pipe(
+//     concatMap((image: string) => this.uploadImage(advert_pk, image)),
+//   )
+// }
 
 }

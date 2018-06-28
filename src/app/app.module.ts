@@ -52,6 +52,7 @@ import {ProductEditPageComponent} from "./product-edit-page/product-edit-page.co
 import {DataProductResolver} from "./core/product.resolve";
 import {ImagesUploaderComponent} from "./shared/components/images-uploader/images-uploader.component";
 import {ProductImagesService} from "./core/services/product-images.service";
+import {Base64ValidatorsService} from "./core/services/base64-validators.service";
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import {ProductImagesService} from "./core/services/product-images.service";
     SessionService,
     ProfileService,
     ProductImagesService,
+    Base64ValidatorsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

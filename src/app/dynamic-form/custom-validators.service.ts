@@ -90,7 +90,6 @@ export class CustomValidatorsService {
     return null;
   }
 
-
   public existValue(options: optionsConf[]): ValidatorFn {
     return (c: AbstractControl): ValidationErrors => {
       if (options.length) return null;
