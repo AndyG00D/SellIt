@@ -37,5 +37,5 @@ export class Base64ValidatorsService implements OnInit {
     }
     return true;
   }
-  
+
 }

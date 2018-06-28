@@ -1,16 +1,8 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {User} from "../../../core/models/user";
-import {catchError, concatMap, map} from "rxjs/operators";
-import {Image, Product} from "../../../core/models/product";
+import {Component, Input, OnInit} from '@angular/core';
+import {Image} from "../../../core/models/product";
 import {ProductService} from "../../../core/services/product.service";
-import {environment} from "../../../../environments/environment";
-import {from} from "rxjs/internal/observable/from";
-import {Observable} from "rxjs/index";
 import {ProductImagesService} from "../../../core/services/product-images.service";
 import {Base64ValidatorsService} from "../../../core/services/base64-validators.service";
-
 
 @Component({
   selector: 'app-images-uploader',
@@ -18,15 +10,25 @@ import {Base64ValidatorsService} from "../../../core/services/base64-validators.
   styleUrls: ['./images-uploader.component.scss']
 
 })
-export class ImagesUploaderComponent {
-  @Input() prop: any;
-  @Input() uploadedImages = [];
+export class ImagesUploaderComponent implements OnInit{
+  @Input() id: number = null;
+  // @Input() uploadedImages = [];
+  public uploadedImages = [];
   public newImages: string[] = [];
 
 
   constructor(private productService: ProductService,
               private productImagesService: ProductImagesService,
               private base64ValidatorsService: Base64ValidatorsService) {
+  }
+
+  ngOnInit(){
+    if(this.id){
+      this.productImagesService.getImages(this.id).subscribe(
+        (images: Image[]) => this.uploadedImages.push(...images)
+        // images => console.log(images)
+      );
+    }
   }
 
   onFileChange(event) {
@@ -71,7 +73,7 @@ export class ImagesUploaderComponent {
   }
 
   uploadImage(i, image) {
-    this.productImagesService.uploadImage(196, image).subscribe(
+    this.productImagesService.uploadImage(this.id, image).subscribe(
       image => this.uploadedImages.push(image)
     );
     this.deleteNewImage(i);
