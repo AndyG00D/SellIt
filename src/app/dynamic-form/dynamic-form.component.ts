@@ -1,16 +1,15 @@
-import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {FormGroup, FormControl, FormArray, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 import {FormControlConf} from "./dynamic-form.model";
-import {ValidateFn} from "codelyzer/walkerFactory/walkerFn";
 import {CustomValidatorsService} from "./custom-validators.service";
-
 
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.scss']
 })
-export class DynamicFormComponent implements OnInit, AfterViewInit {
+
+export class DynamicFormComponent implements OnInit {
   @Input() props;
   @Input() data: any;
   @Output() submitted = new EventEmitter<any>();
@@ -28,11 +27,8 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-  }
-
   // setup the form
-  createForm(props): FormGroup {
+  private createForm(props): FormGroup {
     const formGroup = {};
     for (let prop of props) {
       if (prop.type === 'nested') { // generate Nested Form
@@ -105,7 +101,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
     return res;
   }
 
-  private setFormData() {
+  private setFormData(): void {
     for (let item in this.data)
       if (this.data[item] && this.form.get(item)) {
         this.form.get(item).patchValue(this.data[item]);
@@ -113,7 +109,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
   }
 
 
-  private markAllDirty(control: AbstractControl) {
+  private markAllDirty(control: AbstractControl): void {
     if (control.hasOwnProperty('controls')) {
       control.markAsDirty(); // mark group
       let ctrl = <any>control;
@@ -126,7 +122,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     this.markAllDirty(this.form);
     if (this.form.valid) {
       console.log('form submitted...');

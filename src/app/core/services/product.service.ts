@@ -53,7 +53,7 @@ export class ProductService implements OnInit {
       );
   }
 
-  public stop() {
+  public stop():void {
     this._isAlive = false;
   }
 
@@ -81,7 +81,7 @@ export class ProductService implements OnInit {
       );
   }
 
-  public updateProduct(pk: number, newProduct: Product) {
+  public updateProduct(pk: number, newProduct: Product): Observable<Product> {
     return this.http.patch(apiUrls.products + pk + '/', newProduct)
       .pipe(
         tap((response: any) => {
@@ -92,7 +92,7 @@ export class ProductService implements OnInit {
       );
   }
 
-  public deleteProduct(pk: number) {
+  public deleteProduct(pk: number): Observable<any>  {
     return this.http.delete(apiUrls.products + pk + '/')
       .pipe(
         tap(() => {

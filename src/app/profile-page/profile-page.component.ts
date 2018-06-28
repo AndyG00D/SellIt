@@ -18,7 +18,6 @@ export class ProfilePageComponent {
               private profileService: ProfileService) {
     this.userProps = this.service.getFormConfig('profile');
     this.avatarProps = this.service.getFormConfig('avatar');
-    // this.profileService.getProfile().subscribe(data => this.user = data);
     this.profileService.getUser().subscribe((user) => {
       this.user = user
     });
@@ -28,21 +27,4 @@ export class ProfilePageComponent {
     this.profileService.updateProfile(event).subscribe(
     );
   }
-
-  // onFileChange(event) {
-  //   let reader = new FileReader();
-  //   if(event.target.files && event.target.files.length > 0) {
-  //     let file = event.target.files[0];
-  //     reader.readAsDataURL(file);
-  //     reader.onload = () => {
-  //       console.log('result :' + reader.result);
-  //       // this.form.get(this.prop.key).setValue(reader.result);
-  //       // this.form.get(this.prop.key).setValue({
-  //       //   filename: file.name,
-  //       //   filetype: file.type,
-  //       //   value: reader.result.split(',')[1]
-  //       // })
-  //     };
-  //   }
-  // }
 }

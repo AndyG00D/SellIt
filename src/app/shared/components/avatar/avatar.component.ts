@@ -12,11 +12,5 @@ export class AvatarComponent {
   img: string = apiUrls.noAvatar;
 
   constructor() {
-  //   if( this.user['avatar'] === undefined){
-  //     this.img = apiUrls.noAvatar;
-  //   } else {
-  //     // this.img = this.user.avatar;
-  //     this.img = 'true';
-  //   }
   }
 }

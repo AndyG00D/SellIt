@@ -44,7 +44,7 @@ export class AuthService {
       )
   }
 
-  public AuthGoogle() {
+  public AuthGoogle(): void {
     let socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData: any) => {
@@ -66,7 +66,7 @@ export class AuthService {
       )
   }
 
-  public getRegistration(reg: SignUpUser) {
+  public getRegistration(reg: SignUpUser): Observable<any> {
     return this.http.post(apiUrls.reg, reg)
       .pipe(
         tap((data: any) => {
@@ -114,20 +114,17 @@ export class AuthService {
       );
   }
 
-  public resetAuth() {
-    this.sessionService.token = null;
-    this.sessionService.user = null;
+  public resetAuth(): void {
     this.profileService.setUser(null);
-    this.router.navigate(['/login']);
+    this.sessionService.user = null;
+    this.sessionService.token = null;
+    this.router.navigate(['/products']);
   }
 
   public getLogout(): Observable<any> {
     return this.http.get(apiUrls.logout).pipe(
       tap(() => {
-        this.sessionService.token = null;
-        this.sessionService.user = null;
-        this.profileService.setUser(null);
-        this.router.navigate(['/products']);
+        this.resetAuth();
       })
     );
   }

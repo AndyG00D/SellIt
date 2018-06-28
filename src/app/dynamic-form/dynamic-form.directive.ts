@@ -34,7 +34,7 @@ export class DynamicFormDirective implements OnInit, OnChanges {
     }
   }
 
-  addComponent(component: Type<any>, prop: FormControlConf = null, formGroupKey: any = null) {
+  private addComponent(component: Type<any>, prop: FormControlConf = null, formGroupKey: any = null): void {
     let componentFactory = this.factoryResolver.resolveComponentFactory(component);
     let componentRef = this.container.createComponent(componentFactory);
     if (prop !== null) {
@@ -50,7 +50,7 @@ export class DynamicFormDirective implements OnInit, OnChanges {
     }
   }
 
-  createFormView(props: FormControlConf[]): void {
+  private createFormView(props: FormControlConf[]): void {
     for (let prop of props) {
       if (!prop.hideLabel && prop.type != 'submit' && prop.type != 'reset') {
         this.addComponent(LabelComponent, prop);

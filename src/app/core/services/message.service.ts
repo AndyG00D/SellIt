@@ -2,36 +2,36 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class MessageService {
-  messagesError: string[] = [];
-  messagesWarning: string[] = [];
-  messagesSuccess: string[] = [];
+  private messagesError: string[] = [];
+  private messagesWarning: string[] = [];
+  private messagesSuccess: string[] = [];
 
   // add messages
-  addError(message: string) {
+  public addError(message: string) {
     this.messagesError.push(message);
     console.log(message);
   }
 
-  addWarning(message: string) {
+  public addWarning(message: string) {
     this.messagesWarning.push(message);
     console.log(message);
   }
 
-  addSuccess(message: string) {
+  public addSuccess(message: string) {
     this.messagesSuccess.push(message);
     console.log(message);
   }
 
   // clear messages
-  clearError() {
+  public clearError() {
     this.messagesError = [];
   }
 
-  clearWarning() {
+  public clearWarning() {
     this.messagesWarning = [];
   }
 
-  clearSuccess() {
+  public clearSuccess() {
     this.messagesSuccess = [];
   }
 }

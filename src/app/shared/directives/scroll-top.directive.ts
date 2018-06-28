@@ -13,7 +13,7 @@ export class ScrollTopDirective implements OnInit {
   constructor(private element: ElementRef, private renderer: Renderer2) {
   }
 
-  whenScrolled() {
+  public whenScrolled() {
     if (window.pageYOffset < 100) {
       this.renderer.addClass(this.element.nativeElement, '_hide');
     } else {
@@ -21,11 +21,11 @@ export class ScrollTopDirective implements OnInit {
     }
   }
 
-  onClick() {
+  public onClick() {
     window.scroll({top: 0, behavior: "smooth"});
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.renderer.addClass(this.element.nativeElement, '_hide');
   }
 

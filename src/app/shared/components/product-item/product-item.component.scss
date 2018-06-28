@@ -1,8 +1,7 @@
-.product-item{
+.product-item {
   height: 250px;
   width: 320px;
   margin: 0.72rem;
-
 
   @media (max-width: 700px) {
     width: 220px;
@@ -22,32 +21,24 @@
     color: var(--sub-theme-color);
     background-color: var(--theme-color);
     text-decoration: none;
-
   }
 
-
-  &__url:hover{
+  &__url:hover {
     background-color: var(--green-color);
   }
 
-
-  &__img{
+  &__img {
     max-height: 200px;
     max-width: 100%;
     height: 100%;
-    //width: 100%;
     padding: 0;
     margin: 0;
-
-
-
   }
 
-  &__title{
+  &__title {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    //width: 100%;
     margin: 0;
     box-sizing: border-box;
     padding: 0 1rem;
@@ -57,7 +48,7 @@
     height: 3.6rem;
   }
 
-  &__ico{
+  &__ico {
     font-size: 2rem;
   }
 }
