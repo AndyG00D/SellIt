@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
-import {FormGroup, FormControl, FormArray, Validators, ValidatorFn} from '@angular/forms';
+import {FormGroup, FormControl, FormArray, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 import {FormControlConf} from "./dynamic-form.model";
 import {ValidateFn} from "codelyzer/walkerFactory/walkerFn";
 import {CustomValidatorsService} from "./custom-validators.service";
@@ -16,7 +16,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
   @Output() submitted = new EventEmitter<any>();
   form: FormGroup = new FormGroup({});
 
-  constructor(private customValidators:CustomValidatorsService
+  constructor(private customValidators: CustomValidatorsService
   ) {
   }
 
@@ -106,7 +106,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
     return res;
   }
 
-  setFormData() {
+  private setFormData() {
     for (let item in this.data)
       if (this.data[item] && this.form.get(item)) {
         this.form.get(item).patchValue(this.data[item]);
@@ -114,7 +114,22 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
       }
   }
 
-  onSubmit() {
+
+  private markAllDirty(control: AbstractControl) {
+    if (control.hasOwnProperty('controls')) {
+      control.markAsDirty(); // mark group
+      let ctrl = <any>control;
+      for (let inner in ctrl.controls) {
+        this.markAllDirty(ctrl.controls[inner] as AbstractControl);
+      }
+    }
+    else {
+      (<FormControl>(control)).markAsDirty();
+    }
+  }
+
+  public onSubmit() {
+    this.markAllDirty(this.form);
     if (this.form.valid) {
       console.log('form submitted...');
       this.submitted.emit(this.form.value);

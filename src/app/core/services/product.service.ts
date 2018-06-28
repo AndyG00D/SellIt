@@ -57,8 +57,9 @@ export class ProductService implements OnInit {
     this._isAlive = false;
   }
 
-  public getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(apiUrls.products + id.toString() + '/')
+  public getProduct(id: number | string): Observable<Product> {
+    console.log(id);
+    return this.http.get<Product>(apiUrls.products + id + '/')
       .pipe(
         map((product) => {
             this._setNoImage(product);

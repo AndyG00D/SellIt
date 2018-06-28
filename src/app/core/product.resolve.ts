@@ -13,7 +13,7 @@ export class DataProductResolver implements Resolve<Product> {
 
   public resolve( route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
     :Observable<Product> | Promise <Product> | Product {
-    console.log('params: ' + JSON.stringify(route.url));
+    // console.log('params: ' + JSON.stringify(route.url));
     return this.service.getProduct(route.params.id);
   }
 }

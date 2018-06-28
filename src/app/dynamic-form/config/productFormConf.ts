@@ -18,6 +18,7 @@ export let productFormConf: Array<FormControlConf> = [{
     key: 'price',
     type: 'number',
     label: 'Price',
+    validators: [Validators.required]
   },
   {
     key: 'currency',
