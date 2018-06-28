@@ -1,6 +1,5 @@
 import {FormControlConf} from '../dynamic-form.model'
 import {Validators} from "@angular/forms";
-import {ProductService} from "../../core/services/product.service";
 
 
 export let productFormConf: Array<FormControlConf> = [{
@@ -49,14 +48,9 @@ export let productFormConf: Array<FormControlConf> = [{
     label: 'Active',
     value: true
   },
-  // {
-  //   key: 'images',
-  //   type: 'files',
-  //   label: 'Images'
-  // },
   {
     key: 'submit',
     type: 'submit',
-    label: 'Update User'
+    label: 'Save Product'
   }
 ];

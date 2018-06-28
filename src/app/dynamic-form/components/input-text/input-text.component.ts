@@ -1,19 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-input-text',
-  templateUrl: './input-text.component.html',
-  styleUrls: ['./input-text.component.scss']
+  templateUrl: './input-text.component.html'
 })
-export class InputTextComponent implements OnInit {
+export class InputTextComponent {
   @Input() prop: any;
   @Input() form: FormGroup;
-  // @Input() parentsFormGroup: string = '';
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
 
 }

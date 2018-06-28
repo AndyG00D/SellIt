@@ -1,17 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-label',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css']
+  templateUrl: './button.component.html'
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent{
   @Input() prop: any;
 
   constructor() { }
-
-  ngOnInit() {
-    console.log(this.prop);
-  }
 
 }

@@ -10,11 +10,14 @@
   height: 30px;
   //max-width: 600px;
   color: var(--content-color);
-
-  border-bottom: 1px solid var(--theme-color);
+  border-bottom: 1px solid var(--content-color);
 
   &_color-invert {
     border-bottom: 1px solid var(--sub-theme-color);
+  }
+
+  &__form-group{
+    border: 1px dotted var(--content-color);
   }
 
   &__button {
@@ -82,9 +85,9 @@
     height: 2px;
     width: 0;
     background: var(--theme-color);
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
+    transition: 0.5s ease all;
+    -moz-transition: 0.5s ease all;
+    -webkit-transition: 0.5s ease all;
   }
 
   &__focus-line_color-invert:before, &__focus-line_color-invert:after {
@@ -109,11 +112,18 @@
     //height: 100%;
     width: auto;
     padding: 0.5rem;
-    border: 1px solid var(--theme-color);
+    border: 1px solid var(--content-color);
     font-family: var(--font-family);
     font-size: 0.85rem;
     background: none;
   }
+
+  &__textarea:focus {
+    outline: none;
+    border: 2px solid var(--theme-color);
+  }
+
+
 }
 
 /* btn ================================= */

@@ -1,6 +1,6 @@
 import {ComponentFactoryResolver, Directive, Input, OnChanges, OnInit, Type, ViewContainerRef} from '@angular/core';
 import {LabelComponent} from "./components/label/label.component";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {FormGroup} from "@angular/forms";
 import {InputTextComponent} from "./components/input-text/input-text.component";
 import {InputNumberComponent} from "./components/input-number/input-number.component";
 import {TextareaComponent} from "./components/textarea/textarea.component";
@@ -10,7 +10,6 @@ import {FormGroupComponent} from "./components/form-group/form-group.component";
 import {InputBooleanComponent} from "./components/input-boolean/input-boolean.component";
 import {ButtonComponent} from "./components/button/button.component";
 import {FormArrayComponent} from "./components/form-array/form-array.component";
-import {InputFileComponent} from "./components/input-file/input-file.component";
 import {SelectColorComponent} from "./components/select-color/select-color.component";
 import {InputFileBase64Component} from "./components/input-file-base64/input-file-base64.component";
 import {InputFileBase64MultiComponent} from "./components/input-file-multi-base64/input-file-multi-base64.component";
@@ -52,7 +51,6 @@ export class DynamicFormDirective implements OnInit, OnChanges {
   }
 
   createFormView(props: FormControlConf[]): void {
-
     for (let prop of props) {
       if (!prop.hideLabel && prop.type != 'submit' && prop.type != 'reset') {
         this.addComponent(LabelComponent, prop);
@@ -78,7 +76,6 @@ export class DynamicFormDirective implements OnInit, OnChanges {
           break;
         case 'checkbox':
         case 'radio':
-          // this.addComponent(InputNumberComponent, prop);
           this.addComponent(InputBooleanComponent, prop);
           break;
         case 'textarea':

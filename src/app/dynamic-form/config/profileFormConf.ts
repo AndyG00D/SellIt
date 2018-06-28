@@ -1,7 +1,4 @@
 import {FormControlConf} from '../dynamic-form.model'
-import {Validators} from "@angular/forms";
-
-
 
 export let avatarFormConf: Array<FormControlConf> = [
   {
@@ -42,14 +39,7 @@ export let profileFormConf: Array<FormControlConf> = [
       type: 'text',
       label: 'Address',
       hideLabel: true
-    },
-      // {
-      //   key: 'name',
-      //   type: 'text',
-      //   label: 'City',
-      //   // hideLabel: true
-      // },
-    ]
+    }]
   },
   {
     key: 'color_scheme',

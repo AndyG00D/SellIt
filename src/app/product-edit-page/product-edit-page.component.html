@@ -9,7 +9,8 @@
   <!--<app-product-form></app-product-form>-->
   <app-dynamic-form [props]="props"
                     [data]="product"
-                    (submitted)="onAddProduct($event)">
+                    (submitted)="onUpdateProduct($event)">
   </app-dynamic-form>
+  <button class="btn _full-width" (click)="onDeleteProduct()" >Delete Product</button>
 </section>
 <app-footer></app-footer>

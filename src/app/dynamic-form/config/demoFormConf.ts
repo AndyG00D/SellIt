@@ -12,15 +12,8 @@ export let testNestedFormConf: Array<FormControlConf> = [
     key: 'field2',
     type: 'text',
     label: 'Field 2',
-  },
-  // {
-  //   key: 'field3',
-  //   type: 'nested',
-  //   label: 'Field 3',
-  //   conf: tesFormArrayConf
-  // }
+  }
 ];
-
 
 export let tesFormArrayConf: Array<FormControlConf> = [
   {

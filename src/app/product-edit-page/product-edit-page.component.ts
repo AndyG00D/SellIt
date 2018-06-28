@@ -21,7 +21,7 @@ import {MessageService} from "../core/services/message.service";
   templateUrl: './product-edit-page.component.html',
   styleUrls: ['./product-edit-page.component.scss']
 })
-export class ProductEditPageComponent implements OnInit, OnDestroy{
+export class ProductEditPageComponent implements OnInit, OnDestroy {
   public loading$ = new BehaviorSubject(true);
   private destroy = new Subject();
   public product: Product;
@@ -35,11 +35,12 @@ export class ProductEditPageComponent implements OnInit, OnDestroy{
               private router: Router,
               private messageService: MessageService,
               private profileService: ProfileService) {
-    this.profileService.getUser().subscribe((user) => {this.user = user});
+    this.profileService.getUser().subscribe((user) => {
+      this.user = user
+    });
   }
 
-  ngOnInit(){
-
+  ngOnInit() {
 
 
     this.route.data.subscribe(
@@ -53,18 +54,16 @@ export class ProductEditPageComponent implements OnInit, OnDestroy{
     );
 
 
-
-    if (this.user.id !== this.product.owner.id){
+    if (this.user.id !== this.product.owner.id) {
       this.messageService.addWarning('You are not owner of this product! You can not edit it.');
-     this.router.navigate(['/products/' + this.product.pk])
+      this.router.navigate(['/products/' + this.product.pk])
 
     }
 
-    console.log("it works");
     this.props = this.dynamicFormService.getFormConfig('product');
-    this.dataProductsService.getLocations().subscribe(data =>{
-      for(let prop of this.props){
-        if(prop.key === 'location'){
+    this.dataProductsService.getLocations().subscribe(data => {
+      for (let prop of this.props) {
+        if (prop.key === 'location') {
           prop.options.push(...data);
         }
       }
@@ -72,35 +71,16 @@ export class ProductEditPageComponent implements OnInit, OnDestroy{
 
   }
 
-  onAddProduct(event) {
-    // let newProduct: Product;
-    // let newImages: String[] = ;
-    // for(let prop in event){
-    //   if(prop === 'images'){
-    //
-    //   }
-    // }
+  onUpdateProduct(event) {
+    this.dataProductsService.updateProduct(this.product.pk, event).subscribe(
+      data => console.log("dataProductsService done! " + data)
+    );
+  }
 
-    // let images = new Array<string>(...event.images);
-    // console.log(images);
-    // delete event['images'];
-    //
-    // this.dataProductsService.addProduct(event).subscribe(
-    //   (data: Product) =>  {
-    //     this.dataProductsService.uploadNewImage(data.pk, images[0]).subscribe(
-    //       img => console.log(img)
-    //     );
-
-    // http create -> swithMap ->  Observable From([img1, img2]) -- ignore img-> concatMap( 2nd send for img)-> resultSelector ->
-
-    const images = event.images;
-    delete event['images'];
-
-    this.dataProductsService.updateProduct(this.product.pk, event).pipe(
-      // takeWhile(() => !!images),
-      // switchMap((val) => this.dataProductsService.uploadNewImages(val.pk, images))
-    )
-      .subscribe(data => console.log("dataProductsService done! " + data));
+  onDeleteProduct(){
+    this.dataProductsService.deleteProduct(this.product.pk).subscribe(
+      () => this.router.navigate(['/products'])
+    );
   }
 
 

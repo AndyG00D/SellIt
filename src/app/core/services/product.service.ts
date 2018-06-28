@@ -84,18 +84,20 @@ export class ProductService implements OnInit {
   public updateProduct(pk: number, newProduct: Product) {
     return this.http.patch(apiUrls.products + pk + '/', newProduct)
       .pipe(
-        map((response: Response) => {
-          console.log('updateProduct: ' + response);
+        tap((response: any) => {
+          this.messageService.addSuccess('Update product id:' + response.pk);
+          console.log('addProduct: ' + response);
         }),
         catchError(this.handleError('updateProduct:', []))
       );
   }
 
-  public deleteProduct(newProduct: Product) {
-    return this.http.delete(apiUrls.products + newProduct.pk + '/')
+  public deleteProduct(pk: number) {
+    return this.http.delete(apiUrls.products + pk + '/')
       .pipe(
-        map((response: Response) => {
-          console.log('deleteProduct: ' + response);
+        tap(() => {
+          this.messageService.addSuccess('Delete product id:' + pk);
+          console.log('addProduct: ' + pk);
         }),
         catchError(this.handleError('deleteProduct:', []))
       );

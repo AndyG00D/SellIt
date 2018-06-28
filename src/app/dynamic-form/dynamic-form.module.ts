@@ -14,7 +14,6 @@ import {FormGroupComponent} from "./components/form-group/form-group.component";
 import {ButtonComponent} from "./components/button/button.component";
 import {DynamicFormService} from "./dynamic-form.service";
 import {FormArrayComponent} from "./components/form-array/form-array.component";
-import {InputFileComponent} from "./components/input-file/input-file.component";
 import {SelectColorComponent} from "./components/select-color/select-color.component";
 import {InputFileBase64Component} from "./components/input-file-base64/input-file-base64.component";
 import {CustomValidatorsService} from "./custom-validators.service";
@@ -38,7 +37,6 @@ import {InputFileBase64MultiComponent} from "./components/input-file-multi-base6
     FormGroupComponent,
     ButtonComponent,
     FormArrayComponent,
-    InputFileComponent,
     SelectColorComponent,
     InputFileBase64Component,
     InputFileBase64MultiComponent
@@ -54,7 +52,6 @@ import {InputFileBase64MultiComponent} from "./components/input-file-multi-base6
     FormGroupComponent,
     ButtonComponent,
     FormArrayComponent,
-    InputFileComponent,
     SelectColorComponent,
     InputFileBase64Component,
     InputFileBase64MultiComponent
@@ -68,5 +65,6 @@ import {InputFileBase64MultiComponent} from "./components/input-file-multi-base6
     FormControlErrorsComponent
   ]
 })
+
 export class DynamicFormModule {
 }

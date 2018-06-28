@@ -1,8 +1,8 @@
 <ng-container [formGroup]="form">
-  <fieldset [formArrayName]="prop.key">
+  <fieldset class="input-text__form-group" [formArrayName]="prop.key">
     <div class="form-group">
-      <fieldset  *ngFor="let control of formArray.controls; let i = index" [formGroupName]="i">
-        {{i}}
+      <fieldset class="input-text__form-group" *ngFor="let control of formArray.controls; let i = index"
+                [formGroupName]="i">
         <ng-container [formGroup]="control">
           <ng-container dynamic-form
                         [props]="prop.conf"
@@ -11,11 +11,6 @@
         </ng-container>
         <button (click)="removeItem(i)">remove {{i}}</button>
       </fieldset>
-      <!--<app-form-group-->
-        <!--[prop]="prop.conf"-->
-        <!--[form]="control"-->
-        <!--[formGroupKey]="i">-->
-      <!--</app-form-group>-->
     </div>
   </fieldset>
 </ng-container>

@@ -1,22 +1,12 @@
-import {Component, OnDestroy, OnInit, Input} from '@angular/core';
-// import {FormControl, FormGroup, Validators} from '@angular/forms';
-
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-form-control-errors',
-  templateUrl: './form-control-errors.component.html',
-  styleUrls: ['./form-control-errors.component.scss'],
+  templateUrl: './form-control-errors.component.html'
 })
-export class FormControlErrorsComponent implements OnInit, OnDestroy {
+export class FormControlErrorsComponent {
   @Input() errors: any;
   @Input() title: string = 'Field';
 
-
   constructor() {}
-
-  public ngOnInit() {}
-
-
-  public ngOnDestroy(): void {}
-
 }
