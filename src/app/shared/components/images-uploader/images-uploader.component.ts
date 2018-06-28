@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {Image} from "../../../core/models/product";
 import {ProductService} from "../../../core/services/product.service";
 import {ProductImagesService} from "../../../core/services/product-images.service";
@@ -10,11 +10,13 @@ import {Base64ValidatorsService} from "../../../core/services/base64-validators.
   styleUrls: ['./images-uploader.component.scss']
 
 })
-export class ImagesUploaderComponent implements OnInit{
+export class ImagesUploaderComponent implements OnInit {
   @Input() id: number = null;
+  @Output() newImages: string[] = [];
   // @Input() uploadedImages = [];
   public uploadedImages = [];
-  public newImages: string[] = [];
+
+  // public newImages: string[] = [];
 
 
   constructor(private productService: ProductService,
@@ -22,8 +24,8 @@ export class ImagesUploaderComponent implements OnInit{
               private base64ValidatorsService: Base64ValidatorsService) {
   }
 
-  ngOnInit(){
-    if(this.id){
+  ngOnInit() {
+    if (this.id) {
       this.productImagesService.getImages(this.id).subscribe(
         (images: Image[]) => this.uploadedImages.push(...images)
         // images => console.log(images)
@@ -61,12 +63,7 @@ export class ImagesUploaderComponent implements OnInit{
     this.uploadedImages.splice(i, 1);
   }
 
-  deleteRestImg(i
-                  :
-                  number, image
-                  :
-                  Image
-  ) {
+  deleteRestImg(i: number, image: Image) {
     this.productImagesService.deleteImage(image.pk, image.advert).subscribe(
     );
     this.deleteUploadImage(i);
@@ -79,10 +76,12 @@ export class ImagesUploaderComponent implements OnInit{
     this.deleteNewImage(i);
   }
 
-// public uploadImages(advert_pk: number, images: string[]) {
-//   return from(images).pipe(
-//     concatMap((image: string) => this.uploadImage(advert_pk, image)),
-//   )
-// }
+public uploadImages() {
+  this.productImagesService.uploadImages(this.id, this.newImages).subscribe(
+    // image => this.uploadedImages.push(image)
+    image => this.uploadedImages.push(image)
+  );
+  this.newImages = [];
+}
 
 }

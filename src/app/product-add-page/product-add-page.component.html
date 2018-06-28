@@ -1,8 +1,10 @@
 <app-header></app-header>
 <section class="content">
-  <p><a href="" routerLink="..">&lt; Back to product list</a></p>
+  <p><a routerLink="..">&lt; Back to product list</a></p>
   <h1>Add products</h1>
   <app-messages></app-messages>
+  <label class="input-text__label">Images</label>
+  <app-images-uploader></app-images-uploader>
   <!--<app-product-form></app-product-form>-->
   <app-dynamic-form [props]="props"
                     (submitted)="onAddProduct($event)">
