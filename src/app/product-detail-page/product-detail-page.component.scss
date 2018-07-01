@@ -9,7 +9,7 @@
   @media (min-width: 600px) {
 
     display: grid;
-    grid-template-columns: 55% auto;
+    grid-template-columns: 55% 43%;
     grid-template-rows: max-content;
     grid-template-areas: "slideshow title" "slideshow description";
     grid-gap: 1rem;
@@ -25,7 +25,7 @@
     margin: 0;
     font-family: var(--title-font-family);
     font-size: 2.28rem;
-    width: 70%;
+    //width: 70%;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
     white-space: -o-pre-wrap;
@@ -45,6 +45,11 @@
   &__description {
     grid-area: description;
     padding-top: 1rem;
+    //width: 80%;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
   }
 
   &__list {
@@ -62,7 +67,7 @@
 .no-login{
   font-family: var(--font-family);
   color: var(--content-color);
-  font-size: 2.28rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 

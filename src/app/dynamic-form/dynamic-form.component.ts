@@ -9,6 +9,13 @@ import {CustomValidatorsService} from "./custom-validators.service";
   styleUrls: ['./dynamic-form.component.scss']
 })
 
+/**
+ * In component generating model part of dynamic Form by config.
+ * Add Form controls, groups, validators by type in config.
+ * @Input() props - configuration of Form
+ * @Input() data: any - default data of form
+ * @Output() submitted: EventEmitter - emmit on Submit
+ */
 export class DynamicFormComponent implements OnInit {
   @Input() props;
   @Input() data: any;
@@ -27,7 +34,14 @@ export class DynamicFormComponent implements OnInit {
     }
   }
 
-  // setup the form
+
+  /**
+   * Function generate model part of dynamic Form by config.
+   * Add  Form controls/groups by type in config.
+   * Can callback recursive for implementation of nesting form groups
+   * @param props - config for current component
+   * @returns {FormGroup} - model part of Form
+   */
   private createForm(props): FormGroup {
     const formGroup = {};
     for (let prop of props) {
@@ -48,7 +62,12 @@ export class DynamicFormComponent implements OnInit {
     return new FormGroup(formGroup);
   }
 
-
+  /**
+   * Function generate array of Validators by type in config.
+   * Implement standard validation for other type inputs.
+   * @param {FormControlConf} prop - config of form control
+   * @returns {ValidatorFn[]}
+   */
   private getValidators(prop: FormControlConf): ValidatorFn[] {
     let res: ValidatorFn[];
     switch (prop.type) {
@@ -101,6 +120,9 @@ export class DynamicFormComponent implements OnInit {
     return res;
   }
 
+  /**
+   * Set data in exist controls of form
+   */
   private setFormData(): void {
     for (let item in this.data)
       if (this.data[item] && this.form.get(item)) {
@@ -108,7 +130,9 @@ export class DynamicFormComponent implements OnInit {
       }
   }
 
-
+  /**
+   * Recursive function for mark all controls in form as dirty
+   */
   private markAllDirty(control: AbstractControl): void {
     if (control.hasOwnProperty('controls')) {
       control.markAsDirty(); // mark group
@@ -122,6 +146,12 @@ export class DynamicFormComponent implements OnInit {
     }
   }
 
+  /**
+   * If form submitted
+   * mark all controls in form as dirty
+   * if form valid
+   * generate emmit with object of form value
+   */
   public onSubmit(): void {
     this.markAllDirty(this.form);
     if (this.form.valid) {

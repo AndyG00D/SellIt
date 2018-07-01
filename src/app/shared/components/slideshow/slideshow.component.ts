@@ -7,6 +7,10 @@ import {Image} from "../../../core/models/product";
   styleUrls: ['./slideshow.component.scss']
 })
 
+/**
+ * View slide show of array images
+ * @Input() images: Image[]; array of product images
+ */
 export class SlideshowComponent implements OnInit {
 
   @Input() images: Image[];
@@ -22,6 +26,11 @@ export class SlideshowComponent implements OnInit {
     this.showSlides(this.slideIndex);
   }
 
+  /**
+   * create new array slides based on images array
+   * file - url of image
+   * isActive - marker for shoving current image
+   */
   private createSlides(): void {
     this.slides = [];
     this['images'].forEach((image) => {
@@ -37,6 +46,11 @@ export class SlideshowComponent implements OnInit {
     this.showSlides(this.slideIndex += 1);
   }
 
+  /**
+   * Function control view slides by changing
+   * marker isActive
+   * @param {number} n - index of nex showing slide
+   */
   private showSlides(n: number): void {
     if (n > this.slides.length) {
       this.slideIndex = 1

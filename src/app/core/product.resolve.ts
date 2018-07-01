@@ -4,6 +4,10 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import {ProductService} from "./services/product.service";
 import {Product} from "./models/product";
 
+/**
+ * Resolver get product data by id on RestApi.
+ * Working on product detail and edit pages
+ */
 @Injectable()
 export class DataProductResolver implements Resolve<Product> {
 
@@ -13,7 +17,6 @@ export class DataProductResolver implements Resolve<Product> {
 
   public resolve( route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
     :Observable<Product> | Promise <Product> | Product {
-    // console.log('params: ' + JSON.stringify(route.url));
     return this.service.getProduct(route.params.id);
   }
 }

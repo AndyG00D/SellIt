@@ -6,8 +6,13 @@ import {User} from "../../../core/models/user";
   templateUrl: './user-name.component.html',
   styleUrls: ['./user-name.component.scss']
 })
+
+/**
+ * Block viewed for auth user on header
+ * @Input() user: any; -  auth user data
+ */
 export class UserNameComponent {
-  @Input() user: any;
+  @Input() user: User;
   name: string = 'User';
 
   constructor() {

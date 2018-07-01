@@ -4,6 +4,9 @@ import {Observable} from 'rxjs';
 import {SessionService} from "../services/session.service";
 import {MessageService} from "../services/message.service";
 
+/**
+ * protect pages for guests
+ */
 @Injectable()
 export class GuestGuard implements CanActivate {
 

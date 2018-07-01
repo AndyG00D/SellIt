@@ -8,6 +8,11 @@ import {Directive, ElementRef, Renderer2, OnInit} from '@angular/core';
   }
 })
 
+/**
+ * directive observe scrolling on page
+ * for view button on top
+ * and scroll page on top if button clicked
+ */
 export class ScrollTopDirective implements OnInit {
 
   constructor(private element: ElementRef, private renderer: Renderer2) {

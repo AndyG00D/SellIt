@@ -5,6 +5,11 @@ import { MessageService} from "../../../core/services/message.service";
   selector: 'app-messages',
   templateUrl: './messages.component.html'
 })
+
+/**
+ * Service for view Error, Warning, Success massages
+ * working with message service
+ */
 export class MessagesComponent {
   constructor(public messageService: MessageService) {}
 }

@@ -1,3 +1,6 @@
+/**
+* model of User/Owner data
+*/
 export interface User {
   id: number;
   username: string;

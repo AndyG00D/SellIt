@@ -1,3 +1,6 @@
+/**
+ * validate pattern
+ */
 export class patterns {
   static number: RegExp =  /[0-9]/;
   static char: RegExp =  /[A-z]/;

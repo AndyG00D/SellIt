@@ -8,6 +8,9 @@ import {avatarFormConf, changePasswordFormConf, profileFormConf} from "./config/
 import {resetPasswordFormConf} from "./config/resetPasswordFormConf";
 import {resetConfirmFormConf} from "./config/resetConfirmFormConf";
 
+/**
+ * service for get config for dynamic forms
+ */
 @Injectable({
   providedIn: 'root'
 })

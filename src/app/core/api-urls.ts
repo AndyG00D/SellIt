@@ -1,6 +1,9 @@
 import {environment} from "../../environments/environment";
 
 export class apiUrls {
+  /**
+   * URLs for HTTP request
+   */
   static products: string = `${environment.apiBase}/adverts/`;
   static reg: string = `${environment.apiBase}/registration/`;
   static login: string = `${environment.apiBase}/login/`;
@@ -14,7 +17,9 @@ export class apiUrls {
   static locations = `${environment.apiBase}/locations/`;
   static profileProducts = `${environment.apiBase}/profile/adverts/`;
 
-
+  /**
+   * Path to no Image and Avatar
+   */
   static noImage: string = `/assets/img/No_image.png`;
   static noAvatar: string = `/assets/img/noavatar.png`;
 }

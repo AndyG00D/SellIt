@@ -2,6 +2,9 @@ import {Component} from '@angular/core';
 import {DynamicFormService} from "../dynamic-form/dynamic-form.service";
 import {FormControlConf} from "../dynamic-form/dynamic-form.model";
 
+/**
+ * Page for demonstrating opportunities of dynamic form module
+ */
 @Component({
   selector: 'app-dynamic-form-demo-page',
   templateUrl: './dynamic-form-demo-page.component.html',

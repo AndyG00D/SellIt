@@ -10,6 +10,22 @@ import {Base64ValidatorsService} from "../../../core/services/base64-validators.
   styleUrls: ['./images-uploader.component.scss']
 
 })
+
+/**
+ * Component for working with RestApi product images
+ * working in two modes
+ *
+ * 1. With set product Id:
+ * view, delete  images in RestApi,
+ * view, download, delete, upload each/all new images on browser ,
+ * (used in product edit page)
+ * @Input() productId
+ *
+ * 2. Without product Id:
+ *  view, delete new images on browser,
+ * calling uploading all images from parent component
+ * (used in product add page)
+ */
 export class ImagesUploaderComponent implements OnInit {
   @Input() productId: number = null;
 
@@ -30,6 +46,10 @@ export class ImagesUploaderComponent implements OnInit {
     }
   }
 
+  /**
+   * convert with validation input files to base64 format and pus in new images array
+   * @param event
+   */
   public onFileChange(event) {
     //files exist?
     if (!(event.target.files && event.target.files.length > 0)) return;

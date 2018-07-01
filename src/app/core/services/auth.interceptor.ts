@@ -10,8 +10,13 @@ import {
 } from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {SessionService} from "./session.service";
-import {catchError, tap} from "rxjs/operators";
+import {tap} from "rxjs/operators";
 
+
+/**
+ * Interceptor add token in requests to RestApi for register user
+ * and check auth ( if caching error 401 will cleaned auth data in browser
+ */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(public sessionService: SessionService,

@@ -9,13 +9,21 @@ import {User} from "../core/models/user";
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.css']
 })
+
+/**
+ * Profile page:
+ * Update avatar
+ * if change username reset auth data and navigate to login page
+ * Update info
+ * update password
+ */
 export class ProfilePageComponent {
   user: User;
   userProps: FormControlConf[];
   avatarProps: FormControlConf[];
   passProps: FormControlConf[];
 
-    constructor(private service: DynamicFormService,
+  constructor(private service: DynamicFormService,
               private profileService: ProfileService) {
     this.userProps = this.service.getFormConfig('profile');
     this.avatarProps = this.service.getFormConfig('avatar');
@@ -30,7 +38,7 @@ export class ProfilePageComponent {
   }
 
   public onChangePass(event) {
-    this.profileService.getChangePasswod(event).subscribe();
+    this.profileService.getChangePassword(event).subscribe();
   }
 
 }

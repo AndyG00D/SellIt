@@ -10,7 +10,10 @@ import {Observable} from "rxjs/Observable";
 import {MessageService} from "./message.service";
 import {Router} from "@angular/router";
 
-
+/**
+ * Service contains HTTP requests functions for working with profile user data on ResApi,
+ * contains subject of data auth user and functions for working with it
+ */
 @Injectable()
 export class ProfileService {
   public handleError: HandleError;
@@ -46,7 +49,6 @@ export class ProfileService {
     return this.http.get(apiUrls.profile)
       .pipe(
         tap((data: User) => {
-          // console.log('login: ' + JSON.stringify(data));
           this.sessionService.user = data;
           this._userSubject.next(data);
         }),
@@ -74,17 +76,15 @@ export class ProfileService {
       )
   }
 
-  public getChangePasswod(params: any): Observable<any> {
+  public getChangePassword(params: any): Observable<any> {
     return this.http.post(apiUrls.changePassword, params)
       .pipe(
         tap((response: any) => {
           this.messageService.addSuccess(response.detail);
         }),
-        catchError(this.handleError('getChangePasswod:'))
+        catchError(this.handleError('getChangePassword:'))
       )
   }
-
-
 
 
 }

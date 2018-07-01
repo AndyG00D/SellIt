@@ -14,6 +14,13 @@ import {SelectColorComponent} from "./components/select-color/select-color.compo
 import {InputFileBase64Component} from "./components/input-file-base64/input-file-base64.component";
 import {InputFileBase64MultiComponent} from "./components/input-file-multi-base64/input-file-multi-base64.component";
 
+/**
+ * Directive generate view part of dynamic Form by config.
+ * Can located on root Form or nested Form Group
+ * for implementation of nesting form groups
+ * @Input() props; configuration of Form
+ * @Input() form: FormGroup; context of Form
+ */
 @Directive({
   selector: '[dynamic-form]',
 })
@@ -34,22 +41,34 @@ export class DynamicFormDirective implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Dynamic adding component(control of Form). Use ViewContainerRef and ComponentFactoryResolver.
+   * Can callback with 1-3 params.
+   * @param {Type<any>} component - file of component
+   * @param {FormControlConf} prop - part of config for current component
+   * @param formGroupKey - context of parent FormGroup
+   */
   private addComponent(component: Type<any>, prop: FormControlConf = null, formGroupKey: any = null): void {
     let componentFactory = this.factoryResolver.resolveComponentFactory(component);
     let componentRef = this.container.createComponent(componentFactory);
     if (prop !== null) {
       componentRef.instance['prop'] = prop;
     }
-    //addError context of current form
+    //add context of current form
     if (this.form !== null) {
       componentRef.instance.form = this.form;
     }
-    //addError parents Form Group
+    //add parents Form Group
     if (formGroupKey) {
       componentRef.instance.formGroupKey = formGroupKey;
     }
   }
 
+  /**
+   * Function generate view part of dynamic Form by config.
+   * Dynamic add component of Form by type in config.
+   * @param {FormControlConf[]} props - config of form
+   */
   private createFormView(props: FormControlConf[]): void {
     for (let prop of props) {
       if (!prop.hideLabel && prop.type != 'submit' && prop.type != 'reset') {

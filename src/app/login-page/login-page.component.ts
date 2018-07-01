@@ -1,10 +1,14 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DynamicFormService} from "../dynamic-form/dynamic-form.service";
 import {FormControlConf} from "../dynamic-form/dynamic-form.model";
 import {AuthService} from "../core/services/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService as SocialAuthService} from "angular5-social-login";
 
+/**
+ * On login page can: login, register, auth with google,
+ * confirm email, reset password, confirm reset password
+ */
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -23,6 +27,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    // load form by queryParams
     for (let param in this.router.snapshot.queryParams) {
       //verify email
       switch (param) {
@@ -40,6 +45,7 @@ export class LoginPageComponent implements OnInit {
       }
     }
   }
+
 
   changeForm(currentForm: string) {
     this.currentForm = currentForm;
@@ -62,6 +68,12 @@ export class LoginPageComponent implements OnInit {
     );
   }
 
+  /**
+   * Function for  Confirm Reset Password get request to Rest Api
+   * with params password1, password1 from form and
+   * uid and token from queryParams
+   * @param event - object from form with types password1, password1
+   */
   public onResetConfirm(event) {
     let params = {...event};
     params.uid = this.router.snapshot.queryParams['uid'];

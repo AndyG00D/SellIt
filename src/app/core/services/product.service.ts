@@ -1,16 +1,17 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Image, Product} from "../models/product";
-import {map, catchError, concatMap, tap} from "rxjs/operators";
+import {Product} from "../models/product";
+import {map, catchError, tap} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 import {takeWhile} from "rxjs/operators";
 import {apiUrls} from "../api-urls";
 import {HandleError, HttpErrorHandler} from "./http-error-handler.service";
-import {from} from "rxjs/internal/observable/from";
 import {MessageService} from "./message.service";
 import {optionsConf} from "../../dynamic-form/dynamic-form.model";
 
-
+/**
+ * service contains HTTP requests functions for working with products (Adverts) on ResApi
+ */
 @Injectable()
 export class ProductService implements OnInit {
 
@@ -53,7 +54,7 @@ export class ProductService implements OnInit {
       );
   }
 
-  public stop():void {
+  public stop(): void {
     this._isAlive = false;
   }
 
@@ -92,7 +93,7 @@ export class ProductService implements OnInit {
       );
   }
 
-  public deleteProduct(pk: number): Observable<any>  {
+  public deleteProduct(pk: number): Observable<any> {
     return this.http.delete(apiUrls.products + pk + '/')
       .pipe(
         tap(() => {
@@ -108,12 +109,10 @@ export class ProductService implements OnInit {
     return this.http.get(apiUrls.locations)
       .pipe(
         map((response: any) => {
-          // console.log(JSON.stringify(response));
           let res: optionsConf[] = [];
           for (let item of response) {
             res.push({label: item.name, value: item.id})
           }
-          // console.log(JSON.stringify(res));
           return res;
         }),
         catchError(this.handleError('getLocations:', []))

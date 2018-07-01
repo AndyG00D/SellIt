@@ -1,11 +1,16 @@
 import {ValidatorFn} from "@angular/forms";
 
-
+/**
+ * model of options (input select) for dynamic forms
+ */
 export interface optionsConf {
   label: string;
   value: any;
 }
 
+/**
+ * model of configuration for dynamic forms
+ */
 export class FormControlConf {
   //main userProps
   key: string;

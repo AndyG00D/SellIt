@@ -1,12 +1,18 @@
 import {Injectable} from '@angular/core';
 
+/**
+ * Service gather Error, Warning, Success massages from other parts
+ * of project and view them in messages.component and console
+ */
 @Injectable()
 export class MessageService {
-  private messagesError: string[] = [];
-  private messagesWarning: string[] = [];
-  private messagesSuccess: string[] = [];
+  public messagesError: string[] = [];
+  public messagesWarning: string[] = [];
+  public messagesSuccess: string[] = [];
 
-  // add messages
+  /**
+   * add messages
+   */
   public addError(message: string) {
     this.messagesError.push(message);
     console.log(message);
@@ -22,7 +28,9 @@ export class MessageService {
     console.log(message);
   }
 
-  // clear messages
+  /**
+   *   clear messages
+    */
   public clearError() {
     this.messagesError = [];
   }

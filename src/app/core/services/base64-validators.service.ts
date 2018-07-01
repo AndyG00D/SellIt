@@ -2,7 +2,10 @@ import {Injectable, OnInit} from '@angular/core';
 import {MessageService} from "./message.service";
 import {environment} from "../../../environments/environment";
 
-
+/**
+ * Service validate files on format base64, before
+ * uploading to RestApi
+ */
 @Injectable()
 export class Base64ValidatorsService implements OnInit {
 
@@ -12,7 +15,11 @@ export class Base64ValidatorsService implements OnInit {
   public ngOnInit() {
   }
 
-  // Validations
+  /**
+   * Validate Type of file
+   * @param {File} file choose in local storage
+   * @returns {boolean} true if right
+   */
   public isValidType(file: File): boolean {
     if (!environment.imgFileType.includes(file.type)) {
       this.messageService.addError('Wrong type of file!');
@@ -21,7 +28,11 @@ export class Base64ValidatorsService implements OnInit {
     return true;
   }
 
-
+  /**
+   * Validate Size of file
+   * @param {File} file choose in local storage
+   * @returns {boolean} true if right
+   */
   public isValidSize(file: File): boolean {
     if (file.size > environment.maxFileSize) {
       this.messageService.addError('File is too big!');
@@ -30,6 +41,11 @@ export class Base64ValidatorsService implements OnInit {
     return true;
   }
 
+  /**
+   * Control RestApi count limit of uploading files
+   * @param {File} file choose in local storage
+   * @returns {boolean} true if right
+   */
   public isValidCount( ExistFilesCount: number): boolean {
     if (environment.imgFileCount < ExistFilesCount) {
       this.messageService.addError(`Max count of files ${environment.imgFileCount}!`);

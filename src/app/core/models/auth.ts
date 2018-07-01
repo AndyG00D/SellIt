@@ -1,8 +1,14 @@
+/**
+ * model of HTTP requests params to login
+ */
 export interface SignInUser {
   email: string;
   password: string;
 }
 
+/**
+ * model of HTTP requests params to registration
+ */
 export interface SignUpUser {
   username: string;
   email: string;

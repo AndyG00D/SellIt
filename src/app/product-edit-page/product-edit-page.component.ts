@@ -10,7 +10,12 @@ import {ProfileService} from "../core/services/profile.service";
 import {User} from "../core/models/user";
 import {MessageService} from "../core/services/message.service";
 
-
+/**
+ * product edit page
+ * Can update product info, delete product
+ * Add, delete product images
+ * Available only for auth owner
+ */
 @Component({
   selector: 'app-product-edit-page',
   templateUrl: './product-edit-page.component.html',
@@ -63,6 +68,9 @@ export class ProductEditPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * get config for product with data of Location from RestApi
+   */
   private getFormConfig(): void {
     this.props = this.dynamicFormService.getFormConfig('product');
     this.dataProductsService.getLocations().subscribe(data => {

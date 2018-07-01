@@ -4,6 +4,10 @@ import {HttpClient} from "@angular/common/http";
 import {HttpErrorHandler, HandleError} from "./http-error-handler.service";
 import {CookieService} from 'ngx-cookie-service';
 
+/**
+ * Service for save/delete auth token on cookies and
+ * auth user data on LocalStorage
+ */
 @Injectable()
 export class SessionService {
 

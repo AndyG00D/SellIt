@@ -7,6 +7,11 @@ import {User} from "../core/models/user";
 import {ProductService} from "../core/services/product.service";
 import {ProfileService} from "../core/services/profile.service";
 
+/**
+ * detail page of product by id
+ * for auth user view chat
+ * for product owner view button to product edit page by same id
+ */
 @Component({
   selector: 'app-detail-page',
   templateUrl: './product-detail-page.component.html',

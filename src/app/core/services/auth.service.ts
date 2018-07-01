@@ -12,6 +12,9 @@ import {Observable} from "rxjs/Observable";
 import {MessageService} from "./message.service";
 
 
+/**
+ * service contains HTTP requests functions for working with registration on ResApi
+ */
 @Injectable()
 export class AuthService {
 
@@ -118,6 +121,7 @@ export class AuthService {
     this.sessionService.token = null;
     this.sessionService.user = null;
     this.profileService.setUser(null);
+    this.sessionService.token = null;
     this.router.navigate(['/products']);
   }
 

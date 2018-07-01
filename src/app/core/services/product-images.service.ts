@@ -8,7 +8,9 @@ import {HandleError, HttpErrorHandler} from "./http-error-handler.service";
 import {from} from "rxjs/internal/observable/from";
 import {MessageService} from "./message.service";
 
-
+/**
+ * service contains HTTP requests functions for working with product images on ResApi
+ */
 @Injectable()
 export class ProductImagesService implements OnInit {
 

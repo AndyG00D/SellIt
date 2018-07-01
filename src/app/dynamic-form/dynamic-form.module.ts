@@ -19,6 +19,9 @@ import {InputFileBase64Component} from "./components/input-file-base64/input-fil
 import {CustomValidatorsService} from "./custom-validators.service";
 import {InputFileBase64MultiComponent} from "./components/input-file-multi-base64/input-file-multi-base64.component";
 
+/**
+ * Module for generating dynamic forms by configuration
+ */
 @NgModule({
   imports: [
     CommonModule,

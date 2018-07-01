@@ -7,6 +7,13 @@ import {Directive, ElementRef, EventEmitter, Output} from '@angular/core';
   }
 })
 
+/**
+ * Directive control scrolling on page
+ * if scroll on bottop page generate
+ * emit getNextPage for get new data
+ * (uset on product list page)
+ * @Output() getNextPage = new EventEmitter<boolean>();
+ */
 export class InfiniteScrollDirective {
 
   constructor(private element: ElementRef) {

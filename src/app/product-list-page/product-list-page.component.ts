@@ -4,6 +4,12 @@ import {Product} from "../core/models/product";
 import {User} from "../core/models/user";
 import {ProfileService} from "../core/services/profile.service";
 
+/**
+ * List of product:
+ * loading more data when scroll down
+ * Scroll top button
+ * View special icon if auth user owner of product
+ */
 @Component({
   selector: 'app-product-list-page',
   templateUrl: './product-list-page.component.html',
