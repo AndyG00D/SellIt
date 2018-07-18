@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Image} from "../../../core/models/product";
+import {Image} from '../../../core/models/product';
 
 @Component({
   selector: 'app-slideshow',
@@ -53,10 +53,10 @@ export class SlideshowComponent implements OnInit {
    */
   private showSlides(n: number): void {
     if (n > this.slides.length) {
-      this.slideIndex = 1
+      this.slideIndex = 1;
     }
     if (n < 1) {
-      this.slideIndex = this.slides.length
+      this.slideIndex = this.slides.length;
     }
     for (let i = 0; i < this.slides.length; i++) {
       this.slides[i].isActive = false;

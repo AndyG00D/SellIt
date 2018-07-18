@@ -1,14 +1,14 @@
 import {Injectable, OnInit} from '@angular/core';
-import {User} from "../models/user";
-import {tap, catchError, share, distinctUntilChanged} from "rxjs/operators";
-import {HttpClient} from "@angular/common/http";
-import {apiUrls} from "../api-urls";
-import {HttpErrorHandler, HandleError} from "./http-error-handler.service";
-import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
-import {SessionService} from "./session.service";
-import {Observable} from "rxjs/Observable";
-import {MessageService} from "./message.service";
-import {Router} from "@angular/router";
+import {User} from '../models/user';
+import {tap, catchError, share, distinctUntilChanged} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {ApiUrls} from '../api-urls';
+import {HttpErrorHandler, HandleError} from './http-error-handler.service';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {SessionService} from './session.service';
+import {Observable} from 'rxjs/Observable';
+import {MessageService} from './message.service';
+import {Router} from '@angular/router';
 
 /**
  * Service contains HTTP requests functions for working with profile user data on ResApi,
@@ -35,8 +35,7 @@ export class ProfileService {
     if (this.sessionService.token) {
       if (!this._userSubject.value && this.sessionService.user) {
         this._userSubject.next(this.sessionService.user);
-      }
-      else {
+      } else {
         this.getProfile().subscribe();
       }
     } else {
@@ -46,18 +45,18 @@ export class ProfileService {
   }
 
   public getProfile(): Observable<any> {
-    return this.http.get(apiUrls.profile)
+    return this.http.get(ApiUrls.profile)
       .pipe(
         tap((data: User) => {
           this.sessionService.user = data;
           this._userSubject.next(data);
         }),
         catchError(this.handleError('getProfile:'))
-      )
+      );
   }
 
   public updateProfile(user: User): Observable<any> {
-    return this.http.patch(apiUrls.profile, user)
+    return this.http.patch(ApiUrls.profile, user)
       .pipe(
         tap((user: User) => {
           if (this._userSubject.value.username === user.username) {
@@ -73,17 +72,17 @@ export class ProfileService {
           }
         }),
         catchError(this.handleError('updateProfile:'))
-      )
+      );
   }
 
   public getChangePassword(params: any): Observable<any> {
-    return this.http.post(apiUrls.changePassword, params)
+    return this.http.post(ApiUrls.changePassword, params)
       .pipe(
         tap((response: any) => {
           this.messageService.addSuccess(response.detail);
         }),
         catchError(this.handleError('getChangePassword:'))
-      )
+      );
   }
 
 

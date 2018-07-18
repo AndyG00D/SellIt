@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {apiUrls} from "../../../core/api-urls";
-import {User} from "../../../core/models/user";
+import {ApiUrls} from '../../../core/api-urls';
+import {User} from '../../../core/models/user';
 
 @Component({
   selector: 'app-avatar',
@@ -15,7 +15,7 @@ import {User} from "../../../core/models/user";
  */
 export class AvatarComponent {
   @Input() user: User;
-  img: string = apiUrls.noAvatar;
+  img: string = ApiUrls.noAvatar;
 
   constructor() {
   }

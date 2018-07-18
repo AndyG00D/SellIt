@@ -1,9 +1,9 @@
-import {ValidatorFn} from "@angular/forms";
+import {ValidatorFn} from '@angular/forms';
 
 /**
  * model of options (input select) for dynamic forms
  */
-export interface optionsConf {
+export interface OptionsConf {
   label: string;
   value: any;
 }
@@ -12,19 +12,19 @@ export interface optionsConf {
  * model of configuration for dynamic forms
  */
 export class FormControlConf {
-  //main userProps
+  // main userProps
   key: string;
   type: string;
   label: string;
-  //additional userProps
+  // additional userProps
   value?: any;
   validators?: ValidatorFn[];
-  //userProps for select, checkbox
-  options?: optionsConf[];
-  //userProps for nested, arrays
+  // userProps for select, checkbox
+  options?: OptionsConf[];
+  // userProps for nested, arrays
   conf?: FormControlConf[];
   arrayLength?: number;
-  //customisation
+  // customisation
   hideLabel?: boolean;
   hideErrors?: boolean;
   invertTheme?: boolean;
@@ -36,7 +36,7 @@ export class FormControlConf {
     label?: string,
     value?: any,
     validators?: ValidatorFn[],
-    options?: optionsConf[],
+    options?: OptionsConf[],
     conf?: FormControlConf[],
     arrayLength?: number,
     hideLabel?: boolean,

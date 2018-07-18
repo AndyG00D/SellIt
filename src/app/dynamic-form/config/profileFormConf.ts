@@ -1,8 +1,8 @@
-import {FormControlConf} from '../dynamic-form.model'
-import {CustomValidatorsService} from "../custom-validators.service";
-import {Validators} from "@angular/forms";
+import {FormControlConf} from '../dynamic-form.model';
+import {CustomValidatorsService} from '../custom-validators.service';
+import {Validators} from '@angular/forms';
 
-export let avatarFormConf: Array<FormControlConf> = [
+export const avatarFormConf: Array<FormControlConf> = [
   {
     key: 'avatar',
     type: 'file',
@@ -16,7 +16,7 @@ export let avatarFormConf: Array<FormControlConf> = [
 ];
 
 
-export let profileFormConf: Array<FormControlConf> = [
+export const profileFormConf: Array<FormControlConf> = [
   {
     key: 'username',
     type: 'text',
@@ -49,10 +49,10 @@ export let profileFormConf: Array<FormControlConf> = [
     value: '',
     type: 'select-color',
     options: [
-      {label: "(choose one)", value: ''},
-      {label: "blue", value: '#00b3be'},
-      {label: "red", value: '#d21212'},
-      {label: "green", value: '#91d763'},
+      {label: '(choose one)', value: ''},
+      {label: 'blue', value: '#00b3be'},
+      {label: 'red', value: '#d21212'},
+      {label: 'green', value: '#91d763'},
     ]
   },
   {
@@ -61,10 +61,10 @@ export let profileFormConf: Array<FormControlConf> = [
     value: '',
     type: 'select',
     options: [
-      {label: "(choose one)", value: ''},
-      {label: "English", value: 'en'},
-      {label: "Japan", value: 'ja'},
-      {label: "France", value: 'fr'}
+      {label: '(choose one)', value: ''},
+      {label: 'English', value: 'en'},
+      {label: 'Japan', value: 'ja'},
+      {label: 'France', value: 'fr'}
     ]
   },
   {
@@ -72,14 +72,9 @@ export let profileFormConf: Array<FormControlConf> = [
     type: 'submit',
     label: 'Update User'
   },
-  // {
-  //   key: 'reset',
-  //   type: 'reset',
-  //   label: 'Reset',
-  // },
 ];
 
-export let changePasswordFormConf: Array<FormControlConf> = [
+export const changePasswordFormConf: Array<FormControlConf> = [
   {
     key: 'new_password1',
     type: 'password',

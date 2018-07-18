@@ -1,8 +1,7 @@
-import {FormControlConf} from '../dynamic-form.model'
-import {Validators} from "@angular/forms";
+import {FormControlConf} from '../dynamic-form.model';
+import {Validators} from '@angular/forms';
 
-
-export let testNestedFormConf: Array<FormControlConf> = [
+export const testNestedFormConf: Array<FormControlConf> = [
   {
     key: 'field1',
     type: 'text',
@@ -15,7 +14,7 @@ export let testNestedFormConf: Array<FormControlConf> = [
   }
 ];
 
-export let tesFormArrayConf: Array<FormControlConf> = [
+export const tesFormArrayConf: Array<FormControlConf> = [
   {
     key: 'item',
     type: 'text',
@@ -34,7 +33,7 @@ export let tesFormArrayConf: Array<FormControlConf> = [
   }
 ];
 
-export let demoFormConf: Array<FormControlConf> = [
+export const demoFormConf: Array<FormControlConf> = [
   {
     key: 'number',
     type: 'number',
@@ -76,10 +75,10 @@ export let demoFormConf: Array<FormControlConf> = [
     type: 'checkbox',
     label: 'Checkbox',
     options: [
-      {label: "(choose one)", value: ''},
-      {label: "Bolzano", value: '39100'},
-      {label: "Meltina", value: '39010'},
-      {label: "Appiano", value: '39057'}
+      {label: '(choose one)', value: ''},
+      {label: 'Bolzano', value: '39100'},
+      {label: 'Meltina', value: '39010'},
+      {label: 'Appiano', value: '39057'}
     ]
   },
   {
@@ -87,10 +86,10 @@ export let demoFormConf: Array<FormControlConf> = [
     type: 'radio',
     label: 'Radio',
     options: [
-      {label: "(choose one)", value: ''},
-      {label: "Bolzano", value: '39100'},
-      {label: "Meltina", value: '39010'},
-      {label: "Appiano", value: '39057'}
+      {label: '(choose one)', value: ''},
+      {label: 'Bolzano', value: '39100'},
+      {label: 'Meltina', value: '39010'},
+      {label: 'Appiano', value: '39057'}
     ]
   },
   {
@@ -104,10 +103,10 @@ export let demoFormConf: Array<FormControlConf> = [
     value: '39010',
     type: 'select',
     options: [
-      {label: "(choose one)", value: ''},
-      {label: "Bolzano", value: '39100'},
-      {label: "Meltina", value: '39010'},
-      {label: "Appiano", value: '39057'}
+      {label: '(choose one)', value: ''},
+      {label: 'Bolzano', value: '39100'},
+      {label: 'Meltina', value: '39010'},
+      {label: 'Appiano', value: '39057'}
     ]
   },
   {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {User} from "../models/user";
-import {HttpClient} from "@angular/common/http";
-import {HttpErrorHandler, HandleError} from "./http-error-handler.service";
+import {User} from '../models/user';
+import {HttpClient} from '@angular/common/http';
+import {HttpErrorHandler, HandleError} from './http-error-handler.service';
 import {CookieService} from 'ngx-cookie-service';
 
 /**
@@ -33,14 +33,14 @@ export class SessionService {
   }
 
   public get user(): User {
-    return JSON.parse(localStorage.getItem("user"));
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   public set user(value: User) {
     if (value === null) {
       localStorage.removeItem('user');
     } else {
-      localStorage.setItem("user", JSON.stringify(value));
+      localStorage.setItem('user', JSON.stringify(value));
     }
   }
 

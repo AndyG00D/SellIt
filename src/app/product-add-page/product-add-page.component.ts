@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DynamicFormService} from "../dynamic-form/dynamic-form.service";
-import {FormControlConf} from "../dynamic-form/dynamic-form.model";
-import {ProductService} from "../core/services/product.service";
+import {DynamicFormService} from '../dynamic-form/dynamic-form.service';
+import {FormControlConf} from '../dynamic-form/dynamic-form.model';
+import {ProductService} from '../core/services/product.service';
 
 /**
  * page for adding new product with images and selecting location
@@ -31,7 +31,7 @@ export class ProductAddPageComponent implements OnInit {
   private getFormConfig(): void {
     this.props = this.dynamicFormService.getFormConfig('product');
     this.dataProductsService.getLocations().subscribe(data => {
-      for (let prop of this.props) {
+      for (const prop of this.props) {
         if (prop.key === 'location') {
           prop.options.push(...data);
         }

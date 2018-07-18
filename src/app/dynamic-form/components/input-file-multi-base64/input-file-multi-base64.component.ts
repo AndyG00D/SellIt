@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {Base64ValidatorsService} from "../../../core/services/base64-validators.service";
+import {FormGroup} from '@angular/forms';
+import {Base64ValidatorsService} from '../../../core/services/base64-validators.service';
 
 @Component({
   selector: 'app-input-file-base64',
@@ -14,20 +14,28 @@ export class InputFileBase64MultiComponent {
   }
 
   onFileChange(event) {
-    //files exist?
-    if (!(event.target.files && event.target.files.length > 0)) return;
-    //File count less max limit upload files RestApi
-    let ExistFilesCount = event.target.files.length;
-    if (!this.base64ValidatorsService.isValidCount(ExistFilesCount)) return;
+    // files exist?
+    if (!(event.target.files && event.target.files.length > 0)) {
+      return;
+    }
+    // File count less max limit upload files RestApi
+    const ExistFilesCount = event.target.files.length;
+    if (!this.base64ValidatorsService.isValidCount(ExistFilesCount)) {
+      return;
+    }
 
-    let res = [];
-    for (let file of event.target.files) {
+    const res = [];
+    for (const file of event.target.files) {
       // is valid type?
-      if (!this.base64ValidatorsService.isValidType(file)) continue;
+      if (!this.base64ValidatorsService.isValidType(file)) {
+        continue;
+      }
       // is valid size?
-      if (!this.base64ValidatorsService.isValidSize(file)) continue;
+      if (!this.base64ValidatorsService.isValidSize(file)) {
+        continue;
+      }
 
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
         res.push(reader.result);

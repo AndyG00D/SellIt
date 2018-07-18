@@ -1,5 +1,5 @@
 import {AuthService} from './auth.service';
-import {Observable} from "rxjs/index";
+import {Observable} from 'rxjs/index';
 import {
   HttpErrorResponse,
   HttpEvent,
@@ -7,10 +7,10 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpResponse
-} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {SessionService} from "./session.service";
-import {tap} from "rxjs/operators";
+} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {SessionService} from './session.service';
+import {tap} from 'rxjs/operators';
 
 
 /**

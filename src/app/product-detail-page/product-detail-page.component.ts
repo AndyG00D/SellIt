@@ -2,10 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {Subject} from 'rxjs/internal/Subject';
-import {Product} from "../core/models/product";
-import {User} from "../core/models/user";
-import {ProductService} from "../core/services/product.service";
-import {ProfileService} from "../core/services/profile.service";
+import {Product} from '../core/models/product';
+import {User} from '../core/models/user';
+import {ProductService} from '../core/services/product.service';
+import {ProfileService} from '../core/services/profile.service';
 
 /**
  * detail page of product by id
@@ -37,7 +37,7 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
       );
   }
 
-  public isOwner(){
+  public isOwner() {
     return (this.user && this.user.id) === this.product.owner.id;
   }
 

@@ -1,7 +1,7 @@
 import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {Injectable} from "@angular/core";
-import {patterns} from "./patterns";
-import {optionsConf} from "./dynamic-form.model";
+import {Patterns} from "./patterns";
+import {OptionsConf} from "./dynamic-form.model";
 
 /**
  * Service of custom Form validators
@@ -34,7 +34,7 @@ export class CustomValidatorsService {
    * @returns {ValidationErrors}
    */
   public number(control: FormControl): ValidationErrors {
-    if (!(patterns.number.test(control.value))) {
+    if (!(Patterns.number.test(control.value))) {
       return {number: true};
     }
     return null;
@@ -46,7 +46,7 @@ export class CustomValidatorsService {
    * @returns {ValidationErrors}
    */
   public password(control: FormControl): ValidationErrors {
-    if (!(patterns.number.test(control.value) && patterns.char.test(control.value))) {
+    if (!(Patterns.number.test(control.value) && Patterns.char.test(control.value))) {
       return {password: true};
     }
     return null;
@@ -61,7 +61,7 @@ export class CustomValidatorsService {
     if (control.value == null) {
       return null;
     }
-    if (!patterns.email.test(control.value)) {
+    if (!Patterns.email.test(control.value)) {
       return {email: true};
     }
     return null;
@@ -69,10 +69,10 @@ export class CustomValidatorsService {
 
   /**
    * Check value of form control equal on of options in conf
-   * @param {optionsConf[]} options - options in conf for select
+   * @param {OptionsConf[]} options - options in conf for select
    * @returns {ValidatorFn}
    */
-  public existValue(options: optionsConf[]): ValidatorFn {
+  public existValue(options: OptionsConf[]): ValidatorFn {
     return (c: AbstractControl): ValidationErrors => {
       if (options.length) return null;
       for (let option of options) {

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {DynamicFormService} from "../dynamic-form/dynamic-form.service";
-import {FormControlConf} from "../dynamic-form/dynamic-form.model";
-import {AuthService} from "../core/services/auth.service";
-import {ActivatedRoute} from "@angular/router";
-import {AuthService as SocialAuthService} from "angular5-social-login";
+import {DynamicFormService} from '../dynamic-form/dynamic-form.service';
+import {FormControlConf} from '../dynamic-form/dynamic-form.model';
+import {AuthService} from '../core/services/auth.service';
+import {ActivatedRoute} from '@angular/router';
+import {AuthService as SocialAuthService} from 'angular5-social-login';
 
 /**
  * On login page can: login, register, auth with google,
@@ -16,29 +16,30 @@ import {AuthService as SocialAuthService} from "angular5-social-login";
 })
 export class LoginPageComponent implements OnInit {
 
-  public currentForm: string = 'signIn';
+  public currentForm: string;
   public props: FormControlConf[];
 
   constructor(private dynamicFormService: DynamicFormService,
               private authService: AuthService,
               private socialAuthService: SocialAuthService,
               private router: ActivatedRoute) {
+    this.currentForm = 'signIn';
     this.props = this.dynamicFormService.getFormConfig(this.currentForm);
   }
 
   ngOnInit() {
     // load form by queryParams
-    for (let param in this.router.snapshot.queryParams) {
-      //verify email
+    for (const param in this.router.snapshot.queryParams) {
+      // verify email
       switch (param) {
         case 'key':
           this.authService.getVerifyEmail(this.router.snapshot.queryParams['key']).subscribe();
           break;
-        //verify Confirm reset password
+        // verify Confirm reset password
         case 'uid':
           this.changeForm('resetConfirm');
           break;
-        //load current form
+        // load current form
         case 'form':
           this.changeForm(this.router.snapshot.queryParams['form']);
           break;
@@ -75,7 +76,7 @@ export class LoginPageComponent implements OnInit {
    * @param event - object from form with types password1, password1
    */
   public onResetConfirm(event) {
-    let params = {...event};
+    const params = {...event};
     params.uid = this.router.snapshot.queryParams['uid'];
     params.token = this.router.snapshot.queryParams['token'];
     this.authService.getResetConfirm(params).subscribe(

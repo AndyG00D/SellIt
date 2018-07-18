@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {User} from "../../../core/models/user";
+import {User} from '../../../core/models/user';
 
 @Component({
   selector: 'app-user-name',
@@ -13,7 +13,7 @@ import {User} from "../../../core/models/user";
  */
 export class UserNameComponent {
   @Input() user: User;
-  name: string = 'User';
+  public name = 'User';
 
   constructor() {
   }

@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {Base64ValidatorsService} from "../../../core/services/base64-validators.service";
+import {FormGroup} from '@angular/forms';
+import {Base64ValidatorsService} from '../../../core/services/base64-validators.service';
 
 
 @Component({

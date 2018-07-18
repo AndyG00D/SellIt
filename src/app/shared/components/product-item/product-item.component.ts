@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product} from "../../../core/models/product";
+import { Product} from '../../../core/models/product';
 
 @Component({
   selector: 'app-product-item',
@@ -16,7 +16,7 @@ import { Product} from "../../../core/models/product";
 export class ProductItemComponent {
 
   @Input() product: Product;
-  @Input() isOwner: boolean = false;
+  @Input() isOwner = false;
 
     constructor() {
   }

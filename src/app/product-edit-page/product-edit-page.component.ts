@@ -1,14 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DynamicFormService} from "../dynamic-form/dynamic-form.service";
-import {FormControlConf} from "../dynamic-form/dynamic-form.model";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ProductService} from "../core/services/product.service";
-import {Product} from "../core/models/product";
-import {Subject} from "rxjs/internal/Subject";
-import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
-import {ProfileService} from "../core/services/profile.service";
-import {User} from "../core/models/user";
-import {MessageService} from "../core/services/message.service";
+import {DynamicFormService} from '../dynamic-form/dynamic-form.service';
+import {FormControlConf} from '../dynamic-form/dynamic-form.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProductService} from '../core/services/product.service';
+import {Product} from '../core/models/product';
+import {Subject} from 'rxjs/internal/Subject';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {ProfileService} from '../core/services/profile.service';
+import {User} from '../core/models/user';
+import {MessageService} from '../core/services/message.service';
 
 /**
  * product edit page
@@ -36,7 +36,7 @@ export class ProductEditPageComponent implements OnInit, OnDestroy {
               private messageService: MessageService,
               private profileService: ProfileService) {
     this.profileService.getUser().subscribe((user) => {
-      this.user = user
+      this.user = user;
     });
   }
 
@@ -63,8 +63,7 @@ export class ProductEditPageComponent implements OnInit, OnDestroy {
   private ownerProtect(): void {
     if (this.user.id !== this.product.owner.id) {
       this.messageService.addWarning('You are not owner of this product! You can not edit it.');
-      this.router.navigate(['/products/' + this.product.pk])
-
+      this.router.navigate(['/products/' + this.product.pk]).then();
     }
   }
 
@@ -74,7 +73,7 @@ export class ProductEditPageComponent implements OnInit, OnDestroy {
   private getFormConfig(): void {
     this.props = this.dynamicFormService.getFormConfig('product');
     this.dataProductsService.getLocations().subscribe(data => {
-      for (let prop of this.props) {
+      for (const prop of this.props) {
         if (prop.key === 'location') {
           prop.options.push(...data);
         }

@@ -1,13 +1,13 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Product} from "../models/product";
-import {map, catchError, tap} from "rxjs/operators";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {Product} from '../models/product';
+import {map, catchError, tap} from 'rxjs/operators';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {takeWhile} from "rxjs/operators";
-import {apiUrls} from "../api-urls";
-import {HandleError, HttpErrorHandler} from "./http-error-handler.service";
-import {MessageService} from "./message.service";
-import {optionsConf} from "../../dynamic-form/dynamic-form.model";
+import {takeWhile} from 'rxjs/operators';
+import {ApiUrls} from '../api-urls';
+import {HandleError, HttpErrorHandler} from './http-error-handler.service';
+import {MessageService} from './message.service';
+import {OptionsConf} from '../../dynamic-form/dynamic-form.model';
 
 /**
  * service contains HTTP requests functions for working with products (Adverts) on ResApi
@@ -15,8 +15,8 @@ import {optionsConf} from "../../dynamic-form/dynamic-form.model";
 @Injectable()
 export class ProductService implements OnInit {
 
-  private _isAlive: boolean = true;
-  public infoMsg: string = '';
+  private _isAlive: boolean;
+  public infoMsg: string;
 
   public handleError: HandleError;
 
@@ -24,6 +24,8 @@ export class ProductService implements OnInit {
               private httpErrorHandler: HttpErrorHandler,
               private messageService: MessageService) {
     this.handleError = httpErrorHandler.createHandleError('Errors: ');
+    this._isAlive = true;
+    this.infoMsg = '';
   }
 
   public ngOnInit() {
@@ -34,7 +36,7 @@ export class ProductService implements OnInit {
       .set('offset', offset.toString())
       .set('limit', limit.toString());
 
-    return this.http.get(apiUrls.products, {params})
+    return this.http.get(ApiUrls.products, {params})
       .pipe(
         takeWhile(() => this._isAlive),
         map((response: any) => {
@@ -60,7 +62,7 @@ export class ProductService implements OnInit {
 
   public getProduct(id: number | string): Observable<Product> {
     console.log(id);
-    return this.http.get<Product>(apiUrls.products + id + '/')
+    return this.http.get<Product>(ApiUrls.products + id + '/')
       .pipe(
         map((product) => {
             this._setNoImage(product);
@@ -72,7 +74,7 @@ export class ProductService implements OnInit {
   }
 
   public addProduct(newProduct: Product): Observable<Product> {
-    return this.http.post<Product>(apiUrls.products, newProduct)
+    return this.http.post<Product>(ApiUrls.products, newProduct)
       .pipe(
         tap((response: any) => {
           this.messageService.addSuccess('Created new product productId:' + response.pk);
@@ -83,7 +85,7 @@ export class ProductService implements OnInit {
   }
 
   public updateProduct(pk: number, newProduct: Product): Observable<Product> {
-    return this.http.patch(apiUrls.products + pk + '/', newProduct)
+    return this.http.patch(ApiUrls.products + pk + '/', newProduct)
       .pipe(
         tap((response: any) => {
           this.messageService.addSuccess('Update product id:' + response.pk);
@@ -94,7 +96,7 @@ export class ProductService implements OnInit {
   }
 
   public deleteProduct(pk: number): Observable<any> {
-    return this.http.delete(apiUrls.products + pk + '/')
+    return this.http.delete(ApiUrls.products + pk + '/')
       .pipe(
         tap(() => {
           this.messageService.addSuccess('Delete product id:' + pk);
@@ -104,14 +106,13 @@ export class ProductService implements OnInit {
       );
   }
 
-
-  public getLocations(): Observable<Array<optionsConf>> {
-    return this.http.get(apiUrls.locations)
+  public getLocations(): Observable<Array<OptionsConf>> {
+    return this.http.get(ApiUrls.locations)
       .pipe(
         map((response: any) => {
-          let res: optionsConf[] = [];
-          for (let item of response) {
-            res.push({label: item.name, value: item.id})
+          const res: OptionsConf[] = [];
+          for (const item of response) {
+            res.push({label: item.name, value: item.id});
           }
           return res;
         }),
@@ -124,7 +125,7 @@ export class ProductService implements OnInit {
       product.images.push({
         pk: null,
         advert: null,
-        file: apiUrls.noImage
+        file: ApiUrls.noImage
       });
     }
   }

@@ -1,4 +1,4 @@
-import {User} from "./user";
+import {User} from './user';
 
 
 /**
@@ -13,7 +13,7 @@ export interface Image {
 /**
  * model of RestApi product(advert) data
  */
-export interface Product{
+export interface Product {
   pk: number;
   owner: User;
   theme: string;

@@ -27,7 +27,7 @@ export class ScrollTopDirective implements OnInit {
   }
 
   public onClick() {
-    window.scroll({top: 0, behavior: "smooth"});
+    window.scroll({top: 0, behavior: 'smooth'});
   }
 
   public ngOnInit() {

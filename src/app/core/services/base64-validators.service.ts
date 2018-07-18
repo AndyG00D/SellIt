@@ -1,6 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
-import {MessageService} from "./message.service";
-import {environment} from "../../../environments/environment";
+import {MessageService} from './message.service';
+import {environment} from '../../../environments/environment';
 
 /**
  * Service validate files on format base64, before

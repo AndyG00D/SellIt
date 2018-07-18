@@ -1,8 +1,8 @@
-import {FormControlConf} from '../dynamic-form.model'
-import {Validators} from "@angular/forms";
+import {FormControlConf} from '../dynamic-form.model';
+import {Validators} from '@angular/forms';
 
 
-export let productFormConf: Array<FormControlConf> = [{
+export const productFormConf: Array<FormControlConf> = [{
   key: 'theme',
   type: 'text',
   label: 'Theme',
@@ -25,7 +25,7 @@ export let productFormConf: Array<FormControlConf> = [{
     type: 'select',
     label: 'Currency',
     options: [
-      {label: "USD", value: "1"}
+      {label: 'USD', value: '1'}
     ]
   },
   {
@@ -39,7 +39,7 @@ export let productFormConf: Array<FormControlConf> = [{
     label: 'Location',
     value: '',
     options: [
-      {label: "---", value: ''}
+      {label: '---', value: ''}
     ]
   },
   {

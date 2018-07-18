@@ -1,12 +1,12 @@
-import {environment} from "../../environments/environment";
+import {environment} from '../../environments/environment';
 
-export class apiUrls {
+export class ApiUrls {
   /**
    * URLs for HTTP request
    */
-  static products: string = `${environment.apiBase}/adverts/`;
-  static reg: string = `${environment.apiBase}/registration/`;
-  static login: string = `${environment.apiBase}/login/`;
+  static products = `${environment.apiBase}/adverts/`;
+  static reg = `${environment.apiBase}/registration/`;
+  static login = `${environment.apiBase}/login/`;
   static logout = `${environment.apiBase}/logout/`;
   static verify = `${environment.apiBase}/verify-email/`;
   static profile = `${environment.apiBase}/profile/`;
@@ -20,6 +20,6 @@ export class apiUrls {
   /**
    * Path to no Image and Avatar
    */
-  static noImage: string = `/assets/img/No_image.png`;
-  static noAvatar: string = `/assets/img/noavatar.png`;
+  static noImage = `/assets/img/No_image.png`;
+  static noAvatar = `/assets/img/noavatar.png`;
 }

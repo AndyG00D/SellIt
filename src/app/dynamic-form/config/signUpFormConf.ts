@@ -1,9 +1,9 @@
-import {FormControlConf} from '../dynamic-form.model'
-import {Validators} from "@angular/forms";
-import {CustomValidatorsService} from "../custom-validators.service";
+import {FormControlConf} from '../dynamic-form.model';
+import {Validators} from '@angular/forms';
+import {CustomValidatorsService} from '../custom-validators.service';
 
 
-export let signUpFormConf: Array<FormControlConf> = [
+export const signUpFormConf: Array<FormControlConf> = [
   {
     key: 'username',
     type: 'text',

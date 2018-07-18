@@ -1,8 +1,8 @@
-import {FormControlConf} from '../dynamic-form.model'
-import {Validators} from "@angular/forms";
+import {FormControlConf} from '../dynamic-form.model';
+import {Validators} from '@angular/forms';
 
 
-export let signInFormConf: Array<FormControlConf> = [
+export const signInFormConf: Array<FormControlConf> = [
   {
     key: 'email',
     type: 'email',
