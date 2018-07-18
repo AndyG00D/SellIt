@@ -20,9 +20,11 @@ describe('ProductService', () => {
   let httpTestingController: HttpTestingController;
   const testRequestFunction = (
     functionName,
-    params = null,
     url,
-    mockData) => {
+    type,
+    mockData,
+    resData,
+    ...params) => {
     describe(`Testing #${functionName}`, () => {
       // const id: number = 132;
       // let params: any[] = [id];
@@ -30,30 +32,61 @@ describe('ProductService', () => {
       // const url = ApiUrls.products + id + '/';
       // const mockData = mockProducts.results[0] as Product;
 
-      it('should return the Product', () => {
-        // service should have made one request to GET data from expected URL
+      it(`#${functionName}: should return data of`, () => {
+        // function should have made one request and equaled result data
         service[functionName](...params).subscribe(data => {
-          expect(data).toEqual(mockData);
+          expect(data).toEqual(resData);
         });
 
         // The following `expectOne()` will match the request's URL.
-        // const req = httpTestingController.expectOne(url);
+        const req = httpTestingController.expectOne(url);
 
-        // Assert that the request is a GET.
-        // expect(req.request.method).toBe('GET');
+        // Assert the request type ('GET', 'POST', 'PUT', 'PATCH', 'DELETE').
+        expect(req.request.method).toBe(type);
 
         // Respond with the mock data
-        // req.flush(mockData);
-
-        httpTestingController.expectOne(url).flush(mockData);
-
+        req.flush(mockData);
       });
 
-      it('can test for 404 error', () => {
+      // it('can test for 404 error', () => {
+      //
+      //   const emsg = 'deliberate 404 error';
+      //
+      //   service[functionName](mockData).subscribe(
+      //     data => fail('should have failed with the 404 error'),
+      //     (error: HttpErrorResponse) => {
+      //       expect(error.status).toEqual(404, 'status');
+      //       expect(error.error).toEqual(emsg, 'message');
+      //     }
+      //   );
+      //   const req = httpTestingController.expectOne(url);
+      //   req.flush(emsg, { status: 404, statusText: 'Not Found'});
+      // });
+      //
+      // it('can test for network error', () => {
+      //   const emsg = 'simulated network error';
+      //
+      //   service[functionName](mockData).subscribe(
+      //     data => fail,
+      //     (error: HttpErrorResponse) => {
+      //       expect(error.error.message).toEqual(emsg, 'message');
+      //     }
+      //   );
+      //
+      //   const req = httpTestingController.expectOne(url);
+      //   // Create mock ErrorEvent, raised when something goes wrong at the network level.
+      //   // Connection timeout, DNS error, offline, etc
+      //   const mockError = new ErrorEvent('Network error', {message: emsg });
+      //
+      //   // Respond with mock error
+      //   req.error(mockError);
+      // });
+
+      it(`#${functionName}: can test for 404 error`, () => {
         const emsg = 'deliberate 404 error';
 
         service[functionName](...params).subscribe(
-          data => fail('should have failed with the 404 error'),
+          data => fail,
           (error: HttpErrorResponse) => {
             expect(error.status).toEqual(404, 'status');
             expect(error.error).toEqual(emsg, 'message');
@@ -66,11 +99,11 @@ describe('ProductService', () => {
         req.flush(emsg, {status: 404, statusText: 'Not Found'});
       });
 
-      it('can test for network error', () => {
+      it(`#${functionName}: can test for network error`, () => {
         const emsg = 'simulated network error';
 
         service[functionName](...params).subscribe(
-          data => fail('should have failed with the network error'),
+          data => fail,
           (error: HttpErrorResponse) => {
             expect(error.error.message).toEqual(emsg, 'message');
           }
@@ -88,6 +121,23 @@ describe('ProductService', () => {
         req.error(mockError);
       });
     });
+    // auth
+      it(`#${functionName}: should emit 'false' for 401 Unauthorized`, () => {
+
+        service[functionName](mockData).subscribe((next) => {
+          expect(next).toBeTruthy();
+        });
+
+        const req = httpTestingController.expectOne(url);
+
+        // Assert that the request is a GET.
+        // expect(req.request.method).toBe('POST');
+
+        // Respond with the mock data
+        req.flush(null, {status: 401, statusText: 'Unauthorized'});
+
+        // httpTestingController.expectOne(url).flush(null, {status: 401, statusText: 'Unauthorized'});
+      });
   };
   // const checkUrl = (url) => (request: HttpRequest<any>): boolean => {
   //   return request.url.includes(url);
@@ -135,54 +185,91 @@ describe('ProductService', () => {
 
   // + '?offset=0&limit=12'
   // describe('#getProduct', () => testRequestFunction('getProduct', [132], ApiUrls.products + 132 + '/', mockProducts.results[0]));
-  // testRequestFunction('getProducts', [0, 12], ApiUrls.products, mockProducts);
-  testRequestFunction('getProduct', [132], ApiUrls.products + 132 + '/', mockProducts.results[0]);
-  // testRequestFunction('getLocations', [], ApiUrls.locations, mockLocation);
-
-
-  const functionName = 'addProduct';
-  const url = ApiUrls.products;
-  const mockData = mockProducts.results[0] as Product;
-  describe(`Testing #${functionName}`, () => {
-    it('should return the Product', () => {
-      // service should have made one request to GET data from expected URL
-      service[functionName](mockData).subscribe(data => {
-        expect(data).toEqual(mockData);
-      });
-
-      // The following `expectOne()` will match the request's URL.
-      const req = httpTestingController.expectOne(url);
-
-      // Assert that the request is a GET.
-      expect(req.request.method).toBe('POST');
-
-      req.flush(mockData, { status: 200, statusText: 'Ok' });
-      // Respond with the mock data
-      // req.flush(mockData);
-      //
-      // // Expect server to return the hero after PUT
-      // const expectedResponse = new HttpResponse(
-      //   { status: 200, statusText: 'OK', body: updateHero });
-      // req.event(expectedResponse);
-
-    });
-
-    it(`should emit 'false' for 401 Unauthorized`, () => {
-
-      service[functionName](mockData).subscribe((next) => {
-        expect(next).toBeTruthy();
-      });
-
-      const req = httpTestingController.expectOne(url);
-
-      // Assert that the request is a GET.
-      // expect(req.request.method).toBe('POST');
-
-      // Respond with the mock data
-      req.flush(null, {status: 401, statusText: 'Unauthorized'});
-
-      // httpTestingController.expectOne(url).flush(null, {status: 401, statusText: 'Unauthorized'});
-    });
+  testRequestFunction('getProducts', ApiUrls.products + '?offset=0&limit=12', 'GET', mockProducts, mockProducts.results as Product[], 0, 12);
+  const mockProduct = mockProducts.results[0] as Product;
+  testRequestFunction('getProduct', ApiUrls.products + 132 + '/', 'GET', mockProduct, mockProduct, 132);
+  testRequestFunction('addProduct', ApiUrls.products, 'POST', mockProduct, mockProduct, mockProduct);
+  testRequestFunction('updateProduct', ApiUrls.products + 132 + '/', 'PATCH', mockProduct, mockProduct, 132, mockProduct);
+  testRequestFunction('deleteProduct', ApiUrls.products + 132 + '/', 'DELETE', mockProduct, mockProduct, 132);
+  testRequestFunction('getLocations', ApiUrls.locations, 'GET', [{ name: 'here', id: 1 }], [{ label: 'here', value: 1 }]);
+  // const functionName = 'addProduct';
+  // const url = ApiUrls.products;
+  // const mockData = mockProducts.results[0] as Product;
+  // describe(`Testing #${functionName}`, () => {
+  //   it('should return the Product', () => {
+  //     // service should have made one request to GET data from expected URL
+  //     service[functionName](mockData).subscribe(data => {
+  //       expect(data).toEqual(mockData);
+  //     });
+  //
+  //     // The following `expectOne()` will match the request's URL.
+  //     const req = httpTestingController.expectOne(url);
+  //
+  //     // Assert that the request is a GET.
+  //     expect(req.request.method).toBe('POST');
+  //
+  //     req.flush(mockData, { status: 200, statusText: 'Ok' });
+  //     // Respond with the mock data
+  //     // req.flush(mockData);
+  //     //
+  //     // // Expect server to return the hero after PUT
+  //     // const expectedResponse = new HttpResponse(
+  //     //   { status: 200, statusText: 'OK', body: updateHero });
+  //     // req.event(expectedResponse);
+  //
+  //   });
+  //
+  //   it(`should emit 'false' for 401 Unauthorized`, () => {
+  //
+  //     service[functionName](mockData).subscribe((next) => {
+  //       expect(next).toBeTruthy();
+  //     });
+  //
+  //     const req = httpTestingController.expectOne(url);
+  //
+  //     // Assert that the request is a GET.
+  //     // expect(req.request.method).toBe('POST');
+  //
+  //     // Respond with the mock data
+  //     req.flush(null, {status: 401, statusText: 'Unauthorized'});
+  //
+  //     // httpTestingController.expectOne(url).flush(null, {status: 401, statusText: 'Unauthorized'});
+  //   });
+  //
+  //   it('can test for 404 error', () => {
+  //
+  //     const emsg = 'deliberate 404 error';
+  //
+  //     service[functionName](mockData).subscribe(
+  //       data => fail,
+  //       (error: HttpErrorResponse) => {
+  //         expect(error.status).toEqual(404, 'status');
+  //         expect(error.error).toEqual(emsg, 'message');
+  //       }
+  //     );
+  //     const req = httpTestingController.expectOne(url);
+  //     req.flush(null, { status: 404, statusText: 'Not Found'});
+  //   });
+  //
+  //   it('can test for network error', () => {
+  //     const emsg = 'simulated network error';
+  //
+  //     service[functionName](mockData).subscribe(
+  //       data => fail,
+  //       (error: HttpErrorResponse) => {
+  //         expect(error.error.message).toEqual(emsg, 'message');
+  //       }
+  //     );
+  //
+  //     const req = httpTestingController.expectOne(url);
+  //     // Create mock ErrorEvent, raised when something goes wrong at the network level.
+  //     // Connection timeout, DNS error, offline, etc
+  //     const mockError = new ErrorEvent('Network error', {message: emsg });
+  //
+  //     // Respond with mock error
+  //     req.error(mockError);
+  //   });
+  // });
 
     // it(`should emit 'true' for 200 Ok`, () => {
     //
@@ -228,41 +315,6 @@ describe('ProductService', () => {
     //   // Respond with mock error
     //   req.flush(emsg, {status: 404, statusText: 'Not Found'});
     // });
-
-    it('can test for 404 error', () => {
-
-        const emsg = 'deliberate 404 error';
-
-        service[functionName](mockData).subscribe(
-          data => fail,
-          (error: HttpErrorResponse) => {
-            expect(error.status).toEqual(404, 'status');
-            expect(error.error).toEqual(emsg, 'message');
-          }
-        );
-      const req = httpTestingController.expectOne(url);
-      req.flush(null, { status: 404, statusText: 'Not Found'});
-    });
-
-    it('can test for network error', () => {
-      const emsg = 'simulated network error';
-
-      service[functionName](mockData).subscribe(
-        data => fail,
-        (error: HttpErrorResponse) => {
-          expect(error.error.message).toEqual(emsg, 'message');
-        }
-      );
-
-      const req = httpTestingController.expectOne(url);
-      // Create mock ErrorEvent, raised when something goes wrong at the network level.
-      // Connection timeout, DNS error, offline, etc
-      const mockError = new ErrorEvent('Network error', {message: emsg });
-
-      // Respond with mock error
-      req.error(mockError);
-    });
-  });
   // describe('private .adaptResponse()', () => {
   //
   //   it('should do nothing when empty project', () => {

@@ -78,7 +78,6 @@ export class ProductService implements OnInit {
       .pipe(
         tap((response: any) => {
           this.messageService.addSuccess('Created new product productId:' + response.pk);
-          console.log('addProduct: ' + response);
         }),
         catchError(this.handleError('addProduct:', []))
       );
@@ -89,7 +88,6 @@ export class ProductService implements OnInit {
       .pipe(
         tap((response: any) => {
           this.messageService.addSuccess('Update product id:' + response.pk);
-          console.log('addProduct: ' + response);
         }),
         catchError(this.handleError('updateProduct:', []))
       );
@@ -100,7 +98,6 @@ export class ProductService implements OnInit {
       .pipe(
         tap(() => {
           this.messageService.addSuccess('Delete product id:' + pk);
-          console.log('addProduct: ' + pk);
         }),
         catchError(this.handleError('deleteProduct:', []))
       );
