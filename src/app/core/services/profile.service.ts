@@ -55,8 +55,8 @@ export class ProfileService {
       );
   }
 
-  public updateProfile(user: User): Observable<any> {
-    return this.http.patch(ApiUrls.profile, user)
+  public updateProfile(newUser: User): Observable<any> {
+    return this.http.patch(ApiUrls.profile, newUser)
       .pipe(
         tap((user: User) => {
           if (this._userSubject.value.username === user.username) {
@@ -84,6 +84,4 @@ export class ProfileService {
         catchError(this.handleError('getChangePassword:'))
       );
   }
-
-
 }

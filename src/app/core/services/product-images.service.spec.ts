@@ -1,21 +1,21 @@
-// ///<reference path="product.service.ts"/>
+// ///<reference path="product-images.service.ts"/>
 // import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 // import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 // import {inject, TestBed} from '@angular/core/testing';
-// import {of} from 'rxjs';
-// import {ProductService} from './product.service';
+//
 //
 // import {ApiUrls} from '../api-urls';
-// import {Product} from '../models/product';
+// import {Image, Product} from '../models/product';
 // import {mockProducts} from '../../../assets/mock-data/products';
 // import {mockLocation} from '../../../assets/mock-data/location';
 // import {HttpErrorHandler} from './http-error-handler.service';
 // import {MessageService} from './message.service';
 // import {OptionsConf} from '../../dynamic-form/dynamic-form.model';
+// import {ProductImagesService} from './product-images.service';
 //
-// describe('ProductService', () => {
+// describe('ProductImagesService', () => {
 //
-//   let service: ProductService;
+//   let service: ProductImagesService;
 //   let httpTestingController: HttpTestingController;
 //
 //   const testRequestFunction = (
@@ -101,10 +101,10 @@
 //   beforeEach(() => {
 //     TestBed.configureTestingModule({
 //       imports: [HttpClientTestingModule],
-//       providers: [ProductService, HttpClient, HttpErrorHandler, MessageService]
+//       providers: [ProductImagesService, HttpClient, HttpErrorHandler, MessageService]
 //     });
 //     // injects the service
-//     service = TestBed.get(ProductService);
+//     service = TestBed.get(ProductImagesService);
 //     httpTestingController = TestBed.get(HttpTestingController);
 //   });
 //
@@ -118,37 +118,48 @@
 //     expect(service).toBeDefined();
 //   });
 //
-//   it('should be created', inject([ProductService], (serviceAnother: ProductService) => {
+//   it('should be created', inject([ProductImagesService], (serviceAnother: ProductImagesService) => {
 //     expect(serviceAnother).toBeTruthy();
 //   }));
 //
 //   // test functions
-//   const id = 132;
-//   const offset = 0;
-//   const limit = 12;
-//   const resProducts = mockProducts.results as Product[];
-//   const mockProduct = mockProducts.results[0] as Product;
-//   const resProduct = mockProducts.results[0] as Product;
-//   const newProduct = mockProducts.results[0] as Product;
-//   const mockLocat = [{name: 'here', id: 1}];
-//   const resLocat = [{value: 1, label: 'here'}] as OptionsConf[];
+//   const advertPK = 132;
+//   const imageID = 132;
+//   const mockImages = mockProducts.results[3].images as Image[];
+//   const resImages = mockProducts.results[3].images as Image[];
+//   const mockImage = mockImages[0] as Image;
+//   const resImage = mockImages[0] as Image;
+//   const newImageFile = 'fileInBase64Format';
+//   const newImageFiles = [newImageFile, newImageFile, newImageFile];
 //   let testUrl;
 //
-//   testUrl = `${ApiUrls.products}?offset=${offset}&limit=${limit}`;
-//   testRequestFunction('getProducts', testUrl, 'GET', mockProducts, resProducts, offset, limit);
+//   testUrl = ApiUrls.products + advertPK + '/image/';
+//   testRequestFunction('getImages', testUrl, 'GET', mockImages, resImages, advertPK);
 //
-//   testUrl = ApiUrls.products + 132 + '/';
-//   testRequestFunction('getProduct', testUrl, 'GET', mockProduct, resProduct, id);
+//   testUrl = ApiUrls.products + advertPK + '/image/';
+//   testRequestFunction('uploadImage', testUrl, 'POST', mockImage, resImage, advertPK, newImageFile);
 //
-//   testUrl = ApiUrls.products;
-//   testRequestFunction('addProduct', testUrl, 'POST', mockProduct, resProduct, newProduct);
+//   // testUrl = ApiUrls.products;
+//   // testRequestFunction('uploadImages', testUrl, 'POST', mockProduct, resProducts, newProduct);
 //
-//   testUrl = ApiUrls.products + 132 + '/';
-//   testRequestFunction('updateProduct', testUrl, 'PATCH', mockProduct, resProduct, id, newProduct);
+//   it('should return expected heroes (called multiple times)', () => {
 //
-//   testUrl = ApiUrls.products + 132 + '/';
-//   testRequestFunction('deleteProduct', testUrl, 'DELETE', mockProduct, resProduct, id);
+//     service.uploadImages(advertPK, newImageFiles).subscribe((response) => {
+//       expect(response).toBeTruthy();
+//     });
 //
-//   testUrl = ApiUrls.locations;
-//   testRequestFunction('getLocations', testUrl, 'GET', mockLocat, resLocat);
+//     // const requests = httpTestingController.match(testUrl);
+//     // expect(requests.length).toEqual(3, 'calls to uploadImage()');
+//
+//     // Respond to each request with different mock hero results
+//     // requests[0].flush(mockImage);
+//     // requests[1].flush(mockImage);
+//     // requests[2].flush(mockImage);
+//   });
+//
+//   testUrl = ApiUrls.products + advertPK + '/image/' + imageID;
+//   testRequestFunction('updateImage', testUrl, 'PATCH', mockImage, resImage, imageID, advertPK, newImageFile);
+//
+//   testUrl = ApiUrls.products + advertPK + '/image/' + imageID;
+//   testRequestFunction('deleteImage', testUrl, 'DELETE', null, null, imageID, advertPK);
 // });

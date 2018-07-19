@@ -31,20 +31,19 @@ export class AuthService {
     this.handleError = httpErrorHandler.createHandleError('Errors: ');
   }
 
-  public getLogIn(signInUser: SignInUser): Observable<any> {
-    //   'email': 'achicunov+1@gmail.com',
-    //   'password1': 'aaaa123456789',
-    return this.http.post(ApiUrls.login, signInUser)
-      .pipe(
-        tap((data: any) => {
-          this.sessionService.token = data.token;
-          this.sessionService.user = data.user;
-          this.profileService.setUser(data.user);
-          console.log('User sign in!');
-          this.router.navigate(['/products']);
-        }),
-        catchError(this.handleError('getLogIn:', signInUser))
-      );
+  public setAuth(data): void {
+    this.sessionService.token = data.token;
+    this.sessionService.user = data.user;
+    this.profileService.setUser(data.user);
+    this.router.navigate(['/products']);
+  }
+
+  public resetAuth(): void {
+    this.sessionService.token = null;
+    this.sessionService.user = null;
+    this.profileService.setUser(null);
+    this.sessionService.token = null;
+    this.router.navigate(['/products']);
   }
 
   public AuthGoogle(): void {
@@ -59,13 +58,23 @@ export class AuthService {
     return this.http.post(ApiUrls.google, {'access_token': params.token})
       .pipe(
         tap((data: any) => {
-          this.sessionService.token = data.token;
-          this.sessionService.user = data.user;
-          this.profileService.setUser(data.user);
           console.log('Google sign in!');
-          this.router.navigate(['/products']);
+          this.setAuth(data);
         }),
         catchError(this.handleError('getRestAuthGoogle:'))
+      );
+  }
+
+  public getLogIn(signInUser: SignInUser): Observable<any> {
+    //   'email': 'achicunov+1@gmail.com',
+    //   'password1': 'aaaa123456789',
+    return this.http.post(ApiUrls.login, signInUser)
+      .pipe(
+        tap((data: any) => {
+          console.log('User sign in!');
+          this.setAuth(data);
+        }),
+        catchError(this.handleError('getLogIn:', signInUser))
       );
   }
 
@@ -76,6 +85,7 @@ export class AuthService {
           if ('detail' in data) {
             this.messageService.addSuccess(data.detail);
           }
+          this.setAuth(data);
         }),
         catchError(this.handleError('Sign Up:', reg))
       );
@@ -115,14 +125,6 @@ export class AuthService {
         }),
         catchError(this.handleError('getResetConfirm:', params))
       );
-  }
-
-  public resetAuth(): void {
-    this.sessionService.token = null;
-    this.sessionService.user = null;
-    this.profileService.setUser(null);
-    this.sessionService.token = null;
-    this.router.navigate(['/products']);
   }
 
   public getLogout(): Observable<any> {

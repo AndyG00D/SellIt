@@ -29,7 +29,7 @@ export class ProductImagesService implements OnInit {
     return this.http.get(ApiUrls.products + advert_pk + '/image/')
       .pipe(
         tap((response: Image[]) => {
-          console.log('deleteProduct: ' + response);
+          console.log('getImages: ' + response);
         }),
         catchError(this.handleError('deleteProduct:', []))
       );
@@ -40,8 +40,6 @@ export class ProductImagesService implements OnInit {
       .pipe(
         tap((image: Image) => {
           this.messageService.addSuccess('uploaded to server image productId:' + image.pk);
-          console.log('uploadNewImage: ' + image);
-
         }),
         catchError(this.handleError('uploadNewImage:', []))
       );
@@ -54,17 +52,15 @@ export class ProductImagesService implements OnInit {
     );
   }
 
-
   public updateImage(id: number, advert_pk: number, file: string): Observable<any> {
     return this.http.patch(ApiUrls.products + advert_pk + '/image/' + id, {'advert': advert_pk, 'file': file})
       .pipe(
-        map((image: Image) => {
-          console.log('updateImage: ' + image);
+        tap((image: Image) => {
+          this.messageService.addSuccess('update on server image productId:' + image.pk);
         }),
         catchError(this.handleError('updateImage:', []))
       );
   }
-
 
   public deleteImage(id: number, advert_pk: string): Observable<any> {
     return this.http.delete(ApiUrls.products + advert_pk + '/image/' + id)
