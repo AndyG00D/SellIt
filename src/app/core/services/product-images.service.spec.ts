@@ -139,24 +139,6 @@ describe('ProductImagesService', () => {
   testUrl = ApiUrls.products + advertPK + '/image/';
   testRequestFunction('uploadImage', testUrl, 'POST', mockImage, resImage, advertPK, newImageFile);
 
-  // testUrl = ApiUrls.products;
-  // testRequestFunction('uploadImages', testUrl, 'POST', mockProduct, resProducts, newProduct);
-
-  it('should return expected heroes (called multiple times)', () => {
-
-    service.uploadImages(advertPK, newImageFiles).subscribe((response) => {
-      expect(response).toBeTruthy();
-    });
-
-    // const requests = httpTestingController.match(testUrl);
-    // expect(requests.length).toEqual(3, 'calls to uploadImage()');
-
-    // Respond to each request with different mock hero results
-    // requests[0].flush(mockImage);
-    // requests[1].flush(mockImage);
-    // requests[2].flush(mockImage);
-  });
-
   testUrl = ApiUrls.products + advertPK + '/image/' + imageID;
   testRequestFunction('updateImage', testUrl, 'PATCH', mockImage, resImage, imageID, advertPK, newImageFile);
 

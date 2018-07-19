@@ -144,9 +144,6 @@ describe('ProfileService', () => {
   testUrl = ApiUrls.profile;
   testRequestFunction('getProfile', testUrl, 'GET', mockUser, mockUser);
 
-  testUrl = ApiUrls.profile;
-  testRequestFunction('updateProfile', testUrl, 'PATCH', mockUser, mockUser, newUser);
-
   testUrl = ApiUrls.changePassword;
   testRequestFunction('getChangePassword', testUrl, 'POST', mockDetail, mockDetail, newPassword);
 
