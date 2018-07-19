@@ -1,30 +1,22 @@
-///<reference path="product-images.service.ts"/>
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {inject, TestBed} from '@angular/core/testing';
-
 import {ApiUrls} from '../api-urls';
-import {Image, Product} from '../models/product';
 import {mockProducts} from '../../../assets/mock-data/products';
 import {mockLogin} from '../../../assets/mock-data/login';
 import {HttpErrorHandler} from './http-error-handler.service';
 import {MessageService} from './message.service';
-import {OptionsConf} from '../../dynamic-form/dynamic-form.model';
 import {AuthService} from './auth.service';
-import {Router, RouterModule} from '@angular/router';
+import {Router} from '@angular/router';
 import {SessionService} from './session.service';
 import {ProfileService} from './profile.service';
 import {AuthService as SocialAuthService} from 'angular5-social-login';
 import {SignInUser, SignUpUser} from '../models/auth';
-import {RouterTestingModule} from '@angular/router/testing';
-import {CookieService} from 'ngx-cookie-service';
 
 describe('AuthService', () => {
 
   let service: AuthService;
   let httpTestingController: HttpTestingController;
-  // let sessionService: jasmine.SpyObj<SessionService>;
-  // let router: jasmine.SpyObj<Router>;
 
   const testRequestFunction = (
     functionName,
@@ -107,36 +99,16 @@ describe('AuthService', () => {
   };
 
   beforeEach(() => {
-    // const sessionSpy = jasmine.createSpyObj(
-    //   'SessionService',
-    //   ['user', 'setUser', 'token']
-    // );
-    // // sessionSpy.isLoggedIn = sessionIsLoggedIn;
-    //
-    // const routerSpy = jasmine.createSpyObj(
-    //   'Router',
-    //   ['navigate']
-    // );
-
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        // RouterTestingModule
       ],
       providers: [
         AuthService,
         HttpClient,
         HttpErrorHandler,
         MessageService,
-        // Router,
-        // {
-        //   provide: Router,
-        //   useClass: class {
-        //     navigate = jasmine.createSpy('navigate');
-        //   }
-        // },
-        // {provide: SessionService, useValue: sessionSpy},
-        // {provide: Router, useValue: routerSpy},
+        ProfileService,
         {
           provide: SessionService, useValue: jasmine.createSpyObj(
             'SessionService',
@@ -155,19 +127,12 @@ describe('AuthService', () => {
             ['signIn']
           )
         },
-        // SessionService,
-        // CookieService,
-        ProfileService,
-        // SocialAuthService
       ]
     });
+
     // injects the service
     service = TestBed.get(AuthService);
     httpTestingController = TestBed.get(HttpTestingController);
-    // sessionService = TestBed.get(SessionService);
-    // router = TestBed.get(Router);
-    // router: Router,
-    //   useClass: class { navigate = jasmine.createSpy("navigate"); }
   });
 
   afterEach(() => {

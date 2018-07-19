@@ -16,8 +16,6 @@ describe('ProfileService', () => {
 
   let service: ProfileService;
   let httpTestingController: HttpTestingController;
-  // let sessionService: jasmine.SpyObj<SessionService>;
-  // let router: jasmine.SpyObj<Router>;
 
   const testRequestFunction = (
     functionName,
@@ -120,8 +118,6 @@ describe('ProfileService', () => {
     // injects the service
     service = TestBed.get(ProfileService);
     httpTestingController = TestBed.get(HttpTestingController);
-    // sessionService = TestBed.get(SessionService);
-    // router = TestBed.get(Router);
   });
 
   afterEach(() => {

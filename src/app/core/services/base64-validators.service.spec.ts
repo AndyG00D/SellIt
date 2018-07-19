@@ -1,22 +1,22 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {mockLogin} from '../../../assets/mock-data/login';
-import {SessionService} from './session.service';
-import {CookieService} from 'ngx-cookie-service';
+import {MessageService} from './message.service';
+import {Base64ValidatorsService} from './base64-validators.service';
 
-describe('SessionService', () => {
+describe('Base64ValidatorsService', () => {
 
-  let service: SessionService;
+  let service: Base64ValidatorsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
-        SessionService,
-        CookieService
+        Base64ValidatorsService,
+        MessageService,
       ]
     });
     // injects the service
-    service = TestBed.get(SessionService);
+    service = TestBed.get(Base64ValidatorsService);
   });
 
   // test service
@@ -24,7 +24,7 @@ describe('SessionService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should be created', inject([SessionService], (serviceAnother: SessionService) => {
+  it('should be created', inject([Base64ValidatorsService], (serviceAnother: Base64ValidatorsService) => {
     expect(serviceAnother).toBeTruthy();
   }));
 

@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user';
-import {HttpClient} from '@angular/common/http';
-import {HttpErrorHandler, HandleError} from './http-error-handler.service';
 import {CookieService} from 'ngx-cookie-service';
 
 /**
@@ -11,13 +9,7 @@ import {CookieService} from 'ngx-cookie-service';
 @Injectable()
 export class SessionService {
 
-  public handleError: HandleError;
-
-  constructor(private http: HttpClient,
-              public httpErrorHandler: HttpErrorHandler,
-              private cookieService: CookieService) {
-
-    this.handleError = httpErrorHandler.createHandleError('Errors: ');
+  constructor(private cookieService: CookieService) {
   }
 
   public get token(): string {
