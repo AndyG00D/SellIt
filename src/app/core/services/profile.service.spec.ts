@@ -16,8 +16,8 @@ describe('ProfileService', () => {
 
   let service: ProfileService;
   let httpTestingController: HttpTestingController;
-  let sessionService: jasmine.SpyObj<SessionService>;
-  let router: jasmine.SpyObj<Router>;
+  // let sessionService: jasmine.SpyObj<SessionService>;
+  // let router: jasmine.SpyObj<Router>;
 
   const testRequestFunction = (
     functionName,
@@ -100,16 +100,6 @@ describe('ProfileService', () => {
   };
 
   beforeEach(() => {
-    const sessionSpy = jasmine.createSpyObj(
-      'SessionService',
-      ['user', 'setUser', 'token']
-    );
-    // sessionSpy.isLoggedIn = sessionIsLoggedIn;
-
-    const routerSpy = jasmine.createSpyObj(
-      'Router',
-      ['navigate']
-    );
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
@@ -117,20 +107,26 @@ describe('ProfileService', () => {
         HttpClient,
         HttpErrorHandler,
         MessageService,
-        {provide: SessionService, useValue: sessionSpy},
-        {provide: Router, useValue: routerSpy}
+        {provide: SessionService, useValue: jasmine.createSpyObj(
+            'SessionService',
+            ['user', 'setUser', 'token']
+          )},
+        {provide: Router, useValue: jasmine.createSpyObj(
+            'Router',
+            ['navigate']
+          )}
       ]
     });
     // injects the service
     service = TestBed.get(ProfileService);
     httpTestingController = TestBed.get(HttpTestingController);
-    sessionService = TestBed.get(SessionService);
-    router = TestBed.get(Router);
+    // sessionService = TestBed.get(SessionService);
+    // router = TestBed.get(Router);
   });
 
   afterEach(() => {
     // After every test, assert that there are no more pending requests.
-    // httpTestingController.verify();
+    httpTestingController.verify();
   });
 
   // test service
@@ -152,8 +148,8 @@ describe('ProfileService', () => {
   testUrl = ApiUrls.profile;
   testRequestFunction('getProfile', testUrl, 'GET', mockUser, mockUser);
 
-  // testUrl = ApiUrls.profile;
-  // testRequestFunction('updateProfile', testUrl, 'PATCH', mockUser, mockUser, newUser);
+  testUrl = ApiUrls.profile;
+  testRequestFunction('updateProfile', testUrl, 'PATCH', mockUser, mockUser, newUser);
 
   testUrl = ApiUrls.changePassword;
   testRequestFunction('getChangePassword', testUrl, 'POST', mockDetail, mockDetail, newPassword);
