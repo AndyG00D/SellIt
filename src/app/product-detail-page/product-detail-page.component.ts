@@ -18,14 +18,13 @@ import {ProfileService} from '../core/services/profile.service';
   styleUrls: ['./product-detail-page.component.scss']
 })
 
-export class ProductDetailPageComponent implements OnInit, OnDestroy {
-  public loading$ = new BehaviorSubject(true);
-  private destroy = new Subject();
+export class ProductDetailPageComponent implements OnInit {
+  // public loading$ = new BehaviorSubject(true);
+  // private destroy = new Subject();
   public product: Product;
   public user: User;
 
   constructor(
-    private dataProductsService: ProductService,
     private route: ActivatedRoute,
     private profileService: ProfileService) {
     this.profileService.getUser().subscribe((user) => this.user = user);
@@ -33,17 +32,17 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.data.subscribe(
-        product => this.product = product.data
-      );
+      product => this.product = product.data
+    );
   }
 
   public isOwner() {
     return (this.user && this.user.id) === this.product.owner.id;
   }
 
-  public ngOnDestroy(): void {
-    this.destroy.next();
-    this.destroy.complete();
-    this.loading$.complete();
-  }
+  // public ngOnDestroy(): void {
+  // this.destroy.next();
+  // this.destroy.complete();
+  // this.loading$.complete();
+  // }
 }

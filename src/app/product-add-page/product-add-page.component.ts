@@ -18,7 +18,7 @@ export class ProductAddPageComponent implements OnInit {
   public props: FormControlConf[];
 
   constructor(private dynamicFormService: DynamicFormService,
-              private dataProductsService: ProductService) {
+              private productService: ProductService) {
   }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class ProductAddPageComponent implements OnInit {
    */
   private getFormConfig(): void {
     this.props = this.dynamicFormService.getFormConfig('product');
-    this.dataProductsService.getLocations().subscribe(data => {
+    this.productService.getLocations().subscribe(data => {
       for (const prop of this.props) {
         if (prop.key === 'location') {
           prop.options.push(...data);
@@ -40,7 +40,7 @@ export class ProductAddPageComponent implements OnInit {
   }
 
   onAddProduct(event) {
-    this.dataProductsService.addProduct(event).subscribe(
+    this.productService.addProduct(event).subscribe(
       data => this.imagesLoader.uploadNewImages(data.pk)
     );
   }

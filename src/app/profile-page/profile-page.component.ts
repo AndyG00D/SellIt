@@ -23,11 +23,11 @@ export class ProfilePageComponent {
   avatarProps: FormControlConf[];
   passProps: FormControlConf[];
 
-  constructor(private service: DynamicFormService,
+  constructor(private dynamicFormService: DynamicFormService,
               private profileService: ProfileService) {
-    this.userProps = this.service.getFormConfig('profile');
-    this.avatarProps = this.service.getFormConfig('avatar');
-    this.passProps = this.service.getFormConfig('changePassword');
+    this.userProps = this.dynamicFormService.getFormConfig('profile');
+    this.avatarProps = this.dynamicFormService.getFormConfig('avatar');
+    this.passProps = this.dynamicFormService.getFormConfig('changePassword');
     this.profileService.getUser().subscribe((user) => {
       this.user = user;
     });

@@ -25,7 +25,7 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   public user: User;
 
 
-  constructor(private dataProducts: ProductService,
+  constructor(private productService: ProductService,
               private profileService: ProfileService) {
     this.profileService.getUser().subscribe((user) => {
       this.user = user;
@@ -39,7 +39,7 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.dataProducts.stop();
+    this.productService.stop();
   }
 
   public loadProducts(isNextPage: boolean): void {
@@ -51,10 +51,10 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   }
 
   private getProducts(): void {
-    this.dataProducts.getProducts(this._offset, this._limit)
+    this.productService.getProducts(this._offset, this._limit)
       .subscribe((res: Product[]) => {
           this.products.push(...res);
-          this.infoMsg = this.dataProducts.infoMsg;
+          this.infoMsg = this.productService.infoMsg;
           this._isLoadData = true;
         }
       );

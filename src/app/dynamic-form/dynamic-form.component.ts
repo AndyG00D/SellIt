@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {FormGroup, FormControl, FormArray, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
-import {FormControlConf} from "./dynamic-form.model";
-import {CustomValidatorsService} from "./custom-validators.service";
+import {FormControlConf} from './dynamic-form.model';
+import {CustomValidatorsService} from './custom-validators.service';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -44,17 +44,17 @@ export class DynamicFormComponent implements OnInit {
    */
   private createForm(props): FormGroup {
     const formGroup = {};
-    for (let prop of props) {
+    for (const prop of props) {
       if (prop.type === 'nested') { // generate Nested Form
         formGroup[prop.key] = this.createForm(prop.conf);
       } else if (prop.type === 'array') { // generate Form Array
-        let items = [];
+        const items = [];
         const item = this.createForm(prop.conf);
         for (let i = 0; i < prop.arrayLength; i++) {
           items.push(item);
         }
         formGroup[prop.key] = new FormArray(items);
-      } else if (prop.type != 'submit' && prop.type !== 'reset') { // generate Form Control
+      } else if (prop.type !== 'submit' && prop.type !== 'reset') { // generate Form Control
         formGroup[prop.key] = new FormControl(prop.value || '', this.getValidators(prop));
       }
 
@@ -124,7 +124,7 @@ export class DynamicFormComponent implements OnInit {
    * Set data in exist controls of form
    */
   private setFormData(): void {
-    for (let item in this.data)
+    for (const item in this.data)
       if (this.data[item] && this.form.get(item)) {
         this.form.get(item).patchValue(this.data[item]);
       }
@@ -136,12 +136,11 @@ export class DynamicFormComponent implements OnInit {
   private markAllDirty(control: AbstractControl): void {
     if (control.hasOwnProperty('controls')) {
       control.markAsDirty(); // mark group
-      let ctrl = <any>control;
-      for (let inner in ctrl.controls) {
+      const ctrl = <any>control;
+      for (const inner in ctrl.controls) {
         this.markAllDirty(ctrl.controls[inner] as AbstractControl);
       }
-    }
-    else {
+    } else {
       (<FormControl>(control)).markAsDirty();
     }
   }

@@ -21,16 +21,16 @@ import {MessageService} from '../core/services/message.service';
   templateUrl: './product-edit-page.component.html',
   styleUrls: ['./product-edit-page.component.scss']
 })
-export class ProductEditPageComponent implements OnInit, OnDestroy {
-  public loading$ = new BehaviorSubject(true);
-  private destroy = new Subject();
+export class ProductEditPageComponent implements OnInit {
+  // public loading$ = new BehaviorSubject(true);
+  // private destroy = new Subject();
   public product: Product;
   public user: User;
   public props: FormControlConf[];
 
 
   constructor(private dynamicFormService: DynamicFormService,
-              private dataProductsService: ProductService,
+              private productService: ProductService,
               private route: ActivatedRoute,
               private router: Router,
               private messageService: MessageService,
@@ -46,17 +46,15 @@ export class ProductEditPageComponent implements OnInit, OnDestroy {
     this.getFormConfig();
   }
 
-  public ngOnDestroy(): void {
-    this.destroy.next();
-    this.destroy.complete();
-    this.loading$.complete();
-  }
+  // public ngOnDestroy(): void {
+  //   this.destroy.next();
+  //   this.destroy.complete();
+  //   this.loading$.complete();
+  // }
 
   private getProduct(): void {
     this.route.data.subscribe(
-      product => {
-        this.product = product.data;
-      }
+      product => this.product = product.data
     );
   }
 
@@ -72,7 +70,7 @@ export class ProductEditPageComponent implements OnInit, OnDestroy {
    */
   private getFormConfig(): void {
     this.props = this.dynamicFormService.getFormConfig('product');
-    this.dataProductsService.getLocations().subscribe(data => {
+    this.productService.getLocations().subscribe(data => {
       for (const prop of this.props) {
         if (prop.key === 'location') {
           prop.options.push(...data);
@@ -82,11 +80,11 @@ export class ProductEditPageComponent implements OnInit, OnDestroy {
   }
 
   public onUpdateProduct(event): void {
-    this.dataProductsService.updateProduct(this.product.pk, event).subscribe();
+    this.productService.updateProduct(this.product.pk, event).subscribe();
   }
 
   public onDeleteProduct(): void {
-    this.dataProductsService.deleteProduct(this.product.pk).subscribe(
+    this.productService.deleteProduct(this.product.pk).subscribe(
       () => this.router.navigate(['/products'])
     );
   }
