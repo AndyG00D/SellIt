@@ -1,7 +1,7 @@
 <!--item-->
 <div class="product-item" *ngIf="product?.is_active">
-  <a class="product-item__url" [routerLink]="product.pk">
-    <img [src]="product?.images[0]?.file" [alt]="product?.theme" class="product-item__img">
+  <a class="product-item__url" >
+    <img [src]="product?.images[0]?.file" [alt]="product?.theme" class="product-item__img" [routerLink]="product.pk">
     <div class="product-item__title">
       <span class="">{{ product?.theme }}</span>
 
@@ -12,8 +12,9 @@
       </span>
       <!--read only icon-->
       <ng-template #readOnly>
-      <span class="text_white-color">
-        <i class="fa fa-eye" aria-hidden="true"></i>
+      <span class="text_white-color" (click)="clickAddProduct()">
+        <!--<i class="fa fa-eye" aria-hidden="true"></i>-->
+        <i class="fa fa-cart-plus" aria-hidden="true"></i>
       </span>
       </ng-template>
 

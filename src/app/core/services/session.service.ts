@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user';
 import {CookieService} from 'ngx-cookie-service';
+import {ProductInOrder} from '../models/product-in-order';
 
 /**
  * Service for save/delete auth token on cookies and
@@ -33,6 +34,18 @@ export class SessionService {
       localStorage.removeItem('user');
     } else {
       localStorage.setItem('user', JSON.stringify(value));
+    }
+  }
+
+  public get cart(): ProductInOrder[] {
+    return JSON.parse(localStorage.getItem('cart'));
+  }
+
+  public set cart(value: ProductInOrder[]) {
+    if (value === []) {
+      localStorage.removeItem('cart');
+    } else {
+      localStorage.setItem('cart', JSON.stringify(value));
     }
   }
 

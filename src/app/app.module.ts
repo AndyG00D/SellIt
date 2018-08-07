@@ -44,6 +44,9 @@ import {DataProductResolver} from './core/product.resolve';
 import {ImagesUploaderComponent} from './shared/components/images-uploader/images-uploader.component';
 import {ProductImagesService} from './core/services/product-images.service';
 import {Base64ValidatorsService} from './core/services/base64-validators.service';
+import {CartService} from './core/services/cart.service';
+import {CartItemComponent} from './shared/components/cart-item/cart-item.component';
+import {CartComponent} from './shared/components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,9 @@ import {Base64ValidatorsService} from './core/services/base64-validators.service
     ProfilePageComponent,
     AvatarComponent,
     UserNameComponent,
-    ImagesUploaderComponent
+    ImagesUploaderComponent,
+    CartItemComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +100,7 @@ import {Base64ValidatorsService} from './core/services/base64-validators.service
     ProfileService,
     ProductImagesService,
     Base64ValidatorsService,
+    CartService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

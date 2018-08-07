@@ -25,8 +25,23 @@
   }
 }
 
+.header__cart{
+  display: flex;
+  font-family: var(--font-family);
+  height: 60px;
+  width: 100%;
+  z-index: 100;
+
+  &__submenu{
+    right: 0;
+    width: 600px;
+    background-color: var(--theme-color);
+  }
+}
+
 /* user-block ================================= */
 .user-block {
+  display: flex;
   font-family: var(--font-family);
   height: 60px;
   width: 100%;

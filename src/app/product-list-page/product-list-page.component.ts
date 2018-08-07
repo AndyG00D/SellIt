@@ -3,6 +3,7 @@ import {ProductService} from '../core/services/product.service';
 import {Product} from '../core/models/product';
 import {User} from '../core/models/user';
 import {ProfileService} from '../core/services/profile.service';
+import {CartService} from '../core/services/cart.service';
 
 /**
  * List of product:
@@ -26,7 +27,8 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
 
 
   constructor(private dataProducts: ProductService,
-              private profileService: ProfileService) {
+              private profileService: ProfileService,
+              private cartService: CartService) {
     this.profileService.getUser().subscribe((user) => {
       this.user = user;
     });
@@ -60,5 +62,8 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
       );
   }
 
-
+  public onAddProduct(product: Product) {
+    console.log(product);
+    this.cartService.addProductInCart(product);
+  }
 }

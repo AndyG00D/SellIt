@@ -1,11 +1,12 @@
 <app-header></app-header>
 <section class="content content_full-width">
-  <app-messages ></app-messages>
+  <app-messages></app-messages>
   <div class="product-list" appInfiniteScroll (getNextPage)="loadProducts($event)">
     <!--<h3 class="text_red-color text_big_size">{{ errorMsg }}</h3>-->
     <app-product-item *ngFor="let product of products"
                       [product]="product"
-                      [isOwner]="user?.id === product.owner.id">
+                      [isOwner]="user?.id === product.owner.id"
+                      (addProduct)="onAddProduct($event)">
     </app-product-item>
     <h3 class="text_big_size _full-width text_center">{{ infoMsg }}</h3>
     <app-button-on-top appOnTop></app-button-on-top>

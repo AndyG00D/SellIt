@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {FormGroup, FormControl, FormArray, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
-import {FormControlConf} from "./dynamic-form.model";
-import {CustomValidatorsService} from "./custom-validators.service";
+import {FormControlConf} from './dynamic-form.model';
+import {CustomValidatorsService} from './custom-validators.service';
 
 @Component({
   selector: 'app-dynamic-form',

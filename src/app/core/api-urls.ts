@@ -16,6 +16,8 @@ export class ApiUrls {
   static resetConfirm = `${environment.apiBase}/password/reset/confirm/`;
   static locations = `${environment.apiBase}/locations/`;
   static profileProducts = `${environment.apiBase}/profile/adverts/`;
+  static cart = `${environment.apiBase}/profile/baskets/`;
+  static addCart = `${environment.apiBase}/profile/add_to_basket/`;
 
   /**
    * Path to no Image and Avatar
