@@ -1,11 +1,12 @@
-<span class="" (click)="clickMinusProduct()">
+<span (click)="clickMinusProduct()">
         <i class="fa fa-minus"></i>
       </span>
-<input type="text" min="1" [value]="data?.count || 0" (keyup)="onSetProduct($event)">
-<span (click)="clickPlusProduct()">
+<input class="cart__input" type="text" min="1" [value]="data?.count || 0" (keyup)="onSetProduct($event)">
+<span
+  (click)="clickPlusProduct()">
         <i class="fa fa-plus"></i>
       </span>
-<span (click)="clickRemoveProduct()">
+<span class="cart__remove-btn" (click)="clickRemoveProduct()">
         <i class="fa fa-remove"></i>
       </span>
 

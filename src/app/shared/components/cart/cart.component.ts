@@ -23,11 +23,12 @@ export class CartComponent {
     });
   }
 
-  public setCart(event: ProductInOrder) {
-    this.cartService.setProductInCart(event.product, event.count);
-  }
-
-  public removeProduct(id: number){
-    this.cartService.removeProductInCart(id);
-  }
+  // public setCart(event: ProductInOrder) {
+  //   this.cartService.setProductInCart(event.product, event.count);
+  // }
+  //
+  // public removeProduct(id: number) {
+  //   console.log(id);
+  //   this.cartService.removeProductInCart(id);
+  // }
 }

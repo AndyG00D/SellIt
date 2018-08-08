@@ -1,20 +1,32 @@
-<span class="cart__item">
-    <img
-      [src]="data?.product?.images[0]?.file"
-      [alt]="data?.product?.theme"
-      [routerLink]="['/products/', data?.product?.pk]"
-    >
-     <span class="cart__title">
-        {{data?.product?.theme}}
-      </span>
-     <span class="" (click)="clickMinusProduct()">
-        <i class="fa fa-minus"></i>
-      </span>
-     <input type="text" min="1" [value]="data?.count" (keyup)="onSetProduct($event)">
-      <span (click)="clickPlusProduct()">
-        <i class="fa fa-plus"></i>
-      </span>
-        <span (click)="clickRemoveProduct()">
-        <i class="fa fa-remove"></i>
-      </span>
-</span>
+<div class="cart__item">
+  <img class="cart__img"
+       [src]="data?.product?.images[0]?.file"
+       [alt]="data?.product?.theme"
+       [routerLink]="['/products/', data?.product?.pk]"
+  >
+  <div class="cart__title">
+    {{data?.product?.theme}}
+  </div>
+
+  <div class="cart__price">
+    {{data?.product?.price}}
+  </div>
+  <!--<span class="" (click)="clickMinusProduct()">-->
+  <!--<i class="fa fa-minus"></i>-->
+  <!--</span>-->
+  <!--<input type="text" min="1" [value]="data?.count" (keyup)="onSetProduct($event)">-->
+  <!--<span (click)="clickPlusProduct()">-->
+  <!--<i class="fa fa-plus"></i>-->
+  <!--</span>-->
+  <!--<span (click)="clickRemoveProduct()">-->
+  <!--<i class="fa fa-remove"></i>-->
+  <!--</span>-->
+  <app-cart-product-controls
+    class="cart__controls"
+    [data]="data"
+    (minusProduct)="setCart($event)"
+    (plusProduct)="setCart($event)"
+    (setProduct)="setCart($event)"
+    (removeProduct)="removeProduct($event)">
+  </app-cart-product-controls>
+</div>

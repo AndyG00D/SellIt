@@ -33,19 +33,17 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
     private profileService: ProfileService,
     private cartService: CartService) {
     this.profileService.getUser().subscribe((user) => this.user = user);
-    this.cartService.getCart().subscribe((data: ProductInOrder[]) => {
-      data.forEach(item => {
-        if (item.product.pk === this.product.pk) {
-          this.count = item.count;
-        }
-      });
-    });
   }
 
   ngOnInit() {
     this.route.data.subscribe(
       product => this.product = product.data
     );
+    this.cartService.getCart().subscribe((data: ProductInOrder[]) => {
+      const productInCart: ProductInOrder = data.find(item => item.product.pk === this.product.pk);
+      console.log(productInCart);
+      this.count = productInCart ? productInCart.count : this.count;
+    });
   }
 
   public isOwner() {
@@ -56,5 +54,13 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
     this.destroy.next();
     this.destroy.complete();
     this.loading$.complete();
+  }
+
+  public setCart(event: ProductInOrder) {
+    this.cartService.setProductInCart(event.product, event.count);
+  }
+
+  public removeProduct(id: number) {
+    this.cartService.removeProductInCart(id);
   }
 }

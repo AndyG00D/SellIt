@@ -48,6 +48,7 @@ import {CartService} from './core/services/cart.service';
 import {CartItemComponent} from './shared/components/cart-item/cart-item.component';
 import {CartComponent} from './shared/components/cart/cart.component';
 import {CartProductControlsComponent} from './shared/components/cart-product-controls/cart-product-controls.component';
+import {CartPageComponent} from './cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import {CartProductControlsComponent} from './shared/components/cart-product-con
     ImagesUploaderComponent,
     CartItemComponent,
     CartComponent,
-    CartProductControlsComponent
+    CartProductControlsComponent,
+    CartPageComponent
   ],
   imports: [
     BrowserModule,

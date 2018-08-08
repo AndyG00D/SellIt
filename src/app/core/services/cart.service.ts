@@ -59,11 +59,12 @@ export class CartService implements OnInit {
       newCart[existProductIndex].product = product;
       newCart[existProductIndex].count = count;
     }
-    console.log(newCart);
+    console.log("newCart: " + newCart);
     this.setCart(newCart);
   }
 
-  public removeProductInCart(id: number) {
+  public removeProductInCart(id: any) {
+    console.log(id);
     const newCart: ProductInOrder[] = this._cartSubject.value
       .filter((item) => item.product.pk !== id);
     this.setCart(newCart);

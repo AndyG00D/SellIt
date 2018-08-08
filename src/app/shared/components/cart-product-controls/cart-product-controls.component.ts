@@ -17,11 +17,11 @@ import {Patterns} from '../../../dynamic-form/patterns';
 export class CartProductControlsComponent {
 
   @Input() data: ProductInOrder;
+  @Input() step  = 1;
   @Output() plusProduct = new EventEmitter<any>();
   @Output() minusProduct = new EventEmitter<any>();
   @Output() setProduct = new EventEmitter<any>();
   @Output() removeProduct = new EventEmitter<any>();
-  step = 1;
 
   constructor() {
   }
@@ -39,6 +39,7 @@ export class CartProductControlsComponent {
   }
 
   public clickRemoveProduct() {
+    console.log('remove');
       this.removeProduct.emit(this.data.product.pk);
   }
 
