@@ -69,8 +69,16 @@
     margin: 0;
   }
 
+  &__img:hover {
+    outline: var(--green-color) solid 1px;
+  }
+
   &__controls {
     margin-right: 0;
+  }
+
+  &__btn:hover {
+    color: var(--green-color);
   }
 
   &__title {
@@ -83,7 +91,7 @@
     font-family: var(--font-family);
     font-size: 1.28rem;
     font-weight: bold;
-    height: 3.6rem;
+    //height: 3.6rem;
     word-wrap: break-word;
     word-break: break-all;
   }
@@ -96,16 +104,29 @@
     font-size: 1.28rem;
     font-weight: bold;
     color: var(--green-color);
-    height: 3.6rem;
+    //height: 3.6rem;
     word-wrap: break-word;
     word-break: break-all;
     padding: 0 1rem;
   }
 
   &__price::after {
-    content: '$';
+    content: ' $';
   }
 
+  &__total {
+    padding-top: 1rem;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 1rem;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    font-size: 1.28rem;
+    font-weight: bold;
+    border-top: 1px solid var(--content-color);
+  }
 
   &__ico {
     flex: 2rem;

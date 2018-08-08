@@ -42,7 +42,18 @@ export class CartService implements OnInit {
     } else if (this.sessionService.token) {
       // this.getALLProducts().subscribe();
     }
-    return this._cartSubject.asObservable().pipe(distinctUntilChanged(), share());
+    return this._cartSubject.asObservable();
+      // .pipe(distinctUntilChanged(), share());
+  }
+
+  public getTotal(): Observable<Number> {
+    return this.getCart().pipe(map(data => {
+      let total = 0;
+      for (const item of data) {
+        total += item.product.price * item.count;
+      }
+      return total;
+    }));
   }
 
   public setProductInCart(product: Product, count: number = 0) {
@@ -59,7 +70,7 @@ export class CartService implements OnInit {
       newCart[existProductIndex].product = product;
       newCart[existProductIndex].count = count;
     }
-    console.log("newCart: " + newCart);
+    console.log('newCart: ' + newCart);
     this.setCart(newCart);
   }
 

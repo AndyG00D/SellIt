@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ProductInOrder} from '../../../core/models/product-in-order';
 import {CartService} from '../../../core/services/cart.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -16,10 +17,15 @@ import {CartService} from '../../../core/services/cart.service';
  */
 export class CartComponent {
   public data: ProductInOrder[];
+  public total: Number;
+
 
   constructor(private cartService: CartService) {
     this.cartService.getCart().subscribe((data) => {
       this.data = data;
+    });
+    this.cartService.getTotal().subscribe((total) => {
+      this.total = total;
     });
   }
 
