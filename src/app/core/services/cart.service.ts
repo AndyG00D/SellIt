@@ -45,14 +45,19 @@ export class CartService implements OnInit {
     return this._cartSubject.asObservable().pipe(distinctUntilChanged(), share());
   }
 
-  public addProductInCart(product: Product, count = 1) {
+  public setProductInCart(product: Product, count: number = 0) {
     const newCart: ProductInOrder[] = this._cartSubject.value;
     const existProductIndex = newCart.findIndex(data => data.product.pk === product.pk);
-    if (existProductIndex === -1) {
+    if (existProductIndex === -1 && !count) {
+      newCart.push({product: product, count: 1});
+    } else if (existProductIndex === -1 && !!count) {
       newCart.push({product: product, count: count});
+    } else if (!count) { // if argument count not set, add 1 position of product
+      newCart[existProductIndex].product = product;
+      newCart[existProductIndex].count += 1;
     } else {
       newCart[existProductIndex].product = product;
-      newCart[existProductIndex].count += count;
+      newCart[existProductIndex].count = count;
     }
     console.log(newCart);
     this.setCart(newCart);

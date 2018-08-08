@@ -47,6 +47,7 @@ import {Base64ValidatorsService} from './core/services/base64-validators.service
 import {CartService} from './core/services/cart.service';
 import {CartItemComponent} from './shared/components/cart-item/cart-item.component';
 import {CartComponent} from './shared/components/cart/cart.component';
+import {CartProductControlsComponent} from './shared/components/cart-product-controls/cart-product-controls.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import {CartComponent} from './shared/components/cart/cart.component';
     UserNameComponent,
     ImagesUploaderComponent,
     CartItemComponent,
-    CartComponent
+    CartComponent,
+    CartProductControlsComponent
   ],
   imports: [
     BrowserModule,

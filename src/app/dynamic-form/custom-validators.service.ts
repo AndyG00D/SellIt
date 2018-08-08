@@ -21,7 +21,7 @@ export class CustomValidatorsService {
     return (c: AbstractControl): ValidationErrors => {
       const fgValue1 = c.root.value[control];
       const fgValue2 = c.value;
-      if (fgValue1 != fgValue2) {
+      if (fgValue1 !== fgValue2) {
         return {confirm: true};
       }
       return null;

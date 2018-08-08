@@ -1,6 +1,10 @@
 <div class="cart">
   <app-cart-item *ngFor="let item of data"
                  class="cart__item"
-                 [data]="item">
+                 [data]="item"
+                 (minusProduct)="setCart($event)"
+                 (plusProduct)="setCart($event)"
+                 (setProduct)="setCart($event)"
+                 (removeProduct)="removeProduct($event)">
   </app-cart-item>
 </div>

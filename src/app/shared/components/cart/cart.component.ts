@@ -22,4 +22,12 @@ export class CartComponent {
       this.data = data;
     });
   }
+
+  public setCart(event: ProductInOrder) {
+    this.cartService.setProductInCart(event.product, event.count);
+  }
+
+  public removeProduct(id: number){
+    this.cartService.removeProductInCart(id);
+  }
 }

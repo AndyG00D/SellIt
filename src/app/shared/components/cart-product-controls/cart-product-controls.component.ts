@@ -3,9 +3,9 @@ import {ProductInOrder} from '../../../core/models/product-in-order';
 import {Patterns} from '../../../dynamic-form/patterns';
 
 @Component({
-  selector: 'app-cart-item',
-  templateUrl: './cart-item.component.html',
-  styleUrls: ['./cart-item.component.scss']
+  selector: 'app-cart-product-controls',
+  templateUrl: './cart-product-controls.component.html',
+  styleUrls: ['./cart-product-controls.component.scss']
 })
 
 /**
@@ -14,7 +14,7 @@ import {Patterns} from '../../../dynamic-form/patterns';
  *  @Input() product: Product; data o current product
  *  @Input() isOwner: boolean; true if auth user is owner
  */
-export class CartItemComponent {
+export class CartProductControlsComponent {
 
   @Input() data: ProductInOrder;
   @Output() plusProduct = new EventEmitter<any>();

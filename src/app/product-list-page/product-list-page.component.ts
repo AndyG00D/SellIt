@@ -64,6 +64,6 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
 
   public onAddProduct(product: Product) {
     console.log(product);
-    this.cartService.addProductInCart(product);
+    this.cartService.setProductInCart(product);
   }
 }

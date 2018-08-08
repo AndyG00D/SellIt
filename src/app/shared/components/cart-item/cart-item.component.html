@@ -1,14 +1,20 @@
 <span class="cart__item">
+    <img
+      [src]="data?.product?.images[0]?.file"
+      [alt]="data?.product?.theme"
+      [routerLink]="['/products/', data?.product?.pk]"
+    >
      <span class="cart__title">
         {{data?.product?.theme}}
       </span>
-     <span class="">
+     <span class="" (click)="clickMinusProduct()">
         <i class="fa fa-minus"></i>
       </span>
-   <span class="">
-        {{data?.count}}
-      </span>
-      <span class="">
+     <input type="text" min="1" [value]="data?.count" (keyup)="onSetProduct($event)">
+      <span (click)="clickPlusProduct()">
         <i class="fa fa-plus"></i>
+      </span>
+        <span (click)="clickRemoveProduct()">
+        <i class="fa fa-remove"></i>
       </span>
 </span>

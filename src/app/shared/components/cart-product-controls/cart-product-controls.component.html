@@ -1,0 +1,11 @@
+<span class="" (click)="clickMinusProduct()">
+        <i class="fa fa-minus"></i>
+      </span>
+<input type="text" min="1" [value]="data?.count || 0" (keyup)="onSetProduct($event)">
+<span (click)="clickPlusProduct()">
+        <i class="fa fa-plus"></i>
+      </span>
+<span (click)="clickRemoveProduct()">
+        <i class="fa fa-remove"></i>
+      </span>
+

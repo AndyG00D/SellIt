@@ -6,6 +6,8 @@ import {Product} from '../core/models/product';
 import {User} from '../core/models/user';
 import {ProductService} from '../core/services/product.service';
 import {ProfileService} from '../core/services/profile.service';
+import {CartService} from '../core/services/cart.service';
+import {ProductInOrder} from '../core/models/product-in-order';
 
 /**
  * detail page of product by id
@@ -23,18 +25,27 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
   private destroy = new Subject();
   public product: Product;
   public user: User;
+  public count = 0;
 
   constructor(
     private dataProductsService: ProductService,
     private route: ActivatedRoute,
-    private profileService: ProfileService) {
+    private profileService: ProfileService,
+    private cartService: CartService) {
     this.profileService.getUser().subscribe((user) => this.user = user);
+    this.cartService.getCart().subscribe((data: ProductInOrder[]) => {
+      data.forEach(item => {
+        if (item.product.pk === this.product.pk) {
+          this.count = item.count;
+        }
+      });
+    });
   }
 
   ngOnInit() {
     this.route.data.subscribe(
-        product => this.product = product.data
-      );
+      product => this.product = product.data
+    );
   }
 
   public isOwner() {
