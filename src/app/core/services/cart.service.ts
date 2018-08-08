@@ -19,8 +19,8 @@ export class CartService implements OnInit {
   // private currentBasket: number = null;
   private _cartSubject = new BehaviorSubject<Array<ProductInOrder>>([]);
 
-  constructor(private http: HttpClient,
-              private sessionService: SessionService,
+  constructor(private sessionService: SessionService,
+              // private http: HttpClient,
               // private httpErrorHandler: HttpErrorHandler,
               // private messageService: MessageService
   ) {
