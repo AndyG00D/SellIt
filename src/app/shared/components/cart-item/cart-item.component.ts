@@ -18,42 +18,12 @@ import {CartService} from '../../../core/services/cart.service';
 export class CartItemComponent {
 
   @Input() data: ProductInOrder;
-  // @Output() plusProduct = new EventEmitter<any>();
-  // @Output() minusProduct = new EventEmitter<any>();
-  // @Output() setProduct = new EventEmitter<any>();
-  // @Output() removeProduct = new EventEmitter<any>();
-  // step = 1;
 
   constructor(private cartService: CartService) {
   }
 
-  // public clickPlusProduct() {
-  //   this.data.count = this.data.count + this.step;
-  //   this.plusProduct.emit(this.data);
-  // }
-  //
-  // public clickMinusProduct() {
-  //   if (this.data.count - this.step > 1) {
-  //     this.data.count -= this.step;
-  //     this.minusProduct.emit(this.data);
-  //   }
-  // }
-  //
-  // public clickRemoveProduct() {
-  //     this.removeProduct.emit(this.data.product.pk);
-  // }
-  //
-  // public onSetProduct(event: any) { // without type info
-  //   if (Patterns.number.test(event.target.value) && event.target.value > 1) {
-  //     this.data.count = ++event.target.value;
-  //   } else {
-  //     event.target.value = this.data.count;
-  //   }
-  //   this.setProduct.emit(this.data);
-  // }
-
   public setCart(event: ProductInOrder) {
-    this.cartService.setProductInCart(event.product, event.count);
+    this.cartService.setProductCountInCart(event.product, event.count);
   }
 
   public removeProduct(id: number) {

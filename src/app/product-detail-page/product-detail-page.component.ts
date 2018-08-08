@@ -41,8 +41,7 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
     );
     this.cartService.getCart().subscribe((data: ProductInOrder[]) => {
       const productInCart: ProductInOrder = data.find(item => item.product.pk === this.product.pk);
-      console.log(productInCart);
-      this.count = productInCart ? productInCart.count : this.count;
+      this.count = productInCart ? productInCart.count : 0;
     });
   }
 
@@ -56,8 +55,12 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
     this.loading$.complete();
   }
 
+  public addCart() {
+    this.cartService.addProductInCart(this.product);
+  }
+
   public setCart(event: ProductInOrder) {
-    this.cartService.setProductInCart(event.product, event.count);
+    this.cartService.setProductCountInCart(event.product, event.count);
   }
 
   public removeProduct(id: number) {

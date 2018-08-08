@@ -10,7 +10,7 @@ import {ProductInOrder} from '../models/product-in-order';
 import {SessionService} from './session.service';
 
 /**
- * service contains HTTP requests functions for working with product images on ResApi
+ * service of user cart
  */
 @Injectable()
 export class CartService implements OnInit {
@@ -43,7 +43,7 @@ export class CartService implements OnInit {
       // this.getALLProducts().subscribe();
     }
     return this._cartSubject.asObservable();
-      // .pipe(distinctUntilChanged(), share());
+    // .pipe(distinctUntilChanged(), share());
   }
 
   public getTotal(): Observable<Number> {
@@ -56,28 +56,55 @@ export class CartService implements OnInit {
     }));
   }
 
-  public setProductInCart(product: Product, count: number = 0) {
+  // public setProductInCart(product: Product, count: number = 0) {
+  //   const newCart: ProductInOrder[] = this._cartSubject.value;
+  //   const existProductIndex = newCart.findIndex(data => data.product.pk === product.pk);
+  //   if (existProductIndex === -1 && !count) {
+  //     newCart.push({product: product, count: 1});
+  //   } else if (existProductIndex === -1 && !!count) {
+  //     newCart.push({product: product, count: count});
+  //   } else if (!count) { // if argument count not set, add 1 position of product
+  //     newCart[existProductIndex].product = product;
+  //     newCart[existProductIndex].count += 1;
+  //   } else {
+  //     newCart[existProductIndex].product = product;
+  //     newCart[existProductIndex].count = count;
+  //   }
+  //   console.log('newCart: ' + newCart);
+  //   this.setCart(newCart);
+  // }
+  // public isProductInCart(product: Product) {
+  //   return !!this._cartSubject.value.find(data => data.product.pk === product.pk);
+  // }
+
+  public getProductIndex(product: Product): number {
+    return this._cartSubject.value.findIndex(data => data.product.pk === product.pk);
+  }
+
+  public addProductInCart(product: Product) {
     const newCart: ProductInOrder[] = this._cartSubject.value;
-    const existProductIndex = newCart.findIndex(data => data.product.pk === product.pk);
-    if (existProductIndex === -1 && !count) {
-      newCart.push({product: product, count: 1});
-    } else if (existProductIndex === -1 && !!count) {
-      newCart.push({product: product, count: count});
-    } else if (!count) { // if argument count not set, add 1 position of product
-      newCart[existProductIndex].product = product;
-      newCart[existProductIndex].count += 1;
-    } else {
-      newCart[existProductIndex].product = product;
-      newCart[existProductIndex].count = count;
-    }
-    console.log('newCart: ' + newCart);
+    newCart.push({product: product, count: 1});
+    this.setCart(newCart);
+  }
+
+  public addOneProductCountInCart(product: Product) {
+    const newCart: ProductInOrder[] = this._cartSubject.value;
+    const index = this.getProductIndex(product);
+    newCart[index].count += 1;
+    this.setCart(newCart);
+  }
+
+  public setProductCountInCart(product: Product, count: number = 1) {
+    const newCart: ProductInOrder[] = this._cartSubject.value;
+    const index = this.getProductIndex(product);
+    newCart[index].count = count;
     this.setCart(newCart);
   }
 
   public removeProductInCart(id: any) {
-    console.log(id);
     const newCart: ProductInOrder[] = this._cartSubject.value
       .filter((item) => item.product.pk !== id);
     this.setCart(newCart);
   }
+
 }
