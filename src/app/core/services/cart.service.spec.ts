@@ -50,7 +50,9 @@ describe('CartService', () => {
     });
     getLocalCartSpy = spyOnProperty(sessionService, 'cart');
     setLocalCartSpy = spyOnProperty(sessionService, 'cart', 'set');
-    _cartSubjectNextSpy = spyOn(service._cartSubject, 'next');
+    _cartSubjectNextSpy = spyOn(service._cartSubject, 'next').and.callThrough();
+    getCartSpy = spyOn(service, 'getCart').and.callThrough();
+    setCartSpy = spyOn(service, 'setCart').and.callThrough();
 
 
   });
@@ -64,61 +66,10 @@ describe('CartService', () => {
     expect(serviceAnother).toBeTruthy();
   }));
 
-  // describe('Testing setCart', () => {
-  //   service.setCart([mockProductInOrder]);
-  //   // service._cartSubject.subscribe((data) => {
-  //   //   expect(data).toBe([mockProductInOrder]);
-  //   // });
-  //   // expect(service._cartSubject.value).toBe([mockProductInOrder]);
-  // });
+  describe('setCart/getCart', () => {
 
-  describe('Testing getCart', () => {
-    // spyOn(service, 'getCart').and.returnValue(of([<ProductInOrder>{product: mockProducts[0], count: 3}]));
-    // expect(service.getCart).toHaveBeenCalled();
-    // expect(component.items).toEqual(jasmine.any(Object));
-    // expect(component.items[0].id).toEqual(1);
-    // expect(component.items[0].description).toEqual('test description');
-    // expect(component.items[0].price).toEqual(50);
-/*    it('#getObservableValue should return value from observable',
-      (done: DoneFn) => {
-        service.getCart().subscribe(value => {
-          expect(value).toBe([]);
-          done();
-        });
-      });*/
-
-    // it('#getObservableValue should return value from observable',
-    //   (done: DoneFn) => {
-    //     service.getTotal().subscribe(value => {
-    //       expect(value).toBe(0);
-    //       done();
-    //     });
-    //   });
-
-    // it('#getObservableValue should return value from observable',
-    //   (done: DoneFn) => {
-    //     // spyOn(service, 'getTotal').and.returnValue(of(9));
-    //     service.setCart([<ProductInOrder>{product: mockProducts[0], count: 3}]);
-    //     service.getTotal().subscribe(value => {
-    //       expect(value).toBe(9);
-    //       done();
-    //     });
-    //   });
-
-  });
-
-  describe('getter/setter', () => {
-
-
-    beforeEach(() => {
-      getCartSpy = spyOn(service, 'getCart').and.callThrough();
-      setCartSpy = spyOn(service, 'setCart').and.callThrough();
-    });
-
-    it('Setter should cast userProfile data to profileBS & session', () => {
-
+    it('setCart calling next _cartSubject and set in SessionService', () => {
       service.setCart([mockProductInOrder]);
-
       expect(_cartSubjectNextSpy).toHaveBeenCalled();
       expect(_cartSubjectNextSpy.calls.mostRecent().args[0])
         .toEqual([mockProductInOrder]);
@@ -127,41 +78,183 @@ describe('CartService', () => {
         .toEqual([mockProductInOrder]);
     });
 
-    // it('Getter', () => {
-    //   getCartSpy.and.returnValue(of([mockProductInOrder]));
-    //
-    //   // const getCart = service.getCart;
-    //
-    //   // expect(service.getCart).toEqual([mockProductInOrder]);
-    //   // expect(getLocalCartSpy).toHaveBeenCalled();
-    //   // expect(userProfileGetSpy).toHaveBeenCalled();
-    //   service.getCart().subscribe();
-    //     // value => {
-    //           // expect(value).toBe([mockProductInOrder]);
-    //   // expect(setLocalCartSpy).toHaveBeenCalled();
-    //   expect(_cartSubjectNextSpy).toHaveBeenCalled();
-    //   expect(_cartSubjectNextSpy.calls.mostRecent().args)
-    //     .toEqual([mockProductInOrder]);
-    // });
+    it('getCart calling next _cartSubject and get in SessionService', (done: DoneFn) => {
+      service.getCart().subscribe(() => {
+        done();
+      });
+      service.setCart([]);
+      expect(_cartSubjectNextSpy).toHaveBeenCalled();
+      expect(getLocalCartSpy).toHaveBeenCalled();
+    });
+
+    it('set/get in Cart success value', (done: DoneFn) => {
+      service.setCart([mockProductInOrder]);
+      service.getCart().subscribe(data => {
+        expect(data).toEqual([mockProductInOrder]);
+        done();
+      });
+    });
+
+    it('set/get wrong value', (done: DoneFn) => {
+      service.setCart([]);
+      service.getCart().subscribe(data => {
+        expect(data).not.toEqual([mockProductInOrder]);
+        done();
+      });
+
+    });
+
   });
 
-  // describe('Testing getTotal', () => {
-  // });
+  describe('Testing getTotal', () => {
+    it('get value', (done: DoneFn) => {
+      service.setCart([mockProductInOrder]);
+      service.getTotal().subscribe(data => {
+        expect(data).toEqual(3);
+        done();
+      });
+    });
+  });
 
   describe('Testing getProductIndex', () => {
+    it('product exist in cart, return index', () => {
+      service.setCart([mockProductInOrder]);
+      expect(service.getProductIndex(mockProductInOrder.product)).toBe(0);
+    });
+
+    it('product not exist in cart, return -1', () => {
+      service.setCart([]);
+      expect(service.getProductIndex(mockProductInOrder.product)).toBe(-1);
+    });
   });
 
   describe('Testing addProductInCart', () => {
+    it('success value', (done: DoneFn) => {
+      let testData;
+
+      service.getCart().subscribe(data => {
+        testData = data;
+        done();
+      });
+
+      service.setCart([]);
+      expect(testData).toEqual([]);
+
+      service.addProductInCart(mockProductInOrder.product);
+      expect(testData[0].product).toEqual(mockProductInOrder.product);
+    });
+
+    it('success adding and calling setCart', (done: DoneFn) => {
+      let testLength: number;
+      service.getCart().subscribe(data => {
+        testLength = data.length;
+        done();
+      });
+      service.setCart([]);
+      expect(testLength).toEqual(0);
+
+      service.addProductInCart(mockProductInOrder.product);
+      expect(testLength).toEqual(1);
+
+      service.addProductInCart(mockProductInOrder.product);
+      expect(testLength).toEqual(2);
+
+      service.addProductInCart(mockProductInOrder.product);
+      expect(testLength).toEqual(3);
+
+      expect(setCartSpy.calls.count()).toEqual(4);
+    });
   });
 
   describe('Testing addOneProductCountInCart', () => {
+    it('success change count of product and calling setCart', (done: DoneFn) => {
+      let testData;
+
+      service.getCart().subscribe(data => {
+        testData = data;
+        done();
+      });
+
+      service.setCart([mockProductInOrder]);
+      expect(testData[0].product).toEqual(mockProductInOrder.product);
+      expect(testData[0].count).toEqual(3);
+      expect(setCartSpy.calls.count()).toEqual(1);
+
+      service.addOneProductCountInCart(mockProductInOrder.product);
+      expect(testData[0].product).toEqual(mockProductInOrder.product);
+      expect(testData[0].count).toEqual(4);
+      expect(setCartSpy.calls.count()).toEqual(2);
+
+      service.addOneProductCountInCart(mockProductInOrder.product);
+      expect(testData[0].product).toEqual(mockProductInOrder.product);
+      expect(testData[0].count).toEqual(5);
+      expect(setCartSpy.calls.count()).toEqual(3);
+    });
   });
 
   describe('Testing setProductCountInCart', () => {
+    it('success change count of product and calling setCart', (done: DoneFn) => {
+      let testData;
+
+      service.getCart().subscribe(data => {
+        testData = data;
+        done();
+      });
+
+      service.setCart([mockProductInOrder]);
+      expect(testData[0].product).toEqual(mockProductInOrder.product);
+      expect(testData[0].count).toEqual(5);
+      expect(setCartSpy.calls.count()).toEqual(1);
+
+      service.setProductCountInCart(mockProductInOrder.product, 7);
+      expect(testData[0].product).toEqual(mockProductInOrder.product);
+      expect(testData[0].count).toEqual(7);
+      expect(setCartSpy.calls.count()).toEqual(2);
+
+      service.setProductCountInCart(mockProductInOrder.product, 10);
+      expect(testData[0].product).toEqual(mockProductInOrder.product);
+      expect(testData[0].count).toEqual(10);
+      expect(setCartSpy.calls.count()).toEqual(3);
+    });
   });
 
   describe('Testing removeProductInCart', () => {
+    it('remove not exist product in cart and calling setCart', (done: DoneFn) => {
+      let testData;
+
+      service.getCart().subscribe(data => {
+        testData = data;
+        done();
+      });
+
+      // init cart
+      service.setCart([mockProductInOrder]);
+      expect(testData).toEqual([mockProductInOrder]);
+      expect(setCartSpy.calls.count()).toEqual(1);
+
+      // remove not exist product
+      service.removeProductInCart(12);
+      expect(testData).toEqual([mockProductInOrder]);
+      expect(setCartSpy.calls.count()).toEqual(2);
+    });
+
+    it('remove exist product in cart and calling setCart', (done: DoneFn) => {
+      let testData;
+
+      service.getCart().subscribe(data => {
+        testData = data;
+        done();
+      });
+
+      // init cart
+      service.setCart([mockProductInOrder]);
+      expect(testData).toEqual([mockProductInOrder]);
+      expect(setCartSpy.calls.count()).toEqual(1);
+
+      // remove exist product
+      service.removeProductInCart(181);
+      expect(testData).toEqual([]);
+      expect(setCartSpy.calls.count()).toEqual(2);
+    });
   });
-
-
 });
