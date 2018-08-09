@@ -15,9 +15,9 @@ import {SessionService} from './session.service';
 @Injectable()
 export class CartService implements OnInit {
 
-  public handleError: HandleError;
+  // public handleError: HandleError;
   // private currentBasket: number = null;
-  private _cartSubject = new BehaviorSubject<Array<ProductInOrder>>([]);
+  public _cartSubject = new BehaviorSubject<Array<ProductInOrder>>([]);
 
   constructor(private sessionService: SessionService,
               // private http: HttpClient,
@@ -37,9 +37,9 @@ export class CartService implements OnInit {
 
   public getCart(): Observable<Array<ProductInOrder>> {
     if (!this._cartSubject.value.length && this.sessionService.cart) {
-      console.log('local');
       this._cartSubject.next(this.sessionService.cart);
-    } else if (this.sessionService.token) {
+    } else {
+      // if (this.sessionService.token) {
       // this.getALLProducts().subscribe();
     }
     return this._cartSubject.asObservable();
@@ -55,27 +55,6 @@ export class CartService implements OnInit {
       return total;
     }));
   }
-
-  // public setProductInCart(product: Product, count: number = 0) {
-  //   const newCart: ProductInOrder[] = this._cartSubject.value;
-  //   const existProductIndex = newCart.findIndex(data => data.product.pk === product.pk);
-  //   if (existProductIndex === -1 && !count) {
-  //     newCart.push({product: product, count: 1});
-  //   } else if (existProductIndex === -1 && !!count) {
-  //     newCart.push({product: product, count: count});
-  //   } else if (!count) { // if argument count not set, add 1 position of product
-  //     newCart[existProductIndex].product = product;
-  //     newCart[existProductIndex].count += 1;
-  //   } else {
-  //     newCart[existProductIndex].product = product;
-  //     newCart[existProductIndex].count = count;
-  //   }
-  //   console.log('newCart: ' + newCart);
-  //   this.setCart(newCart);
-  // }
-  // public isProductInCart(product: Product) {
-  //   return !!this._cartSubject.value.find(data => data.product.pk === product.pk);
-  // }
 
   public getProductIndex(product: Product): number {
     return this._cartSubject.value.findIndex(data => data.product.pk === product.pk);
@@ -94,7 +73,7 @@ export class CartService implements OnInit {
     this.setCart(newCart);
   }
 
-  public setProductCountInCart(product: Product, count: number = 1) {
+  public setProductCountInCart(product: Product, count: number) {
     const newCart: ProductInOrder[] = this._cartSubject.value;
     const index = this.getProductIndex(product);
     newCart[index].count = count;

@@ -32,7 +32,7 @@ export class CartProductControlsComponent {
   }
 
   public clickMinusProduct() {
-    if (this.data.count - this.step > 1) {
+    if ((this.data.count - this.step) >= 1) {
       this.data.count -= this.step;
       this.minusProduct.emit(this.data);
     }
@@ -44,8 +44,10 @@ export class CartProductControlsComponent {
   }
 
   public onSetProduct(event: any) { // without type info
-    if (Patterns.number.test(event.target.value) && event.target.value > 1) {
-      this.data.count = ++event.target.value;
+    if (Patterns.number.test(event.target.value) && event.target.value > 0) {
+      console.log(event.target.value);
+      this.data.count = +event.target.value;
+      console.log(this.data.count);
     } else {
       event.target.value = this.data.count;
     }

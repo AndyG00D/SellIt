@@ -18,7 +18,7 @@ export const mockProducts = {
       },
       "theme": "new",
       "text": null,
-      "price": 0.0,
+      "price": 1.0,
       "currency": 1,
       "images": [],
       "contract_price": false,
