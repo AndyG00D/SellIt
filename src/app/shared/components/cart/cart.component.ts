@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ProductInOrder} from '../../../core/models/product-in-order';
 import {CartService} from '../../../core/services/cart.service';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-cart',
@@ -15,26 +16,31 @@ import {Subscription} from 'rxjs';
  *  @Input() product: Product; data o current product
  *  @Input() isOwner: boolean; true if auth user is owner
  */
-export class CartComponent {
+export class CartComponent implements OnInit, OnDestroy {
   public data: ProductInOrder[];
   public total: Number;
 
+  private destroy$: Subject<void> = new Subject<void>();
+
 
   constructor(private cartService: CartService) {
-    this.cartService.getCart().subscribe((data) => {
+  }
+
+  public ngOnInit() {
+    this.cartService.cart$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
       this.data = data;
     });
-    this.cartService.getTotal().subscribe((total) => {
+    this.cartService.totalOfCart$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((total) => {
       this.total = total;
     });
   }
 
-  // public setCart(event: ProductInOrder) {
-  //   this.cartService.setProductInCart(event.product, event.count);
-  // }
-  //
-  // public removeProduct(id: number) {
-  //   console.log(id);
-  //   this.cartService.removeProductInCart(id);
-  // }
+  public ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

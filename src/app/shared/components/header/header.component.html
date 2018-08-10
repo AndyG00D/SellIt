@@ -23,7 +23,6 @@
         </div>
       </ng-template>
     </div>
-
     <!--cart-->
     <div class="dropdown">
       <div class="dropdown__btn user-block__menu" routerLink="/cart">
@@ -33,32 +32,6 @@
       </app-cart>
     </div>
   </div>
-
-  <!--user-block-->
-  <!--<div class="dropdown user-block">-->
-
-  <!--<div class=" user-block__menu" *ngIf="!user; else userBlock">-->
-  <!--<span>Welcome,-->
-  <!--<a class="link" routerLink="/login" [queryParams]="{form: 'signIn'}">login</a> or-->
-  <!--<a class="link" routerLink="/login" [queryParams]="{form: 'signUp'}">register</a>-->
-  <!--for start!</span>-->
-  <!--</div>-->
-
-  <!--<ng-template #userBlock>-->
-  <!--<div class="dropdown__btn user-block__menu">-->
-  <!--<span class="user-block__user">-->
-  <!--<app-avatar class="user-block__avatar" [user]="user"></app-avatar>-->
-  <!--<app-user-name [user]="user"></app-user-name>-->
-  <!--</span>-->
-  <!--<a class="link text_white-color" (click)="onLogOut()"><i class="fa fa-sign-out"></i></a>-->
-  <!--</div>-->
-  <!--<div class="dropdown__submenu user-block__submenu">-->
-  <!--<button class="btn" routerLink="/products/add">Add new post</button>-->
-  <!--<button class="btn" routerLink="/profile">Profile</button>-->
-  <!--</div>-->
-  <!--</ng-template>-->
-  <!--</div>-->
-
   <!--logo-->
   <a routerLink="/products">
     <img src="/assets/img/sell-it.png" height="41" width="116" class="logo"/>

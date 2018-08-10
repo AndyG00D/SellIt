@@ -4,7 +4,6 @@ import {mockLogin} from '../../../assets/mock-data/login';
 import {SessionService} from './session.service';
 import {CartService} from './cart.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {of} from 'rxjs';
 import {ProductInOrder} from '../models/product-in-order';
 
 describe('CartService', () => {
@@ -51,7 +50,7 @@ describe('CartService', () => {
     getLocalCartSpy = spyOnProperty(sessionService, 'cart');
     setLocalCartSpy = spyOnProperty(sessionService, 'cart', 'set');
     _cartSubjectNextSpy = spyOn(service._cartSubject, 'next').and.callThrough();
-    getCartSpy = spyOn(service, 'getCart').and.callThrough();
+    getCartSpy = spyOn(service, 'cart$').and.callThrough();
     setCartSpy = spyOn(service, 'setCart').and.callThrough();
 
 
@@ -78,18 +77,9 @@ describe('CartService', () => {
         .toEqual([mockProductInOrder]);
     });
 
-    it('getCart calling next _cartSubject and get in SessionService', (done: DoneFn) => {
-      service.getCart().subscribe(() => {
-        done();
-      });
-      service.setCart([]);
-      expect(_cartSubjectNextSpy).toHaveBeenCalled();
-      expect(getLocalCartSpy).toHaveBeenCalled();
-    });
-
     it('set/get in Cart success value', (done: DoneFn) => {
       service.setCart([mockProductInOrder]);
-      service.getCart().subscribe(data => {
+      service.cart$.subscribe(data => {
         expect(data).toEqual([mockProductInOrder]);
         done();
       });
@@ -97,7 +87,7 @@ describe('CartService', () => {
 
     it('set/get wrong value', (done: DoneFn) => {
       service.setCart([]);
-      service.getCart().subscribe(data => {
+      service.cart$.subscribe(data => {
         expect(data).not.toEqual([mockProductInOrder]);
         done();
       });
@@ -109,7 +99,7 @@ describe('CartService', () => {
   describe('Testing getTotal', () => {
     it('get value', (done: DoneFn) => {
       service.setCart([mockProductInOrder]);
-      service.getTotal().subscribe(data => {
+      service.totalOfCart$.subscribe(data => {
         expect(data).toEqual(3);
         done();
       });
@@ -132,7 +122,7 @@ describe('CartService', () => {
     it('success value', (done: DoneFn) => {
       let testData;
 
-      service.getCart().subscribe(data => {
+      service.cart$.subscribe(data => {
         testData = data;
         done();
       });
@@ -145,22 +135,22 @@ describe('CartService', () => {
     });
 
     it('success adding and calling setCart', (done: DoneFn) => {
-      let testLength: number;
-      service.getCart().subscribe(data => {
-        testLength = data.length;
+      let testData;
+      service.cart$.subscribe(data => {
+        testData = data;
         done();
       });
       service.setCart([]);
-      expect(testLength).toEqual(0);
+      expect(testData.length).toEqual(0);
 
       service.addProductInCart(mockProductInOrder.product);
-      expect(testLength).toEqual(1);
+      expect(testData.length).toEqual(1);
 
       service.addProductInCart(mockProductInOrder.product);
-      expect(testLength).toEqual(2);
+      expect(testData.length).toEqual(2);
 
       service.addProductInCart(mockProductInOrder.product);
-      expect(testLength).toEqual(3);
+      expect(testData.length).toEqual(3);
 
       expect(setCartSpy.calls.count()).toEqual(4);
     });
@@ -170,7 +160,7 @@ describe('CartService', () => {
     it('success change count of product and calling setCart', (done: DoneFn) => {
       let testData;
 
-      service.getCart().subscribe(data => {
+      service.cart$.subscribe(data => {
         testData = data;
         done();
       });
@@ -196,7 +186,7 @@ describe('CartService', () => {
     it('success change count of product and calling setCart', (done: DoneFn) => {
       let testData;
 
-      service.getCart().subscribe(data => {
+      service.cart$.subscribe(data => {
         testData = data;
         done();
       });
@@ -222,7 +212,7 @@ describe('CartService', () => {
     it('remove not exist product in cart and calling setCart', (done: DoneFn) => {
       let testData;
 
-      service.getCart().subscribe(data => {
+      service.cart$.subscribe(data => {
         testData = data;
         done();
       });
@@ -241,7 +231,7 @@ describe('CartService', () => {
     it('remove exist product in cart and calling setCart', (done: DoneFn) => {
       let testData;
 
-      service.getCart().subscribe(data => {
+      service.cart$.subscribe(data => {
         testData = data;
         done();
       });

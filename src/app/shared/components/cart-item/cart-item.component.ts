@@ -27,7 +27,6 @@ export class CartItemComponent {
   }
 
   public removeProduct(id: number) {
-    console.log(id);
     this.cartService.removeProductInCart(id);
   }
 }

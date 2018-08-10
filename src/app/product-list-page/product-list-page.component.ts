@@ -4,6 +4,8 @@ import {Product} from '../core/models/product';
 import {User} from '../core/models/user';
 import {ProfileService} from '../core/services/profile.service';
 import {CartService} from '../core/services/cart.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 /**
  * List of product:
@@ -24,23 +26,28 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   private _isLoadData: boolean;
   public infoMsg: string;
   public user: User;
+  private destroy$: Subject<void> = new Subject<void>();
 
 
   constructor(private dataProducts: ProductService,
               private profileService: ProfileService,
               private cartService: CartService) {
-    this.profileService.getUser().subscribe((user) => {
-      this.user = user;
-    });
   }
 
   public ngOnInit() {
+    this.profileService.getUser()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
+        this.user = user;
+      });
     this.products = [];
     this._offset = 0;
     this.getProducts();
   }
 
   public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
     this.dataProducts.stop();
   }
 
@@ -63,7 +70,6 @@ export class ProductListPageComponent implements OnInit, OnDestroy {
   }
 
   public onAddProduct(product: Product) {
-    console.log(this.cartService.getProductIndex(product));
     if (this.cartService.getProductIndex(product) !== -1) {
       this.cartService.addOneProductCountInCart(product);
     } else {

@@ -17,7 +17,7 @@ export class CartService implements OnInit {
 
   // public handleError: HandleError;
   // private currentBasket: number = null;
-  public _cartSubject = new BehaviorSubject<Array<ProductInOrder>>([]);
+  public _cartSubject: BehaviorSubject<ProductInOrder[]>;
 
   constructor(private sessionService: SessionService,
               // private http: HttpClient,
@@ -25,6 +25,7 @@ export class CartService implements OnInit {
               // private messageService: MessageService
   ) {
     // this.handleError = httpErrorHandler.createHandleError('Errors: ');
+    this._cartSubject = new BehaviorSubject<ProductInOrder[]>(this.sessionService.cart || []);
   }
 
   public ngOnInit() {
@@ -35,19 +36,18 @@ export class CartService implements OnInit {
     this.sessionService.cart = value;
   }
 
-  public getCart(): Observable<Array<ProductInOrder>> {
-    if (!this._cartSubject.value.length && this.sessionService.cart) {
-      this._cartSubject.next(this.sessionService.cart);
-    } else {
+  public get cart$(): Observable<ProductInOrder[]> {
+    // if (!this._cartSubject.value.length && this.sessionService.cart) {
+    //   this._cartSubject.next(this.sessionService.cart);
+    // } else {
       // if (this.sessionService.token) {
       // this.getALLProducts().subscribe();
-    }
-    return this._cartSubject.asObservable();
-    // .pipe(distinctUntilChanged(), share());
+    // }
+    return this._cartSubject.asObservable().pipe(share());
   }
 
-  public getTotal(): Observable<Number> {
-    return this.getCart().pipe(map(data => {
+  public get totalOfCart$(): Observable<Number> {
+    return this.cart$.pipe(map(data => {
       let total = 0;
       for (const item of data) {
         total += item.product.price * item.count;

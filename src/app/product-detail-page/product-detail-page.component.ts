@@ -8,6 +8,7 @@ import {ProductService} from '../core/services/product.service';
 import {ProfileService} from '../core/services/profile.service';
 import {CartService} from '../core/services/cart.service';
 import {ProductInOrder} from '../core/models/product-in-order';
+import {takeUntil} from 'rxjs/operators';
 
 /**
  * detail page of product by id
@@ -22,7 +23,7 @@ import {ProductInOrder} from '../core/models/product-in-order';
 
 export class ProductDetailPageComponent implements OnInit, OnDestroy {
   public loading$ = new BehaviorSubject(true);
-  private destroy = new Subject();
+  private destroy$ = new Subject();
   public product: Product;
   public user: User;
   public count = 0;
@@ -32,17 +33,23 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private profileService: ProfileService,
     private cartService: CartService) {
-    this.profileService.getUser().subscribe((user) => this.user = user);
   }
 
   ngOnInit() {
-    this.route.data.subscribe(
-      product => this.product = product.data
-    );
-    this.cartService.getCart().subscribe((data: ProductInOrder[]) => {
-      const productInCart: ProductInOrder = data.find(item => item.product.pk === this.product.pk);
-      this.count = productInCart ? productInCart.count : 0;
-    });
+    this.profileService.getUser()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => this.user = user);
+    this.route.data
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        product => this.product = product.data
+      );
+    this.cartService.cart$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: ProductInOrder[]) => {
+        const productInCart: ProductInOrder = data.find(item => item.product.pk === this.product.pk);
+        this.count = productInCart ? productInCart.count : 0;
+      });
   }
 
   public isOwner() {
@@ -50,8 +57,8 @@ export class ProductDetailPageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.destroy.next();
-    this.destroy.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
     this.loading$.complete();
   }
 

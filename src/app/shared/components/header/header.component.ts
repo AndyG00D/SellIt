@@ -1,22 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../core/services/auth.service';
 import {User} from '../../../core/models/user';
 import {ProfileService} from '../../../core/services/profile.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   public user: User;
   public userName: string;
+  private until$: Subject<void> = new Subject<void>();
 
   constructor(private authService: AuthService,
               private profileService: ProfileService) {
+  }
 
-    this.profileService.getUser().subscribe((user) => {
+  ngOnInit() {
+    this.profileService.getUser()
+      .pipe(takeUntil(this.until$))
+      .subscribe((user) => {
       this.user = user;
     });
 
@@ -35,8 +42,9 @@ export class HeaderComponent implements OnInit {
     this.authService.getLogout().subscribe();
   }
 
-  ngOnInit() {
-
+   ngOnDestroy() {
+    this.until$.next();
+    this.until$.complete();
   }
 
 }

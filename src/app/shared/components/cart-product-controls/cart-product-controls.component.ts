@@ -8,16 +8,10 @@ import {Patterns} from '../../../dynamic-form/patterns';
   styleUrls: ['./cart-product-controls.component.scss']
 })
 
-/**
- * item product in cart
- *  (used in product list page)
- *  @Input() product: Product; data o current product
- *  @Input() isOwner: boolean; true if auth user is owner
- */
 export class CartProductControlsComponent {
 
   @Input() data: ProductInOrder;
-  @Input() step  = 1;
+  @Input() step = 1;
   @Output() plusProduct = new EventEmitter<any>();
   @Output() minusProduct = new EventEmitter<any>();
   @Output() setProduct = new EventEmitter<any>();
@@ -40,14 +34,12 @@ export class CartProductControlsComponent {
 
   public clickRemoveProduct() {
     console.log('remove');
-      this.removeProduct.emit(this.data.product.pk);
+    this.removeProduct.emit(this.data.product.pk);
   }
 
   public onSetProduct(event: any) { // without type info
     if (Patterns.number.test(event.target.value) && event.target.value > 0) {
-      console.log(event.target.value);
       this.data.count = +event.target.value;
-      console.log(this.data.count);
     } else {
       event.target.value = this.data.count;
     }
