@@ -56,6 +56,16 @@ export class CartService implements OnInit {
     }));
   }
 
+  public get countOfProductsInCart$(): Observable<Number> {
+    return this.cart$.pipe(map(data => {
+      let count = 0;
+      for (const item of data) {
+        count += item.count;
+      }
+      return count;
+    }));
+  }
+
   public getProductIndex(product: Product): number {
     return this._cartSubject.value.findIndex(data => data.product.pk === product.pk);
   }

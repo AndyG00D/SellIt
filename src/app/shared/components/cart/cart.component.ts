@@ -18,7 +18,8 @@ import {takeUntil} from 'rxjs/operators';
  */
 export class CartComponent implements OnInit, OnDestroy {
   public data: ProductInOrder[];
-  public total: Number;
+  public totalCart: Number;
+
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -35,7 +36,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartService.totalOfCart$
       .pipe(takeUntil(this.destroy$))
       .subscribe((total) => {
-      this.total = total;
+      this.totalCart = total;
     });
   }
 

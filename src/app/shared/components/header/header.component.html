@@ -1,8 +1,7 @@
 <header class="header">
   <!--user-block-->
   <div class="user-block">
-    <div class="dropdown">
-
+    <div class="dropdown user-block__cart">
       <div class=" user-block__menu" *ngIf="!user; else userBlock">
         <span>Welcome,
           <a class="link" routerLink="/login" [queryParams]="{form: 'signIn'}">login</a> or
@@ -24,11 +23,12 @@
       </ng-template>
     </div>
     <!--cart-->
-    <div class="dropdown">
-      <div class="dropdown__btn user-block__menu" routerLink="/cart">
+    <div class="dropdown user-block__cart">
+      <div class="user-block__menu btn" routerLink="/cart">
         <i class="fa fa-shopping-cart"></i>
+        <span class="user-block__cart-count" *ngIf="countCart">{{countCart}}</span>
       </div>
-      <app-cart class="dropdown__submenu header__cart__submenu">
+      <app-cart class="dropdown__submenu user-block__cart-submenu">
       </app-cart>
     </div>
   </div>

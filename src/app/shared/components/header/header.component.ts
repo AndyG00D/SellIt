@@ -4,6 +4,7 @@ import {User} from '../../../core/models/user';
 import {ProfileService} from '../../../core/services/profile.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {CartService} from '../../../core/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -14,37 +15,35 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public user: User;
   public userName: string;
-  private until$: Subject<void> = new Subject<void>();
+  public countCart: Number;
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private authService: AuthService,
-              private profileService: ProfileService) {
+              private profileService: ProfileService,
+              private cartService: CartService) {
   }
 
   ngOnInit() {
     this.profileService.getUser()
-      .pipe(takeUntil(this.until$))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((user) => {
-      this.user = user;
-    });
+        this.user = user;
+      });
 
-    if (this.user) {
-      if (this.user.first_name) {
-        this.userName = this.user.first_name + ' ' + this.user.last_name;
-      } else if (this.user.username) {
-        this.userName = this.user.username;
-      } else {
-        this.userName = 'User';
-      }
-    }
+    this.cartService.countOfProductsInCart$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((count) => {
+        this.countCart = count;
+      });
   }
 
   onLogOut() {
     this.authService.getLogout().subscribe();
   }
 
-   ngOnDestroy() {
-    this.until$.next();
-    this.until$.complete();
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }
