@@ -109,7 +109,7 @@ describe('CartService', () => {
   describe('Testing get countOfProductsInCart$', () => {
     it('get value', (done: DoneFn) => {
       service.setCart([mockProductInOrder]);
-      service.totalOfCart$.subscribe(data => {
+      service.countOfProductsInCart$.subscribe(data => {
         expect(data).toEqual(3);
         done();
       });
